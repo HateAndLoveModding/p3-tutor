@@ -1,0 +1,44 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "b",
+      "rationale": "The difference is who owns the control flow: in an agent the model decides the next step, in a workflow the code does. Calling several tools (a), model size (c) and memory across sessions (d) can be true of either kind of system."
+    },
+    {
+      "id": "q2",
+      "answer": "d",
+      "rationale": "The code fixes the order of the steps and the model only fills in one of them, so the code owns the control flow and this is a workflow. Using tools (a) or a model (b) does not make a system an agent, and the order here is fixed, not variable (c)."
+    },
+    {
+      "id": "q3",
+      "answer": "a",
+      "rationale": "A fixed workflow fits when the steps are known and repeat, and it is cheaper and more predictable because there is no looping. Options b, c and d describe open-ended work where the model must choose the steps, which is what an agent is for."
+    },
+    {
+      "id": "q4",
+      "answer": "the model",
+      "accepted": [
+        "the language model",
+        "the language model decides",
+        "the model decides",
+        "the model decides, not the code",
+        "the llm",
+        "the agent's model"
+      ],
+      "rationale": "In an agent the model owns the control flow: it chooses which tool to call next, based on the results so far. Answering the programmer or the code describes a workflow. Answering the program is wrong unless it is clear the program only carries out the model's requests."
+    },
+    {
+      "id": "q5",
+      "answer": "c",
+      "rationale": "Booking has known, repeating steps, so a fixed workflow is cheaper and more predictable. Troubleshooting needs steps that depend on earlier results, so the model must choose them, which is an agent. Agents are not always better (a), workflows still fail and cannot handle unpredictable steps (b), and d reverses the fit."
+    },
+    {
+      "id": "q6",
+      "answer": 40,
+      "tolerance": 0.5,
+      "rationale": "The agent makes 7 - 3 = 4 extra calls per request. 4 calls x $0.02 = $0.08 extra per request, and 500 requests x $0.08 = $40. Answering 20 compares only the 7 or 3 calls against the other one without taking the difference of calls (or counts only 500 x 2 extra calls)."
+    }
+  ]
+}

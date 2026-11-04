@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cheat sheet: context and memory in an agent</title>
+  <style>
+    body { max-width: 44rem; margin: 0 auto; padding: 2rem 1rem; font-family: Charter, Georgia, serif; line-height: 1.5; color: #1f1d1a; background: #fffdf8; }
+    @media (prefers-color-scheme: dark) { body { background: #171614; color: #e9e5dc; } a { color: #eaa77a; } }
+    h1 { font-size: 1.6rem; } h2 { font-size: 1.1rem; margin-top: 1.5rem; }
+    table { border-collapse: collapse; width: 100%; font-size: 0.92rem; }
+    th, td { text-align: left; vertical-align: top; padding: 0.4rem 0.5rem; border-bottom: 1px solid #8884; }
+  </style>
+</head>
+<body>
+  <h1>Context and memory in an agent</h1>
+  <p>From <a href="../lessons/0001-context-and-memory-in-an-agent.html">lesson 1</a> (objective O3).</p>
+
+  <h2>Where does a fact live?</h2>
+  <table>
+    <thead><tr><th>Home</th><th>Holds</th><th>Lasts</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td>Window</td><td>System prompt, tool descriptions, messages, tool results</td><td>One session; rebuilt each call</td><td>Rules; today's calendar result</td></tr>
+      <tr><td>Notes</td><td>Small, specific facts, saved by a tool or the program</td><td>Across sessions</td><td>"Sam: 3D printer trained"</td></tr>
+      <tr><td>Library</td><td>Large reference text, split into chunks</td><td>Permanent; searched on demand</td><td>Machine manuals</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Key rules</h2>
+  <ul>
+    <li>The model keeps nothing between calls; the program re-sends the history.</li>
+    <li>Total input tokens = the sum of the window size at every call, not the final size.</li>
+    <li>Tool results usually dominate growth. Clear them once used.</li>
+    <li>A fuller window can be less accurate (context rot). Aim for the smallest set of high-signal tokens.</li>
+    <li>Compaction summarizes one long conversation; notes carry facts to later sessions.</li>
+    <li>Retrieval: chunk the manuals, search (keywords or embeddings), put only the best chunks in the window. Up front, or just in time via a tool.</li>
+  </ul>
+
+  <h2>Terms</h2>
+  <ul>
+    <li><strong>Token</strong>: a small piece of text; the unit of window size and billing.</li>
+    <li><strong>Context window</strong>: all the text the model can use for one response.</li>
+    <li><strong>Context rot</strong>: accuracy and recall fall as the window grows.</li>
+    <li><strong>Compaction</strong>: summarize and restart the window from the summary.</li>
+    <li><strong>Embedding</strong>: numbers standing for a text's meaning; similar texts are close.</li>
+  </ul>
+  <p>Sources: <a href="https://anthropic.com/engineering/effective-context-engineering-for-ai-agents">Anthropic: Effective context engineering</a>, <a href="https://platform.claude.com/docs/en/build-with-claude/context-windows">Claude docs: Context windows</a>.</p>
+</body>
+</html>

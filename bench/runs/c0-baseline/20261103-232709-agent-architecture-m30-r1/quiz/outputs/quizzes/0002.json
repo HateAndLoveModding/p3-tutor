@@ -1,0 +1,62 @@
+{
+  "id": "0002",
+  "objective": "O4",
+  "title": "Workflows and agents: who owns the control flow",
+  "items": [
+    {
+      "id": "q1",
+      "type": "short",
+      "objective": "O4",
+      "stem": "In a workflow, what decides the order of the steps and when each tool is called? Answer in a few words."
+    },
+    {
+      "id": "q2",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "A makerspace assistant's program always does this for each question: (1) one model call labels the question as a manual question or a booking question, (2) the program runs the matching search tool, (3) one model call writes the reply. The model never chooses the steps. What is this system?",
+      "options": [
+        {"id": "a", "text": "An agent, because a model is called more than once per question"},
+        {"id": "b", "text": "An agent, because the model labels the question and so steers it"},
+        {"id": "c", "text": "A workflow, because the program fixes the steps and their order"},
+        {"id": "d", "text": "A workflow, because it uses no tools and calls the model once"}
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "Every booking request must run the same three steps in the same order: check the calendar, check the student's training record, then write the booking to the calendar. Which design suits this part of the assistant best?",
+      "options": [
+        {"id": "a", "text": "A fixed workflow, where the program runs the three steps in that order"},
+        {"id": "b", "text": "An agent, because a model can pick a better order for each request"},
+        {"id": "c", "text": "An agent, because the task uses more than one tool to finish"},
+        {"id": "d", "text": "A single model call with no tools, since the order never changes"}
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "numeric",
+      "objective": "O4",
+      "stem": "Your fixed-workflow design makes exactly 2 model calls per request. An agent design for the same requests averages 5 model calls per request. Assume every call costs the same and ignore all other costs. Over 400 requests, how many more model calls does the agent design make than the workflow?",
+      "unit": "model calls"
+    },
+    {
+      "id": "q5",
+      "type": "short",
+      "objective": "O4",
+      "stem": "Students often ask, \"What is the maximum material thickness for the laser cutter?\", which is always answered by looking up one manual page and writing the answer. Should that path be a fixed workflow or an agent? Answer with one of those two phrases."
+    },
+    {
+      "id": "q6",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "Your sponsor says: \"Agents are the most capable option, so make the whole assistant one agent.\" Your model budget is small. Which reply best uses the workflow-versus-agent trade-off?",
+      "options": [
+        {"id": "a", "text": "Agree, because an agent's extra calls always pay for themselves in quality"},
+        {"id": "b", "text": "Disagree, because a workflow can never use a model or any tools at all"},
+        {"id": "c", "text": "Agree, because one agent is simpler to build than any fixed workflow"},
+        {"id": "d", "text": "Disagree, because fixed steps are cheaper, so keep an agent only where steps vary"}
+      ]
+    }
+  ]
+}

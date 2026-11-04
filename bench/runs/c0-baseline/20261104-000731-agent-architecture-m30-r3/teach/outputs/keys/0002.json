@@ -1,0 +1,40 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "c",
+      "rationale": "Each call is separate and the model keeps nothing between calls; the program re-sends the whole history, so the model sees everything in that request. Picking b shows M1 (the model remembers by itself); a is the opposite error, thinking old steps are dropped.",
+      "distractors": {"b": "M1", "d": "M1"}
+    },
+    {
+      "id": "q2",
+      "answer": 6800,
+      "tolerance": 1,
+      "rationale": "Call 1 sends 1,100; call 2 sends 1,500; call 3 sends 1,900; call 4 sends 2,300. The sum is 6,800. An answer of 2,300 counts only the final window and misses that earlier text is re-sent and paid for at every call."
+    },
+    {
+      "id": "q3",
+      "answer": "a",
+      "rationale": "A small fact about one student, needed on later visits, belongs in notes that are saved outside the window and loaded back. The window alone is emptied at the end of the session (c, M1); the system prompt is shared by all students (d); the library is for large reference text (b).",
+      "distractors": {"c": "M1"}
+    },
+    {
+      "id": "q4",
+      "answer": "Only the relevant text is sent and paid for, instead of all the manuals at every call, and a smaller window keeps the model's accuracy and recall higher.",
+      "accepted": [
+        "it costs fewer tokens and keeps the window focused",
+        "cheaper and more accurate because only relevant pages are in context",
+        "pasting everything costs tokens at every step and accuracy degrades as the window fills",
+        "fewer tokens per call and less context rot"
+      ],
+      "rationale": "Two reasons count: cost (every token in the window is sent and billed at every call) and quality (accuracy and recall degrade as the window fills, so fitting is not the same as working well). An answer that says only 'it will not fit' misses M2, that a big window removes the need to curate context."
+    },
+    {
+      "id": "q5",
+      "answer": "c",
+      "rationale": "A bigger window changes how much one call can hold, not what survives between sessions: the next session starts empty, and each call is billed for every token sent. Choices b and d are M2: accuracy can degrade as the window fills, and the larger window raises, not lowers, the cost of a full one. Choice a is M1.",
+      "distractors": {"a": "M1", "b": "M2", "d": "M2"}
+    }
+  ]
+}

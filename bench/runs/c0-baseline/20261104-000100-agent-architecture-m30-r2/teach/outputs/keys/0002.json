@@ -1,0 +1,36 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "b",
+      "rationale": "The model keeps nothing between calls; the program appends the tool result to its list and sends the whole list again. Picking a or d shows the idea that the model itself holds state between calls."
+    },
+    {
+      "id": "q2",
+      "answer": 7200,
+      "tolerance": 0,
+      "rationale": "Call 1 reads 900 tokens; call 2 reads 900 + 1,500 = 2,400; call 3 reads 2,400 + 1,500 = 3,900. The total is 900 + 2,400 + 3,900 = 7,200. An answer of 3,900 counts only the last call, and 4,200 counts each piece once, forgetting that the list is re-sent each call."
+    },
+    {
+      "id": "q3",
+      "answer": "c",
+      "rationale": "A calendar changes constantly, so a saved copy goes stale and should be fetched fresh with a tool. Training date, usual booking weekday and preferred name are durable facts worth saving."
+    },
+    {
+      "id": "q4",
+      "answer": "A bigger window does not carry anything between sessions: it is rebuilt each call, so earlier chats must be saved by the program and loaded again, and stuffing in old chats raises cost and can hurt accuracy.",
+      "accepted": [
+        "The window is emptied after each session so nothing persists unless the program saves it",
+        "A big window only holds more within one session; it does not remember across sessions and it costs more",
+        "Context is not memory: the model keeps nothing between sessions, so chats must be saved and reloaded"
+      ],
+      "rationale": "The context window is the limit on one call's input, not storage. Memory between sessions needs saved data that the program reloads, ideally small and durable facts. A full answer may add that big contexts cost more per call. An answer that says a bigger window would work if it were big enough shows the window-equals-memory misconception."
+    },
+    {
+      "id": "q5",
+      "answer": "c",
+      "rationale": "Retrieval searches outside the window and loads only the best chunks; the rest stay in storage and are not seen by the model in that call. Option a shows the idea that retrieval teaches the model the document."
+    }
+  ]
+}

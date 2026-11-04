@@ -1,0 +1,119 @@
+{
+  "duration_api_ms": 19386,
+  "stop_reason": "end_turn",
+  "session_id": "08dd389c-0bba-4c09-967a-da0a5766cf61",
+  "total_cost_usd": 0.11557809999999999,
+  "usage": {
+    "input_tokens": 6,
+    "cache_creation_input_tokens": 22414,
+    "cache_read_input_tokens": 63501,
+    "output_tokens": 1956,
+    "output_tokens_details": {
+      "thinking_tokens": 755
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 22414,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 521,
+        "cache_read_input_tokens": 32019,
+        "cache_creation_input_tokens": 969,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 969
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 6,
+      "outputTokens": 1956,
+      "cacheReadInputTokens": 63501,
+      "cacheCreationInputTokens": 22414,
+      "webSearchRequests": 0,
+      "costUSD": 0.11557809999999999,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 755,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 22414,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 8,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "Here's another way in.\n\nPicture a clerk locked in a windowless room. The room has a slot in the door and a laminated menu on the wall. The menu lists services, like \"check the booking calendar: give me a date and a machine\" and \"look up a manual page: give me a topic\". Outside the door is a runner.\n\nThe clerk can't leave the room, and can't do any of those things. All they can do is slide a note out through the slot, such as \"Check the calendar: laser cutter, Friday.\" The runner reads the note, does the job, and slides the result back in. The clerk reads it and decides what to do next. They might send another note, or they might write the final answer to the student.\n\nIn this picture:\n- **The clerk is the model.** It only reads and writes text.\n- **The runner is your program.** It does the real work.\n- **The menu is the tool descriptions.** The clerk can only ask for what the menu lists, and it picks from the menu using the wording of each entry. That's why a clear description matters for your project.\n- **Each note out and result back is one trip around the loop** you already know.\n\nThe key point is that the model never runs anything. \"Tool calling\" means the model writes a request in an agreed format, and your program decides whether and how to carry it out.\n\nThe analogy breaks down in one place. A real clerk remembers the earlier notes. The model only knows what is written on the page it's handed each time, which is the context we'll get to next.\n\nQuick check: if the clerk writes \"Book the laser cutter, Friday 2pm,\" who actually changes the calendar, and what does the clerk see afterward?\n\nIf you'd like a longer, step-by-step lesson on this, just ask.",
+  "ttft_ms": 2296,
+  "type": "result",
+  "duration_ms": 19555,
+  "uuid": "dc6c9e86-0bbf-4dd3-aae3-44b3b5621211",
+  "ttft_stream_ms": 2205,
+  "time_to_request_ms": 110,
+  "first_content_frame_ms": 2206,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 6,
+      "outputTokens": 1956,
+      "cacheReadInputTokens": 63501,
+      "cacheCreationInputTokens": 22414,
+      "webSearchRequests": 0,
+      "costUSD": 0.11557809999999999,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 755,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 22414,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

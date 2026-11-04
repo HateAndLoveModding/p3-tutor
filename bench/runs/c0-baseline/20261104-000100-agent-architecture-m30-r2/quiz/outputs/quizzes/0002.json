@@ -1,0 +1,68 @@
+{
+  "id": "0002",
+  "objective": "O4",
+  "title": "Workflows and agents: who owns the control flow",
+  "items": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "Some systems that use a language model are called workflows and others are called agents. What decides which of the two a system is?",
+      "options": [
+        {"id": "a", "text": "Whether it calls the model more than once"},
+        {"id": "b", "text": "Whether it uses tools such as a calendar"},
+        {"id": "c", "text": "Whether code or the model picks each next step"},
+        {"id": "d", "text": "Whether it uses a larger, more capable model"}
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "Design A: for every question, our code searches the manuals, passes the top three pages to the model to write an answer, then stops. Design B: the model gets search_manuals and check_calendar tools and decides what to call, how often, and when to stop. Which description is correct?",
+      "options": [
+        {"id": "a", "text": "A is a workflow because code fixes the steps; B is an agent because the model picks them"},
+        {"id": "b", "text": "A is an agent because it uses a model; B is a workflow because it uses tools"},
+        {"id": "c", "text": "Both are agents, because in both the model writes the final answer"},
+        {"id": "d", "text": "Both are workflows, because in both our own program runs everything"}
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "short",
+      "objective": "O4",
+      "stem": "In one short phrase: what must be true of a task's steps for a fixed workflow to be a better choice than an agent?"
+    },
+    {
+      "id": "q4",
+      "type": "numeric",
+      "objective": "O4",
+      "stem": "A fixed workflow answers each manual question with exactly 2 model calls. An agent doing the same job averages 6 model calls per question. Assume every model call costs $0.01. For 500 questions, how many more dollars does the agent cost than the workflow?",
+      "unit": "dollars"
+    },
+    {
+      "id": "q5",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "Which one of these makerspace assistant jobs is the best candidate to build as a fixed workflow rather than an agent?",
+      "options": [
+        {"id": "a", "text": "Answering a vague question like \"why does my print warp?\""},
+        {"id": "b", "text": "Helping a student whose booking request clashes with others"},
+        {"id": "c", "text": "Diagnosing a machine fault from a student's rough notes"},
+        {"id": "d", "text": "Sending each student a reminder for today's bookings"}
+      ]
+    },
+    {
+      "id": "q6",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "A teammate proposes making the whole assistant one agent \"because agents are more flexible\". For the steps whose order never changes, which is the strongest reply given our small model budget?",
+      "options": [
+        {"id": "a", "text": "An agent can call each tool only once per request"},
+        {"id": "b", "text": "A fixed workflow needs fewer model calls and behaves predictably"},
+        {"id": "c", "text": "An agent cannot stop once it has started its loop"},
+        {"id": "d", "text": "A fixed workflow can use a more capable model"}
+      ]
+    }
+  ]
+}

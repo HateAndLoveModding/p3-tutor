@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cheat sheet: where information lives in an agent</title>
+  <link rel="stylesheet" href="../assets/lesson.css">
+</head>
+<body>
+<main>
+  <div class="kicker">Cheat sheet &middot; from <a href="../lessons/0001-context-and-memory-in-an-agent.html">Lesson 1</a></div>
+  <h1>Where information lives in an agent</h1>
+  <table>
+    <thead><tr><th>Place</th><th>Lasts</th><th>Use it for</th><th>Cost</th></tr></thead>
+    <tbody>
+      <tr><td>Context window</td><td>One model call (the program re-sends it each step)</td><td>Rules, tool descriptions, this request's history and tool results</td><td>Tokens, on every call</td></tr>
+      <tr><td>Saved notes or records</td><td>Between sessions</td><td>Small, durable facts: training status, preferences</td><td>Tokens only when loaded</td></tr>
+      <tr><td>Searchable store (retrieval)</td><td>Until the documents change</td><td>Large documents: manuals</td><td>Tokens only for returned chunks</td></tr>
+      <tr><td>Fetched by a tool</td><td>Never saved</td><td>Changing facts: the calendar</td><td>One tool call</td></tr>
+    </tbody>
+  </table>
+  <h2>Rules of thumb</h2>
+  <ul>
+    <li>The model keeps nothing between calls; the program re-sends the whole list.</li>
+    <li>Cost grows with each step: later calls re-read earlier tool results. Trim bulky results.</li>
+    <li>When a long task fills the window: clear used tool results, compact, or hand work to a sub-agent.</li>
+    <li>Save durable facts; fetch changing ones fresh.</li>
+    <li>Retrieval: chunk, index by meaning (embeddings) and keywords (BM25), return the top few. Under about 200,000 tokens, consider skipping it.</li>
+  </ul>
+  <p class="meta">Sources: <a href="https://anthropic.com/engineering/effective-context-engineering-for-ai-agents">Anthropic Engineering</a>, <a href="https://www.anthropic.com/news/contextual-retrieval">Contextual Retrieval</a>.</p>
+</main>
+</body>
+</html>

@@ -1,0 +1,119 @@
+{
+  "duration_api_ms": 10247,
+  "stop_reason": "end_turn",
+  "session_id": "d854bc4e-3e4e-4b29-bd6a-30dce213dc14",
+  "total_cost_usd": 0.0813677,
+  "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 17009,
+    "cache_read_input_tokens": 31537,
+    "output_tokens": 1017,
+    "output_tokens_details": {
+      "thinking_tokens": 209
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 17009,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 555,
+        "cache_read_input_tokens": 20963,
+        "cache_creation_input_tokens": 6620,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 6620
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 4,
+      "outputTokens": 1017,
+      "cacheReadInputTokens": 31537,
+      "cacheCreationInputTokens": 17009,
+      "webSearchRequests": 0,
+      "costUSD": 0.0813677,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 209,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 17009,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 7,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "I can't give you the letter for q3. I don't hand out quiz answers before grading, and that holds when you're retaking for practice. I'd also rather you not read up on why later. Working out the reason is the useful part, and it's the skill you'll use when you defend your design choices.\n\nHere's a way to work it out that applies to every option equally:\n\n1. Say in one sentence what is going wrong in the scenario. Look at what the agent can already see, and at what it keeps doing anyway.\n2. For each of a, b, c and d, write what would be different at step 41 if that change were made. Would the agent's behavior change, and how would you know?\n3. Ask which of those changes still helps if the model's next move is the same as its last 40. Ask this about all four options, not only your favorite.\n4. Your mission includes keeping cost per request small, so ask what each option would cost if the loop kept going.\n\nSend me your one-sentence diagnosis and what you think each option does. I won't say which are right, but I can tell you whether your reasoning holds together.\n\nNeither of your attempts at quiz 0001 has been graded yet. If you'd like me to grade `s1` and `s2` now, say so. Then we can go through q3 properly, with the grade in hand.",
+  "ttft_ms": 1715,
+  "type": "result",
+  "duration_ms": 10408,
+  "uuid": "2fc17563-a8ea-4276-96ef-0b76ce7e581b",
+  "ttft_stream_ms": 1267,
+  "time_to_request_ms": 111,
+  "first_content_frame_ms": 1267,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 4,
+      "outputTokens": 1017,
+      "cacheReadInputTokens": 31537,
+      "cacheCreationInputTokens": 17009,
+      "webSearchRequests": 0,
+      "costUSD": 0.0813677,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 209,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 17009,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

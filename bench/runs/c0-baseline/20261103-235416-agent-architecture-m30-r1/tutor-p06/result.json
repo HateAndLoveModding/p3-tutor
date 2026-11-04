@@ -1,0 +1,119 @@
+{
+  "duration_api_ms": 22874,
+  "stop_reason": "end_turn",
+  "session_id": "87fe0d59-2c58-4799-8281-55dabaae3c95",
+  "total_cost_usd": 0.12883109999999998,
+  "usage": {
+    "input_tokens": 8,
+    "cache_creation_input_tokens": 23519,
+    "cache_read_input_tokens": 96491,
+    "output_tokens": 2509,
+    "output_tokens_details": {
+      "thinking_tokens": 1045
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 23519,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 600,
+        "cache_read_input_tokens": 33008,
+        "cache_creation_input_tokens": 1085,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 1085
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 2509,
+      "cacheReadInputTokens": 96491,
+      "cacheCreationInputTokens": 23519,
+      "webSearchRequests": 0,
+      "costUSD": 0.12883109999999998,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 1045,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 23519,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 10,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "Imagine a person sitting in a sealed room with a notepad and a slot in the door. They can't leave, and they can't see outside. Outside the door is a helper with a laminated **menu of errands**. Each entry has a name and a one-line description, such as \"Check the booking calendar: give me a machine and a day.\"\n\nYou slide a question through the slot: \"Is the laser cutter free Friday?\"\n\nThe person in the room can't answer from memory, but the menu shows an errand that would help. They write a slip: *\"Errand: check the booking calendar. Machine: laser cutter. Day: Friday.\"* They slide it out and wait.\n\nThe helper reads the slip and walks to the calendar. The helper looks it up and slides the result back: *\"Booked 2–4pm.\"* The person reads it, then writes the final answer: \"It's free except 2–4pm.\"\n\nThat is tool calling:\n\n- **Tool:** an errand the helper can run.\n- **Tool definition:** the menu entry. The person picks errands only from its wording, so a vague description gets the wrong errand or none.\n- **Tool call:** the slip. It is only a request, and writing it does nothing.\n- **Tool result:** whatever the helper slides back in.\n\nThe person only ever sees the paper that comes through the slot. That is the \"model knows only what it's given\" idea from earlier.\n\n**Where the analogy breaks:** the helper isn't smart. It just follows slips written in a strict format. Real models also produce those slips as structured text, not free handwriting.\n\n**Quick check:** in the analogy, what does the person in the room use to decide which errand to request?\n\nI'm keeping quiz 0001 closed until it's graded, so I can't go through its items yet. I can grade your attempts whenever you like. If this still feels shaky, I can also write a 15-minute lesson on it with the makerspace assistant as the running example.",
+  "ttft_ms": 1561,
+  "type": "result",
+  "duration_ms": 23069,
+  "uuid": "a3a4e2c9-855f-4218-b4cb-7d0b9a102e65",
+  "ttft_stream_ms": 1266,
+  "time_to_request_ms": 110,
+  "first_content_frame_ms": 1266,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 2509,
+      "cacheReadInputTokens": 96491,
+      "cacheCreationInputTokens": 23519,
+      "webSearchRequests": 0,
+      "costUSD": 0.12883109999999998,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 1045,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 23519,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

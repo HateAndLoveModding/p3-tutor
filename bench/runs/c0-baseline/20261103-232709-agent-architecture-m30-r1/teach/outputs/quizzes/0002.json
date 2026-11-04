@@ -1,0 +1,56 @@
+{
+  "id": "0002",
+  "objective": "O3",
+  "title": "Context and memory in an agent",
+  "items": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "A makerspace assistant is on its third model call in one request, after two tool calls. Which description of what the program sends to the model on this call is correct?",
+      "options": [
+        {"id": "a", "text": "Only the newest tool result, since the model keeps the rest"},
+        {"id": "b", "text": "The whole stack so far, plus the newest tool result"},
+        {"id": "c", "text": "Only the student's question, plus a summary of results"},
+        {"id": "d", "text": "A pointer to the earlier calls, which the model looks up"}
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "numeric",
+      "objective": "O3",
+      "stem": "A request starts with 2,000 tokens (instructions, tool definitions and question). It needs three model calls: the first two each end with a tool call of 100 tokens whose result is 1,000 tokens, and the third writes the final answer. Each call reads the full window so far. How many tokens are read in total across the three calls?",
+      "unit": "tokens"
+    },
+    {
+      "id": "q3",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "On Monday a student told the assistant their preferred booking time. On Thursday they open a new chat and the assistant does not know it. Which fix would make Thursday's session know it?",
+      "options": [
+        {"id": "a", "text": "Choose a model with a larger context window"},
+        {"id": "b", "text": "Tell the model to try harder to recall"},
+        {"id": "c", "text": "Wait, because the model will learn it over time"},
+        {"id": "d", "text": "Save the preference and load it into the window"}
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "short",
+      "objective": "O3",
+      "stem": "The whole 200-page laser cutter manual would fit in the model's context window. Give one reason, in a sentence, for retrieving a few relevant chunks instead of pasting the whole manual into every request."
+    },
+    {
+      "id": "q5",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "A long session is nearing the context limit. The assistant has already confirmed a booking and has read several manual pages it no longer needs. Which choice best protects the booking while freeing room?",
+      "options": [
+        {"id": "a", "text": "Cut the oldest messages, including the booking confirmation"},
+        {"id": "b", "text": "Keep every page, because deleting text always loses facts"},
+        {"id": "c", "text": "Clear used pages, and keep the booking confirmation"},
+        {"id": "d", "text": "Restart with an empty window and no summary"}
+      ]
+    }
+  ]
+}

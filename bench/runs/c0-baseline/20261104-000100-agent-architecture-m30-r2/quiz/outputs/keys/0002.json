@@ -1,0 +1,47 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "c",
+      "rationale": "In a workflow, code written in advance fixes the sequence of steps; in an agent, the model decides the next step and which tool to use. Number of model calls (a), use of tools (b) and model size (d) do not separate the two: both can call a model repeatedly and use tools."
+    },
+    {
+      "id": "q2",
+      "answer": "a",
+      "rationale": "In A the code owns the control flow: search, answer, stop, always in that order. In B the model chooses the tools, their number and when to stop, so it owns the control flow. Using a model (b, c) or running inside our program (d) is true of both designs and does not decide the question."
+    },
+    {
+      "id": "q3",
+      "answer": "They are known in advance",
+      "accepted": [
+        "known in advance",
+        "the steps are known in advance",
+        "predictable",
+        "the steps are predictable",
+        "they are predictable",
+        "fixed and known ahead of time",
+        "the same every time",
+        "the steps are the same every time",
+        "the steps can be written down ahead of time"
+      ],
+      "rationale": "When the steps and their order can be decided ahead of time, code can run them directly, which is cheaper, faster and more predictable. An agent earns its cost only when the steps cannot be known ahead of time. An answer such as 'the task is simple' is partial: simple tasks can still need open-ended steps."
+    },
+    {
+      "id": "q4",
+      "answer": 20,
+      "tolerance": 0,
+      "rationale": "The agent uses 6 - 2 = 4 extra calls per question. 4 calls x $0.01 = $0.04 per question, and 500 questions x $0.04 = $20. An answer of 30 or 10 is the total cost of one design rather than the difference."
+    },
+    {
+      "id": "q5",
+      "answer": "d",
+      "rationale": "The reminder job has the same steps every time (read today's bookings, write the message, send it), so code can own the flow. The other three are open-ended: the next step depends on what the model finds, which is where an agent pays for its flexibility."
+    },
+    {
+      "id": "q6",
+      "answer": "b",
+      "rationale": "When the order of steps never changes, code can run them directly, which means fewer model calls (lower cost) and the same behaviour every time. Agents can call tools many times (a) and can be given a stopping condition (c); (d) is wrong because model choice is independent of workflow versus agent."
+    }
+  ]
+}

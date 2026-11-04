@@ -1,0 +1,43 @@
+{
+  "quiz": "0001",
+  "submission": "s2",
+  "items": [
+    {
+      "id": "q1",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "Right: an agent is a loop where the model picks actions, they are run, and the results come back. A longer prompt or a bigger window changes what one call can do, not the structure of the system."
+    },
+    {
+      "id": "q2",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "Right. The model only writes a structured request naming check_calendar and its arguments. The program around it runs the tool. Keep this split in mind, since it matters again in q4."
+    },
+    {
+      "id": "q3",
+      "verdict": "wrong",
+      "misconception": "M6",
+      "feedback": "You picked 'left to run longer, it will eventually fix the bug'. That is tempting, but the agent is repeating the same edit and getting the same failing result, so more steps add nothing, and every step costs money. The safeguard is a stopping condition, such as a step limit that ends the loop and reports back to a person (option b). This matters for your budget: an agent with no stopping condition can burn it on one stuck request."
+    },
+    {
+      "id": "q4",
+      "verdict": "partial",
+      "misconception": "M4",
+      "feedback": "Your count of 4 is right, but part of your reasoning is not. You wrote that the model 'runs' each tool itself. It does not: each time, the model only requests one tool, and the program runs it and sends the result back. The 4 comes from three tool-request calls plus one final-answer call, so the model is called once for each input it receives: the question and the three tool results. Because each call is billed, this count is also a cost count."
+    },
+    {
+      "id": "q5",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "Right, and you gave both parts: the result goes back in as the model's next input, and the model uses it to decide what to do next. Your group-chat picture works, as long as you remember the model takes its turn only when the program calls it again."
+    },
+    {
+      "id": "q6",
+      "verdict": "partial",
+      "misconception": null,
+      "feedback": "The name does help, but it is only part of the answer. The model is given each tool's whole description: its name, what it does and the parameters it takes. It picks the tool whose description fits the request. A name alone can mislead, for example a tool called check_calendar that also books. For your assistant, writing clear descriptions is therefore your main control over which tool gets called."
+    }
+  ],
+  "summary": "You have the core of the agent loop: you answered q1, q2 and q5 correctly, and q5 shows you understand that results feed the next call. Two ideas need work. First, stopping conditions: a loop with no limit can run, and spend, without end (q3). Second, the program runs the tools and the model only requests them, which slipped back into your q4 reasoning even though q2 was right. Next step: re-trace one request with the makerspace tools, writing under each step whether the model or the program does it, and add a step limit. Also add a full description for one tool: its name, purpose and parameters."
+}

@@ -1,0 +1,40 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "c",
+      "rationale": "In a workflow, predefined code paths orchestrate the model and tools; in an agent, the model directs its own process and tool use. What separates them is who owns the control flow, not the number of calls, tool use or model size (workflows can call the model many times and use tools)."
+    },
+    {
+      "id": "q2",
+      "answer": "a",
+      "rationale": "The code decides the order of the steps and they never change, so this is a workflow, even though a model writes the answer. The model writing text does not give it control of the flow, and a workflow can include model calls and tools."
+    },
+    {
+      "id": "q3",
+      "answer": "d",
+      "rationale": "This is routing, a kind of workflow: the model makes one classification, but the code sets every path and runs the steps after each label. A model making a decision inside a step does not mean the model owns the control flow; that needs the model to choose the next steps itself."
+    },
+    {
+      "id": "q4",
+      "answer": "b",
+      "rationale": "When the steps are known in advance and always in the same order, a fixed workflow is the better choice: it is predictable, consistent and cheaper, and nothing is gained by letting a model decide the order. Booking being an action (c) does not require an agent, and a workflow still can use a model (d)."
+    },
+    {
+      "id": "q5",
+      "answer": "Its steps and number of model calls are fixed in advance, while an agent loops an unknown number of times, with a growing context to pay for on each call.",
+      "accepted": [
+        "A workflow makes a fixed, small number of model calls, while an agent keeps looping and making more calls.",
+        "The number of model calls is known and limited in a workflow, but an agent may take many steps.",
+        "An agent loops for as many steps as it decides, so it uses more model calls and tokens than a fixed workflow."
+      ],
+      "rationale": "Full credit names that a workflow's steps and model calls are fixed and limited, while an agent decides how many steps to take, so it makes more and unpredictable calls. Saying only that agents are more advanced or use bigger models is wrong."
+    },
+    {
+      "id": "q6",
+      "answer": "c",
+      "rationale": "The multi-part planning request has no fixed steps: the assistant must work out which machines, check several calendars and adapt to what it finds, so the model needs to choose its own actions. The other three have known, fixed steps (look up, book, look up), so a workflow handles them more cheaply and predictably."
+    }
+  ]
+}

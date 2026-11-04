@@ -1,0 +1,41 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "the code the developer wrote (predefined code paths)",
+      "accepted": ["the code", "the program", "predefined code", "predefined code paths", "the developer's code", "the developer", "code written by the developer", "the program's code", "the code the developer wrote"],
+      "rationale": "In a workflow the developer's code fixes the steps and their order; in an agent the model decides. Answering 'the model' shows the two have been mixed up."
+    },
+    {
+      "id": "q2",
+      "answer": "c",
+      "rationale": "Who owns the control flow decides the label. Here the program fixes every step and its order, so it is a workflow even though it calls the model twice and uses a tool. The model's label only picks which search the program runs; it does not choose steps or when to stop.",
+      "distractors": {"a": "M8", "b": "M8", "d": "M9"}
+    },
+    {
+      "id": "q3",
+      "answer": "a",
+      "rationale": "The steps and their order never change, which is the case a fixed workflow handles: predictable, cheap and consistent. An agent would spend extra model calls to decide something already known, and could skip a step such as the training check. A model with no tools cannot write the booking.",
+      "distractors": {"b": "M7", "c": "M8", "d": "M9"}
+    },
+    {
+      "id": "q4",
+      "answer": 1200,
+      "tolerance": 0,
+      "rationale": "The agent makes 5 - 2 = 3 more calls per request, and 3 x 400 = 1200. Answering 2000 (5 x 400) or 800 (2 x 400) gives one design's total, not the difference."
+    },
+    {
+      "id": "q5",
+      "answer": "fixed workflow",
+      "accepted": ["workflow", "a fixed workflow", "a workflow", "fixed workflow."],
+      "rationale": "The steps are known in advance (look up the page, write the answer), so a fixed workflow is cheaper and more predictable; an agent would add model calls for nothing. Answering 'agent' shows M7."
+    },
+    {
+      "id": "q6",
+      "answer": "d",
+      "rationale": "Agentic systems trade cost and latency for flexibility, so use the simplest design that works: fixed workflow steps where the path is known, an agent only where the number or order of steps cannot be predicted. Agents are not always better (a), workflows can use models and tools (b), and an agent is not simpler or cheaper to build and run (c).",
+      "distractors": {"a": "M7", "b": "M9", "c": "M7"}
+    }
+  ]
+}

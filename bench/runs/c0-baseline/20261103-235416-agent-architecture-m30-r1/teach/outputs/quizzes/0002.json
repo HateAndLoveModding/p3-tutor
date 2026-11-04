@@ -1,0 +1,56 @@
+{
+  "id": "0002",
+  "objective": "O3",
+  "title": "Context and memory in an agent",
+  "items": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "Within one request, the model is called a third time after two tool results have come back. What lets the model use the first tool result on that third call?",
+      "options": [
+        {"id": "a", "text": "The model stores each result inside itself between calls and recalls it"},
+        {"id": "b", "text": "The program sends the earlier messages and results again in the new call"},
+        {"id": "c", "text": "The tool keeps its result and gives it back to the model each time"},
+        {"id": "d", "text": "The context window keeps the result alive between the separate calls"}
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "A teammate proposes pasting all 40 machine manuals into the system prompt of every request, because the model's context window is large enough to hold them. Which is the strongest objection?",
+      "options": [
+        {"id": "a", "text": "A window never holds that much text, so the call would fail"},
+        {"id": "b", "text": "The model would keep the manuals and stop using the tools"},
+        {"id": "c", "text": "The manuals would be forgotten as soon as the session ended"},
+        {"id": "d", "text": "Every call would re-read and be billed for all of it, and recall of one detail can degrade"}
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "numeric",
+      "objective": "O3",
+      "stem": "In one request, the first model call has an input of 1,500 tokens (system prompt, tool descriptions and question). The model makes three tool requests, one after each of the first three calls, and then writes its final answer on the fourth call. Ignore the length of the model's own requests; each tool result adds 500 tokens to the transcript. The program re-sends the whole transcript on every call. How many input tokens are sent in total across the four calls?",
+      "unit": "tokens"
+    },
+    {
+      "id": "q4",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "Your assistant must know, exactly, which machines each student has completed training for, every time they come back. Which design fits best?",
+      "options": [
+        {"id": "a", "text": "Rely on the model to remember it from earlier chats with the student"},
+        {"id": "b", "text": "Summarize the previous chat and hope the status is in the summary"},
+        {"id": "c", "text": "Store the status outside the model and load it into the context"},
+        {"id": "d", "text": "Index the status as manual chunks and retrieve it by similarity"}
+      ]
+    },
+    {
+      "id": "q5",
+      "type": "short",
+      "objective": "O3",
+      "stem": "The manual chunk \"Maximum material thickness: 6 mm\" never names its machine, and several manuals contain a similar line, so searches for the laser cutter often miss it or return the wrong one. In one sentence, how can you fix this at indexing time?"
+    }
+  ]
+}

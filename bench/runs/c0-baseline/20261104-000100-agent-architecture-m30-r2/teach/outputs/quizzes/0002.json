@@ -1,0 +1,56 @@
+{
+  "id": "0002",
+  "objective": "O3",
+  "title": "Context and memory in an agent",
+  "items": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "In one request, the assistant's model calls a tool at step 1 and writes its final answer at step 2, using the tool's result. How does the model at step 2 know what the tool returned?",
+      "options": [
+        {"id": "a", "text": "The model stored the result inside itself after step 1 finished"},
+        {"id": "b", "text": "The program sent the result again as part of step 2's input"},
+        {"id": "c", "text": "The model re-ran the tool by itself when step 2 began"},
+        {"id": "d", "text": "The model recalled the result from what it learned in training"}
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "numeric",
+      "objective": "O3",
+      "stem": "Each model call receives the system prompt and tool descriptions (800 tokens), the student's question (100 tokens), and every tool call and result so far. In one request the model uses two tools in a row and then writes its answer, three model calls in all. Each tool call plus its result adds 1,500 tokens. Ignoring the model's own output, how many tokens does the model read in total across the three calls?",
+      "unit": "tokens"
+    },
+    {
+      "id": "q3",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "Your assistant can save one thing about a student for later visits. Which of these is the poorest choice to save, because the saved copy would go stale?",
+      "options": [
+        {"id": "a", "text": "The date the student completed laser cutter training"},
+        {"id": "b", "text": "The weekday the student usually books equipment"},
+        {"id": "c", "text": "Which time slots are free on next Friday's calendar"},
+        {"id": "d", "text": "The name the student asked to be called by"}
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "short",
+      "objective": "O3",
+      "stem": "Your team's lead says, \"Let's pick a model with a huge context window so the assistant remembers every student's earlier chats.\" In one or two sentences, explain what is wrong with that plan."
+    },
+    {
+      "id": "q5",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "A 120-page laser cutter manual is split into chunks and stored for search. The model calls search_manuals and three chunks come back. What is true of the other pages of the manual during this model call?",
+      "options": [
+        {"id": "a", "text": "The model has learned them from the search and can quote them"},
+        {"id": "b", "text": "They are loaded too, but placed at lower priority in the window"},
+        {"id": "c", "text": "They stay in the store, outside the window, and are not seen"},
+        {"id": "d", "text": "They are summarised automatically and added to the system prompt"}
+      ]
+    }
+  ]
+}

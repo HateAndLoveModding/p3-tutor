@@ -1,0 +1,37 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "b",
+      "rationale": "The model keeps nothing between calls, so the program re-sends the whole stack (instructions, tools, question, earlier tool calls and results) plus the newest result. Answers a and d assume the model remembers or looks things up itself."
+    },
+    {
+      "id": "q2",
+      "answer": 9300,
+      "tolerance": 0,
+      "rationale": "Call 1 reads 2,000. Call 2 reads 2,000 + 100 + 1,000 = 3,100. Call 3 reads 3,100 + 100 + 1,000 = 4,200. Total 2,000 + 3,100 + 4,200 = 9,300. An answer of 4,200 counts only the final window and misses that every call re-reads the stack."
+    },
+    {
+      "id": "q3",
+      "answer": "d",
+      "rationale": "A new session starts with an empty window, so a fact must be saved outside the window and loaded back in. A larger window (a) does not carry anything across sessions, and the model does not learn from chats on its own (c)."
+    },
+    {
+      "id": "q4",
+      "answer": "Re-sending the whole manual costs tokens on every call, and the model recalls details less reliably in a crowded window (context rot).",
+      "accepted": [
+        "It costs far more to re-read the whole manual on every call.",
+        "A huge window makes the model less accurate at finding details.",
+        "Too much text hurts recall and raises cost; fewer relevant chunks are cheaper and more accurate.",
+        "Because the pages are billed on every call"
+      ],
+      "rationale": "Either reason is full credit: cost (the stack is re-read and billed on every call) or quality (context rot). Fitting in the window is not a reason to include it."
+    },
+    {
+      "id": "q5",
+      "answer": "c",
+      "rationale": "Used tool results are bulky and no longer needed, so clear them; the booking confirmation is a decision later steps rely on, so keep it. Deleting it (a, d) loses a decision, and keeping everything (b) leaves the window full."
+    }
+  ]
+}

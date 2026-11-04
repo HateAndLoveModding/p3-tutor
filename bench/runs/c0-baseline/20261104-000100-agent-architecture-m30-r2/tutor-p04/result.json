@@ -1,0 +1,151 @@
+{
+  "duration_api_ms": 28125,
+  "stop_reason": "end_turn",
+  "session_id": "805d90d5-dc68-48cb-8036-3f5966586e3f",
+  "total_cost_usd": 0.1375351,
+  "usage": {
+    "input_tokens": 12,
+    "cache_creation_input_tokens": 23831,
+    "cache_read_input_tokens": 130308,
+    "output_tokens": 1718,
+    "output_tokens_details": {
+      "thinking_tokens": 350
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 23831,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 498,
+        "cache_read_input_tokens": 34057,
+        "cache_creation_input_tokens": 348,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 348
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 12,
+      "outputTokens": 1718,
+      "cacheReadInputTokens": 130308,
+      "cacheCreationInputTokens": 23831,
+      "webSearchRequests": 0,
+      "costUSD": 0.1255588,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 350,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 23831,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    },
+    "claude-haiku-5-5": {
+      "inputTokens": 14498,
+      "outputTokens": 1053,
+      "cacheReadInputTokens": 0,
+      "cacheCreationInputTokens": 0,
+      "webSearchRequests": 1,
+      "costUSD": 0.0119763,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 389,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 0,
+      "canonicalModel": "claude-haiku-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 10,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "Neither. The premise is the problem: more agents don't always give better results.\n\nEach agent has its own context and makes its own model calls, so every one you add costs tokens. Anthropic's engineering team reports that agents use about 4× the tokens of a chat, and multi-agent systems about 15×. Their multi-agent research system did beat a single agent, but they say it pays off only on high-value tasks with heavy parallel work, information too big for one context window, or many complex tools. On a small budget, you'd feel that cost on every request.\n\nYour assistant looks like one job with three tools: search the manuals, check the calendar, book equipment. Take a student asking \"Can I use the laser cutter Thursday?\" Those steps depend on each other, and one agent can run them in order. Splitting into ten agents would mostly add hand-offs, where context gets lost and tokens get spent re-explaining it.\n\nA sensible plan is to start with one agent and clear tool descriptions. Split off a second agent only when you can name what it fixes. For example, the manuals might flood the context, or two tasks might be able to run in parallel. Measure the cost and quality before and after.\n\nOne more quick check: which of those three tools would you test first as a candidate for splitting off, and what problem would the split solve?\n\nIf you want more depth, I can write a lesson on workflows versus agents and when multi-agent designs pay off.\n\nSources:\n- [How we built our multi-agent research system (Anthropic Engineering)](https://www.anthropic.com/engineering/multi-agent-research-system)",
+  "ttft_ms": 1570,
+  "type": "result",
+  "duration_ms": 28323,
+  "uuid": "7804d9e3-ce5a-418a-8354-e759b0fcf469",
+  "ttft_stream_ms": 1226,
+  "time_to_request_ms": 112,
+  "first_content_frame_ms": 1226,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 12,
+      "outputTokens": 1718,
+      "cacheReadInputTokens": 130308,
+      "cacheCreationInputTokens": 23831,
+      "webSearchRequests": 0,
+      "costUSD": 0.1255588,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 350,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 23831,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    },
+    "claude-haiku-5-5": {
+      "inputTokens": 14498,
+      "outputTokens": 1053,
+      "cacheReadInputTokens": 0,
+      "cacheCreationInputTokens": 0,
+      "webSearchRequests": 1,
+      "costUSD": 0.0119763,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 389,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 0,
+      "canonicalModel": "claude-haiku-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

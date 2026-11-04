@@ -1,0 +1,56 @@
+{
+  "id": "0002",
+  "objective": "O3",
+  "title": "Context and memory in an agent",
+  "items": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "Your assistant is partway through one request and the program is about to make the third model call. When the model writes its output for that call, what does it have to work with?",
+      "options": [
+        {"id": "a", "text": "Only the newest tool result, since older steps were already handled"},
+        {"id": "b", "text": "Its own stored memory of the first two calls, kept on the model side"},
+        {"id": "c", "text": "Everything the program put in that request, including the earlier steps"},
+        {"id": "d", "text": "The question plus whatever it learned from past students in training"}
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "numeric",
+      "objective": "O3",
+      "stem": "In one request, the first model call sends 1,100 tokens (system prompt, tool descriptions and the question). The model then uses three tools in turn, one per call, and each tool request plus its result adds 400 tokens that are re-sent in every later call. The fourth call writes the final answer. How many input tokens are sent in total across the four calls?",
+      "unit": "tokens"
+    },
+    {
+      "id": "q3",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "A student, Jordan, finishes CNC router training on 12 October. The assistant should know this when Jordan returns weeks later. Where should that fact be kept?",
+      "options": [
+        {"id": "a", "text": "A small saved note about Jordan, loaded into the window at later visits"},
+        {"id": "b", "text": "The manual library, so a search can find it among the machine pages"},
+        {"id": "c", "text": "Only the window of the current chat, which holds it for later visits"},
+        {"id": "d", "text": "The shared system prompt, so every student's session carries the fact"}
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "short",
+      "objective": "O3",
+      "stem": "In one or two sentences: why is retrieving a few relevant chunks of the manuals usually better than pasting all the manuals into every request, even when the window is big enough to hold them?"
+    },
+    {
+      "id": "q5",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "Your sponsor suggests switching to a model with a window five times larger so the team can skip retrieval and notes entirely. Which reply is most accurate?",
+      "options": [
+        {"id": "a", "text": "Agreed: a larger window lets the model remember students between sessions"},
+        {"id": "b", "text": "Agreed: once everything fits, accuracy no longer depends on what is in it"},
+        {"id": "c", "text": "No: it still starts empty each session, and every token sent is billed"},
+        {"id": "d", "text": "No: a larger window mainly lowers the cost, with no effect on quality"}
+      ]
+    }
+  ]
+}

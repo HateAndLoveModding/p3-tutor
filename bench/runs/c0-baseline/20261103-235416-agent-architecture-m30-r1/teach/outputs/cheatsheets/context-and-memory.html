@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cheat sheet: context and memory in an agent</title>
+  <style>
+    body { max-width: 42rem; margin: 0 auto; padding: 2rem 1rem; font-family: Charter, Georgia, serif; line-height: 1.5; color: #1f1d1a; background: #fffdf8; }
+    h1 { font-size: 1.6rem; } h2 { font-size: 1.15rem; margin-top: 1.5rem; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+    th, td { text-align: left; vertical-align: top; padding: 0.4rem 0.5rem; border-bottom: 1px solid #e4dfd4; }
+    @media (prefers-color-scheme: dark) { body { background: #171614; color: #e9e5dc; } th, td { border-color: #36332e; } }
+  </style>
+</head>
+<body>
+<h1>Context and memory: one page</h1>
+<p>From <a href="../lessons/0001-context-and-memory.html">Lesson 1</a>. Source: <a href="https://anthropic.com/engineering/effective-context-engineering-for-ai-agents">Anthropic, Effective context engineering for AI agents</a>.</p>
+<h2>Terms</h2>
+<ul>
+  <li><strong>Context:</strong> the text sent to the model on one call (system prompt, tool descriptions, transcript).</li>
+  <li><strong>Context window:</strong> the limit on that text, in tokens.</li>
+  <li><strong>Context rot:</strong> recall of details can get worse as the window fills.</li>
+  <li><strong>Transcript:</strong> messages, tool requests and results the program keeps and re-sends.</li>
+  <li><strong>Compaction:</strong> summarize a long conversation and continue in a fresh window.</li>
+  <li><strong>Notes:</strong> facts saved outside the window and loaded later.</li>
+  <li><strong>Retrieval:</strong> search a collection and put only the best chunks in the context.</li>
+</ul>
+<h2>Which tool for which fact?</h2>
+<table>
+  <thead><tr><th>Need</th><th>Use</th></tr></thead>
+  <tbody>
+    <tr><td>Needed on every call of this request</td><td>Context</td></tr>
+    <tr><td>Exact fact that must survive between visits</td><td>Saved notes or a lookup tool, loaded into context</td></tr>
+    <tr><td>Long conversation near the limit</td><td>Compaction (and clear old tool results)</td></tr>
+    <tr><td>Long reference documents</td><td>Retrieval (chunk, index, search); small sets may fit in the prompt</td></tr>
+  </tbody>
+</table>
+<h2>Cost rule</h2>
+<p>Input on call n = fixed prefix + everything added so far. Total input = the sum over all calls, so a result left in the transcript is paid for again on every later call.</p>
+<h2>Retrieval checklist</h2>
+<ul>
+  <li>Label each chunk with its machine and section before indexing.</li>
+  <li>Combine meaning search (embeddings) with exact-word search (BM25) for part numbers and codes.</li>
+  <li>Return few, small chunks.</li>
+</ul>
+</body>
+</html>

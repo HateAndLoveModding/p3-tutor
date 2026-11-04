@@ -1,0 +1,73 @@
+{
+  "id": "0002",
+  "objective": "O4",
+  "title": "Workflows and agents: who owns the control flow?",
+  "items": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "What is the main difference between a workflow and an agent?",
+      "options": [
+        {"id": "a", "text": "A workflow calls the model once, while an agent calls it several times"},
+        {"id": "b", "text": "A workflow cannot use tools, while an agent is able to use tools"},
+        {"id": "c", "text": "In a workflow the code sets the steps, while in an agent the model does"},
+        {"id": "d", "text": "A workflow uses a small model, while an agent needs a larger model"}
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "A makerspace assistant is built like this. Step 1: code searches the manuals for the student's question. Step 2: code pastes the best page into a prompt. Step 3: the model writes the answer. Step 4: code sends it. The steps never change. What is this design?",
+      "options": [
+        {"id": "a", "text": "A workflow, because the code fixes the order of every step"},
+        {"id": "b", "text": "An agent, because the model writes the final answer to the student"},
+        {"id": "c", "text": "An agent, because the model is called and a tool is used"},
+        {"id": "d", "text": "A workflow, because the manual search is done with no model"}
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "In another design, the model first reads a student's message and labels it 'manual question', 'booking request' or 'other'. Code then runs a different fixed sequence of steps for each label, and the model never picks a step. Who owns the control flow?",
+      "options": [
+        {"id": "a", "text": "The model, because it chooses the label that decides the path"},
+        {"id": "b", "text": "The model, because it makes the first decision in the design"},
+        {"id": "c", "text": "Neither, because the control flow is shared equally by both"},
+        {"id": "d", "text": "The code, because it sets every path and what follows each label"}
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "To book a machine, the assistant must always do the same three things in order: check the calendar for the slot, create the booking, then send a confirmation. Which design is the better choice for this part, and why?",
+      "options": [
+        {"id": "a", "text": "An agent, because the model can then decide when to book"},
+        {"id": "b", "text": "A workflow, because the steps are known and the order never changes"},
+        {"id": "c", "text": "An agent, because booking is an action that needs the loop"},
+        {"id": "d", "text": "A workflow, because it removes the need for a model altogether"}
+      ]
+    },
+    {
+      "id": "q5",
+      "type": "short",
+      "objective": "O4",
+      "stem": "The team's model budget is small. In one sentence, why does a fixed workflow usually cost less per request than an agent on the same task?"
+    },
+    {
+      "id": "q6",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "Which request to the makerspace assistant would most justify using an agent rather than a fixed workflow?",
+      "options": [
+        {"id": "a", "text": "\"What is the maximum material thickness for the laser cutter?\""},
+        {"id": "b", "text": "\"Book the 3D printer for me on Friday at 2 pm for one hour.\""},
+        {"id": "c", "text": "\"I must make 20 acrylic parts by Friday: which machines and when?\""},
+        {"id": "d", "text": "\"Remind me which safety training I need for the milling machine.\""}
+      ]
+    }
+  ]
+}

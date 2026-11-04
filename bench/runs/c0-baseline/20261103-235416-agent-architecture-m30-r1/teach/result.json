@@ -1,0 +1,151 @@
+{
+  "duration_api_ms": 210040,
+  "stop_reason": "end_turn",
+  "session_id": "5ecc0292-d893-4657-ada3-e9959ad4178e",
+  "total_cost_usd": 0.6309391000000002,
+  "usage": {
+    "input_tokens": 26,
+    "cache_creation_input_tokens": 67699,
+    "cache_read_input_tokens": 596541,
+    "output_tokens": 26187,
+    "output_tokens_details": {
+      "thinking_tokens": 2438
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 67699,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 676,
+        "cache_read_input_tokens": 77905,
+        "cache_creation_input_tokens": 368,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 368
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 26,
+      "outputTokens": 26187,
+      "cacheReadInputTokens": 596541,
+      "cacheCreationInputTokens": 67699,
+      "webSearchRequests": 0,
+      "costUSD": 0.5923721,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 2438,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 67699,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    },
+    "claude-haiku-5-5": {
+      "inputTokens": 56970,
+      "outputTokens": 5740,
+      "cacheReadInputTokens": 0,
+      "cacheCreationInputTokens": 0,
+      "webSearchRequests": 3,
+      "costUSD": 0.038567,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 2367,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 0,
+      "canonicalModel": "claude-haiku-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 31,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "The O3 lesson is written, with a quiz, its key and a cheat sheet. I didn't open the lesson in a browser and didn't count its words. I estimate about 4,000 words, inside the 2,700 to 6,750 range for 30 minutes.\n\n- **Lesson:** `lessons/0001-context-and-memory.html`. It opens with the win: say what the makerspace assistant sees at each step, what it forgets between visits, and when to use context, notes or retrieval.\n  - It covers the context window and context rot, why the program re-sends the whole transcript on every call, and why nothing carries over between sessions.\n  - It also covers notes and compaction, and retrieval: chunking, embeddings, BM25, and chunks that lose their machine name.\n  - It has three figures, practice checks with instant feedback, and a worked token-cost example (12,500 input tokens for one request). A faded version follows, then a \"design it\" exercise.\n- **Sources:** the lesson draws on two Anthropic pages I opened and read, [Effective context engineering for AI agents](https://anthropic.com/engineering/effective-context-engineering-for-ai-agents) (the primary source) and [Introducing Contextual Retrieval](https://www.anthropic.com/news/contextual-retrieval). Both are in `RESOURCES.md`.\n- **Quiz and key:** `quizzes/0002.json` and `keys/0002.json`, five items with none repeating the lesson's practice.\n- **Cheat sheet:** `cheatsheets/context-and-memory.html`.\n- **Notes:** `NOTES.md` now records the new misconception id M7 (a big window means context needs no curation). It also records that quiz 0001's two submissions are still ungraded.\n\nI didn't write a learning record, since there's no new evidence of what you've learned yet.\n\nI found no community I could verify, so the lesson suggests testing the ideas at your team's design review instead. I can look for one if you want.\n\nThe quiz is ready whenever you are, and you can ask me about any part of the lesson.",
+  "ttft_ms": 2076,
+  "type": "result",
+  "duration_ms": 199159,
+  "uuid": "12fd1915-714b-4aa2-9fce-46d1dba08e34",
+  "ttft_stream_ms": 1741,
+  "time_to_request_ms": 110,
+  "first_content_frame_ms": 1742,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 26,
+      "outputTokens": 26187,
+      "cacheReadInputTokens": 596541,
+      "cacheCreationInputTokens": 67699,
+      "webSearchRequests": 0,
+      "costUSD": 0.5923721,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 2438,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 67699,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    },
+    "claude-haiku-5-5": {
+      "inputTokens": 56970,
+      "outputTokens": 5740,
+      "cacheReadInputTokens": 0,
+      "cacheCreationInputTokens": 0,
+      "webSearchRequests": 3,
+      "costUSD": 0.038567,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 2367,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 0,
+      "canonicalModel": "claude-haiku-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

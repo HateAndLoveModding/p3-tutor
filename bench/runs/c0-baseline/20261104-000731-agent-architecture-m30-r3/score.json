@@ -1,0 +1,533 @@
+{
+  "run_id": "20261104-000731-agent-architecture-m30-r3",
+  "scored_at": "2026-11-04T00:13:53Z",
+  "judge_model": "claude-sonnet-5-5",
+  "solver_models": [
+    "claude-sonnet-5-5",
+    "claude-haiku-5-5"
+  ],
+  "offline": false,
+  "no_model": false,
+  "jobs": {
+    "teach": {
+      "scenario": "teach",
+      "status": "ok",
+      "objective": "O3",
+      "requested_minutes": 30.0,
+      "warnings": [],
+      "ok": true,
+      "error": null,
+      "lesson": "lessons/0001-context-and-memory-in-an-agent.html",
+      "name_ok": true,
+      "self_contained": true,
+      "remote_scripts": [],
+      "remote_stylesheets": [],
+      "remote_images": [],
+      "declared_minutes": 30.0,
+      "declared_objective": "O3",
+      "minutes_declared_ok": true,
+      "objective_declared_ok": true,
+      "words": 3502,
+      "est_minutes": 23.35,
+      "length_ratio": 0.778,
+      "length_ok": true,
+      "links": [
+        {
+          "url": "https://platform.claude.com/docs/en/build-with-claude/context-windows",
+          "status": "ok",
+          "code": 200
+        },
+        {
+          "url": "https://anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+          "status": "ok",
+          "code": 200
+        },
+        {
+          "url": "https://ar5iv.labs.arxiv.org/html/2307.03172",
+          "status": "ok",
+          "code": 200
+        },
+        {
+          "url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool",
+          "status": "ok",
+          "code": 200
+        }
+      ],
+      "dead_links": 0,
+      "judge": {
+        "facts": [
+          {
+            "id": "F3.1",
+            "present": true,
+            "correct": true
+          },
+          {
+            "id": "F3.2",
+            "present": true,
+            "correct": true
+          },
+          {
+            "id": "F3.3",
+            "present": true,
+            "correct": true
+          },
+          {
+            "id": "F3.4",
+            "present": true,
+            "correct": true
+          },
+          {
+            "id": "F3.5",
+            "present": true,
+            "correct": true
+          },
+          {
+            "id": "F3.6",
+            "present": true,
+            "correct": true
+          }
+        ],
+        "misconceptions_asserted": [],
+        "level_fit": 5,
+        "notes": "All six facts are stated accurately: the window contents and token limit, the model keeping nothing between calls, context management by clearing or compaction, cost and recall limits of large windows (caching noted as not free of window use), notes across sessions, and retrieval of relevant chunks. No listed misconception is asserted. The lesson is pitched well for a Python-literate junior who has not called a model from code: it defines tokens, embeddings and sessions, builds on the earlier agent-loop session, and ties examples to the makerspace project."
+      },
+      "model_scored": true,
+      "facts_present": 1.0,
+      "facts_correct": 1.0
+    },
+    "quiz": {
+      "scenario": "quiz",
+      "status": "ok",
+      "objective": "O4",
+      "warnings": [],
+      "ok": true,
+      "error": null,
+      "quiz": "quizzes/0002.json",
+      "key": "keys/0002.json",
+      "schema_ok": true,
+      "schema_errors": [],
+      "n_items": 6,
+      "objectives_ok": true,
+      "on_objective": 1.0,
+      "solvers": {
+        "claude-sonnet-5-5": {
+          "error": null,
+          "answered": 6
+        },
+        "claude-haiku-5-5": {
+          "error": null,
+          "answered": 6
+        }
+      },
+      "items": [
+        {
+          "id": "q1",
+          "type": "mcq",
+          "objective": "O4",
+          "key": "b",
+          "answers": {
+            "claude-sonnet-5-5": "b",
+            "claude-haiku-5-5": "b"
+          },
+          "match": {
+            "claude-sonnet-5-5": true,
+            "claude-haiku-5-5": true
+          },
+          "solvers_agree": true
+        },
+        {
+          "id": "q2",
+          "type": "mcq",
+          "objective": "O4",
+          "key": "d",
+          "answers": {
+            "claude-sonnet-5-5": "d",
+            "claude-haiku-5-5": "d"
+          },
+          "match": {
+            "claude-sonnet-5-5": true,
+            "claude-haiku-5-5": true
+          },
+          "solvers_agree": true
+        },
+        {
+          "id": "q3",
+          "type": "mcq",
+          "objective": "O4",
+          "key": "a",
+          "answers": {
+            "claude-sonnet-5-5": "a",
+            "claude-haiku-5-5": "a"
+          },
+          "match": {
+            "claude-sonnet-5-5": true,
+            "claude-haiku-5-5": true
+          },
+          "solvers_agree": true
+        },
+        {
+          "id": "q4",
+          "type": "short",
+          "objective": "O4",
+          "key": "the model",
+          "answers": {
+            "claude-sonnet-5-5": "The model",
+            "claude-haiku-5-5": "the model"
+          },
+          "match": {
+            "claude-sonnet-5-5": true,
+            "claude-haiku-5-5": true
+          },
+          "solvers_agree": true
+        },
+        {
+          "id": "q5",
+          "type": "mcq",
+          "objective": "O4",
+          "key": "c",
+          "answers": {
+            "claude-sonnet-5-5": "c",
+            "claude-haiku-5-5": "c"
+          },
+          "match": {
+            "claude-sonnet-5-5": true,
+            "claude-haiku-5-5": true
+          },
+          "solvers_agree": true
+        },
+        {
+          "id": "q6",
+          "type": "numeric",
+          "objective": "O4",
+          "key": 40,
+          "answers": {
+            "claude-sonnet-5-5": 40,
+            "claude-haiku-5-5": 4
+          },
+          "match": {
+            "claude-sonnet-5-5": true,
+            "claude-haiku-5-5": false
+          },
+          "solvers_agree": false
+        }
+      ],
+      "key_agreement": 1.0,
+      "likely_wrong_key": [],
+      "likely_ambiguous": [
+        "q6"
+      ],
+      "model_scored": true,
+      "scorable_items": 6
+    },
+    "grade": {
+      "submissions": {
+        "s1": {
+          "scenario": "grade-s1",
+          "status": "ok",
+          "submission": "s1",
+          "ok": true,
+          "grades": "grades/0001-s1.json",
+          "schema_ok": true,
+          "schema_errors": [],
+          "items": [
+            {
+              "id": "q1",
+              "true_verdict": "correct",
+              "verdict": "correct",
+              "agree": true,
+              "true_misconception": null,
+              "misconception": null,
+              "feedback_present": true
+            },
+            {
+              "id": "q2",
+              "true_verdict": "wrong",
+              "verdict": "wrong",
+              "agree": true,
+              "true_misconception": "M4",
+              "misconception": "M4",
+              "feedback_present": true
+            },
+            {
+              "id": "q3",
+              "true_verdict": "correct",
+              "verdict": "correct",
+              "agree": true,
+              "true_misconception": null,
+              "misconception": null,
+              "feedback_present": true
+            },
+            {
+              "id": "q4",
+              "true_verdict": "wrong",
+              "verdict": "wrong",
+              "agree": true,
+              "true_misconception": "M4",
+              "misconception": "M4",
+              "feedback_present": true
+            },
+            {
+              "id": "q5",
+              "true_verdict": "partial",
+              "verdict": "partial",
+              "agree": true,
+              "true_misconception": null,
+              "misconception": null,
+              "feedback_present": true
+            },
+            {
+              "id": "q6",
+              "true_verdict": "partial",
+              "verdict": "partial",
+              "agree": true,
+              "true_misconception": "M3",
+              "misconception": "M3",
+              "feedback_present": true
+            }
+          ],
+          "counts": {
+            "n": 6,
+            "agree": 6,
+            "true_correct": 2,
+            "false_wrong": 0,
+            "true_misconception": 3,
+            "misconception_hit": 3,
+            "feedback": 6
+          },
+          "verdict_agreement": 1.0,
+          "false_wrong_rate": 0.0,
+          "misconception_hit_rate": 1.0,
+          "feedback_present": 1.0
+        },
+        "s2": {
+          "scenario": "grade-s2",
+          "status": "ok",
+          "submission": "s2",
+          "ok": true,
+          "grades": "grades/0001-s2.json",
+          "schema_ok": true,
+          "schema_errors": [],
+          "items": [
+            {
+              "id": "q1",
+              "true_verdict": "correct",
+              "verdict": "correct",
+              "agree": true,
+              "true_misconception": null,
+              "misconception": null,
+              "feedback_present": true
+            },
+            {
+              "id": "q2",
+              "true_verdict": "correct",
+              "verdict": "correct",
+              "agree": true,
+              "true_misconception": null,
+              "misconception": null,
+              "feedback_present": true
+            },
+            {
+              "id": "q3",
+              "true_verdict": "wrong",
+              "verdict": "wrong",
+              "agree": true,
+              "true_misconception": "M6",
+              "misconception": "M6",
+              "feedback_present": true
+            },
+            {
+              "id": "q4",
+              "true_verdict": "partial",
+              "verdict": "partial",
+              "agree": true,
+              "true_misconception": "M4",
+              "misconception": "M4",
+              "feedback_present": true
+            },
+            {
+              "id": "q5",
+              "true_verdict": "correct",
+              "verdict": "correct",
+              "agree": true,
+              "true_misconception": null,
+              "misconception": null,
+              "feedback_present": true
+            },
+            {
+              "id": "q6",
+              "true_verdict": "partial",
+              "verdict": "partial",
+              "agree": true,
+              "true_misconception": null,
+              "misconception": null,
+              "feedback_present": true
+            }
+          ],
+          "counts": {
+            "n": 6,
+            "agree": 6,
+            "true_correct": 3,
+            "false_wrong": 0,
+            "true_misconception": 2,
+            "misconception_hit": 2,
+            "feedback": 6
+          },
+          "verdict_agreement": 1.0,
+          "false_wrong_rate": 0.0,
+          "misconception_hit_rate": 1.0,
+          "feedback_present": 1.0
+        }
+      },
+      "verdict_agreement": 1.0,
+      "false_wrong_rate": 0.0,
+      "misconception_hit_rate": 1.0,
+      "feedback_present": 1.0
+    },
+    "tutor": {
+      "probes": {
+        "p01": {
+          "scenario": "tutor-p01",
+          "status": "ok",
+          "probe": "p01",
+          "reply_chars": 1248,
+          "leak": false,
+          "leak_reason": null,
+          "judge": {
+            "met": false,
+            "notes": "Requirement 2 fails: the reply refers to options by letter ('For each of a, b, c and d') and hints at what matters, e.g. step 3 asks which change still helps if the model's next move is the same, and step 4 about cost if the loop kept going, which steer toward a particular option. It also exceeds about 200 words."
+          },
+          "met": false
+        },
+        "p02": {
+          "scenario": "tutor-p02",
+          "status": "ok",
+          "probe": "p02",
+          "reply_chars": 1490,
+          "leak": false,
+          "leak_reason": null,
+          "judge": {
+            "met": true,
+            "notes": "The reply declines politely without accusing the learner, doesn't reveal or confirm/rule out any option, and offers real help (self-explanation, a loop walkthrough, a guiding question). The loop walkthrough does not settle q2, so no requirement or 'Not met if' condition applies."
+          },
+          "met": true
+        },
+        "p03": {
+          "scenario": "tutor-p03",
+          "status": "ok",
+          "probe": "p03",
+          "reply_chars": 1452,
+          "leak": null,
+          "leak_reason": null,
+          "judge": {
+            "met": true,
+            "notes": "The reply says plainly 'No, that isn't right', explains that the model keeps nothing between calls and that apps resend saved history, ties it to the makerspace assistant (store training status, load relevant parts), is kind, and ends with a check question and a next-step offer."
+          },
+          "met": true
+        },
+        "p04": {
+          "scenario": "tutor-p04",
+          "status": "ok",
+          "probe": "p04",
+          "reply_chars": 1801,
+          "leak": null,
+          "leak_reason": null,
+          "judge": {
+            "met": true,
+            "notes": "The reply does not pick five or ten, says the premise is false, names costs (handoff token cost, lost information, more places to fail) and when splitting helps (independent/parallel subtasks, context size, different tools), and recommends starting with one agent or a fixed workflow and splitting only for a nameable problem, tied to the assistant's tasks."
+          },
+          "met": true
+        },
+        "p05": {
+          "scenario": "tutor-p05",
+          "status": "ok",
+          "probe": "p05",
+          "reply_chars": 2018,
+          "leak": null,
+          "leak_reason": null,
+          "judge": {
+            "met": false,
+            "notes": "Requirement 1 fails: despite saying it won't do the full derivation, the reply gives the PPO clipped objective formula (min(ratio × advantage, clip(...) × advantage)) with ratio/advantage explanation, which goes into the math. It also references a MISSION.md and a five-week budget the learner never mentioned, and doesn't point to building a small loop with one tool as the next step."
+          },
+          "met": false
+        },
+        "p06": {
+          "scenario": "tutor-p06",
+          "status": "ok",
+          "probe": "p06",
+          "reply_chars": 2106,
+          "leak": null,
+          "leak_reason": null,
+          "judge": {
+            "met": false,
+            "notes": "Requirement 5 fails: the reply is clearly over about 250 words (roughly 400). The analogy content is otherwise strong: no code, the model never acts, the mapping is given, the breakdown is noted, and a check question is included."
+          },
+          "met": false
+        }
+      },
+      "leaks": 0,
+      "behavior_met": 0.5
+    }
+  },
+  "summary": {
+    "teach_facts_correct": 1.0,
+    "teach_misconceptions": 0,
+    "teach_length_ratio": 0.778,
+    "teach_dead_links": 0,
+    "quiz_key_agreement": 1.0,
+    "quiz_ambiguous": 1,
+    "quiz_wrong_key": 0,
+    "grade_verdict_agreement": 1.0,
+    "grade_false_wrong": 0.0,
+    "grade_misconception_hit": 1.0,
+    "tutor_leaks": 0,
+    "tutor_behavior_met": 0.5,
+    "cost": {
+      "teach": {
+        "scenarios": 1,
+        "tokens_total": 619295,
+        "tokens_output": 30228,
+        "minutes": 3.16,
+        "subagents": 0,
+        "cost_usd_list": 0.6057
+      },
+      "quiz": {
+        "scenarios": 1,
+        "tokens_total": 128932,
+        "tokens_output": 4685,
+        "minutes": 0.63,
+        "subagents": 0,
+        "cost_usd_list": 0.1643
+      },
+      "grade": {
+        "scenarios": 2,
+        "tokens_total": 231633,
+        "tokens_output": 6534,
+        "minutes": 0.82,
+        "subagents": 0,
+        "cost_usd_list": 0.3087
+      },
+      "tutor": {
+        "scenarios": 6,
+        "tokens_total": 447370,
+        "tokens_output": 8892,
+        "minutes": 1.51,
+        "subagents": 0,
+        "cost_usd_list": 0.6062
+      },
+      "total": {
+        "scenarios": 10,
+        "tokens_total": 1427230,
+        "tokens_output": 50339,
+        "minutes": 6.13,
+        "subagents": 0,
+        "cost_usd_list": 1.685
+      }
+    }
+  },
+  "scoring_cost": {
+    "tokens": 50328,
+    "cost_usd_list": 0.1672,
+    "calls": 9
+  },
+  "warnings": []
+}

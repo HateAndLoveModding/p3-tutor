@@ -1,0 +1,43 @@
+{
+  "quiz": "0001",
+  "submission": "s2",
+  "items": [
+    {
+      "id": "q1",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "Right. What makes a system an agent is the loop: the model picks an action, the program runs it, and the result comes back for the next step. A longer prompt or a bigger model changes what one call can do, but it doesn't change that structure."
+    },
+    {
+      "id": "q2",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "Right. The model only outputs a structured request naming check_calendar with the machine and date as arguments. The program around it runs the tool. Keep this split in mind when you design your tool descriptions."
+    },
+    {
+      "id": "q3",
+      "verdict": "wrong",
+      "misconception": "M6",
+      "feedback": "You picked 'left to run longer, it will eventually fix the bug'. That's tempting, but the agent is getting the same failing result every step, so more steps add nothing new. The loop needs a stopping condition, such as a step limit that ends the run and reports back to a person. This matters for your budget too, because every extra step costs model usage."
+    },
+    {
+      "id": "q4",
+      "verdict": "partial",
+      "misconception": "M4",
+      "feedback": "4 is the right count: three tool requests plus the final answer. Your reasoning has a slip, though. You wrote that the model 'runs' each tool itself. The model only asks for a tool in each call, and the program runs it and sends the result back. The count still comes out as 4 because the model is called once for the question and once for each of the three results."
+    },
+    {
+      "id": "q5",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "Right, and you gave both parts: the result goes back in as the model's next input, and the model uses it to decide what to do next. The group-chat reply is a good picture. The model has no other way to see what the tool returned."
+    },
+    {
+      "id": "q6",
+      "verdict": "partial",
+      "misconception": null,
+      "feedback": "The name is part of how the model chooses, so you're partly right. The model relies on the whole tool description the program gives it: the name, what the tool does and the parameters it takes. A name alone can mislead. For example, 'check_calendar' doesn't say whether it checks one machine or all of them, and the description does. This is the idea behind writing good descriptions for your own tools."
+    }
+  ],
+  "summary": "You have the core loop down. You got the loop, the model's tool request and what happens to a tool result right, and your count of model calls was right. Two things to fix. First, the model only requests tools and never runs them; your q4 reasoning slipped there. Second, a loop needs a stopping condition, because 'it'll get there eventually' isn't safe and costs money. Next step: rewrite check_calendar's description so the model could pick it without seeing any code, then re-read the part of the agent-loop lesson on stopping conditions."
+}

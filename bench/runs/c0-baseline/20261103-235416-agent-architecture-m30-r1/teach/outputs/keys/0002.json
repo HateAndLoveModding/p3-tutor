@@ -1,0 +1,42 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "b",
+      "rationale": "Every model call is separate and the model keeps nothing between calls; the program holds the transcript and sends it again each time. The model has no internal store (a), tools do not hand results back by themselves (c), and the window is only the text sent on one call, so it does not persist between calls (d).",
+      "distractors": {"a": "M3", "c": "M4", "d": "M7"}
+    },
+    {
+      "id": "q2",
+      "answer": "d",
+      "rationale": "The whole context is re-sent and billed on every call, and recall of any one detail can degrade as the window fills (context rot), so a window that can hold the manuals is not a reason to include them. Option a is false by the premise, and b and c describe behaviour that does not exist.",
+      "distractors": {"a": "M7", "c": "M3"}
+    },
+    {
+      "id": "q3",
+      "answer": 9000,
+      "tolerance": 0,
+      "rationale": "The transcript is re-sent on every call and grows by 500 tokens per tool result: call 1 = 1,500; call 2 = 2,000; call 3 = 2,500; call 4 = 3,000. The sum is 9,000. An answer of 3,000 counts only the final call; an answer of 3,000 or 1,500 + 1,500 = 3,000 misses that earlier content is re-sent on every call."
+    },
+    {
+      "id": "q4",
+      "answer": "c",
+      "rationale": "Exact facts that must persist across sessions should be saved as a structured record outside the model and loaded into the context (or fetched by a tool). The model does not remember earlier chats (a, M3), a summary can drop the detail (b), and similarity search over manual chunks is for long documents, not exact per-student records (d).",
+      "distractors": {"a": "M3"}
+    },
+    {
+      "id": "q5",
+      "answer": "Add the machine name (and section) to each chunk before indexing it",
+      "accepted": [
+        "prepend the machine name to each chunk",
+        "add context to each chunk before indexing",
+        "prepend a short description of where the chunk comes from",
+        "put the machine name and section title at the top of every chunk",
+        "contextual retrieval",
+        "add the machine name to each chunk"
+      ],
+      "rationale": "The chunk lost the context that says what it is about; prepending a short label such as the machine name and section before embedding and indexing lets search match it (the idea behind Anthropic's Contextual Retrieval). Answers such as 'use a bigger model' or 'put the whole manual in the prompt' do not fix the chunk."
+    }
+  ]
+}
