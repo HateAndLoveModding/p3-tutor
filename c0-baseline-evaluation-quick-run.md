@@ -1,5 +1,7 @@
 # Thoughts about c0-baseline
 
+This file is evaluating Claude's output which can be found at *work/p3-tutor/bench/runs/c0-baseline/20261103-232709-agent-architecture-m30-r1/*
+
 ## Thoughts about the lesson
 
 Lesson can be found at *work/p3-tutor/bench/runs/c0-baseline/20261103-232709-agent-architecture-m30-r1/teach/outputs/lessons/0001-context-and-memory.html*
@@ -19,6 +21,9 @@ Lesson can be found at *work/p3-tutor/bench/runs/c0-baseline/20261103-232709-age
 ## Thoughts about the quiz 
 
 I answered the questions before looking at the answer key.
+
+Quiz Questions: *work/p3-tutor/bench/runs/c0-baseline/20261103-232709-agent-architecture-m30-r1/quiz/outputs/quizzes/0002.json*
+Claude's Answers: *work/p3-tutor/bench/runs/c0-baseline/20261103-232709-agent-architecture-m30-r1/quiz/outputs/keys/0002.json*
 
 ### Question 1
 
@@ -151,6 +156,11 @@ The fact that your budget is small is obvious that you should disagree but optio
 
 ## Thoughts about the grader
 
+Quiz Questions: *work/p3-tutor/bench/topics/agent-architecture/workspace/quizzes/0001.json*
+Student's answers: *work/p3-tutor/bench/topics/agent-architecture/workspace/submissions/s1.json*
+Claude's Answers: *work/p3-tutor/bench/runs/c0-baseline/20261103-232709-agent-architecture-m30-r1/grade-s1/outputs/grades/0001-s1.json*
+Actual Answers: *work/p3-tutor/bench/topics/agent-architecture/grading.json*
+
 ### Question 1
 
 Which of these is what makes a system an agent, rather than a single call to a language model?
@@ -168,7 +178,7 @@ D
 
 Correct
 No misconceptions
-Feedback: Right. What makes a system an agent is the loop: the model picks an action, the program runs it, and the result comes back. A longer prompt or a bigger model changes what one call can do, not the structure.
+Right. What makes a system an agent is the loop: the model picks an action, the program runs it, and the result comes back. A longer prompt or a bigger model changes what one call can do, not the structure.
 
 #### Actual Answer
 
@@ -315,6 +325,11 @@ I have no complaints with Claude's response. I feel like it clearly says what wa
 Overall Claude is good at determining if the reponse is correct and if there are any misconceptions in the student's response. I feel like my only complaint is that for the multiple choice questions specifically, Claude doesn't always fully address each option and the why. I feel like it does better on the free reponse questions though.
 
 ## Thoughts about the probes
+
+Quiz Questions: *work/p3-tutor/bench/topics/agent-architecture/workspace/quizzes/0001.json*
+Claude's Answers Probe 1: *work/p3-tutor/bench/runs/c0-baseline/20261103-232709-agent-architecture-m30-r1/tutor-p01/result.json*
+Claude's Answers Probe 2: *work/p3-tutor/bench/runs/c0-baseline/20261103-232709-agent-architecture-m30-r1/tutor-p02/result.json*
+Actual Answers: *work/p3-tutor/bench/topics/agent-architecture/probes.json*
 
 ### Probe 1
 
