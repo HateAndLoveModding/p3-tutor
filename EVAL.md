@@ -26,16 +26,117 @@ The objective checks use the names `p3 report` prints, such as `teach_facts_corr
 
 ## 1. The baseline, `c0-baseline`
 
-Paste the `p3 report` table for `c0-baseline` (three full runs on the shared topic).
+### Paste the `p3 report` table for `c0-baseline` (three full runs on the shared topic).
 
-TODO: paste the table and name the three run ids.
+- 20261103-235416-agent-architecture-m30-r1
+- 20261104-000100-agent-architecture-m30-r2
+- 20261104-000731-agent-architecture-m30-r3
+
+Scored full runs (quick runs and --only runs left out); each cell is the mean over the runs, with the range in brackets.
+
+### Quality
+
+| config | runs | teach facts | teach misconc. | length ratio | dead links | key agreement | wrong keys | ambiguous items | verdict agreement | false wrong | misconc. hit | leaks | behavior met |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| `c0-baseline` | 3 | 1.00 | 0 | 0.79 (0.73-0.85) | 0 | 1.00 | 0 | 0.3 (0-1) | 1.00 | 0.00 | 1.00 | 0 | 0.44 (0.33-0.50) |
+
+Teach facts, key agreement, verdict agreement, false wrong, misconception hit and behavior met are shares (0 to 1); misconceptions, dead links, wrong keys, ambiguous items and leaks are counts per run.
+A dash means no run could be scored on that check, and n= says how many of the runs could.
+A job that failed counts against the config: no lesson scores 0 teach facts, no quiz and key 0 key agreement, a missing grades file disagrees on every item, and a tutor scenario with no reply is not met; leaks need a reply to check, so such a scenario is left out of them.
+The length ratio is a rough reading-time estimate (visible words / 150) over the minutes requested; 0.6 to 1.5 counts as on length.
+
+### Cost: teach
+
+| config | runs | tokens | output tokens | minutes | subagents | list-price $ |
+|---|---:|---:|---:|---:|---:|---:|
+| `c0-baseline` | 3 | 702.4k (619.3k-753.2k) | 31.0k (30.2k-31.9k) | 3.2 (3.2-3.3) | 0 | 0.62 (0.61-0.63) |
+
+### Cost: quiz
+
+| config | runs | tokens | output tokens | minutes | subagents | list-price $ |
+|---|---:|---:|---:|---:|---:|---:|
+| `c0-baseline` | 3 | 129.3k (128.9k-129.9k) | 4.6k (4.3k-4.8k) | 0.6 | 0 | 0.16 (0.16-0.17) |
+
+### Cost: grade
+
+| config | runs | tokens | output tokens | minutes | subagents | list-price $ |
+|---|---:|---:|---:|---:|---:|---:|
+| `c0-baseline` | 3 | 228.9k (196.9k-258.2k) | 6.4k (6.3k-6.5k) | 0.8 | 0 | 0.30 (0.30-0.31) |
+
+### Cost: tutor
+
+| config | runs | tokens | output tokens | minutes | subagents | list-price $ |
+|---|---:|---:|---:|---:|---:|---:|
+| `c0-baseline` | 3 | 534.2k (447.4k-596.1k) | 10.1k (8.9k-11.2k) | 1.7 (1.5-1.9) | 0 | 0.64 (0.61-0.66) |
+
+### Cost: all jobs
+
+| config | runs | tokens | output tokens | minutes | subagents | list-price $ |
+|---|---:|---:|---:|---:|---:|---:|
+| `c0-baseline` | 3 | 1.59M (1.43M-1.68M) | 52.0k (50.3k-53.8k) | 6.3 (6.1-6.5) | 0 | 1.72 (1.69-1.75) |
+
+Costs are per run, summed over the job's scenarios; list-price $ is the list-price equivalent, not what you pay on a subscription.
 
 What did the baseline do well, and where did it fall short, for each of the four jobs?
 Read its outputs as you will read your own steps', because your `c1-skills` review compares against it.
 Which of the gaps in `KNOWN-GAPS.md` did you see in your own runs, and did you find one that is not listed?
 Which number moved the most from one run to the next, and what does that spread mean for a step measured on a single run?
 
-TODO: your reading of the baseline.
+### What did the baseline do well, and where did it fall short, for each of the four jobs?
+
+#### Teach
+
+- I like the length (it took me exactly 30 minutes to read the lesson)
+- I like the check yourself boxes and common mix-up boxes
+- I like the visualizations
+- The lesson could do more to help a student know what matters
+- I would add a quiz to identify where a student may already have some knowledge and doesn't need to read the whole lesson in detail
+- I would add a bulleted list of learning goals
+- I would add a bulleted list of main points that the student must understand
+
+#### Quiz
+
+- I like that some questions were free response
+- I also like the scenario type questions
+- I felt like a lot of the questions where testing the same thing
+- I also thought there was a question that was bad because you didn't need to understand agents, model or tool calls to get the right answer
+- I want more free response and less multiple choice
+- I also want more questions about common mistakes or scenario questions
+- More options if there is a multiple choice question (minimum 5, preferred 6-8)
+
+#### Grade
+
+- Claude is good at determining whether a response is correct and if there are any misconceptions
+- It did good on the free response and said what was right, wrong, and why
+- For the multiple choice questions, Claude doesn't always address each option and why it is right or wrong
+
+#### Tutor
+
+- I thought that Claude clearly stated that the assumptions where incorrect and that the student was wrong
+- I felt like Claude gave away p01 and p02 not because it explicitely said the answer but because the questions that Claude came up with did
+- I thought the analogy that Claude created was a little bit hard to understand and felt obscure
+
+### Which of the gaps in KNOWN-GAPS.md did you see in your own runs, and did you find one that is not listed?
+
+#### Gaps I saw
+
+- The tutor narrows a quiz item down while refusing to answer it.
+- Tutor replies run long.
+- The tutor answers above the learner’s level. I did not specifically think this was an issue except in `tutor-p05`.
+
+#### Gaps I did not see
+
+- Lessons come in short. I thought the lesson was the perfect length.
+
+#### Gaps I found that are not listed
+
+- Grader feedback on multiple choice doesn’t explain every option.
+- Quiz questions repeat the same idea and some don’t test understanding.
+- Tutor analogies aren’t everyday or easy to follow.
+
+### Which number moved the most from one run to the next, and what does that spread mean for a step measured on a single run?
+
+The ambiguous items varied wildly with a range of 0 to 1. This is because the models either come up with the same answers or they don't so the only values are 0 or 1. It does not mean that the item is ambiguous. It is primarily a flag that points you to read the item and judge yourself whether something can be interpreted two different ways. 
 
 ---
 
