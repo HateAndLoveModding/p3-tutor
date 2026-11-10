@@ -84,22 +84,28 @@ Which number moved the most from one run to the next, and what does that spread 
 
 ### What did the baseline do well, and where did it fall short, for each of the four jobs?
 
+This information comes from *c0-baseline-evaluation-quick-run.md* and *c0-baseline-evaluation-full-run.md*. These thoughts only come from the quick run and r1 of the full run.
+
 #### Teach
+
+*bench/runs/c0-baseline/20261103-232709-agent-architecture-m30-r1/teach/outputs/lessons/0001-context-and-memory.html*
 
 - I like the length (it took me exactly 30 minutes to read the lesson)
 - I like the check yourself boxes and common mix-up boxes
 - I like the visualizations
 - The lesson could do more to help a student know what matters
-- I would add a quiz to identify where a student may already have some knowledge and doesn't need to read the whole lesson in detail
+- I would add a quiz at the beginningto identify where a student may already have some knowledge and doesn't need to read the whole lesson in detail
 - I would add a bulleted list of learning goals
 - I would add a bulleted list of main points that the student must understand
 
 #### Quiz
 
-- I like that some questions were free response
-- I also like the scenario type questions
-- I felt like a lot of the questions where testing the same thing
-- I also thought there was a question that was bad because you didn't need to understand agents, model or tool calls to get the right answer
+*bench/runs/c0-baseline/20261103-232709-agent-architecture-m30-r1/quiz/outputs/quizzes/0002.json*
+
+- I like that some questions were free response (q1 and q5)
+- I also like the scenario type questions (q2 and q6)
+- I felt like a lot of the questions where testing the same thing (q1, q2, q3, and q5)
+- I also thought there was a question that was bad because you didn't need to understand agents, model or tool calls to get the right answer (q4)
 - I want more free response and less multiple choice
 - I also want more questions about common mistakes or scenario questions
 - More options if there is a multiple choice question (minimum 5, preferred 6-8)
@@ -107,21 +113,21 @@ Which number moved the most from one run to the next, and what does that spread 
 #### Grade
 
 - Claude is good at determining whether a response is correct and if there are any misconceptions
-- It did good on the free response and said what was right, wrong, and why
-- For the multiple choice questions, Claude doesn't always address each option and why it is right or wrong
+- It did good on the free response and said what was right, wrong, and why (s1 q6, s2 q4)
+- For the multiple choice questions, Claude doesn't always address each option and why it is right or wrong (s1 q2, s1 q3, s2 q3)
 
 #### Tutor
 
 - I thought that Claude clearly stated that the assumptions where incorrect and that the student was wrong
 - I felt like Claude gave away p01 and p02 not because it explicitely said the answer but because the questions that Claude came up with did
-- I thought the analogy that Claude created was a little bit hard to understand and felt obscure
+- I thought the analogy that Claude created was a little bit hard to understand and felt obscure (p06)
 
 ### Which of the gaps in KNOWN-GAPS.md did you see in your own runs, and did you find one that is not listed?
 
 #### Gaps I saw
 
-- The tutor narrows a quiz item down while refusing to answer it.
-- Tutor replies run long.
+- The tutor narrows a quiz item down while refusing to answer it (p01 and p02)
+- Tutor replies run long (p06)
 - The tutor answers above the learner’s level. I did not specifically think this was an issue except in `tutor-p05`.
 
 #### Gaps I did not see
@@ -130,9 +136,9 @@ Which number moved the most from one run to the next, and what does that spread 
 
 #### Gaps I found that are not listed
 
-- Grader feedback on multiple choice doesn’t explain every option.
-- Quiz questions repeat the same idea and some don’t test understanding.
-- Tutor analogies aren’t everyday or easy to follow.
+- Grader feedback on multiple choice doesn’t explain every option (s1 q2, s1 q3, s2 q3)
+- Quiz questions repeat the same idea (q1, q2, q3 and q5) and some don’t test understanding (q4).
+- Tutor analogies aren’t everyday or easy to follow (p06).
 
 ### Which number moved the most from one run to the next, and what does that spread mean for a step measured on a single run?
 
