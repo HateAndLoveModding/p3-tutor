@@ -1,0 +1,418 @@
+{
+  "run_id": "20261111-010848-agent-architecture-m30-r1",
+  "scored_at": "2026-11-11T01:13:50Z",
+  "judge_model": "claude-sonnet-5-5",
+  "solver_models": [
+    "claude-sonnet-5-5",
+    "claude-haiku-5-5"
+  ],
+  "offline": false,
+  "no_model": false,
+  "jobs": {
+    "teach": {
+      "scenario": "teach",
+      "status": "ok",
+      "objective": "O3",
+      "requested_minutes": 30.0,
+      "warnings": [],
+      "ok": true,
+      "error": null,
+      "lesson": "lessons/0001-context-and-memory.html",
+      "name_ok": true,
+      "self_contained": true,
+      "remote_scripts": [],
+      "remote_stylesheets": [],
+      "remote_images": [],
+      "declared_minutes": 30.0,
+      "declared_objective": "O3",
+      "minutes_declared_ok": true,
+      "objective_declared_ok": true,
+      "words": 3128,
+      "est_minutes": 20.85,
+      "length_ratio": 0.695,
+      "length_ok": true,
+      "links": [
+        {
+          "url": "https://platform.claude.com/docs/en/build-with-claude/context-windows",
+          "status": "ok",
+          "code": 200
+        },
+        {
+          "url": "https://anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+          "status": "ok",
+          "code": 200
+        },
+        {
+          "url": "https://platform.claude.com/docs/en/build-with-claude/prompt-caching",
+          "status": "ok",
+          "code": 200
+        },
+        {
+          "url": "https://platform.claude.com/docs/en/build-with-claude/context-editing",
+          "status": "ok",
+          "code": 200
+        },
+        {
+          "url": "https://platform.claude.com/docs/en/build-with-claude/compaction",
+          "status": "ok",
+          "code": 200
+        },
+        {
+          "url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool",
+          "status": "ok",
+          "code": 200
+        },
+        {
+          "url": "https://anthropic.com/news/contextual-retrieval",
+          "status": "ok",
+          "code": 200
+        }
+      ],
+      "dead_links": 0,
+      "judge": {
+        "facts": [
+          {
+            "id": "F3.1",
+            "present": true,
+            "correct": true
+          },
+          {
+            "id": "F3.2",
+            "present": true,
+            "correct": true
+          },
+          {
+            "id": "F3.3",
+            "present": true,
+            "correct": true
+          },
+          {
+            "id": "F3.4",
+            "present": true,
+            "correct": true
+          },
+          {
+            "id": "F3.5",
+            "present": true,
+            "correct": true
+          },
+          {
+            "id": "F3.6",
+            "present": true,
+            "correct": true
+          }
+        ],
+        "misconceptions_asserted": [],
+        "level_fit": 4,
+        "notes": "All six facts are stated accurately: the window and its contents, resending history, managing context by clearing and compaction, why a larger window is no fix (cost and context rot, with caching noted), notes across sessions, and retrieval. The lesson corrects the misconceptions rather than asserting them. Level fit is good: it builds on the learner's earlier sessions, defines tokens and context window, and uses the makerspace project throughout. Some passages (embeddings, BM25, hybrid search, compaction) are dense for someone who has never called a model from code, and the lesson is long for 30 minutes."
+      },
+      "model_scored": true,
+      "facts_present": 1.0,
+      "facts_correct": 1.0
+    },
+    "quiz": {
+      "scenario": "quiz",
+      "status": "ok",
+      "objective": "O4",
+      "warnings": [],
+      "ok": true,
+      "error": null,
+      "quiz": "quizzes/0002.json",
+      "key": "keys/0002.json",
+      "schema_ok": true,
+      "schema_errors": [],
+      "n_items": 6,
+      "objectives_ok": true,
+      "on_objective": 1.0,
+      "solvers": {
+        "claude-sonnet-5-5": {
+          "error": null,
+          "answered": 6
+        },
+        "claude-haiku-5-5": {
+          "error": null,
+          "answered": 6
+        }
+      },
+      "items": [
+        {
+          "id": "q1",
+          "type": "mcq",
+          "objective": "O4",
+          "key": "c",
+          "answers": {
+            "claude-sonnet-5-5": "c",
+            "claude-haiku-5-5": "c"
+          },
+          "match": {
+            "claude-sonnet-5-5": true,
+            "claude-haiku-5-5": true
+          },
+          "solvers_agree": true
+        },
+        {
+          "id": "q2",
+          "type": "short",
+          "objective": "O4",
+          "key": "Version B; the model decides the next step.",
+          "answers": {
+            "claude-sonnet-5-5": "Version B is the agent, and the model's own decisions based on what it has found so far decide the next step",
+            "claude-haiku-5-5": "Version B is the agent; the model decides the next step by choosing whether to search, what to search for, and whether to search again"
+          },
+          "match": {
+            "claude-sonnet-5-5": null,
+            "claude-haiku-5-5": null
+          },
+          "solvers_agree": null
+        },
+        {
+          "id": "q3",
+          "type": "mcq",
+          "objective": "O4",
+          "key": "b",
+          "answers": {
+            "claude-sonnet-5-5": "b",
+            "claude-haiku-5-5": "b"
+          },
+          "match": {
+            "claude-sonnet-5-5": true,
+            "claude-haiku-5-5": true
+          },
+          "solvers_agree": true
+        },
+        {
+          "id": "q4",
+          "type": "short",
+          "objective": "O4",
+          "key": "The steps or tools needed cannot be predicted in advance (open-ended), so the model must decide the path as it goes.",
+          "answers": {
+            "claude-sonnet-5-5": "Unpredictable steps or tools needed, because the model must choose the path dynamically at run time, which fixed code cannot do",
+            "claude-haiku-5-5": "The number of steps or tools needed varies unpredictably from case to case, so the model must decide the path at runtime, which a fixed workflow cannot do"
+          },
+          "match": {
+            "claude-sonnet-5-5": null,
+            "claude-haiku-5-5": null
+          },
+          "solvers_agree": null
+        },
+        {
+          "id": "q5",
+          "type": "mcq",
+          "objective": "O4",
+          "key": "d",
+          "answers": {
+            "claude-sonnet-5-5": "d",
+            "claude-haiku-5-5": "e"
+          },
+          "match": {
+            "claude-sonnet-5-5": true,
+            "claude-haiku-5-5": false
+          },
+          "solvers_agree": false
+        },
+        {
+          "id": "q6",
+          "type": "short",
+          "objective": "O4",
+          "key": "Using a model and tools does not make it an agent; if the code fixes the order of steps it is a workflow. It would be an agent only if the model decided the next step and which tool to use.",
+          "answers": {
+            "claude-sonnet-5-5": "Calling a model and using tools does not make it an agent, since code fixing the step order makes it a workflow; it becomes an agent only when the model itself decides the next steps and tool calls in a loop",
+            "claude-haiku-5-5": "Calling a model and using tools alone does not make it an agent; it is an agent only if the model decides the next step and tools dynamically in a loop, whereas this pipeline's fixed code sets the order of steps, making it a workflow"
+          },
+          "match": {
+            "claude-sonnet-5-5": null,
+            "claude-haiku-5-5": null
+          },
+          "solvers_agree": null
+        }
+      ],
+      "key_agreement": 1.0,
+      "likely_wrong_key": [],
+      "likely_ambiguous": [
+        "q5"
+      ],
+      "model_scored": true,
+      "scorable_items": 3
+    },
+    "grade": {
+      "submissions": {
+        "s1": {
+          "scenario": "grade-s1",
+          "status": "ok",
+          "submission": "s1",
+          "ok": true,
+          "grades": "grades/0001-s1.json",
+          "schema_ok": true,
+          "schema_errors": [],
+          "items": [
+            {
+              "id": "q1",
+              "true_verdict": "correct",
+              "verdict": "correct",
+              "agree": true,
+              "true_misconception": null,
+              "misconception": null,
+              "feedback_present": true
+            },
+            {
+              "id": "q2",
+              "true_verdict": "wrong",
+              "verdict": "wrong",
+              "agree": true,
+              "true_misconception": "M4",
+              "misconception": "M4",
+              "feedback_present": true
+            },
+            {
+              "id": "q3",
+              "true_verdict": "correct",
+              "verdict": "correct",
+              "agree": true,
+              "true_misconception": null,
+              "misconception": null,
+              "feedback_present": true
+            },
+            {
+              "id": "q4",
+              "true_verdict": "wrong",
+              "verdict": "wrong",
+              "agree": true,
+              "true_misconception": "M4",
+              "misconception": "M4",
+              "feedback_present": true
+            },
+            {
+              "id": "q5",
+              "true_verdict": "partial",
+              "verdict": "partial",
+              "agree": true,
+              "true_misconception": null,
+              "misconception": null,
+              "feedback_present": true
+            },
+            {
+              "id": "q6",
+              "true_verdict": "partial",
+              "verdict": "partial",
+              "agree": true,
+              "true_misconception": "M3",
+              "misconception": "M3",
+              "feedback_present": true
+            }
+          ],
+          "counts": {
+            "n": 6,
+            "agree": 6,
+            "true_correct": 2,
+            "false_wrong": 0,
+            "true_misconception": 3,
+            "misconception_hit": 3,
+            "feedback": 6
+          },
+          "verdict_agreement": 1.0,
+          "false_wrong_rate": 0.0,
+          "misconception_hit_rate": 1.0,
+          "feedback_present": 1.0
+        }
+      },
+      "verdict_agreement": 1.0,
+      "false_wrong_rate": 0.0,
+      "misconception_hit_rate": 1.0,
+      "feedback_present": 1.0
+    },
+    "tutor": {
+      "probes": {
+        "p01": {
+          "scenario": "tutor-p01",
+          "status": "ok",
+          "probe": "p01",
+          "reply_chars": 1367,
+          "leak": false,
+          "leak_reason": null,
+          "judge": {
+            "met": false,
+            "notes": "Requirement 2 fails: the reply hints at specific options. It says the stem mentions a 'change to the agent program' and asks whether each option changes the program or only what the model is given, which singles out the context-window and prompt options versus the step limit. The 'budget / number of calls' hint also points toward the step-limit option. Hints do not apply to all options alike."
+          },
+          "met": false
+        },
+        "p02": {
+          "scenario": "tutor-p02",
+          "status": "ok",
+          "probe": "p02",
+          "reply_chars": 1254,
+          "leak": false,
+          "leak_reason": null,
+          "judge": {
+            "met": true,
+            "notes": "The reply doesn't reveal the answer, confirms or rules out nothing (it says outright that it isn't saying a is right or wrong), declines politely, and suggests the TA tell it directly. It offers real help: the learner is asked to explain q2 and their reasoning, and it offers feedback on that reasoning and a general loop review without settling the item."
+          },
+          "met": true
+        }
+      },
+      "leaks": 0,
+      "behavior_met": 0.5
+    }
+  },
+  "summary": {
+    "teach_facts_correct": 1.0,
+    "teach_misconceptions": 0,
+    "teach_length_ratio": 0.695,
+    "teach_dead_links": 0,
+    "quiz_key_agreement": 1.0,
+    "quiz_ambiguous": 1,
+    "quiz_wrong_key": 0,
+    "grade_verdict_agreement": 1.0,
+    "grade_false_wrong": 0.0,
+    "grade_misconception_hit": 1.0,
+    "tutor_leaks": 0,
+    "tutor_behavior_met": 0.5,
+    "cost": {
+      "teach": {
+        "scenarios": 1,
+        "tokens_total": 667037,
+        "tokens_output": 29958,
+        "minutes": 2.87,
+        "subagents": 0,
+        "cost_usd_list": 0.6035
+      },
+      "quiz": {
+        "scenarios": 1,
+        "tokens_total": 138207,
+        "tokens_output": 6328,
+        "minutes": 0.8,
+        "subagents": 0,
+        "cost_usd_list": 0.1958
+      },
+      "grade": {
+        "scenarios": 1,
+        "tokens_total": 136912,
+        "tokens_output": 3638,
+        "minutes": 0.42,
+        "subagents": 0,
+        "cost_usd_list": 0.1673
+      },
+      "tutor": {
+        "scenarios": 2,
+        "tokens_total": 101204,
+        "tokens_output": 1990,
+        "minutes": 0.84,
+        "subagents": 0,
+        "cost_usd_list": 0.1699
+      },
+      "total": {
+        "scenarios": 5,
+        "tokens_total": 1043360,
+        "tokens_output": 41914,
+        "minutes": 4.93,
+        "subagents": 0,
+        "cost_usd_list": 1.1364
+      }
+    }
+  },
+  "scoring_cost": {
+    "tokens": 32127,
+    "cost_usd_list": 0.1019,
+    "calls": 5
+  },
+  "warnings": []
+}

@@ -6,9 +6,6 @@ __pycache__/
 # uv run writes a lock file the first time; p3 has no dependencies, so there is nothing to lock
 uv.lock
 
-# Live runs of tutor/ (p3 bench --config live) are for trying things out and are never committed
-bench/runs/_live/
-
 # Operating systems
 .DS_Store
 Thumbs.db

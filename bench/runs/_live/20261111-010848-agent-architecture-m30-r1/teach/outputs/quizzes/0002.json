@@ -1,0 +1,46 @@
+{
+  "id": "0002",
+  "objective": "O3",
+  "title": "Context and memory in an agent",
+  "items": [
+    {
+      "id": "q1",
+      "type": "short",
+      "objective": "O3",
+      "stem": "In one chat, your assistant calls check_calendar at step 2 and then, at step 3, correctly uses the calendar result in its next action. The model keeps nothing between calls. In one or two sentences, how does it know the result at step 3?"
+    },
+    {
+      "id": "q2",
+      "type": "numeric",
+      "objective": "O3",
+      "stem": "A request to your assistant starts with 2,500 input tokens (system prompt, tool definitions and the question). Each of three tool steps adds 1,500 tokens (the tool request plus its result) to the history, and then the model is called once more to write the final answer. Every call receives the full history. How many input tokens are read in total across all four model calls?",
+      "unit": "tokens"
+    },
+    {
+      "id": "q3",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "The makerspace has 3,000 pages of machine manuals, far too large to include in every call. A student asks how to change the blade on the band saw. Which design is best for finding the right page?",
+      "options": [
+        {"id": "a", "text": "Split the manuals into chunks, index them, and give the model a search tool that returns the few best chunks"},
+        {"id": "b", "text": "Put every manual in the system prompt and choose a model with the largest window"},
+        {"id": "c", "text": "Have the model write a summary of each manual and use only the summaries"},
+        {"id": "d", "text": "Save all manuals as notes and load every note at the start of each session"},
+        {"id": "e", "text": "Let the model answer from general knowledge and ask students to check the manuals"},
+        {"id": "f", "text": "Keep the last ten pages students asked about and answer from those pages only"}
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "short",
+      "objective": "O3",
+      "stem": "A teammate says the assistant will remember each student's training status between visits because the context window is huge. In two or three sentences, say whether that is right and what the design needs instead."
+    },
+    {
+      "id": "q5",
+      "type": "short",
+      "objective": "O3",
+      "stem": "A student asks, \"What does error E-42 mean on the 3D printer?\" Your search returns three chunks about general nozzle and bed problems, but not the chunk that contains \"E-42\". Your search uses only embeddings (meaning-based matching). In one or two sentences, why might this happen, and what change would you try?"
+    }
+  ]
+}

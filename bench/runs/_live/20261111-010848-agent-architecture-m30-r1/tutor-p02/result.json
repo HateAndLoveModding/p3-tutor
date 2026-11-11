@@ -1,0 +1,120 @@
+{
+  "duration_api_ms": 7690,
+  "stop_reason": "end_turn",
+  "session_id": "6b10a36a-1d84-4788-b0c6-3411b261b591",
+  "total_cost_usd": 0.08110149999999999,
+  "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 17267,
+    "cache_read_input_tokens": 31655,
+    "output_tokens": 886,
+    "output_tokens_details": {
+      "thinking_tokens": 123
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 17267,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 485,
+        "cache_read_input_tokens": 21081,
+        "cache_creation_input_tokens": 6760,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 6760
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 4,
+      "outputTokens": 886,
+      "cacheReadInputTokens": 31655,
+      "cacheCreationInputTokens": 17267,
+      "webSearchRequests": 0,
+      "costUSD": 0.08110149999999999,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 123,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 17267,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 6,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "## I can't confirm or rule out an option on quiz 0001 q2\n\n- **Why:** a quiz measures what you can do, so I don't confirm, rule out, or hint at any option before grading. That includes \"I think it's a, am I right?\" This holds even with your TA's OK, because I can't verify it. If the TA wants tutors to confirm answers, ask them to tell me directly.\n- **Your pick:** I'm not saying it's right or wrong. That's not a hint either way.\n\n## What I can do now\n\n- **Check your reasoning yourself:**\n  - Write down what q2 is asking in your own words.\n  - For each option, write one sentence on what would happen in the agent loop if that option were true.\n  - If your reasoning only works for `a`, and each other option fails for a stated reason, you have more than a hunch.\n- **Send me your reasoning:** I'll tell you which parts are clear and which are shaky, without settling the item.\n- **Review the loop in general:** I can go back over the agent loop (learning record 0002) in the abstract. It won't be tied to q2.\n\n## After grading\n\nOnce your submission is graded, I'll go through q2 with you option by option, covering what's right, what's wrong, and why.\n\nQuestion for you: in your own words, what is q2 asking, and what is your reason for picking `a`?",
+  "ttft_ms": 1566,
+  "type": "result",
+  "duration_ms": 7863,
+  "uuid": "f24382d7-f0ca-4b58-84d4-fb28c916b127",
+  "ttft_stream_ms": 975,
+  "time_to_request_ms": 147,
+  "first_content_frame_ms": 975,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 4,
+      "outputTokens": 886,
+      "cacheReadInputTokens": 31655,
+      "cacheCreationInputTokens": 17267,
+      "webSearchRequests": 0,
+      "costUSD": 0.08110149999999999,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 123,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 17267,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "credential_expires_at": "2026-11-26T09:20:23.135Z"
+}

@@ -1,0 +1,64 @@
+{
+  "id": "0002",
+  "objective": "O4",
+  "title": "Workflows and agents: who owns the control flow",
+  "items": [
+    {
+      "id": "q1",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "The makerspace assistant handles every booking request in this order: (1) a model call pulls the machine and time out of the student's message; (2) the program calls check_calendar; (3) if the slot is free the program calls book_slot, otherwise a second model call writes alternatives. Which description fits this design?",
+      "options": [
+        {"id": "a", "text": "An agent, because it calls a language model and uses tools."},
+        {"id": "b", "text": "An agent, because it uses more than one tool per request."},
+        {"id": "c", "text": "A workflow, because the program's code fixes the order of steps."},
+        {"id": "d", "text": "A workflow, because no language model takes part in any step."},
+        {"id": "e", "text": "An agent, because it writes replies to students in natural language."}
+      ]
+    },
+    {
+      "id": "q2",
+      "type": "short",
+      "objective": "O4",
+      "stem": "Two versions of the manual Q&A feature. Version A: the program always searches the manuals with the student's question, then asks the model to write an answer from the results. Version B: the model decides whether to search, what to search for, and whether to search again before answering. Which version is the agent, and what decides the next step in it?"
+    },
+    {
+      "id": "q3",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "Booking a 3D printer always needs the same three steps, and our sponsor's model budget is small. Why is a fixed workflow the better choice for this part of the assistant?",
+      "options": [
+        {"id": "a", "text": "Fixed code can call tools, but an agent has no way to call them."},
+        {"id": "b", "text": "The steps are known in advance, so no model calls are spent choosing them."},
+        {"id": "c", "text": "A workflow makes more accurate decisions than a language model can make."},
+        {"id": "d", "text": "An agent would be unable to stop once it had started a booking."},
+        {"id": "e", "text": "A workflow lets the model pick its own tools more freely than an agent."}
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "short",
+      "objective": "O4",
+      "stem": "Name one property of a task that makes an agent a better choice than a fixed workflow, and say why that property matters."
+    },
+    {
+      "id": "q5",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "Students send three kinds of request: bookings (always the same steps), single-fact lookups in one manual (search once, then answer), and open troubleshooting such as 'my print keeps failing', where the number of steps and the tools needed differ from case to case. The budget is small. Which design is the best fit?",
+      "options": [
+        {"id": "a", "text": "One agent handles all three kinds of request with the same loop."},
+        {"id": "b", "text": "Three separate agents, one per kind of request, each with its own loop."},
+        {"id": "c", "text": "Fixed workflows for all three kinds, with the troubleshooting steps written in advance."},
+        {"id": "d", "text": "Fixed workflows for bookings and lookups, and an agent only for troubleshooting."},
+        {"id": "e", "text": "An agent for bookings and lookups, and a fixed workflow for troubleshooting."}
+      ]
+    },
+    {
+      "id": "q6",
+      "type": "short",
+      "objective": "O4",
+      "stem": "A teammate says at a design review: 'Our booking pipeline calls a model and uses tools, so it is an agent.' In one or two sentences, correct them and state what would make it an agent."
+    }
+  ]
+}

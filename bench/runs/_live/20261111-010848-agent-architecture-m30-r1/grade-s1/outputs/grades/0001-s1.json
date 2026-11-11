@@ -1,0 +1,43 @@
+{
+  "quiz": "0001",
+  "submission": "s1",
+  "items": [
+    {
+      "id": "q1",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "Right: (d).\n- Right: an agent is a loop where the model picks an action, the program runs it, and the result comes back.\n- Why the others fail: (a) a longer prompt and (c) a bigger context window change what one call can do, not the structure; (b) memory of past conversations is not automatic and is not what defines an agent."
+    },
+    {
+      "id": "q2",
+      "verdict": "wrong",
+      "misconception": "M4",
+      "feedback": "Right answer: (c). You chose (a).\n- Wrong: the model does not open the booking system or read the calendar. A model only outputs text.\n- Why: when it decides to use a tool, its output is a structured request, here check_calendar with the laser cutter and tomorrow's date as arguments. The program around the model runs the tool and sends the entries back. Think of a customer filling in an order form: the form is the request, and the kitchen (the program) cooks.\n- Other options: (b) is wrong because the model, not the program, decides to call the tool; (d) is wrong because the model never needs, or runs, the tool's code."
+    },
+    {
+      "id": "q3",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "Right: (b).\n- Right: the agent is repeating itself, so more steps add nothing. A step limit ends the loop and reports back to a person.\n- Why the others fail: (a) all 40 steps already fit in context, so a larger window changes nothing; (c) assumes the agent will eventually succeed, but without a stopping condition it can loop forever and burn your budget; (d) a stronger instruction does not stop a loop."
+    },
+    {
+      "id": "q4",
+      "verdict": "wrong",
+      "misconception": "M4",
+      "feedback": "Right answer: 4. You answered 1.\n- Right: the loop uses three tools and then answers.\n- Wrong: the model does not run the tools itself inside one call. Each call ends with one tool request or the final answer.\n- Why: the program runs each tool, then calls the model again with the result. Calls: question -> check_calendar request (1), result -> search_manuals request (2), result -> check_training_record request (3), result -> final answer (4). Each call is billed, which matters for your small budget."
+    },
+    {
+      "id": "q5",
+      "verdict": "partial",
+      "misconception": null,
+      "feedback": "- Right: the program sends the result back to the model.\n- Missing: the why. The result goes into the model's next input and the model is called again, so it can use the result to choose its next step or write the final answer. Without that, the model never sees what its tool call returned. Full credit needs both the what and the why."
+    },
+    {
+      "id": "q6",
+      "verdict": "partial",
+      "misconception": "M3",
+      "feedback": "- Right: the model is sent a list of tools, each with a name and a description, and picks the one that fits the request. That is exactly how tool choice works, so write clear descriptions for your own tools.\n- Wrong: the claim that it remembers on its own which tool it picked in earlier sessions. A model keeps nothing between calls or sessions. It sees only what the program puts in its input, so any memory has to be built and saved by the program.\n- Why it matters: this is the next topic. Your assistant will need deliberate memory to track each student's training status."
+    }
+  ],
+  "summary": "Right: you have the agent loop (q1), the need for a stopping condition (q3), and how the model picks a tool from its descriptions (q6). Wrong: you believe the model runs the tools itself (q2, q4; M4), and that it remembers earlier sessions on its own (q6; M3). To work on next: the program runs each tool, and every step is a separate model call that sees only what the program sends it. Next step: re-trace the laser cutter request, writing 'model outputs' and 'program does' beside each step, then count the model calls. Then we move on to context and memory."
+}

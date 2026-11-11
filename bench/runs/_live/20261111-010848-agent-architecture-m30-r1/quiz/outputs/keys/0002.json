@@ -1,0 +1,53 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "c",
+      "rationale": "A workflow is a system where code follows a predefined path; here the program fixes the order (extract, check, book or suggest), even though the model is called inside two steps. Using a model, tools, several tools or natural-language replies does not make a system an agent (a, b, e: M7); a workflow can contain model calls, so (d) is wrong (M9).",
+      "distractors": {"a": "M7", "b": "M7", "d": "M9", "e": "M7"}
+    },
+    {
+      "id": "q2",
+      "answer": "Version B; the model decides the next step.",
+      "accepted": [
+        "B, the model decides what to do next",
+        "Version B, the model directs its own steps",
+        "B; the model chooses the next step",
+        "Version B, the model owns the control flow"
+      ],
+      "rationale": "The difference is who owns the control flow. In A, the program's code fixes the sequence (search, then answer), so it is a workflow. In B, the model chooses whether and how often to search, so it is an agent. Naming A, or saying the code or the tools decide the next step in B, is wrong."
+    },
+    {
+      "id": "q3",
+      "answer": "b",
+      "rationale": "When the steps are known ahead of time, code can run them directly, so no model calls are spent deciding what to do next: cheaper, faster and more predictable. Agents can call tools (a), and neither design is inherently more accurate (c, M8). An agent stops when its stopping condition is met (d), and in a workflow the code, not the model, chooses the tools (e).",
+      "distractors": {"a": "M4", "c": "M8", "d": "M6"}
+    },
+    {
+      "id": "q4",
+      "answer": "The steps or tools needed cannot be predicted in advance (open-ended), so the model must decide the path as it goes.",
+      "accepted": [
+        "Open-ended tasks where the number and order of steps is unknown beforehand, so the model must choose the next step itself",
+        "Unpredictable steps: a fixed path cannot be written ahead of time, so the model has to decide what to do next",
+        "The task needs flexibility and model-driven decisions because the required steps vary from case to case"
+      ],
+      "rationale": "Full credit names a property (steps unpredictable, varying or open-ended) and the reason (a fixed path cannot be written in advance, so the model must choose steps). A property without a reason is partial. Answers such as 'the task is important' or 'it uses tools' are wrong (M7, M8)."
+    },
+    {
+      "id": "q5",
+      "answer": "d",
+      "rationale": "Bookings and single lookups have predictable steps, so fixed workflows are cheapest and most reliable. Troubleshooting is the open-ended part where the steps vary, so the extra cost of an agent pays off there. An agent for everything (a) or one agent per kind (b) pays agent cost where steps are known (M8); scripting troubleshooting in advance (c) cannot cover cases whose steps vary; and (e) puts the agent where it is not needed and a fixed path where it cannot work.",
+      "distractors": {"a": "M8", "b": "M8"}
+    },
+    {
+      "id": "q6",
+      "answer": "Using a model and tools does not make it an agent; if the code fixes the order of steps it is a workflow. It would be an agent only if the model decided the next step and which tool to use.",
+      "accepted": [
+        "That is a workflow, since the program decides the order. It becomes an agent only when the model directs its own steps and tool use.",
+        "Calling a model with tools is not enough; what matters is who controls the flow. Fixed code path is a workflow, and it is an agent only if the model chooses the next action."
+      ],
+      "rationale": "Full credit needs both: the correction (model and tool use do not define an agent; a code-fixed order is a workflow) and the criterion (the model decides the next step or tool). Only one of the two is partial. Agreeing that it is an agent shows M7."
+    }
+  ]
+}
