@@ -51,7 +51,7 @@ A lesson may have several sections (this is okay). Do each of the following step
 
 ### Teach
 
-- Lessons should have several paragraphs per section in plain language but also use bullet points wherever appropriate. Diagrams should also be used. The worked example can use whatever form of communication is appropriate. There should be one topic per section. The number of sections per lesson should be defined based on the topic and the desired lesson length but also lessons should cover the topic fully to the level asked for but be as short as possible and get straight to the point. The lessons should not have any bloatware.
+- Lessons should have several paragraphs per section in plain language but also use bullet points wherever appropriate. Diagrams should also be used. The worked example can use whatever form of communication is appropriate. There should be one topic per section. The number of sections per lesson should be defined based on the topic and the desired lesson length but also lessons should cover the topic fully to the level asked for but be as short as possible and get straight to the point. The lessons should not have any bloatware. The tutor should prioritize "as short as possible" over the length specified.
 
 ### Tutor
 
