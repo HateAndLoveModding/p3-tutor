@@ -1,0 +1,58 @@
+{
+  "id": "0002",
+  "objective": "O4",
+  "title": "Workflows and agents: who decides the steps",
+  "items": [
+    {
+      "id": "q1",
+      "type": "short",
+      "objective": "O4",
+      "stem": "In one or two sentences, explain the difference between a workflow and an agent in how the order of steps gets decided when a request runs."
+    },
+    {
+      "id": "q2",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "Your team prototypes a request handler. Step 1: Python code calls the model once to label a student's message as 'manual question', 'booking' or 'other'. Step 2: Python code uses an if/elif on that label to run either a manual-search prompt or a booking prompt, and returns that reply. The code never calls the model again after step 2. How should this design be described?",
+      "options": [
+        {"id": "a", "text": "An agent, because a model call decides which branch of the program runs"},
+        {"id": "b", "text": "An agent, because it makes more than one call to the language model"},
+        {"id": "c", "text": "A workflow, because the code fixes the possible paths and their order, and the model only produces the label"},
+        {"id": "d", "text": "An agent, because it handles two kinds of request, which takes flexible decision-making"},
+        {"id": "e", "text": "A workflow, but only because it is small; adding more branches would turn it into an agent"},
+        {"id": "f", "text": "A workflow, because it has no tool calls and a design needs tools to be an agent"}
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "short",
+      "objective": "O4",
+      "stem": "The makerspace assistant's booking path always does the same thing: read the machine and date from the student's message, check the calendar for that slot, book it if it is free, and otherwise report that the slot is taken. Should this path be built as an agent or as a fixed workflow? Name your choice and give the reason."
+    },
+    {
+      "id": "q4",
+      "type": "short",
+      "objective": "O4",
+      "stem": "Your team's first draft of the manual-answering feature is fixed Python code: it searches the manuals once with the student's question, passes the top three pages to the model, and returns the model's answer. A student asks, \"My 3D print keeps warping, what should I try?\" The useful page only turns up if the model reads the first results and searches again with a different term, but the code never allows a second search. In one or two sentences, state what in the design causes this failure and what change fixes it."
+    },
+    {
+      "id": "q5",
+      "type": "short",
+      "objective": "O4",
+      "stem": "A teammate proposes building the nightly job as an agent: find every student whose safety training expires within 7 days, then email each one the renewal link. The same four steps run every night. The teammate argues, \"An agent can do everything a workflow can, so it is the safer choice.\" Given our small model budget, give two concrete costs of choosing an agent for this job."
+    },
+    {
+      "id": "q6",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "The assistant gets three kinds of request: (1) booking a machine for a stated date and time; (2) open troubleshooting questions, such as why a print is warping, where the number of manual searches needed cannot be known in advance; (3) \"am I certified for the CNC router?\", which needs one training-record lookup. Which design is best if the criterion is the lowest model cost that still handles all three kinds correctly?",
+      "options": [
+        {"id": "a", "text": "One agent loop with all the tools, used for every kind of request"},
+        {"id": "b", "text": "A fixed workflow for all three, with a set number of manual searches for troubleshooting"},
+        {"id": "c", "text": "Agents for booking and certification checks, and a fixed workflow for troubleshooting"},
+        {"id": "d", "text": "Fixed workflows for booking and certification checks, and an agent only for troubleshooting"},
+        {"id": "e", "text": "A fixed workflow for booking only, and an agent for troubleshooting and certification checks"}
+      ]
+    }
+  ]
+}

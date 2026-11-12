@@ -1,0 +1,61 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "In a workflow, the developer's code fixes the steps and their order in advance; in an agent, the model decides at run time which step or tool comes next and when to stop.",
+      "accepted": [
+        "Workflow: the code owns the control flow. Agent: the model owns it.",
+        "A workflow follows a predefined path written by the developer; an agent chooses its own next actions in a loop.",
+        "With a workflow the programmer decides the sequence ahead of time, with an agent the model decides the sequence as it goes."
+      ],
+      "rationale": "Full credit needs both sides: the code or developer fixes the path in a workflow, and the model chooses the next step in an agent. Naming only one side is partial. Answers that say an agent is more complex, uses tools, makes more model calls or is smarter, while a workflow is simple, show M10: the difference is who owns the control flow, not complexity or capability. Answers that say a workflow uses no model show M8; a workflow can call the model many times, but the code sets the order.",
+      "distractors": {}
+    },
+    {
+      "id": "q2",
+      "answer": "c",
+      "rationale": "The developer's code fixes both the possible paths and their order; the model only produces output (a label) that the code then reads. Control flow stays with the code, so this is a workflow (the pattern is called routing). a: tempting because the model's output picks the branch, but the branches and order are still written in advance and the model never chooses actions or loops (M9). b: the number of model calls does not decide it; a workflow can chain many calls (M9). d: handling several kinds of request is done here with a fixed if/elif, not model-chosen steps (M10). e: size is not the criterion; a large workflow with many branches is still a workflow as long as code fixes the paths (M10). f: right label, wrong reason; tools are not what separates the two, since workflows can call tools too and an agent is defined by the model choosing the steps (M8).",
+      "distractors": {"a": "M9", "b": "M9", "d": "M10", "e": "M10", "f": "M8"}
+    },
+    {
+      "id": "q3",
+      "answer": "A fixed workflow, because the steps and their order are known in advance and the same every time, so code can run them directly without the model deciding what to do next.",
+      "accepted": [
+        "Workflow: the sequence is predictable, so the code can control it.",
+        "Fixed workflow; the steps never change, so there is nothing for the model to decide, which also keeps it cheaper and more predictable.",
+        "Workflow, since the path is known up front; the model is only needed to read the machine and date out of the message."
+      ],
+      "rationale": "The right choice is a workflow, and the reason must be that the steps and their order are known ahead of time. Mentioning that this is cheaper (fewer model calls) or more predictable is a good addition. Workflow with no reason, or with a reason that is not about the steps being predictable, is partial. Choosing an agent because it is more capable or flexible shows M7: more capability only pays when the path cannot be known in advance. Choosing an agent because the booking path touches several tools shows M8/M10: the number of tools does not matter, the predictability of the path does.",
+      "distractors": {}
+    },
+    {
+      "id": "q4",
+      "answer": "The code, not the model, owns the control flow and fixes a single search; the fix is to let the model decide whether and what to search next, in a loop with a stopping limit, so that part becomes an agent.",
+      "accepted": [
+        "The search is hard-coded to run once; letting the model choose to search again (an agent loop with a step limit) fixes it.",
+        "A fixed workflow cannot adapt to what the first results show. Give the model the search as a tool and let it decide the next search, with a cap on steps.",
+        "The path was fixed in advance for a task whose steps depend on what is found, so the model needs to pick the next step instead of the code."
+      ],
+      "rationale": "Full credit names the cause (the steps are fixed by the code, one search, although this task's steps depend on what each result shows) and the fix (the model chooses the next step, in an agent loop; a step limit is a good addition). Only saying 'use an agent' without saying what failed is partial. Blaming the model, the search quality or the number of pages, or proposing more pages or a bigger model, misses the point that no amount of better output can fix a path the code never lets the model extend. Proposing a longer fixed sequence, such as always searching three times, still fixes the path in advance, and it spends calls on easy questions (M7 in reverse: it keeps the workflow where the steps cannot be predicted).",
+      "distractors": {}
+    },
+    {
+      "id": "q5",
+      "answer": "Two of: more model calls and tokens per run, because the model re-reads its growing context to decide steps that are already known; less predictable behaviour, because the model might skip a student, repeat an email or loop, so it needs a step limit and is harder to test.",
+      "accepted": [
+        "It costs more: every step is a model call that re-reads the context. It is also less reliable, since the model could skip or double-email students.",
+        "Higher cost per run from the loop's extra model calls, and variable runs that are harder to test and debug than fixed code.",
+        "Extra tokens spent deciding obvious steps, and no guarantee that all four steps happen in order, which could mean a missed email."
+      ],
+      "rationale": "Two distinct costs are needed, and good ones are: cost (extra model calls or tokens spent on deciding steps that are already known) and reliability (the run varies, so a step could be skipped, repeated or looped; testing is harder). Only one cost is partial. A vague 'it is slower' or 'it is more complex' without a link to the model deciding steps is weak. Agreeing with the teammate shows M7: an agent can do what a workflow does, but at higher cost and lower predictability, and the extra capability buys nothing when the steps never change.",
+      "distractors": {}
+    },
+    {
+      "id": "q6",
+      "answer": "d",
+      "rationale": "Booking and the single certification lookup have steps known in advance, so fixed workflows handle them with the fewest model calls; only troubleshooting needs the model to choose how many searches to run, so only that part earns an agent's extra cost. a: tempting for simplicity and capability, but it pays loop cost on requests whose steps never vary (M7). b: cheapest to run but fails the criterion of handling all three correctly, since a set number of searches cannot suit open questions (M10: assuming a fixed path can always replace model-chosen steps). c: inverts the rule, giving the agent to predictable tasks and fixing the path of the unpredictable one (M7). e: right about booking and troubleshooting but sends the single-lookup certification check through an agent, which costs more and gains nothing; the choice depends on whether the path is predictable, not on which tool is used.",
+      "distractors": {"a": "M7", "b": "M10", "c": "M7", "e": "M7"}
+    }
+  ]
+}

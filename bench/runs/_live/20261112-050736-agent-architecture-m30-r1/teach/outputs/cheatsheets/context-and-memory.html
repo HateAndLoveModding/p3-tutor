@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cheat sheet: context and memory in an agent</title>
+  <style>
+    body { max-width: 42rem; margin: 0 auto; padding: 2rem 1rem; font-family: Charter, Georgia, serif; line-height: 1.5; background: #fffdf8; color: #1f1d1a; }
+    @media (prefers-color-scheme: dark) { body { background: #171614; color: #e9e5dc; } }
+    h1 { font-size: 1.6rem; } h2 { font-size: 1.1rem; margin-top: 1.5rem; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+    th, td { text-align: left; vertical-align: top; padding: 0.4rem 0.5rem; border-bottom: 1px solid #8884; }
+    code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.88em; }
+  </style>
+</head>
+<body>
+  <h1>Context and memory in an agent</h1>
+  <p>From <a href="../lessons/0001-context-and-memory-in-an-agent.html">Lesson 1</a>.</p>
+  <h2>Rules</h2>
+  <ul>
+    <li>The model sees only the current request: system prompt, all messages, tool results, tool definitions.</li>
+    <li>The program resends the full history on every call. Input tokens per request = the sum of every call's whole input.</li>
+    <li>Nothing carries to a new session unless you save and reload it.</li>
+    <li>Bigger window means more fits, not better. Context rot lowers recall as tokens grow.</li>
+  </ul>
+  <h2>Where does it go?</h2>
+  <table>
+    <thead><tr><th>Information</th><th>Place</th></tr></thead>
+    <tbody>
+      <tr><td>Rules, tool descriptions, needed every call</td><td>System prompt (context)</td></tr>
+      <tr><td>Exact facts: training status, bookings</td><td>Database record, read by a tool or loaded by the program</td></tr>
+      <tr><td>Soft facts: preferences</td><td>Model-written notes (memory tool), loaded at session start</td></tr>
+      <tr><td>Large documents: manuals</td><td>Searchable store behind a <code>search_manuals</code> tool</td></tr>
+      <tr><td>Stale tool results</td><td>Clear them; compact only long conversations</td></tr>
+    </tbody>
+  </table>
+  <h2>Retrieval</h2>
+  <ul>
+    <li>Chunk, then index (embeddings for meaning, BM25 for exact strings), then return the top few chunks.</li>
+    <li>Embeddings miss exact codes; BM25 misses paraphrases; a hybrid covers both.</li>
+    <li>If the right chunk is not retrieved, the model never sees it.</li>
+  </ul>
+</body>
+</html>

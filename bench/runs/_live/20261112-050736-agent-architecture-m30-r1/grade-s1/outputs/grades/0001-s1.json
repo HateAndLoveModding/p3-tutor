@@ -1,0 +1,43 @@
+{
+  "quiz": "0001",
+  "submission": "s1",
+  "items": [
+    {
+      "id": "q1",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "- Right: (d). An agent is a loop: the model picks an action, the program runs it, the result comes back, and this repeats.\n- Why the others fail: (a) a longer prompt only changes what one call does; (b) memory of past conversations is not automatic and does not define an agent; (c) a bigger context window makes one call hold more, but it is still one call with no loop."
+    },
+    {
+      "id": "q2",
+      "verdict": "wrong",
+      "misconception": "M4",
+      "feedback": "- Wrong: you chose (a), that the model reads the calendar by opening the booking system itself. The model only writes text; it has no connection to the booking system.\n- Right: (c). The model outputs a structured request naming check_calendar with the laser cutter and tomorrow's date as arguments. The program around the model runs the tool and sends the result back.\n- Other options: (b) is wrong because the model, not the program, decides to call the tool; (d) is wrong because the model never sees or runs the tool's code. Like a student filling in a booking form, the model writes the request, and staff do the booking.\n- Why (a) is tempting: it looks as if the assistant 'checks' the calendar. That check is carried out by the program."
+    },
+    {
+      "id": "q3",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "- Right: (b). The agent repeats the same failing edit, so more steps add nothing. A step limit ends the loop and reports back to a person.\n- Why the others fail: (a) all 40 steps already fit in the context; (c) it will not eventually fix itself, since it gets the same feedback each time; (d) 'try harder' in a prompt does not stop a loop, only the program can."
+    },
+    {
+      "id": "q4",
+      "verdict": "wrong",
+      "misconception": "M4",
+      "feedback": "- Wrong: you answered 1, saying the model 'runs the 3 tools itself'. The correct answer is 4.\n- Why: the model only requests a tool. The program runs it and sends back the result, and the model is called again each time. Count one call per input the model receives: the question, then the three tool results. That gives 3 tool requests plus 1 final answer = 4 calls.\n- Example: each time you ask a librarian for a book and they hand it over, you have to speak again to ask for the next one. Each of your turns is a model call, and the librarian's fetching is the program running a tool.\n- Same belief as q2: the model never runs tools."
+    },
+    {
+      "id": "q5",
+      "verdict": "partial",
+      "misconception": null,
+      "feedback": "- Right: the program sends the result back to the model.\n- Missing: the 'why' the question asks for. It sends the result back as part of the model's next input and calls the model again, so the model can use the result to choose its next step or write the final answer.\n- Why it matters: the model has no other way to learn what the tool returned. Without the result in its next input, it would be guessing."
+    },
+    {
+      "id": "q6",
+      "verdict": "partial",
+      "misconception": "M3",
+      "feedback": "- Right: the program sends the model a list of tools, each with a name and a description, and the model picks the one that fits the request. That is the full mechanism, and it is why a clear tool description matters for your assistant.\n- Wrong: the claim that the model 'remembers on its own which tool it picked in earlier sessions'. A model keeps nothing between calls or sessions. Anything it 'remembers' must be put back into its input by the program.\n- Why it matters: if you want the assistant to recall past choices or each student's training status, you must build that storage yourself. That is the next topic, context and memory."
+    }
+  ],
+  "summary": "You have the loop (q1), the stopping condition (q3) and the idea that the model picks tools from descriptions (q6). Two things to fix. First, M4: the model never runs a tool. It writes a request, the program runs it, and the result goes back in a new model call (q2, q4). Second, M3: the model keeps no memory by itself between calls or sessions (q6). Next step: trace the laser cutter request again, writing each step as either 'model call' or 'program action', and count the model calls. Then move on to context and memory."
+}

@@ -1,0 +1,44 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "The model has no memory between calls; it saw only the new chat, so the next day nothing from the first chat was in its context. The program must save the information (a record or note) and load it into the new session's context, or give the model a tool to look it up.",
+      "accepted": [
+        "The new chat started with an empty context, so the model could not see yesterday; the program has to save and reload the information",
+        "Nothing from the first chat was sent in the new request; store notes or a record and load them at session start or via a tool"
+      ],
+      "rationale": "Full credit needs both parts: the model only sees what the program sends, so a new session starts empty (not 'the model forgot'), and the fix is to store information outside the window and load it back or expose it through a tool. Saying only that the model needs better memory, or that the window should be bigger, is wrong and shows M3 (the model remembers earlier chats by itself). Giving the cause without a fix is partial."
+    },
+    {
+      "id": "q2",
+      "answer": 14950,
+      "tolerance": 150,
+      "rationale": "Call 1 reads 2,000 + 100 = 2,100. Call 2 reads 2,100 + 50 + 4,000 = 6,150. Call 3 reads 6,150 + 50 + 500 = 6,700. Total: 2,100 + 6,150 + 6,700 = 14,950. An answer of 6,700 counts only the longest input and misses that the history is re-read on every call; an answer of 6,650 or 6,700 adds the pieces once, which shows the same confusion."
+    },
+    {
+      "id": "q3",
+      "answer": "No: training status must be exact, and a model-written note can be wrong, stale or missing. Keep it in a database that the program owns and have the model read it with a lookup tool (check_training_record).",
+      "accepted": [
+        "No, safety-critical exact facts should be stored in the database and fetched through a tool, not written by the model as notes",
+        "I would not; the model can write a wrong or outdated note, so store the status in a record the program controls and look it up with a tool"
+      ],
+      "rationale": "Full credit rejects the proposal because training status is an exact, safety-relevant fact and model-written notes are only as reliable as what the model chose to write, and names a program-controlled record or database lookup as the alternative. Agreeing with the teammate because memory tools persist across sessions shows M9 (notes are an exact, reliable store). Rejecting it without a reason or alternative is partial."
+    },
+    {
+      "id": "q4",
+      "answer": "b",
+      "rationale": "The manual says 're-arm the overheat protector', which shares no keywords with 'reset the thermal fuse'. A keyword index cannot match a paraphrase, while embeddings match meaning, so the missing chunk is a retrieval failure fixed by adding embedding search (a hybrid). A larger model (a) or a prompt rule (d) cannot use a chunk it never received, which shows M8 (the model can fix a retrieval miss). Returning 200 chunks (c) adds cost and context rot and may still not rank the chunk, which shows M7 (more context is better). Compaction (e) shrinks a running conversation and does not affect search. One-sentence chunks (f) lose even more of the context that identifies the machine and the topic.",
+      "distractors": {"a": "M8", "c": "M7", "d": "M8"}
+    },
+    {
+      "id": "q5",
+      "answer": "Cost: the whole history is resent and billed as input on every later call, so each kept result is paid for again and again. Quality: as the context grows, accuracy and recall degrade (context rot), so extra stale text makes the model less reliable even if it fits.",
+      "accepted": [
+        "Cost: every call re-reads the whole history. Quality: context rot lowers accuracy as the window fills",
+        "Each stored result is re-billed on every later call, and long contexts reduce recall and accuracy"
+      ],
+      "rationale": "Both reasons are required for full credit: re-reading the history on every call raises cost, and context rot lowers quality as tokens accumulate. A window size says what fits, not what is wise; believing that a large window removes the need to curate is M7. Giving only one of the two reasons is partial. 'It will hit the limit' alone is partial at best, because with 1M tokens the limit is not the main problem."
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "id": "0002",
+  "objective": "O3",
+  "title": "Context and memory in the makerspace assistant",
+  "items": [
+    {
+      "id": "q1",
+      "type": "short",
+      "objective": "O3",
+      "stem": "In testing, your assistant helps a student pick a 3D printer in one chat. The next day the student opens a new chat and the assistant has no idea who they are. A teammate says, \"The model forgot.\" In one or two sentences, what actually happened, and what would your program have to do for the assistant to know the student the next day?"
+    },
+    {
+      "id": "q2",
+      "type": "numeric",
+      "objective": "O3",
+      "stem": "A request makes three model calls. The system prompt plus tool definitions are 2,000 tokens and the student's question is 100 tokens. Call 1 ends with a 50-token request for search_manuals, which returns 4,000 tokens. Call 2 ends with a 50-token request for check_calendar, which returns 500 tokens. Call 3 writes the final answer. The program resends the full history on each call. Ignoring the final answer's own length, what is the total number of input tokens the model reads across the three calls?",
+      "unit": "tokens"
+    },
+    {
+      "id": "q3",
+      "type": "short",
+      "objective": "O3",
+      "stem": "A teammate proposes letting the model save each student's laser cutter training status as a note through a memory tool, so no training database lookup is needed. In two or three sentences, say whether you would do this and give your reason and an alternative."
+    },
+    {
+      "id": "q4",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "Your manual search uses only a keyword (BM25) index. A student asks, \"How do I reset the thermal fuse on the vinyl cutter?\" The manual says, \"Re-arm the overheat protector by pressing the red tab.\" The assistant answers that the manuals do not cover this, and the five chunks returned were about blade replacement. What is the best next change?",
+      "options": [
+        {"id": "a", "text": "Switch the final answering step to a larger, more capable model"},
+        {"id": "b", "text": "Add embedding search alongside the existing keyword index"},
+        {"id": "c", "text": "Return 200 chunks per search instead of five chunks"},
+        {"id": "d", "text": "Add a system prompt rule telling the model to search harder"},
+        {"id": "e", "text": "Turn on compaction so that old chunks leave the window"},
+        {"id": "f", "text": "Cut every chunk down to a single sentence each"}
+      ]
+    },
+    {
+      "id": "q5",
+      "type": "short",
+      "objective": "O3",
+      "stem": "Your model has a 1M-token context window, and a teammate says, \"Then we can keep every tool result in the history and never trim anything.\" Give one reason about cost and one reason about answer quality why this is still a poor design."
+    }
+  ]
+}
