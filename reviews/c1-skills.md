@@ -35,9 +35,9 @@ Thoughts about the quiz skill:
 
 **What changed:**
 
-- Kind: TODO
-- Files: TODO
-- Why: TODO
+- Kind: new skill
+- Files: tutor/.claude/skills/quiz/SKILL.md
+- Why: Quizzes were still written by /teach under a guide that allowed mostly mcq with three to five options; a quiz skill of its own makes most items free-response scenarios that need the topic, gives mcq items five to eight plausible options, puts two or three items on each learning goal from different angles, and has the key explain every distractor and common wrong answer, as these thoughts ask.
 
 ### Round 2
 
