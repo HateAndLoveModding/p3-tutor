@@ -17,30 +17,21 @@ Keep every heading as it is, because `p3 check` reads them, and add a round by c
 
 **My thoughts:**
 
-#### Lesson
+Write a quiz skill.
 
-- I liked the check-yourself boxes (5 answers each), common mix-up boxes, learning goals per section, and the bulleted summary of main points.
-- I would like an opening quiz to determine prior knowledge.
-- I would like a bulleted list of must know points at the beginning of each section.
-- I read it faster (~15 minutes) but I wouldn't change the length. 
-- I like the visualizations in the original less more but I don't these were bad or not helpful. It might just be Claude's randomness.
+Thoughts about the quiz skill:
 
-#### Quiz
-
-- Overall I loved the quiz. It made me think even though I have probably seen this content 10 times.
-- I liked the broader topic range.
-- I like that there was only one mcq with 6 options.
-
-#### Grader
-
-- Claude still answered correctly with the correct misconceptions but overall the responses were clearer because the content was more structured.
-- I still wasn't satisified with Q2. Maybe Claude should walk through what actually happens. It could also assume that the assistant could read the booking system, explaining why that would still be wrong, and then explaining why it isn’t realistic because my natural instinct is that it is possible for the assistant to read the booking system (I know that answer is wrong for other reasons though).
-
-#### Tutor
-
-- I liked the structure responses.
-- I still feel like p01 hints at the right answer (but I kinda blame it on the question).
-- I thought p02 was good and didn't hint at the right answer. I feel like the question pushed the student to think about what actually happens.
+- Most of the questions should be free response
+- When a multiple choice question is used, there should be at least 5 answer options and a maximum of 8.
+- On a multiple choice question, none of the answers should be obviously nonsense.
+- Do not generate questions that don’t need the topic to answer.
+- Most of the problems should focus on problem-solving and real-world scenarios about the learning goal.
+- Each quiz question should address one learning goal.
+- There should be 2-3 questions per learning goal.
+- The stem should not contain the answer.
+- Each question should have exactly one best answer.
+- Questions on the same learning goal must test different angles, such as recall, apply and diagnose, and that knowing one fact should not answer them all.
+- The answer keys in your notes should explain each distractor and common wrong answers. 
 
 **What changed:**
 
