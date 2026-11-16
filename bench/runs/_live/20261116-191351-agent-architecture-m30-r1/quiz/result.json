@@ -1,0 +1,152 @@
+{
+  "duration_api_ms": 75938,
+  "stop_reason": "end_turn",
+  "session_id": "e5dc8e58-38be-4828-acd4-e6c7e23dd412",
+  "total_cost_usd": 0.23984919999999998,
+  "usage": {
+    "input_tokens": 16,
+    "cache_creation_input_tokens": 32802,
+    "cache_read_input_tokens": 209442,
+    "output_tokens": 8624,
+    "output_tokens_details": {
+      "thinking_tokens": 3154
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 32802,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 494,
+        "cache_read_input_tokens": 40476,
+        "cache_creation_input_tokens": 2890,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 2890
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 16,
+      "outputTokens": 8624,
+      "cacheReadInputTokens": 209442,
+      "cacheCreationInputTokens": 32802,
+      "webSearchRequests": 0,
+      "costUSD": 0.2384242,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 3154,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 32802,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    },
+    "claude-haiku-5-5": {
+      "inputTokens": 7695,
+      "outputTokens": 1311,
+      "cacheReadInputTokens": 0,
+      "cacheCreationInputTokens": 0,
+      "webSearchRequests": 0,
+      "costUSD": 0.001425,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 914,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 0,
+      "canonicalModel": "claude-haiku-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 14,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "I wrote a six-question quiz on O4 at `quizzes/0002.json`, with its key at `keys/0002.json`.\n\nThere is no O4 lesson yet, so this checks the objective at the level its wording states. I took the facts from Anthropic's \"Building effective agents\": a workflow follows predefined code paths, an agent directs its own steps, and agents trade cost and latency for flexibility.\n\nFour items are free response and two are multiple choice (with five and six options). Every item is set in the makerspace assistant.\n\n**Goal 1: tell workflows and agents apart by who owns the control flow**\n- q1: Compare two booking designs and say what decides the next tool in each.\n- q2: Classify a routing design where the model labels the request and the code branches on that label.\n- q3: Describe a hybrid design with fixed stages around one model-driven search step.\n\n**Goal 2: decide when a fixed workflow is the better choice**\n- q4: Choose between workflow and agent for the fixed-order booking steps, with two reasons given the small budget.\n- q5: Pick the one task of six whose steps can be written down in advance.\n- q6: Answer a teammate who says an agent is smarter, and state what would change your mind.\n\nI added misconception ids M7 to M10 in the key, since the existing M1 to M6 don't cover them. M7 is that any model decision makes an agent. M8 is that tools or several model calls make an agent. M9 is that a workflow can't repeat steps. M10 is that an agent is always the better design.",
+  "ttft_ms": 1114,
+  "type": "result",
+  "duration_ms": 76743,
+  "uuid": "16bfd399-7aab-4a1c-a3c0-703ec759c702",
+  "ttft_stream_ms": 800,
+  "time_to_request_ms": 106,
+  "first_content_frame_ms": 801,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 16,
+      "outputTokens": 8624,
+      "cacheReadInputTokens": 209442,
+      "cacheCreationInputTokens": 32802,
+      "webSearchRequests": 0,
+      "costUSD": 0.2384242,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 3154,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 32802,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    },
+    "claude-haiku-5-5": {
+      "inputTokens": 7695,
+      "outputTokens": 1311,
+      "cacheReadInputTokens": 0,
+      "cacheCreationInputTokens": 0,
+      "webSearchRequests": 0,
+      "costUSD": 0.001425,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 914,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 0,
+      "canonicalModel": "claude-haiku-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "credential_expires_at": "2026-11-26T09:20:23.135Z"
+}

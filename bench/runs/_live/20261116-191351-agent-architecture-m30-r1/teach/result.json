@@ -1,0 +1,152 @@
+{
+  "duration_api_ms": 170707,
+  "stop_reason": "end_turn",
+  "session_id": "b171176a-cc09-4f6e-a843-f87183c3ea7d",
+  "total_cost_usd": 0.5559890000000001,
+  "usage": {
+    "input_tokens": 16,
+    "cache_creation_input_tokens": 63203,
+    "cache_read_input_tokens": 297458,
+    "output_tokens": 23623,
+    "output_tokens_details": {
+      "thinking_tokens": 1391
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 63203,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 592,
+        "cache_read_input_tokens": 73444,
+        "cache_creation_input_tokens": 323,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 323
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 16,
+      "outputTokens": 23623,
+      "cacheReadInputTokens": 297458,
+      "cacheCreationInputTokens": 63203,
+      "webSearchRequests": 0,
+      "costUSD": 0.5188198,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 1391,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 63203,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    },
+    "claude-haiku-5-5": {
+      "inputTokens": 51642,
+      "outputTokens": 4010,
+      "cacheReadInputTokens": 0,
+      "cacheCreationInputTokens": 0,
+      "webSearchRequests": 3,
+      "costUSD": 0.0371692,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 1400,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 0,
+      "canonicalModel": "claude-haiku-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 20,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "I wrote the O3 lesson at `lessons/0001-context-and-memory.html`. I haven't opened it in a browser, and I didn't count its words, so I haven't confirmed it falls in the 30-minute range. It has a pre-quiz plus four sections, each with a diagram, a Common Mix-Ups box and a Check Yourself question, then main points and Go further.\n\n- **Pre-quiz (3 min):** one question per section, each telling you to skim or read closely.\n- **1. The context window and its cost:** what a token is, what fills the window, why bigger costs more and can lower recall. The worked example sizes one laser-cutter request.\n- **2. What is kept between steps:** the model keeps nothing between calls, so your program resends the whole message list each time and early tokens are billed again. The worked example traces three calls (10,100 input tokens billed against a final list of 5,600). It also covers clearing, compaction and trimming.\n- **3. What is kept between sessions: notes:** memory is data your program saves outside the model and loads into the next window. The example is remembering a student's training status, with live lookups for the calendar.\n- **4. Retrieval: finding the right page:** chunking, indexing, keyword versus embedding search, and chunks that lose their context. The example is an \"E-42\" error in a 200-page manual.\n\nThe token counts in the worked examples are illustrative, and the lesson says so. The retrieval figures (5.7% down to 2.9% failures) are Anthropic's own results from the Contextual Retrieval post, and the lesson says to test on your own data. I added `RESOURCES.md` with the three sources and noted the lesson in `NOTES.md`. I wrote no cheat sheet this time.\n\nAsk me anything about the lesson, or use `/quiz` for a quiz on it.",
+  "ttft_ms": 1054,
+  "type": "result",
+  "duration_ms": 161333,
+  "uuid": "907ed573-480d-4a53-965c-14b109a5fd1a",
+  "ttft_stream_ms": 769,
+  "time_to_request_ms": 119,
+  "first_content_frame_ms": 769,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 16,
+      "outputTokens": 23623,
+      "cacheReadInputTokens": 297458,
+      "cacheCreationInputTokens": 63203,
+      "webSearchRequests": 0,
+      "costUSD": 0.5188198,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 1391,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 63203,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    },
+    "claude-haiku-5-5": {
+      "inputTokens": 51642,
+      "outputTokens": 4010,
+      "cacheReadInputTokens": 0,
+      "cacheCreationInputTokens": 0,
+      "webSearchRequests": 3,
+      "costUSD": 0.0371692,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 1400,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 0,
+      "canonicalModel": "claude-haiku-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "credential_expires_at": "2026-11-26T09:20:23.135Z"
+}

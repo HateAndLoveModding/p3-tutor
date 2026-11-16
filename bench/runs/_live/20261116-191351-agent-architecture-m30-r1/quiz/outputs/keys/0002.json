@@ -1,0 +1,57 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "In Design A the program's code decides, because the order is fixed in advance, so it is a workflow; in Design B the model decides at run time from the results so far, so it is an agent.",
+      "accepted": [
+        "A: the code (fixed order), workflow. B: the model, agent.",
+        "Design A's program fixes the order of the tools, so it is a workflow; in Design B the model chooses each next tool after seeing the previous result, so it is an agent.",
+        "Code decides in A (workflow), model decides in B (agent)."
+      ],
+      "rationale": "The line between the two is who owns the control flow: predefined code paths (workflow) or the model directing its own steps and tool use (agent). Both designs use the same tools and the same model, so tools do not separate them. Full credit needs both owners and both labels. Naming the right labels with no owner is partial. Swapping the labels, or saying both are agents because both use tools and a model, shows M8 (tools or several model calls make an agent). Saying Design A is an agent because the model writes the reply is M7."
+    },
+    {
+      "id": "q2",
+      "answer": "c",
+      "rationale": "The program's code fixes every path and branches on the label, so the code owns the control flow and this is a workflow (the routing pattern). The model's label is an input to a code decision, not the model steering its own process. a: tempting because the model does influence the path, but a model output that code branches on is not the model owning the flow (M7). b: tempting because agents use tools and many calls, but a fixed pipeline can too (M8). d: the right label for a wrong reason; a workflow can repeat or loop in code, and what matters is who decides (M9). e: handling several request types is just branching written in code, and breadth does not make a system an agent (M8).",
+      "distractors": {"a": "M7", "b": "M8", "d": "M9", "e": "M8"}
+    },
+    {
+      "id": "q3",
+      "answer": "The program's code fixes the order of the stages, and the model decides how many searches to run in Stage 2 (up to the limit of 5); so overall it is a workflow with one agent-like step inside it, and the code still owns the main flow.",
+      "accepted": [
+        "Code decides the stage order; the model decides the number of searches. It is a workflow that contains a small agent loop.",
+        "The program sets the order, the model chooses how many searches within its limit, so mostly a workflow with an agentic step.",
+        "Order: code. Number of searches: model. A hybrid, workflow overall with an agent step."
+      ],
+      "rationale": "Control flow can be split: the three stages are always run in code order, but inside Stage 2 the model directs its own tool use, bounded by a step limit. Full credit names both owners and describes the design as a workflow with an embedded agent loop (or an equivalent hybrid label). Saying the whole thing is an agent because the model calls a tool in a loop shows M7/M8; saying it is purely a workflow because code sets the stage order ignores the model-chosen number of searches. Giving only the two owners with no description of the whole is partial."
+    },
+    {
+      "id": "q4",
+      "answer": "A fixed workflow: the steps and their order are known in advance, so code can run them reliably and predictably, and it needs fewer model calls than an agent loop, which costs less on a small budget.",
+      "accepted": [
+        "Workflow. The steps never change, so code can run them the same way every time, and it avoids the extra model calls and growing context of an agent loop, which saves money.",
+        "Fixed workflow, because the steps are known and the same every time (predictable, testable) and cheaper since no model call is needed to decide each step.",
+        "Workflow: predictable and consistent for a well-defined task, and lower cost and latency than an agent."
+      ],
+      "rationale": "Choosing a workflow is right when the task is well defined and the steps can be written down in advance. Two reasons are asked for: predictability or consistency (code runs the same path every time, easy to test), and lower cost or latency (no model call is spent deciding each step, and the context does not grow with every loop step). Choosing a workflow with only one valid reason is partial. Choosing an agent because it is more capable or flexible shows M10 (an agent is always the better design). Reasons like \"workflows are simpler to code\" alone, or \"the model cannot call tools in a workflow\", are not enough or show M8."
+    },
+    {
+      "id": "q5",
+      "answer": "d",
+      "rationale": "d is the only task whose steps are the same every time and can be written down in advance (read bookings, look up records, send emails), so code can run it with the model used at most for wording. a, b, c, e and f all depend on what each result turns out to be: the number and choice of steps vary by case, which is when letting the model direct the process pays off. Each is tempting only to someone who thinks that needing tools makes a task agentic, or that a manual-search or calendar task is automatically fixed (M7, M8); the criterion in the stem is whether the steps can be written down in advance, and only d meets it.",
+      "distractors": {"a": "M8", "b": "M8", "c": "M8", "e": "M8", "f": "M8"}
+    },
+    {
+      "id": "q6",
+      "answer": "Because the steps are the same every time, code can run them predictably, test them and handle an error (for example a retry or a message to the student) at lower cost, while an agent spends extra model calls and can make unexpected decisions; I would change my mind if the steps or their order varied by request in ways that cannot be listed in advance.",
+      "accepted": [
+        "Keep the workflow: it is cheaper, more predictable and testable, and the error can be handled in code. I would switch only if the needed steps could not be known in advance.",
+        "A workflow is more reliable and costs fewer model calls; an agent adds cost and risk of unforeseen behaviour. I'd reconsider if the task became open-ended, with an unpredictable number or order of steps.",
+        "Cost and predictability: errors like a failed calendar call can be handled by code with a fixed retry. Change if the path became unpredictable and needed model judgment."
+      ],
+      "rationale": "Two parts are needed. (1) A reason for the workflow: predictability and testability, lower cost and latency, and the fact that a known error can be handled by a fixed code branch (retry, apology message) without a model deciding the next step. (2) A condition for switching: the steps, their order or their number cannot be known in advance, or the task is open-ended. Reason with no condition, or the condition alone, is partial. Answers that say an agent is smarter and so always better, or that a workflow can never cope with an error, show M10. Answers that give a condition such as \"if we get more budget\" miss the point: budget is a constraint, not what makes a task need an agent."
+    }
+  ]
+}

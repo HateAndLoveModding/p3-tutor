@@ -1,0 +1,58 @@
+{
+  "id": "0002",
+  "objective": "O4",
+  "title": "Workflows, agents and who decides the next step",
+  "items": [
+    {
+      "id": "q1",
+      "type": "short",
+      "objective": "O4",
+      "stem": "Two designs for the makerspace booking feature. Design A: when a student asks to book a machine, the Python program always runs check_calendar, then check_training_record, then calls the model once to write the reply, then runs book_slot. Design B: the model is given the same three tools and the goal \"book this student a slot\", and is called again after each tool result until it writes a final answer. In one or two sentences, say what decides which tool runs next in Design A and in Design B, and name each design as a workflow or an agent."
+    },
+    {
+      "id": "q2",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "A teammate describes the makerspace assistant: the model first labels each message as \"manual question\", \"booking\" or \"other\". The program then branches on that label. For \"manual question\" it runs search_manuals and then calls the model to write the answer; for \"booking\" it runs check_calendar and then book_slot; for \"other\" it sends a canned reply. Which statement about this design is correct?",
+      "options": [
+        {"id": "a", "text": "It is an agent, because the model makes a decision (the label) that changes what happens next"},
+        {"id": "b", "text": "It is an agent, because it calls the model more than once and uses several tools"},
+        {"id": "c", "text": "It is a workflow, because the program's code fixes the paths; the model's label is only an input the code branches on"},
+        {"id": "d", "text": "It is a workflow, but only because it never repeats a step; any design that can repeat steps is an agent"},
+        {"id": "e", "text": "It is an agent, because it handles three different kinds of request instead of one fixed kind"}
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "short",
+      "objective": "O4",
+      "stem": "A design has three stages. Stage 1: the program fetches the student's training record. Stage 2: the model is given the search_manuals tool and may call it as many times as it wants, up to 5, before writing an answer. Stage 3: the program logs the answer. Say who decides the order of the three stages, who decides how many manual searches happen in Stage 2, and what that means for how you would describe the whole design."
+    },
+    {
+      "id": "q4",
+      "type": "short",
+      "objective": "O4",
+      "stem": "In the booking feature, every request needs the same three steps in the same order: check the calendar for the requested slot, check the student's training record, then book the slot if both pass. Your sponsor's model budget is small. Should this feature be a fixed workflow or an agent loop? Name your choice and give two reasons."
+    },
+    {
+      "id": "q5",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "Your team lists five makerspace tasks, and every one needs tools. Which one is the best candidate for a fixed workflow, judged by whether the steps can be written down in advance?",
+      "options": [
+        {"id": "a", "text": "Answering any student question about the shop, where one question may need one manual, several manuals, the calendar, or none"},
+        {"id": "b", "text": "Helping a student work out why a 3D print keeps failing, where each fix they try changes what to check next"},
+        {"id": "c", "text": "Recommending the right machine for a student's project, where the questions to ask depend on what the project turns out to be"},
+        {"id": "d", "text": "Each night, reading tomorrow's bookings, looking up each student's training record, and emailing a reminder to those who lack training"},
+        {"id": "e", "text": "Resolving a booking conflict between two students, where the options to offer depend on what both calendars allow"},
+        {"id": "f", "text": "Answering a safety question by searching the manuals, where the right search terms and number of searches vary by question"}
+      ]
+    },
+    {
+      "id": "q6",
+      "type": "short",
+      "objective": "O4",
+      "stem": "At your design review, a teammate argues: \"Let's make the booking feature an agent, because an agent is smarter and can handle surprises such as the calendar tool returning an error.\" The booking steps are the same on every request. Give one reason to keep it a fixed workflow anyway, and say what would have to be true about the task for you to change your mind."
+    }
+  ]
+}

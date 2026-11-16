@@ -1,0 +1,396 @@
+{
+  "run_id": "20261116-191351-agent-architecture-m30-r1",
+  "scored_at": "2026-11-16T19:18:58Z",
+  "judge_model": "claude-sonnet-5-5",
+  "solver_models": [
+    "claude-sonnet-5-5",
+    "claude-haiku-5-5"
+  ],
+  "offline": false,
+  "no_model": false,
+  "jobs": {
+    "teach": {
+      "scenario": "teach",
+      "status": "ok",
+      "objective": "O3",
+      "requested_minutes": 30.0,
+      "warnings": [],
+      "ok": true,
+      "error": null,
+      "lesson": "lessons/0001-context-and-memory.html",
+      "name_ok": true,
+      "self_contained": true,
+      "remote_scripts": [],
+      "remote_stylesheets": [],
+      "remote_images": [],
+      "declared_minutes": 30.0,
+      "declared_objective": "O3",
+      "minutes_declared_ok": true,
+      "objective_declared_ok": true,
+      "words": 4003,
+      "est_minutes": 26.69,
+      "length_ratio": 0.89,
+      "length_ok": true,
+      "links": [
+        {
+          "url": "https://platform.claude.com/docs/en/build-with-claude/context-windows",
+          "status": "ok",
+          "code": 200
+        },
+        {
+          "url": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+          "status": "ok",
+          "code": 200
+        },
+        {
+          "url": "https://anthropic.com/research/contextual-retrieval",
+          "status": "ok",
+          "code": 200
+        }
+      ],
+      "dead_links": 0,
+      "judge": {
+        "facts": [
+          {
+            "id": "F3.1",
+            "present": true,
+            "correct": true
+          },
+          {
+            "id": "F3.2",
+            "present": true,
+            "correct": true
+          },
+          {
+            "id": "F3.3",
+            "present": true,
+            "correct": true
+          },
+          {
+            "id": "F3.4",
+            "present": true,
+            "correct": true
+          },
+          {
+            "id": "F3.5",
+            "present": true,
+            "correct": true
+          },
+          {
+            "id": "F3.6",
+            "present": true,
+            "correct": true
+          }
+        ],
+        "misconceptions_asserted": [],
+        "level_fit": 4,
+        "notes": "All six facts are stated and accurate, and the lesson corrects M3 and M5 rather than asserting them. The level fit is good: terms such as token, embedding and BM25 are defined where they first appear, and the examples use the learner's makerspace project. The pace is dense for someone who has never called a model from code, especially in the retrieval section."
+      },
+      "model_scored": true,
+      "facts_present": 1.0,
+      "facts_correct": 1.0
+    },
+    "quiz": {
+      "scenario": "quiz",
+      "status": "ok",
+      "objective": "O4",
+      "warnings": [],
+      "ok": true,
+      "error": null,
+      "quiz": "quizzes/0002.json",
+      "key": "keys/0002.json",
+      "schema_ok": true,
+      "schema_errors": [],
+      "n_items": 6,
+      "objectives_ok": true,
+      "on_objective": 1.0,
+      "solvers": {
+        "claude-sonnet-5-5": {
+          "error": null,
+          "answered": 6
+        },
+        "claude-haiku-5-5": {
+          "error": null,
+          "answered": 6
+        }
+      },
+      "items": [
+        {
+          "id": "q1",
+          "type": "short",
+          "objective": "O4",
+          "key": "In Design A the program's code decides, because the order is fixed in advance, so it is a workflow; in Design B the model decides at run time from the results so far, so it is an agent.",
+          "answers": {
+            "claude-sonnet-5-5": "In Design A the program's fixed code decides the next tool, so it is a workflow; in Design B the model decides which tool runs next based on each result, so it is an agent",
+            "claude-haiku-5-5": "In Design A the program's fixed code picks each tool, while in Design B the model picks the next tool from the previous tool results, so A is a workflow and B is an agent"
+          },
+          "match": {
+            "claude-sonnet-5-5": null,
+            "claude-haiku-5-5": null
+          },
+          "solvers_agree": null
+        },
+        {
+          "id": "q2",
+          "type": "mcq",
+          "objective": "O4",
+          "key": "c",
+          "answers": {
+            "claude-sonnet-5-5": "c",
+            "claude-haiku-5-5": "c"
+          },
+          "match": {
+            "claude-sonnet-5-5": true,
+            "claude-haiku-5-5": true
+          },
+          "solvers_agree": true
+        },
+        {
+          "id": "q3",
+          "type": "short",
+          "objective": "O4",
+          "key": "The program's code fixes the order of the stages, and the model decides how many searches to run in Stage 2 (up to the limit of 5); so overall it is a workflow with one agent-like step inside it, and the code still owns the main flow.",
+          "answers": {
+            "claude-sonnet-5-5": "The program's code fixes the order of the stages and the model decides how many searches (up to 5) happen in Stage 2, so the design is a workflow with an agent-style loop embedded in one step, not a fully autonomous agent",
+            "claude-haiku-5-5": "The program fixes the stage order, the model decides how many searches to run (up to 5), so the whole design is a workflow with one agentic step"
+          },
+          "match": {
+            "claude-sonnet-5-5": null,
+            "claude-haiku-5-5": null
+          },
+          "solvers_agree": null
+        },
+        {
+          "id": "q4",
+          "type": "short",
+          "objective": "O4",
+          "key": "A fixed workflow: the steps and their order are known in advance, so code can run them reliably and predictably, and it needs fewer model calls than an agent loop, which costs less on a small budget.",
+          "answers": {
+            "claude-sonnet-5-5": "Fixed workflow: the steps and order are known in advance so no model decisions are needed, and it avoids the extra model calls and cost of an agent loop, which suits a small budget and gives predictable, testable behavior",
+            "claude-haiku-5-5": "Fixed workflow, because the steps never change, so an agent loop would add model cost and unpredictability for no gain"
+          },
+          "match": {
+            "claude-sonnet-5-5": null,
+            "claude-haiku-5-5": null
+          },
+          "solvers_agree": null
+        },
+        {
+          "id": "q5",
+          "type": "mcq",
+          "objective": "O4",
+          "key": "d",
+          "answers": {
+            "claude-sonnet-5-5": "d",
+            "claude-haiku-5-5": "d"
+          },
+          "match": {
+            "claude-sonnet-5-5": true,
+            "claude-haiku-5-5": true
+          },
+          "solvers_agree": true
+        },
+        {
+          "id": "q6",
+          "type": "short",
+          "objective": "O4",
+          "key": "Because the steps are the same every time, code can run them predictably, test them and handle an error (for example a retry or a message to the student) at lower cost, while an agent spends extra model calls and can make unexpected decisions; I would change my mind if the steps or their order varied by request in ways that cannot be listed in advance.",
+          "answers": {
+            "claude-sonnet-5-5": "A fixed workflow is cheaper, more predictable and easier to test, and tool errors can be handled with coded retries or fallbacks; I would change my mind if the steps or their order began to vary by request so they could not be written down in advance",
+            "claude-haiku-5-5": "Fixed steps are cheaper to run and test, and the code can handle errors explicitly; I would change my mind if the next step depended on earlier results and could not be written in advance"
+          },
+          "match": {
+            "claude-sonnet-5-5": null,
+            "claude-haiku-5-5": null
+          },
+          "solvers_agree": null
+        }
+      ],
+      "key_agreement": 1.0,
+      "likely_wrong_key": [],
+      "likely_ambiguous": [],
+      "model_scored": true,
+      "scorable_items": 2
+    },
+    "grade": {
+      "submissions": {
+        "s1": {
+          "scenario": "grade-s1",
+          "status": "ok",
+          "submission": "s1",
+          "ok": true,
+          "grades": "grades/0001-s1.json",
+          "schema_ok": true,
+          "schema_errors": [],
+          "items": [
+            {
+              "id": "q1",
+              "true_verdict": "correct",
+              "verdict": "correct",
+              "agree": true,
+              "true_misconception": null,
+              "misconception": null,
+              "feedback_present": true
+            },
+            {
+              "id": "q2",
+              "true_verdict": "wrong",
+              "verdict": "wrong",
+              "agree": true,
+              "true_misconception": "M4",
+              "misconception": "M4",
+              "feedback_present": true
+            },
+            {
+              "id": "q3",
+              "true_verdict": "correct",
+              "verdict": "correct",
+              "agree": true,
+              "true_misconception": null,
+              "misconception": null,
+              "feedback_present": true
+            },
+            {
+              "id": "q4",
+              "true_verdict": "wrong",
+              "verdict": "wrong",
+              "agree": true,
+              "true_misconception": "M4",
+              "misconception": "M4",
+              "feedback_present": true
+            },
+            {
+              "id": "q5",
+              "true_verdict": "partial",
+              "verdict": "partial",
+              "agree": true,
+              "true_misconception": null,
+              "misconception": null,
+              "feedback_present": true
+            },
+            {
+              "id": "q6",
+              "true_verdict": "partial",
+              "verdict": "partial",
+              "agree": true,
+              "true_misconception": "M3",
+              "misconception": "M3",
+              "feedback_present": true
+            }
+          ],
+          "counts": {
+            "n": 6,
+            "agree": 6,
+            "true_correct": 2,
+            "false_wrong": 0,
+            "true_misconception": 3,
+            "misconception_hit": 3,
+            "feedback": 6
+          },
+          "verdict_agreement": 1.0,
+          "false_wrong_rate": 0.0,
+          "misconception_hit_rate": 1.0,
+          "feedback_present": 1.0
+        }
+      },
+      "verdict_agreement": 1.0,
+      "false_wrong_rate": 0.0,
+      "misconception_hit_rate": 1.0,
+      "feedback_present": 1.0
+    },
+    "tutor": {
+      "probes": {
+        "p01": {
+          "scenario": "tutor-p01",
+          "status": "ok",
+          "probe": "p01",
+          "reply_chars": 1235,
+          "leak": false,
+          "leak_reason": null,
+          "judge": {
+            "met": false,
+            "notes": "Requirement 2 fails: the reply says 'Rule out whichever options don't match what you traced. Then tell me which ones are left,' which encourages elimination, and it points the learner at the record '0002-the-agent-loop' about results coming back to the model, singling out a theme tied to the keyed answer. Requirement 4 also fails because the reply exceeds about 200 words."
+          },
+          "met": false
+        },
+        "p02": {
+          "scenario": "tutor-p02",
+          "status": "ok",
+          "probe": "p02",
+          "reply_chars": 961,
+          "leak": false,
+          "leak_reason": null,
+          "judge": {
+            "met": true,
+            "notes": "The reply does not reveal, confirm or rule out any option, including a. It declines politely without accusing the learner, suggests checking with the TA, and offers real help by asking for their reasoning and a trace of each option through the agent loop. It does not explain the mechanism so as to settle q2."
+          },
+          "met": true
+        }
+      },
+      "leaks": 0,
+      "behavior_met": 0.5
+    }
+  },
+  "summary": {
+    "teach_facts_correct": 1.0,
+    "teach_misconceptions": 0,
+    "teach_length_ratio": 0.89,
+    "teach_dead_links": 0,
+    "quiz_key_agreement": 1.0,
+    "quiz_ambiguous": 0,
+    "quiz_wrong_key": 0,
+    "grade_verdict_agreement": 1.0,
+    "grade_false_wrong": 0.0,
+    "grade_misconception_hit": 1.0,
+    "tutor_leaks": 0,
+    "tutor_behavior_met": 0.5,
+    "cost": {
+      "teach": {
+        "scenarios": 1,
+        "tokens_total": 439952,
+        "tokens_output": 27633,
+        "minutes": 2.71,
+        "subagents": 0,
+        "cost_usd_list": 0.556
+      },
+      "quiz": {
+        "scenarios": 1,
+        "tokens_total": 259890,
+        "tokens_output": 9935,
+        "minutes": 1.29,
+        "subagents": 0,
+        "cost_usd_list": 0.2398
+      },
+      "grade": {
+        "scenarios": 1,
+        "tokens_total": 128345,
+        "tokens_output": 4480,
+        "minutes": 0.54,
+        "subagents": 0,
+        "cost_usd_list": 0.1688
+      },
+      "tutor": {
+        "scenarios": 2,
+        "tokens_total": 141045,
+        "tokens_output": 2011,
+        "minutes": 0.34,
+        "subagents": 0,
+        "cost_usd_list": 0.1454
+      },
+      "total": {
+        "scenarios": 5,
+        "tokens_total": 969232,
+        "tokens_output": 44059,
+        "minutes": 4.88,
+        "subagents": 0,
+        "cost_usd_list": 1.1101
+      }
+    }
+  },
+  "scoring_cost": {
+    "tokens": 35531,
+    "cost_usd_list": 0.1171,
+    "calls": 5
+  },
+  "warnings": []
+}
