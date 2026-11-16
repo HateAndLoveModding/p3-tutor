@@ -41,6 +41,48 @@ Thoughts about the quiz skill:
 
 ### Round 2
 
+**Run:** work/p3-tutor/bench/runs/_live/20261112-050736-agent-architecture-m30-r1
+
+**My thoughts:**
+
+I currently have no complaints about the quiz after adding the quiz skill. I feel like it addressed my main issues using the quiz and there is nothing that I would change at this time. 
+
+Write a grade skill.
+
+Thoughts about the grade skill:
+
+- Each option in a multiple choice question should be explained and why the option is right or wrong.
+- When an answer is wrong, explain the reason and don't just assert it. 
+- Explain every multiple choice answer option even if the student is right. 
+- Walk through what would actually happen in each case.
+- Address misconceptions that a student may have by assuming them to be true in a hypothetical sense and then showing why that is still wrong.
+- Address multiple misconceptions that the student may have across multiple questions and answers.
+- The grading of the free response questions is good but ensure the grder states the right, wrong, and why.
+- Answer directly.
+- Use analogies or real-world scenarios to explain answers.
+
+**What changed:**
+
+- Kind: TODO
+- Files: TODO
+- Why: TODO
+
+### Round 3
+
+**Run:** TODO
+
+**My thoughts:**
+
+TODO
+
+**What changed:**
+
+- Kind: TODO
+- Files: TODO
+- Why: TODO
+
+### Round 4
+
 **Run:** TODO
 
 **My thoughts:**

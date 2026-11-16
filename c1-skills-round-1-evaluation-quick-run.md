@@ -23,7 +23,7 @@ Lesson can be found at *work/p3-tutor/bench/runs/_live/20261111-010848-agent-arc
 - This lesson took me less time to read (about 15 minutes). Though the word count was about 200 words more. Maybe I was just reading faster or skmming it more. I wouldn't necessarily change anything as far as the length goes because I think the lesson gets the point across.
 - I liked the visualizations a little bit better on the original lesson. I don't know if that is the randomness of Claude or something that the preferences file influenced. I felt like they were fine and were helpful but I felt like the original ones were more helpful.
 
-## Thoughts about the quiz 
+## Thoughts about the lesson quiz 
 
 I answered the questions before looking at the answer key.
 
@@ -137,6 +137,145 @@ I think this question is good and I don't have any complaints.
 - I liked that there was only one multiple choice question. I liked this quiz so much better because I felt like I had to think and each question more and it challenged me even though I have seen this content probably like 10 times. 
 - I also like that there were more options for the multiple choice question.
 - I also felt like the questions focused more on real-world scenarios and the application of the content.
+
+## Thoughts about the quiz 
+
+I answered the questions before looking at the answer key.
+
+Quiz Questions: *work/p3-tutor/bench/runs/_live/20261111-010848-agent-architecture-m30-r1/quiz/outputs/quizzes/0002.json*
+Claude's Answers: *work/p3-tutor/bench/runs/_live/20261111-010848-agent-architecture-m30-r1/quiz/outputs/keys/0002.json*
+
+### Question 1
+
+The makerspace assistant handles every booking request in this order: (1) a model call pulls the machine and time out of the student's message; (2) the program calls check_calendar; (3) if the slot is free the program calls book_slot, otherwise a second model call writes alternatives. Which description fits this design?
+
+- a) An agent, because it calls a language model and uses tools.
+- b) An agent, because it uses more than one tool per request.
+- c) A workflow, because the program's code fixes the order of steps.
+- d) A workflow, because no language model takes part in any step.
+- e) An agent, because it writes replies to students in natural language.
+
+#### My Answer
+
+C
+
+#### Claude's Answer Key
+
+C
+
+A workflow is a system where code follows a predefined path; here the program fixes the order (extract, check, book or suggest), even though the model is called inside two steps. Using a model, tools, several tools or natural-language replies does not make a system an agent (a, b, e: M7); a workflow can contain model calls, so (d) is wrong (M9).
+
+#### Quiz Notes
+
+I don't love this question because I feel like the right answer is obvious. If you know that it is a workflow then you only have two answer choices. Then if you read d and realize that makes no sense because the question states that a model is used, then c is the only reasonable option. The student did not actually have to know that the program's code fixes the order of steps. That information could help the student in the rest of the quiz.
+
+### Question 2
+
+Two versions of the manual Q&A feature. Version A: the program always searches the manuals with the student's question, then asks the model to write an answer from the results. Version B: the model decides whether to search, what to search for, and whether to search again before answering. Which version is the agent, and what decides the next step in it?
+
+#### My Answer
+
+Version B is the agent. The agent determines what it wants to do next.
+
+#### Claude's Answer Key
+
+Version B; the model decides the next step.
+
+The difference is who owns the control flow. In A, the program's code fixes the sequence (search, then answer), so it is a workflow. In B, the model chooses whether and how often to search, so it is an agent. Naming A, or saying the code or the tools decide the next step in B, is wrong.
+
+#### Quiz Notes
+
+I think this question is fine. I don't necessarily have an critiques but I also don't love it as much as some of the other questions.
+
+### Question 3
+
+Booking a 3D printer always needs the same three steps, and our sponsor's model budget is small. Why is a fixed workflow the better choice for this part of the assistant?
+
+- a) Fixed code can call tools, but an agent has no way to call them.
+- b) The steps are known in advance, so no model calls are spent choosing them.
+- c) A workflow makes more accurate decisions than a language model can make.
+- d) An agent would be unable to stop once it had started a booking.
+- e) A workflow lets the model pick its own tools more freely than an agent.
+
+#### My Answer
+
+B
+
+#### Claude's Answer Key
+
+B
+
+When the steps are known ahead of time, code can run them directly, so no model calls are spent deciding what to do next: cheaper, faster and more predictable. Agents can call tools (a), and neither design is inherently more accurate (c, M8). An agent stops when its stopping condition is met (d), and in a workflow the code, not the model, chooses the tools (e).
+
+#### Quiz Notes
+
+I love this question. I love that it makes you think about a real world scenario and determine why you should use a fixed workflow.
+
+### Question 4
+
+Name one property of a task that makes an agent a better choice than a fixed workflow, and say why that property matters.
+
+#### My Answer
+
+The ability to choose what to do next. This is most helpful when using a RAG or search system because those systems are sometimes unreliable and do not output the information that you actually need. An agent is helpful for this case because it can just say, I didn't find what I needed, I will call the tool again to try to get what I actually need. Sometimes that can make the program more unreliable though and results in high token usage.
+
+#### Claude's Answer Key
+
+The steps or tools needed cannot be predicted in advance (open-ended), so the model must decide the path as it goes.
+
+Full credit names a property (steps unpredictable, varying or open-ended) and the reason (a fixed path cannot be written in advance, so the model must choose steps). A property without a reason is partial. Answers such as 'the task is important' or 'it uses tools' are wrong (M7, M8).
+
+#### Quiz Notes
+
+I didn't explicitly state that a fixed path cannot be written in advance but I do like this question because it got me to think. 
+
+### Question 5
+
+Students send three kinds of request: bookings (always the same steps), single-fact lookups in one manual (search once, then answer), and open troubleshooting such as 'my print keeps failing', where the number of steps and the tools needed differ from case to case. The budget is small. Which design is the best fit?
+
+- a) One agent handles all three kinds of request with the same loop.
+- b) Three separate agents, one per kind of request, each with its own loop.
+- c) Fixed workflows for all three kinds, with the troubleshooting steps written in advance.
+- d) Fixed workflows for bookings and lookups, and an agent only for troubleshooting.
+- e) An agent for bookings and lookups, and a fixed workflow for troubleshooting.
+
+#### My Answer
+
+D
+
+#### Claude's Answer Key
+
+D
+
+Bookings and single lookups have predictable steps, so fixed workflows are cheapest and most reliable. Troubleshooting is the open-ended part where the steps vary, so the extra cost of an agent pays off there. An agent for everything (a) or one agent per kind (b) pays agent cost where steps are known (M8); scripting troubleshooting in advance (c) cannot cover cases whose steps vary; and (e) puts the agent where it is not needed and a fixed path where it cannot work.
+
+#### Quiz Notes
+
+I think this question is good.
+
+### Question 6
+
+A teammate says at a design review: 'Our booking pipeline calls a model and uses tools, so it is an agent.' In one or two sentences, correct them and state what would make it an agent.
+
+#### My Answer
+
+That does not give you enough information to determine whether it is a workflow or an agent because both would use a model and tools. What differentiates them is whether the tool calls are always the same in the same order or whether they can change from run to run. An agent would mean that the tools used and the order can change between different runs.
+
+#### Claude's Answer Key
+
+Using a model and tools does not make it an agent; if the code fixes the order of steps it is a workflow. It would be an agent only if the model decided the next step and which tool to use.
+
+Full credit needs both: the correction (model and tool use do not define an agent; a code-fixed order is a workflow) and the criterion (the model decides the next step or tool). Only one of the two is partial. Agreeing that it is an agent shows M7.
+
+#### Quiz Notes
+
+I think this question is good though I don't like how the question says to correct them. It should ask, are they correct? Why? If no, state what would make it an agent.
+
+### Final Thoughts about the quiz
+
+- I feel like there still might be some information in the questions that helps the student out and the student may not actually understand everything.
+- I liked that there were 5 options for mcq, but I felt like some of the questions still need more options.
+- In general though I liked this quiz though.
 
 ## Thoughts about the grader
 
