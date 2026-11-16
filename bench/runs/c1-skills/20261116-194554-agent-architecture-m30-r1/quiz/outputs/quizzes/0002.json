@@ -1,0 +1,52 @@
+{
+  "id": "0002",
+  "objective": "O4",
+  "title": "Workflows and agents: who owns the control flow",
+  "items": [
+    {
+      "id": "q1",
+      "type": "short",
+      "objective": "O4",
+      "stem": "Two designs for the makerspace booking feature. Design A: Python code always calls the model to pull the machine and time out of the student's message, then itself calls check_calendar, then calls the model to write the reply. Design B: the model is given check_calendar, check_training_record and book_machine as tools plus the goal \"handle this booking request\", and it chooses which tool to call, in what order, and when to stop. For each design, say what decides the next step, and say which design is the workflow and which is the agent."
+    },
+    {
+      "id": "q2",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "A teammate says: \"Our assistant is an agent. It makes three separate model calls, each with its own prompt, and one of them uses the calendar tool.\" In the code, the three calls always run in the same order: classify the question, fetch the calendar, write the reply. Judged by who decides the sequence of steps, which description of this system is best?",
+      "options": [
+        {"id": "a", "text": "An agent, because it uses a tool and makes more than one model call"},
+        {"id": "b", "text": "An agent, because each call has its own prompt written for a specialised role"},
+        {"id": "c", "text": "A workflow, because the code fixes the order of the steps and the model only does the work inside each step"},
+        {"id": "d", "text": "A workflow, because it has only three steps, and agents need many more"},
+        {"id": "e", "text": "An agent, because the students' questions vary so much from one request to the next"},
+        {"id": "f", "text": "A workflow, because the model never sees the result that the tool returns"}
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "short",
+      "objective": "O4",
+      "stem": "In your design notes, every booking request goes through the same checks: look up the student's training record, look up the machine's calendar, then book only if both pass. Across 200 test requests the steps never changed. Your sponsor's model budget is small. Should this feature be built as a fixed workflow or as an agent? Name your choice and give two reasons."
+    },
+    {
+      "id": "q4",
+      "type": "short",
+      "objective": "O4",
+      "stem": "A student writes: \"I want to build an enclosure for my sensor board. What machines should I use, am I trained on them, and when can I book them?\" Which tools are needed, in what order, and how many steps it takes all depend on the student's project and answers. Would you build the handling of this kind of request as a fixed workflow or as an agent? Name your choice and give the reason in terms of who decides the steps."
+    },
+    {
+      "id": "q5",
+      "type": "numeric",
+      "objective": "O4",
+      "stem": "Assume every model call costs $0.01, whatever its length. A fixed workflow handles one booking request with 2 model calls (read the request, write the reply); the program runs the tools in between. An agent handling the same request calls the model once per step: on average it requests 4 tools, one per call, and then writes the final answer. With a $30.00 budget, how many more requests can the workflow serve than the agent?",
+      "unit": "requests"
+    },
+    {
+      "id": "q6",
+      "type": "short",
+      "objective": "O4",
+      "stem": "Your team built \"cancel my booking\" as an agent with the tools list_bookings and cancel_booking. In testing it sometimes cancels the wrong booking when a student has two on the same day, and sometimes cancels without asking the student to confirm. In one or two sentences, what design change would you make, and why does it fix both problems?"
+    }
+  ]
+}

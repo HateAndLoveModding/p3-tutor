@@ -1,0 +1,120 @@
+{
+  "duration_api_ms": 20738,
+  "stop_reason": "end_turn",
+  "session_id": "c4eff63c-2c53-445f-b6d1-792e5e6eb004",
+  "total_cost_usd": 0.0954489,
+  "usage": {
+    "input_tokens": 8,
+    "cache_creation_input_tokens": 16209,
+    "cache_read_input_tokens": 81969,
+    "output_tokens": 2240,
+    "output_tokens_details": {
+      "thinking_tokens": 804
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 16209,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 909,
+        "cache_read_input_tokens": 25929,
+        "cache_creation_input_tokens": 844,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 844
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 2240,
+      "cacheReadInputTokens": 81969,
+      "cacheCreationInputTokens": 16209,
+      "webSearchRequests": 0,
+      "costUSD": 0.0954489,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 804,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 16209,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subagent_stats": {
+    "spawned": 0,
+    "requested": {
+      "background": 0,
+      "foreground": 0,
+      "unset": 0
+    },
+    "started_in_background": 0,
+    "max_depth": 0,
+    "spawned_by_subagents": 0,
+    "completed": 0,
+    "failed": 0,
+    "killed": {
+      "parent": 0,
+      "user": 0,
+      "system": 0
+    },
+    "refused": {
+      "depth_limit": 0,
+      "concurrency_limit": 0,
+      "budget": 0
+    },
+    "by_type": {}
+  },
+  "safety_stops": 0,
+  "is_error": false,
+  "num_turns": 7,
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "## Tool calling again, with a new analogy\n\nThis replaces the loop-only picture from the agent-loop session. That picture shows the order of steps but not who does what. Here the analogy is about who does what.\n\n## The short answer\n- The model can only write text. It cannot check a calendar or open a manual.\n- Tool calling means the model writes a structured request, such as \"I want to use the booking-check tool for Friday\". It does not carry the request out.\n- Your program reads that request, runs the real action, and gives the result back to the model as new text.\n- The model reads the result and either asks for another tool or writes the final answer.\n\n## Analogy: a cook who cannot leave the kitchen\n- A cook is working in a kitchen with the door locked. They have a notepad and a slot in the door.\n- Taped to the wall is a card listing what the helper outside can do: \"check the price of an ingredient at the store\", \"see if the store has an item in stock\". Each entry has a short description.\n- A customer asks for a dish. The cook can't tell whether the store has saffron, so they write a note: \"Stock check: saffron\". They push it through the slot.\n- The cook does nothing else until a reply comes back. The helper reads the note, walks to the store, looks, and slides back a slip: \"Saffron: 2 left, $9 each.\"\n- The cook reads the slip and decides the next step. That might be another note, or the finished dish with a price.\n\nHow it maps:\n- Cook = the model.\n- Helper = your program.\n- Wall card = the tool descriptions you write.\n- Notes and slips = the model's tool requests and the results.\n\nWhere it stops working:\n- A real cook remembers the last hour.\n- The model remembers nothing between notes. Each time, the helper hands the whole pad back in, with the original order, every note and every slip so far. Every pass through the slot is a fresh model call.\n- That is why long conversations cost more. The pad grows, and you pay for reading it each time.\n\n## In your project\n- The model never touches your booking calendar. Your Python function does.\n- The wall card is your tool description. If it is vague, the cook writes the wrong note. For example, \"gets data\" leaves the cook guessing when to use it.\n- For \"Is the laser cutter free on Friday, and book me 2pm?\", you get several round trips: one note to check the calendar, one slip back, one note to book, one slip back, then the answer. Each round trip re-reads the whole pad, and that is where your budget goes.\n\n## Your turn\nSuppose the cook writes \"Stock check: saffron\" and your program crashes before it sends anything back.\n- What does the model know at that moment, and what does it do next?\n- Why does your answer come from the cook never leaving the kitchen?\n\nI'm not discussing the specific items on quiz 0001 until a submission is graded. This answer covers the general idea only.",
+  "ttft_ms": 1248,
+  "type": "result",
+  "duration_ms": 20967,
+  "uuid": "7273cac9-48d0-44c3-92a6-7a6db9840323",
+  "ttft_stream_ms": 969,
+  "time_to_request_ms": 114,
+  "first_content_frame_ms": 969,
+  "queued_turn_count": 0,
+  "result_index": 0,
+  "model_usage_since_last_result": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 8,
+      "outputTokens": 2240,
+      "cacheReadInputTokens": 81969,
+      "cacheCreationInputTokens": 16209,
+      "webSearchRequests": 0,
+      "costUSD": 0.0954489,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 804,
+      "cacheCreationEphemeral5mInputTokens": 0,
+      "cacheCreationEphemeral1hInputTokens": 16209,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "credential_expires_at": "2026-11-26T09:20:23.135Z"
+}

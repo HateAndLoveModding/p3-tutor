@@ -1,0 +1,43 @@
+{
+  "quiz": "0001",
+  "submission": "s2",
+  "items": [
+    {
+      "id": "q1",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "- Right: (d). An agent is a loop: the model picks an action, the program runs it, the result comes back, and the cycle repeats until a stop condition. A single model call has no such cycle, so this structure is what separates the two.\n- (a) is wrong because a longer prompt only changes the input to one call. Suppose it made a system an agent: you would paste in a long role description and the model would still answer once and stop, with nothing acted on and no result returned.\n- (b) is wrong because remembering earlier conversations is storage, not structure. A chatbot with perfect memory still answers once per message and never takes an action and reads its result.\n- (c) is wrong because a bigger context window lets one call read more text. It would hold a whole textbook, yet it is still one call with one answer and no loop.\n- Link to the next idea: the loop must also have a way to stop, which is what q3 tests."
+    },
+    {
+      "id": "q2",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "- Right: (c). The model's only output is text, here a structured request naming check_calendar with arguments laser cutter and tomorrow's date. The program reads that request, runs the function, and sends the result back.\n- (a) is wrong because a model has no hands: it cannot open the booking system. If it could, the program around it would be pointless, and you would not need to write the tool at all.\n- (b) is wrong because the model, not the program, decides a tool is needed. If the program decided from keywords, that would be a fixed workflow, not an agent; the model choosing is what makes it an agent.\n- (d) is wrong because the model never sees or runs the tool's code. It would have no place to run it, since it only produces text.\n- Watch out: (a) and (d) encode the belief that the model runs tools itself. Your q4 answer slipped back into that belief, so check it there."
+    },
+    {
+      "id": "q3",
+      "verdict": "wrong",
+      "misconception": "M6",
+      "feedback": "- You chose (c), 'left to run longer, it will eventually fix the bug'. This is wrong because the agent has repeated the same edit and got the same failing test 40 times, and every one of those steps is in its context. Each new step has the same input as the last, so it is likely to produce the same output.\n- Suppose it were true that more time fixes it. Step 41 sees the same 40 identical failures and makes the same edit, step 42 does the same, and so on. The only thing that grows is your model bill, which matters on your small budget.\n- Right: (b). A step limit is a stopping condition in the agent program. It ends the loop after N steps and reports what happened, so a person can step in and cost is capped.\n- (a) is wrong because all 40 steps already fit in the context. The agent can see everything; seeing more does not change what it does with it.\n- (d) is wrong because a longer prompt asking the model to try harder is only more input text. It cannot stop a loop, and the program still decides whether to call the model again.\n- This is M6, the belief that an agent needs no stopping condition: the loop ends only when the program says so."
+    },
+    {
+      "id": "q4",
+      "verdict": "partial",
+      "misconception": "M4",
+      "feedback": "- Right: your number, 4 model calls, and your count of 3 tool requests plus 1 final answer is correct. Each call ends with one tool request or the final answer.\n- Wrong: your reason, 'the model can only run one tool itself each time it's called, so it runs check_calendar...'. The model does not run tools.\n- Why: each call outputs a request such as check_calendar(...) as text. The program runs the tool and sends the result back, and that starts the next call. Trace it: call 1 outputs the calendar request, the program runs it; call 2 outputs the manual search request, the program runs it; call 3 outputs the training record request, the program runs it; call 4 sees all three results and writes the answer. The tool runs sit between the model calls and are not model calls themselves.\n- Suppose the model really ran the tools. Then the program would have nothing to do between calls, and the number of calls would not depend on the results coming back. In fact the program must run each tool and return its result before the model can make the next call.\n- This is the M4 belief behind the wrong options in q2: you chose the right option there, so you know the model outputs a request. Apply the same idea here, because the count only works if you see the program doing the running."
+    },
+    {
+      "id": "q5",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "- Right: 'the result goes back in as the next input... and then the model takes its next turn with that in front of it'. That is what happens: the program adds the result to the model's input and calls the model again.\n- Right: you also gave the why, 'so it can figure out what to do next'. The model needs the result to choose its next tool or write the final answer, since it cannot see the result any other way.\n- Your group chat comparison works: the result is a new message that the model reads before its turn. To make it stick, note that the model has no memory between calls, so every call must include the earlier steps and the new result in its input."
+    },
+    {
+      "id": "q6",
+      "verdict": "partial",
+      "misconception": null,
+      "feedback": "- Right: the name does help the model. check_calendar does signal what the tool is for, and the model does choose using text it has been given, not by looking at code.\n- Missing: the rest of the tool description, meaning what the tool does and the parameters it takes. The program gives the model a description for each tool, and the model picks the one whose description fits the request.\n- Why: a name alone can mislead. Take two tools named check_calendar and check_schedule, or a tool named book that does not say whether it books a machine or a room. With only names the model has to guess, but a description such as 'returns the bookings for one machine on one date; takes machine and date' tells it which to call and what arguments to send.\n- For your mission: this is why writing a clear description for each makerspace tool matters. It is the only thing the model sees about the tool."
+    }
+  ],
+  "summary": "You have the structure of an agent down: the loop (q1), the model outputting a request that the program runs (q2), and the result being fed back as the next input (q5). One misconception shows up: M6, the belief that an agent needs no stopping condition (q3). The correction: the loop runs only while the program calls the model again, and with an identical failure repeating, only a step limit or similar rule stops it and caps cost. Your q4 reasoning also slipped into the belief that the model runs the tools itself (M4), even though your q2 answer shows you know it only outputs a request, and in q6 you named only the tool's name when the model relies on the full description. Work on this first: redo q4 step by step, writing for each of the 4 calls what the model outputs and what the program does before the next call. Then write a full description (purpose and parameters) for the check_calendar tool."
+}

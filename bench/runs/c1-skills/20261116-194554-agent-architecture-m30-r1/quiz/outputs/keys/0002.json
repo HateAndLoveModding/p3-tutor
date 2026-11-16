@@ -1,0 +1,57 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "In Design A the program's code decides the next step (a fixed path), so it is the workflow; in Design B the model decides the next step, so it is the agent.",
+      "accepted": [
+        "A is a workflow: the code fixes the order. B is an agent: the model chooses the tools, the order and when to stop.",
+        "Workflow = developer's code owns the control flow (A); agent = the model owns the control flow (B)."
+      ],
+      "rationale": "The difference is who owns the control flow: in a workflow, predefined code paths decide the sequence and the model is called inside steps; in an agent, the model decides what to do next and when to stop. Full credit needs both the correct labels and the 'who decides' reason for each design. Right labels with no reason are partial. Reasons such as 'B uses more tools', 'B is smarter' or 'A has fewer model calls' show M7 or M8: tools and number of calls do not define the difference. Swapping the labels, or saying both are agents because both call the model, is wrong (M7).",
+      "distractors": {}
+    },
+    {
+      "id": "q2",
+      "answer": "c",
+      "rationale": "The code fixes the order (classify, fetch calendar, reply), so the program owns the control flow and this is a workflow, even though it uses a tool and several differently prompted model calls. a: uses a tool and several calls, which is tempting because agents do both, but workflows can too (M7). b: separate role prompts are still a fixed path chosen by the code (M7). d: size is not the criterion; a workflow can have many steps and an agent can finish in one or two (M8). e: varied input does not give the model control of the steps; the path stays the same for every question (M9). f: the model does see the tool result when it writes the reply, and what the model sees is not the criterion anyway.",
+      "distractors": {"a": "M7", "b": "M7", "d": "M8", "e": "M9"}
+    },
+    {
+      "id": "q3",
+      "answer": "A fixed workflow: the steps and their order are known in advance, so code can run them and no model decision is needed; this uses fewer model calls (cheaper and faster) and behaves predictably and is easy to test.",
+      "accepted": [
+        "Workflow. The order never changes, so there is nothing for a model to decide, and skipping the decision calls saves money.",
+        "Workflow: known fixed steps, lower cost per request, more reliable because the code cannot skip or reorder a check."
+      ],
+      "rationale": "When the path is known ahead of time, a workflow is better: the program runs the steps in order, the model is used only where language understanding is needed, so there are fewer model calls and lower cost and latency, and the checks cannot be skipped or reordered. Full credit: workflow plus two reasons from these (known steps, cost/latency, predictability or reliability). Workflow with one reason is partial. Choosing an agent 'because it is more capable' or 'because it can adapt' shows M10: flexibility is only worth paying for when the path really varies. Choosing an agent for any reason is wrong.",
+      "distractors": {}
+    },
+    {
+      "id": "q4",
+      "answer": "An agent: the steps cannot be written in advance because they depend on the student's answers and the results of each tool, so the model has to decide the next step and when to stop.",
+      "accepted": [
+        "Agent, since the path is open-ended and the model must choose which tool to use next based on what comes back.",
+        "Agent: the control flow cannot be fixed beforehand, so the model must own it."
+      ],
+      "rationale": "A fixed workflow is better only when the path is known ahead of time. Here the number and order of steps depend on the project and on intermediate results, so code cannot fix them and the model must own the control flow, which is the case an agent is for (with a step limit as a safeguard). Choosing an agent without the reason about who decides the steps is partial. Choosing a workflow shows M10 in reverse: believing a fixed path is always best, or that it can simply be hard-coded with branches for every case; the paths here are too many and open-ended to enumerate. Answers that say agent because the question is long or varied show M9.",
+      "distractors": {}
+    },
+    {
+      "id": "q5",
+      "answer": 900,
+      "tolerance": 0,
+      "rationale": "Workflow: 2 calls x $0.01 = $0.02 per request, so $30.00 / $0.02 = 1500 requests. Agent: 4 tool requests need 4 calls and the final answer takes a fifth, so 5 x $0.01 = $0.05 per request, so $30.00 / $0.05 = 600 requests. The difference is 1500 - 600 = 900. An answer of 1500 or 600 alone is the right method stopped early: it gives one design, not the difference. An answer of 750 comes from counting only 4 agent calls (750 agent requests, difference 750) and forgets that writing the final answer is also a model call. Counting the program's tool runs as model calls shows M4."
+    },
+    {
+      "id": "q6",
+      "answer": "Make cancellation a fixed workflow: code looks up the bookings, asks the student to pick one and confirm, then cancels it; the model is only used to read the request or phrase messages. The sequence is the same every time, so the code guarantees the confirmation and the correct booking, instead of leaving them to the model's choices.",
+      "accepted": [
+        "Turn it into a fixed workflow with code enforcing lookup, confirm, then cancel, because the order is known and should not depend on the model's decisions.",
+        "Hard-code the steps (list, ask which one, confirm, cancel) and use the model only for language; the code cannot skip the confirmation."
+      ],
+      "rationale": "The steps for cancelling are known in advance and an error is costly, so the control flow should belong to code: the program lists the bookings, asks which one, requires a confirmation and then cancels, so neither skipped confirmation nor a wrong choice can happen by the model's decision. Full credit: moving to a fixed workflow plus the reason that code, not the model, now guarantees the order. A workflow with no reason is partial. Fixes that keep the agent, such as a longer prompt telling it to always confirm, or a stronger model, show M10: instructions make skipping less likely, not impossible, and the agent still owns the order. Only adding a step limit does not address either problem.",
+      "distractors": {}
+    }
+  ]
+}
