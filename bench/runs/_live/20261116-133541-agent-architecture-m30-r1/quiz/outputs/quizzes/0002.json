@@ -1,0 +1,51 @@
+{
+  "id": "0002",
+  "objective": "O4",
+  "title": "Workflows, agents and who controls the steps",
+  "items": [
+    {
+      "id": "q1",
+      "type": "short",
+      "objective": "O4",
+      "stem": "Two designs for the makerspace assistant answer the same student question, \"Can I use the laser cutter Friday?\". Design A: the program always calls search_manuals, then check_calendar, then makes one model call to write the reply. Design B: the program gives the model the same two tools plus a goal, and the model decides which tool to use, in what order, and when to stop. Label each design as a workflow or an agent, and state the one criterion that separates them (one or two sentences)."
+    },
+    {
+      "id": "q2",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "A Python script handles each student message by making three model calls, one after another, in this order every time: (1) classify the message as a booking request or a manual question, (2) extract the machine name and date, (3) draft a reply from those results. A teammate asks how to label this design. Which label and reason is correct?",
+      "options": [
+        {"id": "a", "text": "An agent, because the model is called several times and each call builds on the output of the one before"},
+        {"id": "b", "text": "An agent, because the model decides what text to write at each of the three steps"},
+        {"id": "c", "text": "An agent, because one step has the model work out which machine and date the student means"},
+        {"id": "d", "text": "A workflow, because the code fixes the order of the steps and the model only supplies each step's content"},
+        {"id": "e", "text": "A workflow, because it makes exactly three model calls, and an agent has to make more than three"},
+        {"id": "f", "text": "A workflow, because it has no loop, and any design that contains a loop is automatically an agent"}
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "short",
+      "objective": "O4",
+      "stem": "Every booking request in the makerspace assistant must go through the same three actions in the same order: check the calendar for the slot, check the student's training record, then create the booking. Your sponsor gave you a small model budget. Would you build this part as a fixed workflow or as an agent? Give your choice and two reasons that come from the facts in this case."
+    },
+    {
+      "id": "q4",
+      "type": "short",
+      "objective": "O4",
+      "stem": "A student writes: \"My 3D prints keep warping off the bed and I don't know why.\" Answering well may need several manual searches, a look at which printer the student used, and follow-up questions, and nobody can say in advance which of these will be needed or in what order. Explain why a fixed workflow is a poor fit for this request and what you would use instead (one or two sentences)."
+    },
+    {
+      "id": "q5",
+      "type": "short",
+      "objective": "O4",
+      "stem": "In testing, your team's booking assistant gives the model three tools (check_calendar, check_training, create_booking) and a system prompt that says \"always check training before booking\". About 1 request in 20, the model books first and checks training afterwards, and the number of model calls per request varies from 3 to 9. Name the root cause in terms of who controls the order of steps, and describe the design change that removes the problem (two or three sentences)."
+    },
+    {
+      "id": "q6",
+      "type": "short",
+      "objective": "O4",
+      "stem": "You have moved booking to a fixed workflow: check calendar, check training, create booking, always in that order. A student writes: \"Book the laser cutter Friday, or if it is taken, the 3D printer instead, whichever has a slot after 2 pm.\" Say why the workflow cannot handle this request as built, and give one way to handle it without turning the whole booking process into an agent (two sentences)."
+    }
+  ]
+}

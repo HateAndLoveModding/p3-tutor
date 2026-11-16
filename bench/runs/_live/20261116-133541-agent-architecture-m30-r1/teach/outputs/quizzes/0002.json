@@ -1,0 +1,46 @@
+{
+  "id": "0002",
+  "objective": "O3",
+  "title": "Context and memory in an agent",
+  "items": [
+    {
+      "id": "q1",
+      "type": "numeric",
+      "objective": "O3",
+      "stem": "In a run of your assistant, call 1 receives 1,000 input tokens. The model requests a tool, and the tool's result is 2,000 tokens. Call 2 receives everything from call 1 plus that result, and the model requests a second tool whose result is 500 tokens. Call 3 receives everything so far and writes the final answer. Ignore the length of the model's own requests and replies. Across the three calls, how many input tokens are sent in total?",
+      "unit": "tokens"
+    },
+    {
+      "id": "q2",
+      "type": "short",
+      "objective": "O3",
+      "stem": "A student finishes laser cutter training in a chat on Monday. On Wednesday, in a new session, the assistant asks them to take the training again. Your program keeps the conversation only as a Python list of messages. In one or two sentences, why did this happen, and what would you add so it does not?"
+    },
+    {
+      "id": "q3",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "Your assistant can write a few short notes at the end of each session for later sessions. Which one is the best thing to save?",
+      "options": [
+        {"id": "a", "text": "Tomorrow's free time slots for the laser cutter, as just checked"},
+        {"id": "b", "text": "The three manual pages it read about changing the lens"},
+        {"id": "c", "text": "The student's machine trainings completed, with the dates"},
+        {"id": "d", "text": "The full text of the whole conversation, word for word"},
+        {"id": "e", "text": "The system prompt and the list of tool definitions in use"},
+        {"id": "f", "text": "Every tool result from the session, in the order received"}
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "short",
+      "objective": "O3",
+      "stem": "Your sponsor suggests pasting all 400 pages of machine manuals into every request, so the assistant \"always has the answer\". In two or three sentences, give two reasons this is a poor design, and say what you would do instead."
+    },
+    {
+      "id": "q5",
+      "type": "short",
+      "objective": "O3",
+      "stem": "A research-style run of your assistant has reached 150,000 tokens, most of it old search results the model has already used, and its answers have started missing details that are in the context. Name the problem and give one action that fixes it without losing what the model concluded."
+    }
+  ]
+}

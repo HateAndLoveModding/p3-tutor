@@ -1,0 +1,45 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": 7500,
+      "tolerance": 0,
+      "rationale": "Every call re-sends the whole history. Call 1: 1,000. Call 2: 1,000 + 2,000 = 3,000. Call 3: 3,000 + 500 = 3,500. Total 1,000 + 3,000 + 3,500 = 7,500. Answering 3,500 (the final context) forgets that earlier calls were billed too; answering 3,500 or 4,000 treats history as sent once (M10)."
+    },
+    {
+      "id": "q2",
+      "answer": "The message list was discarded when the session ended, so nothing carried over; save the training status as a note in storage (a file or database) and have the assistant read it at the start of each session.",
+      "accepted": [
+        "Nothing is remembered between sessions unless saved; write the training record to a file or database and load it at the start of the next session.",
+        "The conversation was lost when the session ended; add persistent memory, such as a stored note or record that is read back in a new session."
+      ],
+      "rationale": "Full credit needs the cause (the context or message list does not persist between sessions) and a fix (persistent storage written by the program and read back). Only a cause or only a fix is partial. Saying the model forgot or should be trained to remember shows M3, the belief that memory between sessions is automatic."
+    },
+    {
+      "id": "q3",
+      "answer": "c",
+      "rationale": "A completed-training record is small, needed in later sessions and cannot be looked up from the context. Tomorrow's free slots (a) change and should be read live from the calendar. Manual pages (b) belong to retrieval, which re-fetches them. A full transcript (d) and every tool result (f) are bulky and mostly useless later, which wastes tokens when read back. The system prompt and tool definitions (e) are already sent by the program on every call.",
+      "distractors": {"a": "M9", "b": "M8", "d": "M9", "e": "M9", "f": "M9"}
+    },
+    {
+      "id": "q4",
+      "answer": "It costs tokens on every call, since the whole text is re-sent each time, and recall gets worse as the context fills (context rot); instead keep an index and use search and read tools to fetch only the needed sections.",
+      "accepted": [
+        "Too expensive per request and the model recalls less accurately in a huge context; use retrieval, loading only the relevant manual sections when needed.",
+        "It may not fit the window, costs a lot on every call and lowers accuracy; retrieve the relevant pages with a search tool instead."
+      ],
+      "rationale": "Full credit: two valid reasons from cost per call (history and manuals re-sent as input), recall degrading in a long context, or exceeding the window, plus retrieval (search then read just the needed sections) as the alternative. One reason or no alternative is partial. Reasons like \"the model cannot read PDFs\" or \"it would be unfair\" are wrong, and agreeing with the sponsor shows M8, loading whole documents instead of retrieving.",
+      "distractors": {}
+    },
+    {
+      "id": "q5",
+      "answer": "Context rot: recall degrades as the context grows; clear the old tool results (or compact the conversation into a summary) while keeping the model's conclusions.",
+      "accepted": [
+        "Context rot, fixed by tool result clearing that keeps the model's own notes and conclusions.",
+        "The context is too full so recall degrades; compact it into a summary that keeps decisions and drop the spent search results."
+      ],
+      "rationale": "Full credit names the problem (a long, full context makes the model recall worse, called context rot) and a shrinking action that keeps conclusions: tool result clearing or compaction. Suggesting a larger window alone shows M7, the belief that more context is always better; suggesting a restart that drops everything loses the conclusions."
+    }
+  ]
+}

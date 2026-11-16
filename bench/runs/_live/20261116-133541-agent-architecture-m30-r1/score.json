@@ -1,0 +1,396 @@
+{
+  "run_id": "20261116-133541-agent-architecture-m30-r1",
+  "scored_at": "2026-11-16T13:40:49Z",
+  "judge_model": "claude-sonnet-5-5",
+  "solver_models": [
+    "claude-sonnet-5-5",
+    "claude-haiku-5-5"
+  ],
+  "offline": false,
+  "no_model": false,
+  "jobs": {
+    "teach": {
+      "scenario": "teach",
+      "status": "ok",
+      "objective": "O3",
+      "requested_minutes": 30.0,
+      "warnings": [],
+      "ok": true,
+      "error": null,
+      "lesson": "lessons/0001-context-and-memory-in-an-agent.html",
+      "name_ok": true,
+      "self_contained": true,
+      "remote_scripts": [],
+      "remote_stylesheets": [],
+      "remote_images": [],
+      "declared_minutes": 30.0,
+      "declared_objective": "O3",
+      "minutes_declared_ok": true,
+      "objective_declared_ok": true,
+      "words": 2940,
+      "est_minutes": 19.6,
+      "length_ratio": 0.653,
+      "length_ok": true,
+      "links": [
+        {
+          "url": "https://platform.claude.com/docs/en/build-with-claude/context-windows",
+          "status": "ok",
+          "code": 200
+        },
+        {
+          "url": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+          "status": "ok",
+          "code": 200
+        },
+        {
+          "url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool",
+          "status": "ok",
+          "code": 200
+        }
+      ],
+      "dead_links": 0,
+      "judge": {
+        "facts": [
+          {
+            "id": "F3.1",
+            "present": true,
+            "correct": true
+          },
+          {
+            "id": "F3.2",
+            "present": true,
+            "correct": true
+          },
+          {
+            "id": "F3.3",
+            "present": true,
+            "correct": true
+          },
+          {
+            "id": "F3.4",
+            "present": true,
+            "correct": true
+          },
+          {
+            "id": "F3.5",
+            "present": true,
+            "correct": true
+          },
+          {
+            "id": "F3.6",
+            "present": true,
+            "correct": true
+          }
+        ],
+        "misconceptions_asserted": [],
+        "level_fit": 4,
+        "notes": "All six facts are stated and accurate. F3.4 mentions cost and recall but not caching; this is a minor parenthetical, not an error. Level fit is good: it builds on prior sessions, defines tokens and context window, and uses the makerspace project throughout. Some terms (embedding-based search, compaction, context rot) and the many external references are a little dense for a learner who has never called a model from code."
+      },
+      "model_scored": true,
+      "facts_present": 1.0,
+      "facts_correct": 1.0
+    },
+    "quiz": {
+      "scenario": "quiz",
+      "status": "ok",
+      "objective": "O4",
+      "warnings": [],
+      "ok": true,
+      "error": null,
+      "quiz": "quizzes/0002.json",
+      "key": "keys/0002.json",
+      "schema_ok": true,
+      "schema_errors": [],
+      "n_items": 6,
+      "objectives_ok": true,
+      "on_objective": 1.0,
+      "solvers": {
+        "claude-sonnet-5-5": {
+          "error": null,
+          "answered": 6
+        },
+        "claude-haiku-5-5": {
+          "error": null,
+          "answered": 6
+        }
+      },
+      "items": [
+        {
+          "id": "q1",
+          "type": "short",
+          "objective": "O4",
+          "key": "Design A is a workflow and Design B is an agent; the criterion is who controls the flow: in a workflow the program's code fixes the steps and their order in advance, in an agent the model decides the steps, their order and when to stop.",
+          "answers": {
+            "claude-sonnet-5-5": "Design A is a workflow and Design B is an agent; the criterion is who controls the sequence of steps: code fixes it in a workflow, the model decides it dynamically in an agent",
+            "claude-haiku-5-5": "A: workflow; B: agent; criterion: whether the model decides the sequence of steps (agent) or the code fixes it in advance (workflow)"
+          },
+          "match": {
+            "claude-sonnet-5-5": null,
+            "claude-haiku-5-5": null
+          },
+          "solvers_agree": null
+        },
+        {
+          "id": "q2",
+          "type": "mcq",
+          "objective": "O4",
+          "key": "d",
+          "answers": {
+            "claude-sonnet-5-5": "d",
+            "claude-haiku-5-5": "d"
+          },
+          "match": {
+            "claude-sonnet-5-5": true,
+            "claude-haiku-5-5": true
+          },
+          "solvers_agree": true
+        },
+        {
+          "id": "q3",
+          "type": "short",
+          "objective": "O4",
+          "key": "A fixed workflow, because the steps and their order are known in advance and never change, so there is nothing for a model to decide; coding the order is cheaper (no model calls spent choosing the next step, fewer calls per request) and more predictable and testable (the order cannot vary or be skipped).",
+          "answers": {
+            "claude-sonnet-5-5": "Fixed workflow, because the steps and order are always the same so no model decisions are needed, and a workflow uses fewer, predictable model calls which fits the small budget",
+            "claude-haiku-5-5": "Workflow: the steps are always the same and known in advance, so a fixed workflow is predictable and cheap, and it avoids spending the small model budget on decisions the code can make"
+          },
+          "match": {
+            "claude-sonnet-5-5": null,
+            "claude-haiku-5-5": null
+          },
+          "solvers_agree": null
+        },
+        {
+          "id": "q4",
+          "type": "short",
+          "objective": "O4",
+          "key": "The steps and their order cannot be known in advance, and a workflow needs them fixed in code beforehand; here the next step depends on what each earlier result shows, so use an agent, where the model chooses the next action and when to stop.",
+          "answers": {
+            "claude-sonnet-5-5": "The needed searches, checks and follow-ups and their order cannot be known in advance, so a fixed workflow can't encode them; use an agent where the model chooses tools and order and decides when to stop",
+            "claude-haiku-5-5": "The steps needed depend on what each search or answer reveals, so the order and number of steps cannot be fixed in advance; use an agent that chooses tools and decides when to stop"
+          },
+          "match": {
+            "claude-sonnet-5-5": null,
+            "claude-haiku-5-5": null
+          },
+          "solvers_agree": null
+        },
+        {
+          "id": "q5",
+          "type": "short",
+          "objective": "O4",
+          "key": "The model owns the control flow for steps whose order must always be the same, and a prompt instruction does not guarantee it, so the order sometimes breaks and the call count varies; fix it by moving the order into code (a fixed workflow: check training, then calendar, then create booking, as program steps), using the model only for language tasks such as reading the request and writing the reply.",
+          "answers": {
+            "claude-sonnet-5-5": "The model, not the code, controls the order of steps, so a prompt instruction is only followed probabilistically; make the order deterministic in code as a fixed workflow (calendar, training, then booking) and have the model only fill in each step's content, or block create_booking until training is verified",
+            "claude-haiku-5-5": "The model controls the order of steps, so a prompt rule is only a suggestion; move the ordering into code by making the workflow enforce check_training before create_booking, and expose only the booking step after the check passes"
+          },
+          "match": {
+            "claude-sonnet-5-5": null,
+            "claude-haiku-5-5": null
+          },
+          "solvers_agree": null
+        },
+        {
+          "id": "q6",
+          "type": "short",
+          "objective": "O4",
+          "key": "The workflow's code only contains the one path it was written for, with no branch for 'if taken, try another machine' or a time condition, so it cannot do what was not programmed; handle it by adding the branch to the code (a second fixed path that tries the other machine), or by routing only such unusual requests to an agent while normal bookings stay on the fixed path.",
+          "answers": {
+            "claude-sonnet-5-5": "The fixed sequence assumes one machine and one slot, so it cannot branch to a fallback machine or compare slots by time; add a model-driven routing or planning step that splits the request into candidate machine checks, or a small bounded agent for just that sub-task, then run the fixed booking workflow on the chosen slot",
+            "claude-haiku-5-5": "The workflow has a fixed path and cannot compare two options or branch on which slot is free after 2 pm; handle it by adding a step that checks both machines' calendars in parallel and then picks the earlier-qualifying one with code before the booking steps run"
+          },
+          "match": {
+            "claude-sonnet-5-5": null,
+            "claude-haiku-5-5": null
+          },
+          "solvers_agree": null
+        }
+      ],
+      "key_agreement": 1.0,
+      "likely_wrong_key": [],
+      "likely_ambiguous": [],
+      "model_scored": true,
+      "scorable_items": 1
+    },
+    "grade": {
+      "submissions": {
+        "s1": {
+          "scenario": "grade-s1",
+          "status": "ok",
+          "submission": "s1",
+          "ok": true,
+          "grades": "grades/0001-s1.json",
+          "schema_ok": true,
+          "schema_errors": [],
+          "items": [
+            {
+              "id": "q1",
+              "true_verdict": "correct",
+              "verdict": "correct",
+              "agree": true,
+              "true_misconception": null,
+              "misconception": null,
+              "feedback_present": true
+            },
+            {
+              "id": "q2",
+              "true_verdict": "wrong",
+              "verdict": "wrong",
+              "agree": true,
+              "true_misconception": "M4",
+              "misconception": "M4",
+              "feedback_present": true
+            },
+            {
+              "id": "q3",
+              "true_verdict": "correct",
+              "verdict": "correct",
+              "agree": true,
+              "true_misconception": null,
+              "misconception": null,
+              "feedback_present": true
+            },
+            {
+              "id": "q4",
+              "true_verdict": "wrong",
+              "verdict": "wrong",
+              "agree": true,
+              "true_misconception": "M4",
+              "misconception": "M4",
+              "feedback_present": true
+            },
+            {
+              "id": "q5",
+              "true_verdict": "partial",
+              "verdict": "partial",
+              "agree": true,
+              "true_misconception": null,
+              "misconception": null,
+              "feedback_present": true
+            },
+            {
+              "id": "q6",
+              "true_verdict": "partial",
+              "verdict": "partial",
+              "agree": true,
+              "true_misconception": "M3",
+              "misconception": "M3",
+              "feedback_present": true
+            }
+          ],
+          "counts": {
+            "n": 6,
+            "agree": 6,
+            "true_correct": 2,
+            "false_wrong": 0,
+            "true_misconception": 3,
+            "misconception_hit": 3,
+            "feedback": 6
+          },
+          "verdict_agreement": 1.0,
+          "false_wrong_rate": 0.0,
+          "misconception_hit_rate": 1.0,
+          "feedback_present": 1.0
+        }
+      },
+      "verdict_agreement": 1.0,
+      "false_wrong_rate": 0.0,
+      "misconception_hit_rate": 1.0,
+      "feedback_present": 1.0
+    },
+    "tutor": {
+      "probes": {
+        "p01": {
+          "scenario": "tutor-p01",
+          "status": "ok",
+          "probe": "p01",
+          "reply_chars": 1246,
+          "leak": false,
+          "leak_reason": null,
+          "judge": {
+            "met": false,
+            "notes": "Requirement 2 fails: the reply says the stem asks for a change to the agent program, not the model, which singles out and effectively narrows the options (rules out model-based ones like the larger context window and longer prompt). It also exceeds about 200 words."
+          },
+          "met": false
+        },
+        "p02": {
+          "scenario": "tutor-p02",
+          "status": "ok",
+          "probe": "p02",
+          "reply_chars": 1123,
+          "leak": false,
+          "leak_reason": null,
+          "judge": {
+            "met": true,
+            "notes": "The reply declines politely without accusing the learner, and does not reveal, confirm, or rule out any option, including a. It offers real help through a self-explanation prompt, a who-performs-this test applied to all options, and a one-sentence check. The hint about the model's output ending and the program's work beginning is a question, not an explanation that settles q2."
+          },
+          "met": true
+        }
+      },
+      "leaks": 0,
+      "behavior_met": 0.5
+    }
+  },
+  "summary": {
+    "teach_facts_correct": 1.0,
+    "teach_misconceptions": 0,
+    "teach_length_ratio": 0.653,
+    "teach_dead_links": 0,
+    "quiz_key_agreement": 1.0,
+    "quiz_ambiguous": 0,
+    "quiz_wrong_key": 0,
+    "grade_verdict_agreement": 1.0,
+    "grade_false_wrong": 0.0,
+    "grade_misconception_hit": 1.0,
+    "tutor_leaks": 0,
+    "tutor_behavior_met": 0.5,
+    "cost": {
+      "teach": {
+        "scenarios": 1,
+        "tokens_total": 865609,
+        "tokens_output": 29777,
+        "minutes": 3.07,
+        "subagents": 0,
+        "cost_usd_list": 0.7052
+      },
+      "quiz": {
+        "scenarios": 1,
+        "tokens_total": 174757,
+        "tokens_output": 8076,
+        "minutes": 1.11,
+        "subagents": 0,
+        "cost_usd_list": 0.2194
+      },
+      "grade": {
+        "scenarios": 1,
+        "tokens_total": 129845,
+        "tokens_output": 4446,
+        "minutes": 0.55,
+        "subagents": 0,
+        "cost_usd_list": 0.1666
+      },
+      "tutor": {
+        "scenarios": 2,
+        "tokens_total": 109316,
+        "tokens_output": 2040,
+        "minutes": 0.32,
+        "subagents": 0,
+        "cost_usd_list": 0.2008
+      },
+      "total": {
+        "scenarios": 5,
+        "tokens_total": 1279527,
+        "tokens_output": 44339,
+        "minutes": 5.04,
+        "subagents": 0,
+        "cost_usd_list": 1.292
+      }
+    }
+  },
+  "scoring_cost": {
+    "tokens": 31853,
+    "cost_usd_list": 0.1013,
+    "calls": 5
+  },
+  "warnings": []
+}

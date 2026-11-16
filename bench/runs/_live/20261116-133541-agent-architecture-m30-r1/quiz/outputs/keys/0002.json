@@ -1,0 +1,61 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "Design A is a workflow and Design B is an agent; the criterion is who controls the flow: in a workflow the program's code fixes the steps and their order in advance, in an agent the model decides the steps, their order and when to stop.",
+      "accepted": [
+        "A is a workflow, B is an agent: in A the code decides the order, in B the model does.",
+        "A = workflow (predefined code path), B = agent (the model directs its own process and tool use); the difference is who owns the control flow.",
+        "A workflow, B agent; whoever decides what happens next (code vs model) is what separates them."
+      ],
+      "rationale": "Full credit needs both correct labels and the criterion: who owns the control flow (code for a workflow, the model for an agent). Both designs use the same tools and a model, so tools and model calls cannot be what separates them. Correct labels with no criterion, or with a criterion such as 'B uses more tools' or 'B is smarter', are partial. Labels swapped, or 'an agent is any system that uses tools or a model', show M7. Using the number of model calls or the presence of a loop as the criterion shows M8."
+    },
+    {
+      "id": "q2",
+      "answer": "d",
+      "rationale": "The code decides the sequence and no model output can change it; the model only produces content (a class, a machine name, a draft) inside steps the program already fixed. That is a workflow, however many model calls it makes. a: tempting because chained calls look sophisticated, but the number or chaining of calls does not decide who controls the flow (M7). b: every model call writes text, in a workflow too; choosing wording is not choosing the next step (M7). c: extracting or classifying is content work inside a fixed step, not control over the flow (M7). e: invents a call-count threshold; a workflow can make many calls and an agent can finish in two (M8). f: the right label for the wrong reason; workflows can loop (for example, retry until a check passes) and what makes a design an agent is that the model, not the code, decides the next step (M8).",
+      "distractors": {"a": "M7", "b": "M7", "c": "M7", "e": "M8", "f": "M8"}
+    },
+    {
+      "id": "q3",
+      "answer": "A fixed workflow, because the steps and their order are known in advance and never change, so there is nothing for a model to decide; coding the order is cheaper (no model calls spent choosing the next step, fewer calls per request) and more predictable and testable (the order cannot vary or be skipped).",
+      "accepted": [
+        "Workflow: the order is always the same, so code can enforce it, which is cheaper and more reliable than letting a model pick the steps.",
+        "Fixed workflow. The three steps are known and fixed, so an agent's flexibility is wasted; a workflow costs fewer model calls, which suits the small budget, and always runs the training check before booking.",
+        "Workflow, since the sequence is predetermined; it is predictable and uses fewer tokens/calls than an agent that re-decides each step."
+      ],
+      "rationale": "Full credit: choose the workflow and give two reasons that use the case: the steps and order are known and fixed (so an agent's flexibility adds nothing), and the workflow is cheaper per request and more predictable or reliable (small budget; training check cannot be skipped). One valid reason with the right choice is partial, as is the right choice with only a generic reason such as 'workflows are simpler'. Choosing an agent 'because agents are more capable' shows M9; choosing an agent because the model can be told the order in its prompt shows M10."
+    },
+    {
+      "id": "q4",
+      "answer": "The steps and their order cannot be known in advance, and a workflow needs them fixed in code beforehand; here the next step depends on what each earlier result shows, so use an agent, where the model chooses the next action and when to stop.",
+      "accepted": [
+        "A workflow needs a predefined path, but this request's path depends on what is found along the way, so use an agent that picks its own steps.",
+        "Open-ended: the number and order of searches and questions is unpredictable, so the model has to direct the flow; use an agent (with a step limit).",
+        "Use an agent: the model must decide dynamically what to search or ask next, which hard-coded steps cannot do."
+      ],
+      "rationale": "Full credit: names the reason (the needed steps and their order are unknown in advance and depend on intermediate results, so they cannot be written into code) and names the replacement (an agent, where the model controls the flow). Mentioning a step limit or the extra cost is a good addition, not required. Saying only 'use an agent' is partial. Saying the workflow is poor because it is 'less intelligent' or 'cannot call tools' is wrong: workflows can call tools and use models (M7). Saying it would work if more steps were added in code shows the learner has not seen that the path itself is unknown."
+    },
+    {
+      "id": "q5",
+      "answer": "The model owns the control flow for steps whose order must always be the same, and a prompt instruction does not guarantee it, so the order sometimes breaks and the call count varies; fix it by moving the order into code (a fixed workflow: check training, then calendar, then create booking, as program steps), using the model only for language tasks such as reading the request and writing the reply.",
+      "accepted": [
+        "The model decides the order, so a prompt rule is only a suggestion; hard-code the sequence in the program (workflow) so booking can never happen before the training check.",
+        "Control flow is left to the model; make it a workflow where the code enforces training check before booking and the model just handles the text.",
+        "Using an agent for a fixed sequence; replace it with code that runs the steps in order, which also makes the number of calls constant."
+      ],
+      "rationale": "Full credit needs the cause (the model, not the code, controls the order, and a prompt instruction does not enforce it) and the fix (put the required order in the program as a workflow, keeping the model for content). Naming only the fix, or only 'the model sometimes ignores instructions', is partial. Suggesting a stronger or longer prompt, a bigger model or more examples shows M10, the belief that telling the model the order makes it certain. Suggesting a step limit treats a wrong order as a runaway loop and does not remove the problem. Saying 'add another agent to check the first' keeps the same flaw."
+    },
+    {
+      "id": "q6",
+      "answer": "The workflow's code only contains the one path it was written for, with no branch for 'if taken, try another machine' or a time condition, so it cannot do what was not programmed; handle it by adding the branch to the code (a second fixed path that tries the other machine), or by routing only such unusual requests to an agent while normal bookings stay on the fixed path.",
+      "accepted": [
+        "The steps are hard-coded and have no fallback or condition, so nothing can choose another machine; add an explicit fallback branch in code, or send requests like this to an agent and keep standard bookings in the workflow.",
+        "A workflow can only follow its predefined path, so it cannot adapt to an alternative; add a conditional step for the alternative machine, or hand the odd request to an agent.",
+        "It has no logic for alternatives because the path is fixed in advance; extend the code with an if/else, or use an agent as a fallback only for requests the workflow can't handle."
+      ],
+      "rationale": "Full credit: explains the limit (a workflow can only do the paths written into its code, so a request that needs a different path, such as choosing between machines or conditions, is outside it) and gives one workable way to stay mostly fixed (add an explicit branch or fallback in code, or route only unusual requests to an agent). A correct limit with no way forward is partial. Answering 'make the whole booking an agent' ignores the stem's constraint and shows M9. Answering that the model in the workflow will work it out shows M7: in a workflow the model fills in content but does not choose the path."
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cheat sheet: context and memory in an agent</title>
+  <style>
+    body { max-width: 42rem; margin: 0 auto; padding: 2rem 1rem; font-family: Georgia, serif; line-height: 1.5; background: #fffdf8; color: #1f1d1a; }
+    @media (prefers-color-scheme: dark) { body { background: #171614; color: #e9e5dc; } }
+    h1 { font-size: 1.6rem; } h2 { font-size: 1.1rem; margin-top: 1.5rem; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+    th, td { text-align: left; padding: 0.35rem 0.5rem; border-bottom: 1px solid #999; vertical-align: top; }
+  </style>
+</head>
+<body>
+  <h1>Context and memory in an agent</h1>
+  <p>From <a href="../lessons/0001-context-and-memory-in-an-agent.html">Lesson 1</a>.</p>
+  <h2>Three kinds of memory</h2>
+  <table>
+    <thead><tr><th>Kind</th><th>Lives in</th><th>Lasts</th><th>Makerspace use</th></tr></thead>
+    <tbody>
+      <tr><td>Context (message list)</td><td>The request</td><td>One run</td><td>Question, tool results so far</td></tr>
+      <tr><td>Notes</td><td>Storage you control</td><td>Across sessions</td><td>Training status, unfinished bookings</td></tr>
+      <tr><td>Retrieval source</td><td>Documents and search</td><td>Until updated</td><td>Machine manuals</td></tr>
+    </tbody>
+  </table>
+  <h2>Rules</h2>
+  <ul>
+    <li>Context counts: system prompt, tool definitions, all messages and tool results, and the response.</li>
+    <li>History is re-sent on every call: total input = sum of each call's context.</li>
+    <li>Fuller context recalls worse (context rot): keep the smallest set of useful tokens.</li>
+    <li>Shrink with tool result clearing (light) or compaction (summary).</li>
+    <li>Nothing persists between sessions unless your program saves and reads it.</li>
+    <li>Save small, durable facts; read changing facts live; retrieve documents, do not load them whole.</li>
+    <li>Retrieval: up front, just in time (search then read), or hybrid (small index plus tools).</li>
+  </ul>
+</body>
+</html>
