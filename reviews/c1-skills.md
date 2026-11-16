@@ -13,7 +13,7 @@ Keep every heading as it is, because `p3 check` reads them, and add a round by c
 
 ### Round 1
 
-**Run:** bench/runs/_live/20261111-010848-agent-architecture-m30-r1
+**Run:** work/p3-tutor/bench/runs/_live/20261111-010848-agent-architecture-m30-r1
 
 **My thoughts:**
 
@@ -69,11 +69,29 @@ Thoughts about the grade skill:
 
 ### Round 3
 
-**Run:** TODO
+**Run:** work/p3-tutor/bench/runs/_live/20261116-133541-agent-architecture-m30-r1
 
 **My thoughts:**
 
-TODO
+I thought that the grader skill did great. It clearly explained each answer option and directly said whether it was right or wrong. I feel like the grader does not always fully explain why the hypothetical assumptions are wrong. The sections about the hypothetical assumptions should be just as structured as the rest of the response, clearly stating the right, wrong, and why.
+
+I do not want to worry about that yet though.
+
+Write a tutor skill.
+
+Thoughts about the tutor skill:
+
+- Things should be explained with headers and bullet points.
+- When evaluating a plan, code, or similar, things that I did well, things that need work, and why should all be clearly stated. Point to the next reachable step.
+- If evaluating a claim or my understanding, the right, wrong, and why should be clearly stated.
+- Analogies of everyday actions or situations should be used when explaining things and be simple.
+- The questions you ask should not hint at the right answer in a multiple choice question.
+- Ask for the student's reasoning.
+- Have the student identify where the problem actually lives.
+- Do not give quiz answers before grading. Ever.
+- Identify where the student's misconception is and lead them back to the lesson. Tell them what is wrong but not then what the correction is. The student should figure that out on their own.
+- Tie answers back to the project.
+- Decline out of scope requests.
 
 **What changed:**
 
