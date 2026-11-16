@@ -101,11 +101,29 @@ Thoughts about the tutor skill:
 
 ### Round 4
 
-**Run:** TODO
+**Run:** work/p3-tutor/bench/runs/_live/20261116-160858-agent-architecture-m30-r1
 
 **My thoughts:**
 
-TODO
+I feel like the tutor did not hint at the correct answer. I am not sure if the response is helpful for the student though. Focusing even more on getting the student to explain their resoning I think might be the best thing. Even before asking any questions. Then the tutor can lead the student to correct misconceptions and figure out the right answer on their own.
+
+Write a teach skill.
+
+Thoughts about the teach skill:
+
+- The lesson may have several sections.
+- There should be a short quiz at the beginning of the lesson so a student can find what they already know and skim those parts.
+- There should be a bulleted list of the main points the student must understand at the end of the lesson.
+- The length should be a minimum of a hundred words per minute and a maximum of a hundred and fifty words per minute.
+- There should be several visualizations throughout the lesson. At least one per section is preferred.
+- There should be a section title at the beginning of each section.
+- There should be a bulleted list of learning goals after the section title.
+- Each section should have a list of bullet points of prior knowledge that the student must have in order to understand the topic after the learning goals.
+- Each section should state the general idea after the prior knowledge.
+- The section should have a list important steps using bullet points if applicable after the general idea.
+- The section should have a concrete real world applicable worked example and a diagram of the example if applicable after the important steps.
+- There should be at least one "Common Mix-Ups" box in each section after the example. It should explain common errors that students make and what is right, wrong, and why. It should also explain common misconceptions that students have and what is right, wrong, and why.
+- There should be at least one "Check Yourself" box at the end of each section after the common mix-ups. The answer should be hidden until the student answers the question. The questions should be multiple choice and should have 4-6 answer options.
 
 **What changed:**
 
