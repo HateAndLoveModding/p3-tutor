@@ -1,0 +1,53 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "The context is discarded when the session ends and a prompt instruction creates no storage; the program must save the status to storage it owns and load or look it up in the new session.",
+      "accepted": [
+        "The model keeps nothing between sessions, so the program must save the record and load it next session",
+        "Nothing persists unless the program writes it to a database or notes file and reads it back in the next session"
+      ],
+      "rationale": "Persistence is the program's job: write to storage outside the context window, read it back at the next session. A prompt instruction is only text and stores nothing. A response that says the model should be told to remember, or that the model will keep it, shows M1."
+    },
+    {
+      "id": "q2",
+      "answer": 7050,
+      "tolerance": 0.5,
+      "rationale": "Three model calls (two tool requests, then the final answer). Call 1 sends 2,000 + 50 = 2,050. Call 2 adds 300: 2,350. Call 3 adds another 300: 2,650. Total 2,050 + 2,350 + 2,650 = 7,050. An answer of 2,650 counts only the last call and misses that the context is re-sent each call (M1); 4,700 or 7,350 are counting slips."
+    },
+    {
+      "id": "q3",
+      "answer": "d",
+      "rationale": "A larger window raises only the limit. Every call still sends, and is billed for, every token, and recall weakens as context grows (context rot), so retrieval stays cheaper and more reliable. Option a and e are M2, that fitting in the window means being used well.",
+      "distractors": {"a": "M2", "e": "M2", "b": "M1", "c": "M2", "f": "M1"}
+    },
+    {
+      "id": "q4",
+      "answer": "The program runs the search against an index it built and returns the matching passages; the model only writes the search request and then reads the returned passages.",
+      "accepted": [
+        "The model just writes the query; the program searches an index and puts the best chunks into context",
+        "The program does the searching and returns a few chunks; the model only asks for the search and reads the results"
+      ],
+      "rationale": "Retrieval is a tool like any other: the model outputs a request with a query, and the program splits, indexes, searches and returns a few chunks. A response that says the model reads or scans the manuals itself shows M3."
+    },
+    {
+      "id": "q5",
+      "answer": "Training status goes in a record the program owns, looked up by a tool, because it must be exact; the morning preference goes in a model-written note file, because it is soft and flexible.",
+      "accepted": [
+        "Training in a database or official record read by a tool; preference in a notes memory file",
+        "Exact fact others rely on in a program-owned record; soft preference in model notes"
+      ],
+      "rationale": "An exact, safety-relevant fact should not depend on a model's note, so keep it in a checked record and look it up with a tool. A soft detail suits a notes file the model writes and reads. Putting the training status only in a model-written note, or both in the prompt, misses the split."
+    },
+    {
+      "id": "q6",
+      "answer": "Clear old tool results that have already been used, and compact by summarizing the conversation into a new window; a summary can drop detail the task still needs.",
+      "accepted": [
+        "Delete stale tool results and summarize the conversation; the risk is losing detail in the summary",
+        "Clearing old results and compaction; clearing may remove something needed later"
+      ],
+      "rationale": "The two techniques in the lesson are clearing old tool results and compaction (summarizing and restarting with the summary). The risk: detail dropped by a summary, or a cleared result needed later, is gone from the context. Answering that a bigger window is the fix shows M2."
+    }
+  ]
+}

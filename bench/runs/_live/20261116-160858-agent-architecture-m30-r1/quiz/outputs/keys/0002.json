@@ -1,0 +1,61 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "X is a workflow: your code decides what happens next (the order is fixed). Y is an agent: the model decides what happens next at each step.",
+      "accepted": [
+        "X workflow, code controls the steps; Y agent, model controls the steps",
+        "X = workflow (code decides), Y = agent (model decides)",
+        "Design X is a workflow because the program fixes the path in advance; design Y is an agent because the model chooses its own next action and when to stop"
+      ],
+      "rationale": "What separates the two is who owns the control flow, the choice of the next step: in a workflow, predefined code paths do; in an agent, the model does, step by step. In X the code always searches, then calls the model once, so the path is fixed even though a model is involved. In Y the model picks the next tool or ends the run. Partial: both labels right with no statement of who decides, or the right owner for only one design. Wrong: swapping the labels, or saying X is an agent because it uses a model or a tool (M8)."
+    },
+    {
+      "id": "q2",
+      "answer": "c",
+      "rationale": "The code fixes the order of the steps (extract, check the calendar, book or reject, confirm), so the code owns the control flow and the model only produces content inside steps 1 and 4. That is a workflow. (a) is tempting because the model does choose the tool arguments, but choosing the values to pass is not choosing which step comes next (M7). (b) holds that using tools or making several model calls makes an agent; a workflow can do both (M8). (d) treats memory between sessions as the dividing line, but memory is independent of who controls the flow (M3). (e) confuses agents with multi-agent systems; one model in a loop is already an agent (M9). (f) makes the difference a matter of size, but a long fixed pipeline is still a workflow and a two-step loop of model-chosen actions is an agent (M10).",
+      "distractors": {"a": "M7", "b": "M8", "d": "M3", "e": "M9", "f": "M10"}
+    },
+    {
+      "id": "q3",
+      "answer": "A task whose steps are known in advance and the same every time (for example, cancelling a booking: look it up, cancel it, free the slot, notify the student). Code can run it with fewer model calls, so it is cheaper and faster, and it is more predictable, because the steps cannot be skipped, reordered or looped.",
+      "accepted": [
+        "When the steps are known and fixed, a workflow is cheaper, faster and more reliable than an agent, because no model call is spent deciding what to do next and the model cannot skip a step",
+        "Routine, repeatable tasks with a known sequence: workflow costs less (fewer model calls) and behaves predictably, which matters when every step must happen",
+        "Any predictable task; the workflow is cheaper and more consistent and easier to test"
+      ],
+      "rationale": "Full credit needs a task type (steps known ahead of time, same each run) and two reasons from: lower cost or latency (no extra model calls to choose steps), higher reliability or predictability (steps always run, in order), easier testing and debugging. Partial: a fitting task with only one reason, or reasons with no task. Wrong: choosing a task where the number or order of steps varies; saying a workflow is better because it is smarter or more flexible; or agreeing that agents are always better, which ignores that an agent's flexibility costs extra model calls and its freedom to skip or repeat steps (M11)."
+    },
+    {
+      "id": "q4",
+      "answer": "No. The number and order of steps depend on the question and on what each lookup returns (one lookup for the first question; several lookups, a comparison and a training check for the second), so they cannot be written in advance; the model has to choose the next step, which is an agent.",
+      "accepted": [
+        "No, the first needs one search and the second needs several different tools in an order that depends on the results, so the model must decide the path: that needs an agent",
+        "No: the steps differ per question and cannot be known before the question arrives, so a fixed sequence would either fail the hard question or waste calls on the easy one",
+        "No, because the path is not predictable in advance; an agent that chooses its own steps fits better"
+      ],
+      "rationale": "Full credit: no, plus the reason that the steps vary with the request or with intermediate results, so the path cannot be fixed in code and the model must choose it. Partial: no with no reason, or a reason that only says the second question is harder. Wrong: yes. A yes answer shows the belief that one long fixed sequence of every possible tool would cover all questions; running every step every time would waste model calls on the simple question, and still could not handle results that need a follow-up search."
+    },
+    {
+      "id": "q5",
+      "answer": "Make sending the email a fixed step in code that always runs after create_booking succeeds (a workflow step), so it no longer depends on the model's choice. A prompt instruction only makes the model more likely to send it; the model still owns the control flow and can skip it.",
+      "accepted": [
+        "Have the program send the email itself right after a successful booking, in code; a prompt is only a suggestion and the model can still ignore it",
+        "Hard-code the email as the step after create_booking, so it always happens; instructions in the prompt do not guarantee behaviour because the model decides what to do next",
+        "Turn that part into a workflow: code calls send_confirmation_email after the booking. The prompt only raises the odds, it does not guarantee it"
+      ],
+      "rationale": "Full credit has both parts: move the step into code that always runs (a fixed workflow step, possibly leaving the rest as an agent), and the reason that a prompt only influences a model that still decides the next step, so it gives no guarantee. Partial: the code fix with no reason, or only the reason. Wrong: a bigger context window or a bigger model (does not change who decides), a step limit (a limit ends loops, it does not force a step), or an instruction written more forcefully, which shows M12, the belief that a clear instruction makes an agent follow it every time."
+    },
+    {
+      "id": "q6",
+      "answer": "Move the booking requests to a fixed workflow and keep the manual questions as an agent. Average = 0.7 x 2 + 0.3 x 6 = 3.2 model calls per request.",
+      "accepted": [
+        "Bookings as workflow, manual questions as agent; 3.2 calls on average",
+        "Workflow for the booking requests (same steps every time), agent for the manual questions (steps vary): 1.4 + 1.8 = 3.2 model calls per request",
+        "Run bookings in code and leave manual Q&A to the agent, about 3.2 calls"
+      ],
+      "rationale": "The booking requests have the same steps every time, so code can run them for 2 calls instead of 6 with no loss of flexibility; the manual questions vary in their steps, so they keep the agent. Average: 0.7 x 2 + 0.3 x 6 = 1.4 + 1.8 = 3.2. Partial: the right split with a wrong or missing average, or 3.2 with no stated split. Wrong: moving the manual questions to a workflow (their steps vary, so a fixed path would fail some of them), moving everything to a workflow (the manual questions cannot be run as one fixed path), or keeping everything as an agent (6 calls, no saving), which shows M11, treating the agent as the default for every request."
+    }
+  ]
+}

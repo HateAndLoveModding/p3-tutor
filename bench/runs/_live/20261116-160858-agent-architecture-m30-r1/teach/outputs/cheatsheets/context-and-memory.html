@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cheat sheet: context and memory</title>
+  <style>
+    body { max-width: 42rem; margin: 0 auto; padding: 2rem 1.25rem; font-family: Charter, Georgia, serif; line-height: 1.5; background: #fffdf8; color: #1f1d1a; }
+    h1 { font-size: 1.6rem; } h2 { font-size: 1.1rem; margin-top: 1.6rem; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+    th, td { text-align: left; vertical-align: top; padding: 0.4rem 0.5rem; border-bottom: 1px solid #e4dfd4; }
+    code { background: #f3efe6; padding: 0.1em 0.3em; border-radius: 4px; }
+    @media (prefers-color-scheme: dark) { body { background: #171614; color: #e9e5dc; } th, td { border-color: #36332e; } code { background: #23211e; } }
+  </style>
+</head>
+<body>
+  <h1>Context and memory in an agent</h1>
+  <p>From <a href="../lessons/0001-context-and-memory.html">lesson 1</a>.</p>
+  <h2>Terms</h2>
+  <table>
+    <tr><th>Term</th><th>Meaning</th></tr>
+    <tr><td>Context</td><td>The tokens the model sees at one call: rules, tool descriptions, conversation so far.</td></tr>
+    <tr><td>Context window</td><td>The most tokens a model can take in per call.</td></tr>
+    <tr><td>Context rot</td><td>Recall gets worse as the context grows.</td></tr>
+    <tr><td>Session</td><td>One run of the assistant; its context is discarded at the end.</td></tr>
+    <tr><td>Memory</td><td>Notes in storage outside the window, written and read through tools.</td></tr>
+    <tr><td>Retrieval</td><td>Fetching a few relevant chunks of a large source into context.</td></tr>
+    <tr><td>Compaction</td><td>Summarizing a long conversation and starting a new window with the summary.</td></tr>
+  </table>
+  <h2>Rules to remember</h2>
+  <ul>
+    <li>The model keeps nothing between calls; the program re-sends the context every step.</li>
+    <li>Input cost of a request = the sum of the context size at each call.</li>
+    <li>Clear used tool results; compact only in long tasks.</li>
+    <li>Nothing survives a session unless the program saves it and loads it back.</li>
+    <li>Exact facts: program-owned record plus a lookup tool. Soft details: model-written notes.</li>
+    <li>Retrieve the fewest chunks that reliably hold the answer, with page numbers.</li>
+  </ul>
+</body>
+</html>

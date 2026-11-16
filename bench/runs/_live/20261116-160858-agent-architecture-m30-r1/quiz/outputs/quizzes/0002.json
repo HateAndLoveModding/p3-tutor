@@ -1,0 +1,51 @@
+{
+  "id": "0002",
+  "objective": "O4",
+  "title": "Workflows and agents: who owns the control flow",
+  "items": [
+    {
+      "id": "q1",
+      "type": "short",
+      "objective": "O4",
+      "stem": "Two designs for the makerspace assistant's manual lookup. Design X: your Python code always runs search_manuals first, then makes one model call that writes an answer from the results. Design Y: the model is given search_manuals, list_machines and ask_student as tools and, at each step, picks which one to use next or decides it is done. For each design, say whether it is a workflow or an agent, and who decides what happens next (your code or the model)."
+    },
+    {
+      "id": "q2",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "A teammate says the booking feature is an agent. Its code runs these steps, always in this order: (1) a model call extracts the machine, date and time from the student's message; (2) the code calls check_calendar with those values; (3) if the slot is free the code calls create_booking, otherwise the code replies that it is taken; (4) a model call writes the confirmation text. Which statement is correct?",
+      "options": [
+        {"id": "a", "text": "It is an agent, because the model chooses the arguments that the tools are called with"},
+        {"id": "b", "text": "It is an agent, because it calls tools and makes more than one model call per request"},
+        {"id": "c", "text": "It is a workflow, because the code fixes the order of the steps and the model only fills in the content of two of them"},
+        {"id": "d", "text": "It is a workflow, but only because it does not remember students between sessions"},
+        {"id": "e", "text": "It is neither, because an agent needs several separate models working together on one request"},
+        {"id": "f", "text": "It is a workflow, but only because it takes fewer than ten steps; a longer pipeline would be an agent"}
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "short",
+      "objective": "O4",
+      "stem": "At a design review, a teammate argues: \"An agent can handle anything, so it is always the better choice than a fixed workflow.\" Describe one kind of task where a fixed workflow is the better choice, and give two reasons why."
+    },
+    {
+      "id": "q4",
+      "type": "short",
+      "objective": "O4",
+      "stem": "Students ask the assistant manual questions. One asks, \"What feed speed for 3 mm acrylic on the laser cutter?\" Another asks, \"I need a 20 cm part in the next week: compare the 3D printer and the laser cutter, and tell me whether my training covers either.\" Could you write one fixed sequence of steps in code that handles both well? Answer yes or no, and give the reason."
+    },
+    {
+      "id": "q5",
+      "type": "short",
+      "objective": "O4",
+      "stem": "Your team built the assistant as one agent loop with the tools check_calendar, create_booking and send_confirmation_email. In testing, about 1 booking in 10 is created but no email goes out, because the model sometimes writes its final answer right after create_booking. Every successful booking must send the email. Name the design change that fixes this reliably, and say why simply adding \"always send the email\" to the prompt is the weaker fix."
+    },
+    {
+      "id": "q6",
+      "type": "short",
+      "objective": "O4",
+      "stem": "The sponsor's budget is tight, and each model call costs the same. Right now every request runs as an agent and averages 6 model calls. Traffic is 70% booking requests, which always need the same four steps in the same order (2 model calls if run in code), and 30% manual questions, whose steps differ each time. You may change only how the requests are run. Say which requests you would move to a fixed workflow and which you would leave as an agent, and give the new average number of model calls per request."
+    }
+  ]
+}

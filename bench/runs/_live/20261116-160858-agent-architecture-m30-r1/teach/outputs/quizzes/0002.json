@@ -1,0 +1,52 @@
+{
+  "id": "0002",
+  "objective": "O3",
+  "title": "Context and memory in an agent",
+  "items": [
+    {
+      "id": "q1",
+      "type": "short",
+      "objective": "O3",
+      "stem": "Last week your makerspace assistant helped a student, Sam, finish a 3D-printer safety check, and Sam was told it was recorded. This week Sam opens a new session and the assistant asks whether Sam has done the safety check. A teammate proposes fixing it by adding \"Remember every student\" to the system prompt. In one or two sentences, why would that not fix this, and what must your program do instead?"
+    },
+    {
+      "id": "q2",
+      "type": "numeric",
+      "objective": "O3",
+      "stem": "In a request, the system prompt and tool descriptions take 2,000 tokens and the student's question takes 50 tokens. The model requests two tools, one after the other, and then writes its final answer; each tool request plus its result adds 300 tokens to the context. The program re-sends the whole context at every model call and nothing is ever removed. How many input tokens are sent across all the model calls of this request?",
+      "unit": "tokens"
+    },
+    {
+      "id": "q3",
+      "type": "mcq",
+      "objective": "O3",
+      "stem": "Your sponsor suggests: \"Buy a model whose context window is big enough to hold all 25 machine manuals, so you won't need retrieval.\" Which response is the most accurate?",
+      "options": [
+        {"id": "a", "text": "Correct: if it all fits in the window, the model reads every part equally well"},
+        {"id": "b", "text": "Wrong: a model cannot accept manuals as prompt text, only as saved notes"},
+        {"id": "c", "text": "Wrong: a bigger window makes calls slower, though never more expensive"},
+        {"id": "d", "text": "Wrong: every call would still pay for all those tokens, and recall weakens"},
+        {"id": "e", "text": "Correct: but only after the manuals are copied into a memory notes folder"},
+        {"id": "f", "text": "Wrong: the model forgets the manuals after the first call inside the window"}
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "short",
+      "objective": "O3",
+      "stem": "A teammate says: \"search_manuals means the model reads through the manuals to find the page.\" In one or two sentences, correct this: what does the program do, and what does the model contribute?"
+    },
+    {
+      "id": "q5",
+      "type": "short",
+      "objective": "O3",
+      "stem": "Your assistant needs to keep two facts about a student between visits: (1) the student has passed laser-cutter training, and (2) the student likes to book morning slots. In one or two sentences, say where you would keep each and why they belong in different places."
+    },
+    {
+      "id": "q6",
+      "type": "short",
+      "objective": "O3",
+      "stem": "A long-running booking agent is at 90% of its context window limit, mostly from old calendar results it has already used. Name two things your program can do to shrink the context, and give one risk of one of them."
+    }
+  ]
+}

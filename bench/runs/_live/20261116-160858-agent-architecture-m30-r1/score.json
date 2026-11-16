@@ -1,0 +1,396 @@
+{
+  "run_id": "20261116-160858-agent-architecture-m30-r1",
+  "scored_at": "2026-11-16T16:15:08Z",
+  "judge_model": "claude-sonnet-5-5",
+  "solver_models": [
+    "claude-sonnet-5-5",
+    "claude-haiku-5-5"
+  ],
+  "offline": false,
+  "no_model": false,
+  "jobs": {
+    "teach": {
+      "scenario": "teach",
+      "status": "ok",
+      "objective": "O3",
+      "requested_minutes": 30.0,
+      "warnings": [],
+      "ok": true,
+      "error": null,
+      "lesson": "lessons/0001-context-and-memory.html",
+      "name_ok": true,
+      "self_contained": true,
+      "remote_scripts": [],
+      "remote_stylesheets": [],
+      "remote_images": [],
+      "declared_minutes": 30.0,
+      "declared_objective": "O3",
+      "minutes_declared_ok": true,
+      "objective_declared_ok": true,
+      "words": 3384,
+      "est_minutes": 22.56,
+      "length_ratio": 0.752,
+      "length_ok": true,
+      "links": [
+        {
+          "url": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+          "status": "ok",
+          "code": 200
+        },
+        {
+          "url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool.md",
+          "status": "ok",
+          "code": 200
+        },
+        {
+          "url": "https://Huggingface.co/papers/2307.03172",
+          "status": "ok",
+          "code": 200
+        }
+      ],
+      "dead_links": 0,
+      "judge": {
+        "facts": [
+          {
+            "id": "F3.1",
+            "present": true,
+            "correct": true
+          },
+          {
+            "id": "F3.2",
+            "present": true,
+            "correct": true
+          },
+          {
+            "id": "F3.3",
+            "present": true,
+            "correct": true
+          },
+          {
+            "id": "F3.4",
+            "present": true,
+            "correct": true
+          },
+          {
+            "id": "F3.5",
+            "present": true,
+            "correct": true
+          },
+          {
+            "id": "F3.6",
+            "present": true,
+            "correct": true
+          }
+        ],
+        "misconceptions_asserted": [],
+        "level_fit": 5,
+        "notes": "All facts are stated and accurate. F3.1 is covered by the definition plus the list of what is in the context, including the text the model is about to write. F3.4 is covered by the bigger-window mix-up and the lost-in-the-middle and context-rot points. The lesson fits the learner well: it builds on the agent loop and Python lists, defines token and context window where they first appear, and ties every idea to the makerspace project."
+      },
+      "model_scored": true,
+      "facts_present": 1.0,
+      "facts_correct": 1.0
+    },
+    "quiz": {
+      "scenario": "quiz",
+      "status": "ok",
+      "objective": "O4",
+      "warnings": [],
+      "ok": true,
+      "error": null,
+      "quiz": "quizzes/0002.json",
+      "key": "keys/0002.json",
+      "schema_ok": true,
+      "schema_errors": [],
+      "n_items": 6,
+      "objectives_ok": true,
+      "on_objective": 1.0,
+      "solvers": {
+        "claude-sonnet-5-5": {
+          "error": null,
+          "answered": 6
+        },
+        "claude-haiku-5-5": {
+          "error": null,
+          "answered": 6
+        }
+      },
+      "items": [
+        {
+          "id": "q1",
+          "type": "short",
+          "objective": "O4",
+          "key": "X is a workflow: your code decides what happens next (the order is fixed). Y is an agent: the model decides what happens next at each step.",
+          "answers": {
+            "claude-sonnet-5-5": "Design X is a workflow where your code decides what happens next; Design Y is an agent where the model decides what happens next",
+            "claude-haiku-5-5": "Design X is a workflow, with your code deciding the next step; Design Y is an agent, with the model deciding the next step"
+          },
+          "match": {
+            "claude-sonnet-5-5": null,
+            "claude-haiku-5-5": null
+          },
+          "solvers_agree": null
+        },
+        {
+          "id": "q2",
+          "type": "mcq",
+          "objective": "O4",
+          "key": "c",
+          "answers": {
+            "claude-sonnet-5-5": "c",
+            "claude-haiku-5-5": "c"
+          },
+          "match": {
+            "claude-sonnet-5-5": true,
+            "claude-haiku-5-5": true
+          },
+          "solvers_agree": true
+        },
+        {
+          "id": "q3",
+          "type": "short",
+          "objective": "O4",
+          "key": "A task whose steps are known in advance and the same every time (for example, cancelling a booking: look it up, cancel it, free the slot, notify the student). Code can run it with fewer model calls, so it is cheaper and faster, and it is more predictable, because the steps cannot be skipped, reordered or looped.",
+          "answers": {
+            "claude-sonnet-5-5": "A repeatable task with fixed steps, like processing a booking: a workflow is more predictable and reliable, and cheaper and faster with fewer model calls",
+            "claude-haiku-5-5": "A fixed workflow is better for a task with known, repeated steps, such as the booking flow, because it is predictable and cheaper; reasons: it is easier to test and audit, and it uses fewer model calls and less latency"
+          },
+          "match": {
+            "claude-sonnet-5-5": null,
+            "claude-haiku-5-5": null
+          },
+          "solvers_agree": null
+        },
+        {
+          "id": "q4",
+          "type": "short",
+          "objective": "O4",
+          "key": "No. The number and order of steps depend on the question and on what each lookup returns (one lookup for the first question; several lookups, a comparison and a training check for the second), so they cannot be written in advance; the model has to choose the next step, which is an agent.",
+          "answers": {
+            "claude-sonnet-5-5": "No, the first needs one fixed lookup but the second needs a variable, open-ended set of steps (comparing machines, checking training) that cannot be known in advance, so the model must decide the path",
+            "claude-haiku-5-5": "no, because the two requests need different steps: the first is one lookup, while the second needs comparing machines and checking training, so the steps depend on the question"
+          },
+          "match": {
+            "claude-sonnet-5-5": null,
+            "claude-haiku-5-5": null
+          },
+          "solvers_agree": null
+        },
+        {
+          "id": "q5",
+          "type": "short",
+          "objective": "O4",
+          "key": "Make sending the email a fixed step in code that always runs after create_booking succeeds (a workflow step), so it no longer depends on the model's choice. A prompt instruction only makes the model more likely to send it; the model still owns the control flow and can skip it.",
+          "answers": {
+            "claude-sonnet-5-5": "Make sending the email a fixed code step that runs after create_booking succeeds (a workflow step), because code guarantees it every time while a prompt instruction is only probabilistic and the model can still skip it",
+            "claude-haiku-5-5": "Move the email step into code: after create_booking succeeds, the code calls send_confirmation_email itself rather than leaving it to the model; a prompt is only a suggestion the model can skip, while code always runs"
+          },
+          "match": {
+            "claude-sonnet-5-5": null,
+            "claude-haiku-5-5": null
+          },
+          "solvers_agree": null
+        },
+        {
+          "id": "q6",
+          "type": "short",
+          "objective": "O4",
+          "key": "Move the booking requests to a fixed workflow and keep the manual questions as an agent. Average = 0.7 x 2 + 0.3 x 6 = 3.2 model calls per request.",
+          "answers": {
+            "claude-sonnet-5-5": "Move the booking requests to a fixed workflow and leave manual questions as an agent; the new average is 0.7*2 + 0.3*6 = 3.2 model calls per request",
+            "claude-haiku-5-5": "Move the 70% booking requests to a fixed workflow and keep the 30% manual questions as agents; the new average is 0.7 × 2 + 0.3 × 6 = 3.2 model calls per request"
+          },
+          "match": {
+            "claude-sonnet-5-5": null,
+            "claude-haiku-5-5": null
+          },
+          "solvers_agree": null
+        }
+      ],
+      "key_agreement": 1.0,
+      "likely_wrong_key": [],
+      "likely_ambiguous": [],
+      "model_scored": true,
+      "scorable_items": 1
+    },
+    "grade": {
+      "submissions": {
+        "s1": {
+          "scenario": "grade-s1",
+          "status": "ok",
+          "submission": "s1",
+          "ok": true,
+          "grades": "grades/0001-s1.json",
+          "schema_ok": true,
+          "schema_errors": [],
+          "items": [
+            {
+              "id": "q1",
+              "true_verdict": "correct",
+              "verdict": "correct",
+              "agree": true,
+              "true_misconception": null,
+              "misconception": null,
+              "feedback_present": true
+            },
+            {
+              "id": "q2",
+              "true_verdict": "wrong",
+              "verdict": "wrong",
+              "agree": true,
+              "true_misconception": "M4",
+              "misconception": "M4",
+              "feedback_present": true
+            },
+            {
+              "id": "q3",
+              "true_verdict": "correct",
+              "verdict": "correct",
+              "agree": true,
+              "true_misconception": null,
+              "misconception": null,
+              "feedback_present": true
+            },
+            {
+              "id": "q4",
+              "true_verdict": "wrong",
+              "verdict": "wrong",
+              "agree": true,
+              "true_misconception": "M4",
+              "misconception": "M4",
+              "feedback_present": true
+            },
+            {
+              "id": "q5",
+              "true_verdict": "partial",
+              "verdict": "partial",
+              "agree": true,
+              "true_misconception": null,
+              "misconception": null,
+              "feedback_present": true
+            },
+            {
+              "id": "q6",
+              "true_verdict": "partial",
+              "verdict": "partial",
+              "agree": true,
+              "true_misconception": "M3",
+              "misconception": "M3",
+              "feedback_present": true
+            }
+          ],
+          "counts": {
+            "n": 6,
+            "agree": 6,
+            "true_correct": 2,
+            "false_wrong": 0,
+            "true_misconception": 3,
+            "misconception_hit": 3,
+            "feedback": 6
+          },
+          "verdict_agreement": 1.0,
+          "false_wrong_rate": 0.0,
+          "misconception_hit_rate": 1.0,
+          "feedback_present": 1.0
+        }
+      },
+      "verdict_agreement": 1.0,
+      "false_wrong_rate": 0.0,
+      "misconception_hit_rate": 1.0,
+      "feedback_present": 1.0
+    },
+    "tutor": {
+      "probes": {
+        "p01": {
+          "scenario": "tutor-p01",
+          "status": "ok",
+          "probe": "p01",
+          "reply_chars": 1377,
+          "leak": false,
+          "leak_reason": null,
+          "judge": {
+            "met": true,
+            "notes": "The reply withholds the letter and option text, does not confirm, rule out, or reference any option by letter, gives a generic test applicable to all options, invites the learner to pick and justify, stays friendly, and is about 200 words."
+          },
+          "met": true
+        },
+        "p02": {
+          "scenario": "tutor-p02",
+          "status": "ok",
+          "probe": "p02",
+          "reply_chars": 1092,
+          "leak": false,
+          "leak_reason": null,
+          "judge": {
+            "met": true,
+            "notes": "The reply does not reveal or confirm the answer, does not say whether a is right or wrong, and does not explain the mechanism. It declines politely, suggests checking with the TA, and offers real help by asking the learner to explain their reasoning and test each option against the agent loop."
+          },
+          "met": true
+        }
+      },
+      "leaks": 0,
+      "behavior_met": 1.0
+    }
+  },
+  "summary": {
+    "teach_facts_correct": 1.0,
+    "teach_misconceptions": 0,
+    "teach_length_ratio": 0.752,
+    "teach_dead_links": 0,
+    "quiz_key_agreement": 1.0,
+    "quiz_ambiguous": 0,
+    "quiz_wrong_key": 0,
+    "grade_verdict_agreement": 1.0,
+    "grade_false_wrong": 0.0,
+    "grade_misconception_hit": 1.0,
+    "tutor_leaks": 0,
+    "tutor_behavior_met": 1.0,
+    "cost": {
+      "teach": {
+        "scenarios": 1,
+        "tokens_total": 739854,
+        "tokens_output": 35790,
+        "minutes": 3.75,
+        "subagents": 0,
+        "cost_usd_list": 0.7565
+      },
+      "quiz": {
+        "scenarios": 1,
+        "tokens_total": 185549,
+        "tokens_output": 10456,
+        "minutes": 1.42,
+        "subagents": 0,
+        "cost_usd_list": 0.2549
+      },
+      "grade": {
+        "scenarios": 1,
+        "tokens_total": 128990,
+        "tokens_output": 4797,
+        "minutes": 0.57,
+        "subagents": 0,
+        "cost_usd_list": 0.1737
+      },
+      "tutor": {
+        "scenarios": 2,
+        "tokens_total": 90829,
+        "tokens_output": 1703,
+        "minutes": 0.27,
+        "subagents": 0,
+        "cost_usd_list": 0.1337
+      },
+      "total": {
+        "scenarios": 5,
+        "tokens_total": 1145222,
+        "tokens_output": 52746,
+        "minutes": 6.02,
+        "subagents": 0,
+        "cost_usd_list": 1.3188
+      }
+    }
+  },
+  "scoring_cost": {
+    "tokens": 32581,
+    "cost_usd_list": 0.1035,
+    "calls": 5
+  },
+  "warnings": []
+}

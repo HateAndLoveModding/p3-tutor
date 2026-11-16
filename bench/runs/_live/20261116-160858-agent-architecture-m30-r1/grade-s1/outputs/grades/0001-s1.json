@@ -1,0 +1,43 @@
+{
+  "quiz": "0001",
+  "submission": "s1",
+  "items": [
+    {
+      "id": "q1",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "- Right: (d). An agent is a loop: the model picks an action, the program runs it, the result comes back, and the cycle repeats until a stop condition is met. That structure is what separates an agent from one call.\n- (a) is wrong because a longer prompt only changes what a single call is told. Suppose it made a system an agent: a 5,000-word prompt would still produce one block of text, with nothing run and no result coming back.\n- (b) is wrong because memory of earlier conversations is not automatic (the program has to save and re-supply it) and an agent with no memory is still an agent as long as it loops.\n- (c) is wrong because a bigger context window lets one call read more text, but one call is still one call: no action is taken and no result is fed back.\n- Link to q2 and q4: the loop only works because the program, not the model, carries out each action."
+    },
+    {
+      "id": "q2",
+      "verdict": "wrong",
+      "misconception": "M4",
+      "feedback": "- You chose (a): that the model opens the booking system itself and reads the entries. That is wrong because the model only takes text in and writes text out (your learning record 0001); it has no way to reach a calendar.\n- Walk through the case. The student asks about tomorrow. The model writes a structured request: tool check_calendar, machine laser cutter, date tomorrow. The program reads that request, runs check_calendar against the booking system, and puts the entries into the next input to the model. Suppose (a) were true: the model would need network access and credentials to the booking system, and your program would have no place to check, limit or log the call. Nothing in a text-in, text-out model provides that.\n- Right: (c). The model's output is a request naming check_calendar with the laser cutter and tomorrow's date as arguments. Everything after that is the program's job.\n- (b) is wrong because the model, not the program, decides to call the tool; the stem says so. The program only sees the model's request and acts on it.\n- (d) is wrong for the same reason as (a): the model never runs the tool's code. It does not even see it, and the code lives in your program.\n- This is the same belief as q4 and q6: that the model runs the tools itself. Fix this one and all three improve."
+    },
+    {
+      "id": "q3",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "- Right: (b). The agent repeats the same edit and gets the same failure, so extra steps add nothing. A step limit is a stopping condition in the program: it ends the loop and hands the problem back to a person, and it also caps cost, which matters for your budget.\n- (a) is wrong because all 40 steps already fit in the context. The agent can see everything and still loops, so more room does not change what it does.\n- (c) is wrong because 'it will eventually fix it' assumes a loop needs no stopping condition. With identical input each time, the next step is likely identical too, so it would keep spending tokens on the same failure.\n- (d) is wrong because a 'try harder' prompt is just more text for the model. The loop is run by the program, so only a change in the program (a limit) can reliably stop it."
+    },
+    {
+      "id": "q4",
+      "verdict": "wrong",
+      "misconception": "M4",
+      "feedback": "- Right: you said the model gets the question and the answer comes at the end. The final answer is one model call.\n- Wrong: you answered 1 and said the model 'runs the 3 tools itself'. The correct total is 4.\n- Why: each model call ends in exactly one tool request or the final answer. Trace it: (1) question in, model requests check_calendar; the program runs it. (2) Result in, model requests search_manuals; the program runs it. (3) Result in, model requests check_training_record; the program runs it. (4) Result in, model writes the final answer. That is 3 + 1 = 4 calls, one per input the model receives: the question plus three results.\n- Suppose the model ran the tools itself inside one call. Then it would have to write a tool request, get a result and continue, all within one stretch of output. But a model call only writes text; it cannot pause for a result. The stem also says each call requests exactly one tool, which already rules out three in one call.\n- This is the same belief as q2 (M4): the model runs tools. Practical consequence for your budget: each extra tool step is another model call that rereads the growing context, so cost grows with the number of tool steps."
+    },
+    {
+      "id": "q5",
+      "verdict": "partial",
+      "misconception": null,
+      "feedback": "- Right: 'it sends it back to the model'. That is the what: the program returns the result to the model as part of its next input.\n- Missing: the why. The question asked for both.\n- Why: the model has no other way to see the result, because the program ran the tool, not the model. The result is sent back so that the model can use it to choose its next step (another tool) or write the final answer. Without that, the loop would stop after one action with nothing learned from it.\n- To make it full: 'It adds the result to the model's input and calls the model again, so the model can decide its next step or write its answer.'"
+    },
+    {
+      "id": "q6",
+      "verdict": "partial",
+      "misconception": "M3",
+      "feedback": "- Right: 'it gets sent a list of the tools, each with a name and a little description of what it does, and picks the one that fits what the user asked'. That is the full mechanism: the model never sees the code, only the descriptions the program supplies, and chooses the best match. Also mentioning the parameters would be a good addition.\n- Wrong: 'it also remembers on its own which tool it picked for questions like that in earlier sessions'.\n- Why: a model keeps nothing between calls; it knows only what it learned in training plus the text it is given this time (learning record 0001). Suppose it remembered earlier sessions: then a new student's request would be shaped by invisible history that you cannot inspect or fix. In reality, tool choice comes from the descriptions in the current input. If you want the assistant to recall past choices or a student's training status, your program must save that and put it back into the input; that is the memory topic coming next.\n- This is M3, the belief that memory is automatic; q1 option (b) targeted the same belief, and you avoided it there.\n- Practical consequence for your mission: because the description is all the model has, a vague tool description leads to wrong tool choices, so writing it clearly matters."
+    }
+  ],
+  "summary": "You have the core idea of an agent: a loop of action, result and repeat (q1), the need for a stopping condition such as a step limit (q3), and that tools are chosen from names and descriptions the program supplies (q6). Two beliefs need fixing. First, M4: you think the model runs the tools itself, which caused q2 and q4; the model only writes a request, and the program runs the tool and calls the model again, so one request with three tool steps takes 4 model calls. Second, M3: you think the model remembers on its own between sessions (q6); it keeps nothing unless the program puts it back into the input. Also, q5 gave only the what, not the why. Next step: trace the laser-cutter request from q4 on paper, writing for each of the 4 calls what goes in, what the model writes, and what the program does, then redo q2 and q4."
+}

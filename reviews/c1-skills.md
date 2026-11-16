@@ -95,9 +95,9 @@ Thoughts about the tutor skill:
 
 **What changed:**
 
-- Kind: TODO
-- Files: TODO
-- Why: TODO
+- Kind: new skill
+- Files: tutor/.claude/skills/tutor/SKILL.md
+- Why: Chat replies still came from /teach under a tutoring guide that asked for short paragraphs with no headings and for stating the correction of a misconception; a tutor skill of its own answers with headers and bullets, states right, wrong and why for claims and done well, needs work and why with a next reachable step for plans and code, uses simple everyday analogies, ties each reply to the project, asks for the learner's reasoning and where the problem lives, never gives or hints at a quiz answer before grading, points out a misconception and sends the learner back to the lesson without giving the correction, and declines out-of-scope requests, as these thoughts ask.
 
 ### Round 4
 
