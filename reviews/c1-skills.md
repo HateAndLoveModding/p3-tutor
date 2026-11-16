@@ -127,9 +127,9 @@ Thoughts about the teach skill:
 
 **What changed:**
 
-- Kind: TODO
-- Files: TODO
-- Why: TODO
+- Kind: modified skill
+- Files: tutor/.claude/skills/teach/SKILL.md, tutor/.claude/skills/teach/references/LESSONS.md, tutor/.claude/skills/teach/references/lesson-template.html, tutor/.claude/skills/teach/references/GRADING.md (removed), tutor/.claude/skills/teach/references/QUIZZES.md (removed), tutor/.claude/skills/teach/references/TUTORING.md (removed)
+- Why: The shipped teach still did all four jobs and wrote lessons with a warm-up, sections of explanation, example and practice, one worked example at the end and a revealable answer, and the last run's lesson came in at 3,384 words for 30 minutes; the rewritten teach writes lessons only, opens with a pre-quiz that says which sections to skim, gives every section a title, learning goals, prior knowledge, the general idea, important steps, a real-world worked example with a diagram, a Common Mix-Ups box with right, wrong and why, and a Check Yourself box of four to six options whose answer stays hidden until a pick, closes with the main points, and plans to 100 to 150 words per minute, as these thoughts ask.
 
 ## Major review
 

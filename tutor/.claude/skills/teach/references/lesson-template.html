@@ -1,8 +1,10 @@
 <!doctype html>
 <!--
   Lesson template for the teach skill.
-  Copy this file to lessons/NNNN-<slug>.html, replace every {{PLACEHOLDER}}, keep the components you need,
-  repeat the ones you need more of, and delete these guidance comments.
+  Copy this file to lessons/NNNN-<slug>.html, replace every {{PLACEHOLDER}}, repeat the section block once per
+  section (s1, s2, ...), and delete these guidance comments.
+  Every section keeps all eight parts in order: title, learning goals, prior knowledge, general idea, important
+  steps, worked example (with its figure), Common Mix-Ups, Check Yourself.
   Keep the CSS and the script inline (or link ../assets/lesson.css if the workspace has one); load nothing from the web.
 -->
 <html lang="en">
@@ -54,7 +56,7 @@
     h1 { font-size: 2.1rem; margin: 0.25rem 0 1rem; }
     h2 { font-size: 1.45rem; margin: 3rem 0 0.75rem; }
     h3 { font-size: 1.1rem; margin: 2rem 0 0.5rem; }
-    .kicker, .label, .meta, .section-time, figcaption, summary, th, nav.toc, footer.closing {
+    .kicker, .label, .meta, .section-time, figcaption, th, nav.toc, footer.closing, .part-label, .choices .why-list {
       font-family: var(--sans);
     }
     .kicker { font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
@@ -64,19 +66,23 @@
     nav.toc { font-size: 0.9rem; margin: 1.5rem 0 2rem; }
     nav.toc ol { padding-left: 1.2rem; margin: 0.4rem 0 0; }
     .section-time { font-size: 0.8rem; font-weight: 400; color: var(--muted); margin-left: 0.4rem; white-space: nowrap; }
+    .part-label { display: block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+                  color: var(--muted); margin: 1.5rem 0 0.3rem; }
+    .part-label + ul { margin-top: 0.2rem; }
     dfn { font-style: normal; font-weight: 600; }
-    aside.note { font-size: 0.9rem; color: var(--muted); border-left: 2px solid var(--rule); padding-left: 1rem; margin: 1.25rem 0; }
     .box { border-radius: 6px; padding: 1rem 1.25rem; margin: 1.75rem 0; }
     .box > :first-child { margin-top: 0; }
     .box > :last-child { margin-bottom: 0; }
     .label { display: block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.4rem; }
     .mission { background: var(--accent-soft); }
     .mission .label { color: var(--accent); }
-    .misconception { background: var(--warn-soft); border-left: 4px solid var(--warn); }
-    .misconception .label { color: var(--warn); }
+    .mixups { background: var(--warn-soft); border-left: 4px solid var(--warn); }
+    .mixups .label { color: var(--warn); }
+    .mixups h3 { font-size: 1rem; margin: 1rem 0 0.3rem; }
+    .mixups ul { margin: 0.2rem 0 0.5rem; padding-left: 1.2rem; }
     .worked { border: 1px solid var(--rule); }
     .worked ol { padding-left: 1.3rem; }
-    .summary { border: 1px solid var(--rule); }
+    .main-points { border: 1px solid var(--rule); }
     figure { margin: 2rem 0; }
     figure svg { display: block; width: 100%; height: auto; }
     figcaption { font-size: 0.85rem; color: var(--muted); margin-top: 0.5rem; }
@@ -90,18 +96,19 @@
     .check { border: 1px solid var(--rule); border-radius: 6px; padding: 1rem 1.25rem; margin: 1.75rem 0; }
     .check .label { color: var(--accent); }
     .check p { margin: 0.25rem 0; }
+    .check .covers { font-family: var(--sans); font-size: 0.8rem; color: var(--muted); }
     .choices { list-style: none; padding: 0; margin: 0.75rem 0 0; display: grid; gap: 0.5rem; }
     .choices button { width: 100%; text-align: left; font: inherit; font-size: 0.95rem; color: inherit; background: transparent;
                       border: 1px solid var(--rule); border-radius: 6px; padding: 0.55rem 0.8rem; cursor: pointer; }
-    .choices button:hover { border-color: var(--accent); }
+    .choices button:hover:not(:disabled) { border-color: var(--accent); }
     .choices button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .choices button:disabled { cursor: default; }
     .choices button.right { border-color: var(--ok); background: var(--ok-soft); }
     .choices button.wrong { border-color: var(--warn); background: var(--warn-soft); }
     .feedback { font-size: 0.95rem; margin: 0.6rem 0 0; }
     .feedback:empty { margin: 0; }
-    details { margin-top: 0.75rem; }
-    summary { font-size: 0.85rem; color: var(--accent); cursor: pointer; }
-    details > :not(summary) { margin: 0.5rem 0 0; }
+    .why-list { font-size: 0.88rem; margin: 0.5rem 0 0; padding-left: 1.2rem; }
+    .why-list:empty { display: none; }
     .go-further li { margin-bottom: 0.6rem; }
     footer.closing { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--rule); font-size: 0.9rem; color: var(--muted); }
     @media (max-width: 32rem) {
@@ -142,41 +149,87 @@
   <nav class="toc" aria-label="In this lesson">
     <strong>In this lesson</strong>
     <ol>
-      <li><a href="#warm-up">Warm-up</a></li>
-      <li><a href="#s1">{{SECTION TITLE}}</a></li>
-      <li><a href="#practice">Worked example and practice</a></li>
-      <li><a href="#summary">Summary</a></li>
+      <li><a href="#pre-quiz">Pre-quiz: what do you already know?</a></li>
+      <li><a href="#s1">{{SECTION 1 TITLE}}</a></li>
+      <li><a href="#main-points">Main points</a></li>
       <li><a href="#further">Go further</a></li>
     </ol>
   </nav>
 
-  <!-- Warm-up: recall from earlier lessons or learning records (spacing). Answers on demand. -->
-  <section id="warm-up">
-    <h2>Warm-up <span class="section-time">2 min</span></h2>
-    <div class="check">
-      <span class="label">Recall</span>
-      <p>{{A QUESTION ON SOMETHING THE LEARNER ALREADY LEARNED}}</p>
-      <details>
-        <summary>Check your answer</summary>
-        <p>{{THE ANSWER, AND HOW IT CONNECTS TO TODAY}}</p>
-      </details>
+  <!-- Pre-quiz: one question per section, before the first section. Each names its section; each option's
+       data-why ends with "Skim Section N." when right or "Read Section N closely." when wrong. -->
+  <section id="pre-quiz">
+    <h2>Pre-quiz: what do you already know? <span class="section-time">{{N}} min</span></h2>
+    <p>Answer one question per section. Each answer tells you whether you can skim that section or should read it closely.</p>
+
+    <div class="check" data-check>
+      <span class="label">Pre-quiz 1</span>
+      <p class="covers">Covers <a href="#s1">Section 1: {{SECTION 1 TITLE}}</a></p>
+      <p>{{QUESTION ON SECTION 1'S CORE IDEA}}</p>
+      <ul class="choices">
+        <li><button type="button" data-correct="false" data-why="{{WHY THIS IS TEMPTING BUT WRONG}} Read Section 1 closely.">{{OPTION}}</button></li>
+        <li><button type="button" data-correct="true" data-why="{{WHY THIS IS RIGHT}} Skim Section 1.">{{OPTION}}</button></li>
+        <li><button type="button" data-correct="false" data-why="{{WHY THIS IS TEMPTING BUT WRONG}} Read Section 1 closely.">{{OPTION}}</button></li>
+        <li><button type="button" data-correct="false" data-why="{{WHY THIS IS TEMPTING BUT WRONG}} Read Section 1 closely.">{{OPTION}}</button></li>
+      </ul>
+      <p class="feedback" aria-live="polite"></p>
+      <ul class="why-list"></ul>
     </div>
   </section>
 
-  <!-- One section per idea: explain, show an example, check with immediate feedback. Repeat as needed. -->
+  <!-- One section per topic. Repeat this whole block for s2, s3, ... and keep the eight parts in order. -->
   <section id="s1">
-    <h2>{{SECTION TITLE}} <span class="section-time">{{N}} min</span></h2>
+    <!-- 1. Section title -->
+    <h2>{{SECTION 1 TITLE}} <span class="section-time">{{N}} min</span></h2>
+
+    <!-- 2. Learning goals, each starting with a verb -->
+    <span class="part-label">Learning goals</span>
+    <ul>
+      <li>{{VERB ...}}</li>
+      <li>{{VERB ...}}</li>
+    </ul>
+
+    <!-- 3. Prior knowledge, linking where each item was taught -->
+    <span class="part-label">What you need to know first</span>
+    <ul>
+      <li>{{PRIOR IDEA}}, from <a href="{{EARLIER LESSON OR #SECTION}}">{{WHERE IT WAS TAUGHT}}</a></li>
+      <li>{{PRIOR IDEA}}: {{A FEW WORDS ON WHAT IT IS, WHEN NO LESSON TAUGHT IT}}</li>
+    </ul>
+
+    <!-- 4. The general idea: plain paragraphs, terms defined at first use, citations after claims -->
+    <h3>The general idea</h3>
     <p>{{EXPLANATION, WITH A NEW TERM DEFINED AT FIRST USE:}} <dfn>{{TERM}}</dfn> {{IS ...}} (<a href="{{SOURCE URL FROM THIS SESSION}}">{{SOURCE NAME}}</a>).</p>
+    <p>{{MORE OF THE IDEA, ONE POINT PER PARAGRAPH}}</p>
 
-    <aside class="note">{{A SIDE REMARK THAT WOULD INTERRUPT THE MAIN LINE}}</aside>
+    <!-- 5. Important steps, when the idea has steps -->
+    <h3>Important steps</h3>
+    <ul>
+      <li>{{STEP OR DECISION POINT, WITH WHAT IT DECIDES}}</li>
+      <li>{{STEP OR DECISION POINT, WITH WHAT IT DECIDES}}</li>
+      <li>{{STEP OR DECISION POINT, WITH WHAT IT DECIDES}}</li>
+    </ul>
 
-    <!-- A figure: inline SVG, text labels inside, colors from CSS variables or currentColor, a title, a caption.
-         Give each figure its own ids (fig2-title, arrow2, ...). -->
+    <!-- 6. Worked example: a real case from the mission, fully explained, with a diagram. No analogies. -->
+    <h3>Worked example: {{THE CASE IN A FEW WORDS}}</h3>
+    <div class="box worked">
+      <span class="label">The case</span>
+      <p>{{THE CONTEXT: WHO, WHAT THEY ARE BUILDING OR DOING, WHAT GOES WRONG OR MUST BE DECIDED}}</p>
+      <p><strong>Why this idea applies here:</strong> {{WHY THIS IS THE RIGHT IDEA TO USE IN THIS CASE}}</p>
+      <ol>
+        <li>{{IMPORTANT STEP 1 APPLIED TO THE CASE, WITH THE REASON}}</li>
+        <li>{{IMPORTANT STEP 2 APPLIED TO THE CASE, WITH THE REASON}}</li>
+        <li>{{IMPORTANT STEP 3 APPLIED TO THE CASE, WITH THE REASON}}</li>
+      </ol>
+      <p><strong>The result:</strong> {{WHAT THE CASE ENDS UP WITH, AND WHAT IT SHOWS}}</p>
+    </div>
+
+    <!-- A figure: at least one per section. Inline SVG, text labels inside, colors from CSS variables or
+         currentColor, a title, a caption. Give each figure its own ids (fig2-title, arrow2, ...). -->
     <figure>
       <svg viewBox="0 0 640 120" role="img" aria-labelledby="fig1-title">
         <title id="fig1-title">{{WHAT THE FIGURE SHOWS}}</title>
         <defs>
-          <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <marker id="arrow1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
             <path d="M0,0 L10,5 L0,10 z" fill="currentColor"/>
           </marker>
         </defs>
@@ -184,8 +237,8 @@
           <rect x="20" y="30" width="160" height="60" rx="8"/>
           <rect x="240" y="30" width="160" height="60" rx="8" style="stroke: var(--accent)"/>
           <rect x="460" y="30" width="160" height="60" rx="8"/>
-          <line x1="180" y1="60" x2="236" y2="60" marker-end="url(#arrow)"/>
-          <line x1="400" y1="60" x2="456" y2="60" marker-end="url(#arrow)"/>
+          <line x1="180" y1="60" x2="236" y2="60" marker-end="url(#arrow1)"/>
+          <line x1="400" y1="60" x2="456" y2="60" marker-end="url(#arrow1)"/>
         </g>
         <g fill="currentColor" font-family="system-ui, sans-serif" font-size="18" text-anchor="middle">
           <text x="100" y="66">{{STEP 1}}</text>
@@ -196,61 +249,44 @@
       <figcaption>Figure 1. {{WHAT TO NOTICE IN THE FIGURE}}</figcaption>
     </figure>
 
-    <!-- A misconception where it bites: name it, say why it is tempting, show why it is wrong. -->
-    <div class="box misconception">
-      <span class="label">A common mix-up</span>
-      <p>{{THE WRONG IDEA, WHY IT IS TEMPTING, AND THE EXAMPLE THAT SHOWS WHAT IS TRUE}}</p>
+    <!-- 7. Common Mix-Ups: at least one per section. Errors and misconceptions, each right, wrong, why. -->
+    <div class="box mixups">
+      <span class="label">Common Mix-Ups</span>
+      <h3>{{THE ERROR OR MISCONCEPTION IN A FEW WORDS}}</h3>
+      <ul>
+        <li><strong>Right:</strong> {{WHAT IS TRUE}}</li>
+        <li><strong>Wrong:</strong> {{THE ERROR OR BELIEF, AS LEARNERS HOLD IT}}</li>
+        <li><strong>Why:</strong> {{WHY IT IS WRONG, WITH THE CASE THAT SHOWS THE DIFFERENCE, AND WHY IT IS TEMPTING}}</li>
+      </ul>
     </div>
 
-    <!-- A practice check with immediate feedback. Options: the same number of words, the right one in a varied position.
-         Each button's data-why explains that choice. Never reuse a quiz item here. -->
+    <!-- 8. Check Yourself: at least one, at the end of the section. Multiple choice, four to six options,
+         each with its own data-why. The answer stays hidden until the learner picks; never add a
+         "show the answer" box. Never reuse a pre-quiz question here. -->
     <div class="check" data-check>
-      <span class="label">Check yourself</span>
+      <span class="label">Check Yourself</span>
       <p>{{PRACTICE QUESTION}}</p>
       <ul class="choices">
         <li><button type="button" data-correct="false" data-why="{{WHY THIS IS TEMPTING BUT WRONG}}">{{OPTION}}</button></li>
+        <li><button type="button" data-correct="false" data-why="{{WHY THIS IS TEMPTING BUT WRONG}}">{{OPTION}}</button></li>
         <li><button type="button" data-correct="true" data-why="{{WHY THIS IS RIGHT}}">{{OPTION}}</button></li>
+        <li><button type="button" data-correct="false" data-why="{{WHY THIS IS TEMPTING BUT WRONG}}">{{OPTION}}</button></li>
         <li><button type="button" data-correct="false" data-why="{{WHY THIS IS TEMPTING BUT WRONG}}">{{OPTION}}</button></li>
       </ul>
       <p class="feedback" aria-live="polite"></p>
-      <details>
-        <summary>Show the answer</summary>
-        <p>{{THE RIGHT OPTION AND WHY, FOR READERS WITHOUT SCRIPTS OR ON PAPER}}</p>
-      </details>
+      <ul class="why-list"></ul>
     </div>
   </section>
 
-  <!-- Worked example step by step, then a similar task with the steps faded, solution on demand. -->
-  <section id="practice">
-    <h2>Worked example and practice <span class="section-time">{{N}} min</span></h2>
-    <div class="box worked">
-      <span class="label">Worked example</span>
-      <p>{{THE PROBLEM}}</p>
-      <ol>
-        <li>{{STEP, WITH THE REASON FOR IT}}</li>
-        <li>{{STEP, WITH THE REASON FOR IT}}</li>
-        <li>{{STEP, WITH THE REASON FOR IT}}</li>
-      </ol>
-    </div>
-    <div class="check">
-      <span class="label">Your turn</span>
-      <p>{{A SIMILAR PROBLEM, WITH THE FIRST STEP GIVEN AND THE REST LEFT TO THE LEARNER}}</p>
-      <details>
-        <summary>Show a solution</summary>
-        <p>{{THE SOLUTION, STEP BY STEP}}</p>
-      </details>
-    </div>
-  </section>
-
-  <section id="summary">
-    <h2>Summary <span class="section-time">2 min</span></h2>
-    <div class="box summary">
+  <!-- Main points: the points the learner must understand, one line each, covering every section. -->
+  <section id="main-points">
+    <h2>Main points <span class="section-time">{{N}} min</span></h2>
+    <div class="box main-points">
       <ul>
-        <li>{{KEY IDEA}}</li>
-        <li>{{KEY IDEA}}</li>
-        <li>{{KEY IDEA}}</li>
+        <li>{{MAIN POINT}}</li>
+        <li>{{MAIN POINT}}</li>
+        <li>{{MAIN POINT}}</li>
       </ul>
-      <p><strong>Say it in your own words:</strong> {{A PROMPT TO EXPLAIN THE MAIN IDEA WITHOUT LOOKING}}</p>
     </div>
   </section>
 
@@ -261,26 +297,39 @@
       <li><a href="{{SOURCE URL}}">{{SOURCE TITLE}}</a>: {{WHAT IT COVERS}}</li>
       <li><a href="{{SOURCE URL}}">{{SOURCE TITLE}}</a>: {{WHAT IT COVERS}}</li>
     </ul>
-    <p><strong>Test it with others:</strong> <a href="{{COMMUNITY URL}}">{{COMMUNITY}}</a>, {{WHAT TO ASK OR SHARE THERE}}.</p>
   </section>
 
   <footer class="closing">
     <p>Anything unclear? Ask me in the chat; I can explain any part again, another way, or go deeper.</p>
-    <p>A short quiz on this lesson is ready (quiz {{QUIZ NUMBER}}): ask me for it when you want to check what stuck.</p>
+    <p>When you want to check what stuck, ask me for a quiz on this lesson with <code>/quiz</code>.</p>
   </footer>
 
 </main>
 <script>
-  // Practice checks: mark the chosen option and explain it at once.
+  // Pre-quiz and Check Yourself: nothing is revealed until the learner picks an option.
+  // Then the pick is marked, the right option is shown, and every option's explanation is listed.
   document.querySelectorAll("[data-check]").forEach(function (box) {
     var buttons = box.querySelectorAll("button[data-correct]");
     var out = box.querySelector(".feedback");
+    var list = box.querySelector(".why-list");
     buttons.forEach(function (button) {
       button.addEventListener("click", function () {
-        buttons.forEach(function (b) { b.classList.remove("right", "wrong"); });
         var right = button.getAttribute("data-correct") === "true";
-        button.classList.add(right ? "right" : "wrong");
-        if (out) { out.textContent = (right ? "Yes. " : "Not quite. ") + (button.getAttribute("data-why") || ""); }
+        buttons.forEach(function (b) {
+          b.disabled = true;
+          if (b.getAttribute("data-correct") === "true") { b.classList.add("right"); }
+        });
+        if (!right) { button.classList.add("wrong"); }
+        if (out) { out.textContent = (right ? "Right. " : "Not quite. ") + (button.getAttribute("data-why") || ""); }
+        if (list) {
+          buttons.forEach(function (b) {
+            if (b === button) { return; }
+            var li = document.createElement("li");
+            var tag = b.getAttribute("data-correct") === "true" ? "Right answer: " : "Also wrong: ";
+            li.textContent = tag + b.textContent + " - " + (b.getAttribute("data-why") || "");
+            list.appendChild(li);
+          });
+        }
       });
     });
   });
