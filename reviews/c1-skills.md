@@ -63,9 +63,9 @@ Thoughts about the grade skill:
 
 **What changed:**
 
-- Kind: TODO
-- Files: TODO
-- Why: TODO
+- Kind: new skill
+- Files: tutor/.claude/skills/grade/SKILL.md
+- Why: Grading still ran inside /teach under a guide that asked for two to four sentences per item and only explained the chosen option; a grade skill of its own explains every mcq option by id even on a correct pick, gives right, wrong and why for free response, walks each wrong answer through what would actually happen, follows each misconception as if it were true until it breaks, uses a scenario or analogy where it helps, and ties a misconception shared by several items together, as these thoughts ask.
 
 ### Round 3
 
