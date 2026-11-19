@@ -153,13 +153,91 @@ quiz_ambiguous varied with a range of 0 to 1 (which I originally thought was a l
 Name the rounds that built this step, such as `c1-skills` Rounds 1 to 4, and the inventory entries of the skills they added; the trail from thoughts to change to outcome is already in `reviews/` and `reviews/components.md`, so do not retell it here.
 Then what you put in `PREFERENCES.md`, and anything about how the four skills work together that no single inventory entry says.
 
-TODO: the rounds and entries, your preferences, and how the skills fit together.
+Round 1 added the quiz skill. I put lots of the same things in the skill as I put in preferences.md. For example, I put that I wanted more free response and less mcq in both the skill and the preferences file. I also put that there should be more options for mcq, that none should be obviously nonsense, and that there should more problem-solving and real-world questions in the preferences file. 
+
+Round 2 added the grade skill. My main complaint was that the tutor did not fully explain all the options so I put that in both the preferences file and the skill. 
+
+Round 3 added the tutor skill. I didn't mention much in the preferences file. I mentioned a little bit about the when and what of using analogies and what the tutor should do in certain cases like evaluating a student's claim or plan or code.
+
+Round 4 rewrote the teach skill. The biggest thing in both the preferences file and the skill (with minor changes) is the structure of the lesson. What the lesson should include and how that information should be ordered.
+
+The information in the preferences file and the skills work together by not contradicting each other (though there are a few contradictions that will eventually be addressed) and by making it very clear what I want and it reinforces those things by having them mentioned a couple times.
 
 ### Your review, the objective checks and the cost
 
 Paste `uv run p3 report --configs c0-baseline,c1-skills`: the objective checks, the cost per job, and your ratings.
 
-TODO: paste the report tables.
+Scored full runs (quick runs and --only runs left out); each cell is the mean over the runs, with the range in brackets.
+
+### Quality
+
+| config | runs | teach facts | teach misconc. | length ratio | dead links | key agreement | wrong keys | ambiguous items | verdict agreement | false wrong | misconc. hit | leaks | behavior met |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| `c0-baseline` | 3 | 1.00 | 0 | 0.79 (0.73-0.85) | 0 | 1.00 | 0 | 0.3 (0-1) | 1.00 | 0.00 | 1.00 | 0 | 0.44 (0.33-0.50) |
+| `c1-skills` | 1 | 1.00 | 0 | 0.87 | 0 | 0.50 | 0 | 1 | 1.00 | 0.00 | 1.00 | 0 | 0.33 |
+
+Teach facts, key agreement, verdict agreement, false wrong, misconception hit and behavior met are shares (0 to 1); misconceptions, dead links, wrong keys, ambiguous items and leaks are counts per run.
+A dash means no run could be scored on that check, and n= says how many of the runs could.
+A job that failed counts against the config: no lesson scores 0 teach facts, no quiz and key 0 key agreement, a missing grades file disagrees on every item, and a tutor scenario with no reply is not met; leaks need a reply to check, so such a scenario is left out of them.
+The length ratio is a rough reading-time estimate (visible words / 150) over the minutes requested; 0.6 to 1.5 counts as on length.
+
+### Cost: teach
+
+| config | runs | tokens | output tokens | minutes | subagents | list-price $ |
+|---|---:|---:|---:|---:|---:|---:|
+| `c0-baseline` | 3 | 702.4k (619.3k-753.2k) | 31.0k (30.2k-31.9k) | 3.2 (3.2-3.3) | 0 | 0.62 (0.61-0.63) |
+| `c1-skills` | 1 | 512.8k | 25.9k | 2.6 | 0 | 0.62 |
+
+### Cost: quiz
+
+| config | runs | tokens | output tokens | minutes | subagents | list-price $ |
+|---|---:|---:|---:|---:|---:|---:|
+| `c0-baseline` | 3 | 129.3k (128.9k-129.9k) | 4.6k (4.3k-4.8k) | 0.6 | 0 | 0.16 (0.16-0.17) |
+| `c1-skills` | 1 | 176.8k | 7.5k | 1.0 | 0 | 0.21 |
+
+### Cost: grade
+
+| config | runs | tokens | output tokens | minutes | subagents | list-price $ |
+|---|---:|---:|---:|---:|---:|---:|
+| `c0-baseline` | 3 | 228.9k (196.9k-258.2k) | 6.4k (6.3k-6.5k) | 0.8 | 0 | 0.30 (0.30-0.31) |
+| `c1-skills` | 1 | 260.0k | 9.3k | 1.2 | 0 | 0.34 |
+
+### Cost: tutor
+
+| config | runs | tokens | output tokens | minutes | subagents | list-price $ |
+|---|---:|---:|---:|---:|---:|---:|
+| `c0-baseline` | 3 | 534.2k (447.4k-596.1k) | 10.1k (8.9k-11.2k) | 1.7 (1.5-1.9) | 0 | 0.64 (0.61-0.66) |
+| `c1-skills` | 1 | 434.7k | 7.3k | 1.2 | 0 | 0.47 |
+
+### Cost: all jobs
+
+| config | runs | tokens | output tokens | minutes | subagents | list-price $ |
+|---|---:|---:|---:|---:|---:|---:|
+| `c0-baseline` | 3 | 1.59M (1.43M-1.68M) | 52.0k (50.3k-53.8k) | 6.3 (6.1-6.5) | 0 | 1.72 (1.69-1.75) |
+| `c1-skills` | 1 | 1.38M | 50.0k | 6.0 | 0 | 1.64 |
+
+Costs are per run, summed over the job's scenarios; list-price $ is the list-price equivalent, not what you pay on a subscription.
+
+## Your ratings
+
+Your ratings from 1 to 5 in the major reviews (reviews/<step>.md), which review full runs on the shared topic; a dash means no rating there yet, one that p3 check does not accept, or a job that step does not review (Tutor in c2-review; Quiz, Feedback and Tutor in c3-split).
+
+| job | criterion | c1-skills | c2-review | c3-split | final |
+|---|---|---:|---:|---:|---:|
+| Lesson | Technical correctness and facts | 5 | - | - | - |
+| Lesson | Pedagogy | 5 | - | - | - |
+| Lesson | Alignment with the learning goal | 5 | - | - | - |
+| Lesson | Overall quality | 5 | - | - | - |
+| Quiz | Difficulty | 5 | - | - | - |
+| Quiz | Coverage of the lesson's core | 3 | - | - | - |
+| Quiz | Wording and possible misreadings | 4 | - | - | - |
+| Quiz | Writing quality | 4 | - | - | - |
+| Quiz | Alignment with the learning goal | 5 | - | - | - |
+| Feedback | Useful | 5 | - | - | - |
+| Feedback | Explains enough | 4 | - | - | - |
+| Feedback | Personalized to how I like things explained | 5 | - | - | - |
+| Tutor | Guardrails | 5 | - | - | - |
+| Tutor | Personalization | 4 | - | - | - |
 
 ### What the step bought and what it cost
 
