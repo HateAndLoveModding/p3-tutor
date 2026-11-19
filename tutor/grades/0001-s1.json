@@ -1,0 +1,61 @@
+{
+  "quiz": "0001",
+  "submission": "s1",
+  "items": [
+    {
+      "id": "q1",
+      "verdict": "wrong",
+      "misconception": null,
+      "feedback": "- Wrong: 0.125 is the chance that customer 40 enters the reservoir at all, not the chance that it lands in slot 3.\n- Right: your first factor is correct: customer 40 is accepted with k/i = 5/40 = 0.125.\n- Missing: the slot step. An accepted record overwrites slot j, and j is uniform over slots 1 to 5, so slot 3 gets 1/5 of the accepted cases.\n- Why: trace the draw. j is uniform from 1 to 40, and customer 40 lands in slot 3 only when j = 3, which is 1 value out of 40: 1/40 = 0.025, the same as 5/40 x 1/5.\n- Suppose 0.125 were the chance for slot 3: each of the 5 slots is equally likely, so each would also get 0.125, and the chance of entering at all would be 5 x 0.125 = 0.625. That contradicts the 5/40 = 0.125 acceptance chance you already computed."
+    },
+    {
+      "id": "q2",
+      "verdict": "partial",
+      "misconception": "M2",
+      "feedback": "- Right: you found the cause. randint(1, i) never returns 0, so R[0] is never overwritten, and R[0] holds the first record of the stream, which is the record in every final sample. Name the record itself (the first record) rather than only its slot.\n- Wrong: your fix, j <= k with R[j-1], keeps randint(1, i), and that is still off by one.\n- Why: with 0-based i, the arriving record is the (i+1)th, so it must enter with probability k/(i+1). With randint(1, i) and j <= k it enters with k/i. Trace i = k, the (k+1)th record: randint(1, k) returns only values 1 to k, all of them <= k, so that record enters every time, with probability 1 instead of k/(k+1).\n- A correct fix keeps the range and the index base in step: randint(0, i) with j < k and R[j], or randint(1, i + 1) with j <= k and R[j-1]. This is M2, an off-by-one in the random range, which never raises an error and only shows up as a biased sample."
+    },
+    {
+      "id": "q3",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "- Right: (d) is Algorithm R. Event i enters with 100/i and replaces a uniformly random slot, so every event ends among the 100 with probability 100/n, whatever n turns out to be.\n- (a) is wrong because every event after the 100th has zero chance, so the sample describes only the start of the run, often the warm-up period of a simulation.\n- (b) is wrong because evicting the oldest event pushes each event out after a fixed number of later acceptances. With k = 2 and 4 events, event 1 ends in the sample with probability 1/6 instead of 2/4 = 1/2 (M6).\n- (c) is wrong because a fixed 1/2 makes event 1 face an eviction chance at every later event. After thousands of events it is almost surely gone, while the last event has a 1/2 chance (M1).\n- (e) is wrong because N is only a plan. When the real run is longer or shorter, the acceptance chance does not match it, and early accepted events are overwritten by later ones, so they end less likely than late ones (M1).\n- (f) is wrong because events that are not a multiple of 1000 can never be stored, and dropping the oldest keeps only the last 100 sampled events, the end of the run."
+    },
+    {
+      "id": "q4",
+      "verdict": "wrong",
+      "misconception": "M5",
+      "feedback": "- Wrong: 0.25 is k/n = 3/12, the chance that a record ends in the sample before you know anything about it. The question says record 4 is already in the reservoir, so it asks only for the chance that it survives records 5 to 12.\n- Why: once record 4 is in, a later record m evicts it only when j lands on record 4's slot, which has probability 1/m. So record 4 survives step m with (m - 1)/m: 4/5 x 5/6 x 6/7 x ... x 11/12. Every middle number cancels, leaving 4/12 = 0.333.\n- Suppose 0.25 were the survival chance: record 4 enters with 3/4, so its overall chance would be 3/4 x 0.25 = 0.1875. That contradicts the fact that every record ends with k/n = 0.25, the result you stated yourself in q5.\n- Your own q5 answer holds this number: the i/n you wrote there is exactly this survival chance, 4/12 for i = 4. You also did this conditional step correctly in q9, for the weighted case. This is M5, mixing up the chance at one stage (here, given it is already in) with the overall chance."
+    },
+    {
+      "id": "q5",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "- Right: k/i x i/n = k/n for every record is the result. Every record, early or late, ends in the sample with probability k/n.\n- One wording fix: i/n is not an acceptance chance. A record is accepted once, with k/i. After that, i/n is the chance it survives every later record. Calling it acceptance hides why the classmate is wrong.\n- The link to the classmate's claim: early records get in easily but then face more later records that could evict them. The smaller i is, the smaller i/n is, and that exactly cancels the larger k/i.\n- For the first k records, entry is certain and survival starts only after record k, so survival is k/n directly, as q6 showed. q4 asked for this same i/n with i = 4."
+    },
+    {
+      "id": "q6",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "- Right: (c) 0.01. Record 7 is in from the start and must survive records 11 to 1000, each with (m - 1)/m. The product 10/11 x 11/12 x ... x 999/1000 is 10/1000 = 0.01 = k/n, the same as every other record.\n- (a) 0.007 is wrong because it applies i/n with i = 7. Evictions only start at record 11, once the reservoir is full, so survival runs from record 10's position and gives 10/1000.\n- (b) 0.1 is wrong because 1/k is the chance of one particular slot when a record is accepted, not the chance of being in the sample at the end.\n- (d) 1.0 is wrong because it assumes a record that enters with certainty stays (M3). Each of the 990 later records evicts it with 1/m, so it is almost surely gone by the end.\n- (e) 0.001 is wrong because 1/n would be right for a reservoir of one record. With 10 slots, the chance is 10 times larger."
+    },
+    {
+      "id": "q7",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "- Right: 0.3, the third light's share of the total weight, 3 / (4 + 1 + 3 + 2) = 3/10.\n- The check that makes it stick: the third light enters at its step with 3/8, then survives the fourth light with 1 - 2/10 = 8/10, and 3/8 x 8/10 = 0.3. The tempting answer 0.375 is only the entry chance, the same stage-versus-overall distinction as q4."
+    },
+    {
+      "id": "q8",
+      "verdict": "wrong",
+      "misconception": null,
+      "feedback": "- Right: you saw that this rule favors brighter lights.\n- Wrong: \"the ordering really matters.\" Trace weights 4, 1, 3, 2 in any order. The stored light changes only when a heavier one arrives, so at the end it is always the weight-4 light. A dim light that comes first does get replaced, but the heaviest always wins by the end. The choice is not random at all: the maximum-weight light is chosen every frame.\n- Missing: what goes wrong in the image. The other lights are never sampled, so their light never reaches the pixel, and the image is biased: too dark wherever the dimmer lamps should add light.\n- Why \"non-equal probability\" is not the problem: the correct rule is unequal on purpose, with each light chosen in proportion to its weight (in q7, 0.3 for weight 3 of 10). The bug is that the probabilities become 1 for the heaviest light and 0 for every other light.\n- Suppose equal probability were the goal: the renderer would spend as many shadow rays on a dim lamp as on a bright one, which is the waste weighting avoids (lesson Section 2)."
+    },
+    {
+      "id": "q9",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "- Right: at the third candidate, w_sum becomes 2 + 6 + 4 = 12, the third light replaces the stored one with 4/12, and the stored light survives with 8/12 = 0.667.\n- This is the conditional survival step: given it is already stored, what is the chance it stays? q4 asks the same thing for Algorithm R, and the same tracing gives 4/12 there."
+    }
+  ],
+  "summary": "5 correct (q3, q5, q6, q7, q9), 1 partial (q2), 3 wrong (q1, q4, q8). You can pick out Algorithm R from flawed schemes (q3), you know every record ends with k/n (q5, q6), and you can work weighted reservoirs, including the conditional survival step (q7, q9). The main thing to fix is reaching for a familiar formula instead of tracing what the question conditions on. In q4 you gave k/n when the record was already in (M5), and in q1 you stopped at the acceptance chance k/i without the slot step. In q2 you found the off-by-one but your fix kept one (M2). In q8 the heaviest light wins whatever the order, and the harm is that the other lights vanish from the image. Next step: re-read the survival paragraph in Section 1 of lesson 0001, then trace q4 on paper by writing every factor from 4/5 to 11/12 and cancelling them."
+}

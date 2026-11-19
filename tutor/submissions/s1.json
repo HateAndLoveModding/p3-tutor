@@ -1,0 +1,15 @@
+{
+  "quiz": "0001",
+  "learner": "learner",
+  "answers": [
+    {"id": "q1", "response": "0.125"},
+    {"id": "q2", "response": "R[0] is always in the final sample because is 1 indexed and not 0 indexed. It should be j<=k and R[j-1]."},
+    {"id": "q3", "response": "D"},
+    {"id": "q4", "response": "0.25"},
+    {"id": "q5", "response": "Later records enter with probability of k/i and are only accepted with probability of i/n and multiplying those together gets k/n which is what we would expect and want."},
+    {"id": "q6", "response": "C"},
+    {"id": "q7", "response": "0.3"},
+    {"id": "q8", "response": "The ordering of the lights really matters. If the brightest light is first, then it will stay. If the lowest light is first, then there is chance that it will get updated. It favors brighter lights and results in a non-equal probability that each light is chosen."},
+    {"id": "q9", "response": "0.667"}
+  ]
+}

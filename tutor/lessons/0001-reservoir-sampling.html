@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="p3-minutes" content="10">
+  <meta name="p3-objective" content="O1">
+  <title>Reservoir sampling: a fair sample from a simulation you cannot store</title>
+  <style>
+    :root {
+      --bg: #fffdf8;
+      --text: #1f1d1a;
+      --muted: #6b665e;
+      --rule: #e4dfd4;
+      --accent: #9a4517;
+      --accent-soft: #f7ede4;
+      --warn: #8c2f39;
+      --warn-soft: #f9eaec;
+      --ok: #2f6b3a;
+      --ok-soft: #e7f2e9;
+      --code-bg: #f3efe6;
+      --serif: Charter, "Bitstream Charter", "Iowan Old Style", "Sitka Text", Cambria, Georgia, serif;
+      --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --mono: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #171614;
+        --text: #e9e5dc;
+        --muted: #a49e93;
+        --rule: #36332e;
+        --accent: #eaa77a;
+        --accent-soft: #2c231d;
+        --warn: #f0a3ac;
+        --warn-soft: #2f1f22;
+        --ok: #9fd3a8;
+        --ok-soft: #1c2a1f;
+        --code-bg: #23211e;
+      }
+    }
+    * { box-sizing: border-box; }
+    html { font-size: 19px; -webkit-text-size-adjust: 100%; }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--serif); line-height: 1.6; }
+    main { max-width: 40rem; margin: 0 auto; padding: 3rem 1.25rem 4rem; }
+    p, li { hyphens: auto; }
+    a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+    h1, h2, h3 { line-height: 1.25; font-weight: 600; }
+    h1 { font-size: 2.1rem; margin: 0.25rem 0 1rem; }
+    h2 { font-size: 1.45rem; margin: 3rem 0 0.75rem; }
+    h3 { font-size: 1.1rem; margin: 2rem 0 0.5rem; }
+    .kicker, .label, .meta, .section-time, figcaption, th, nav.toc, footer.closing, .part-label, .choices .why-list {
+      font-family: var(--sans);
+    }
+    .kicker { font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+    .lead { font-size: 1.15rem; }
+    .meta { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; font-size: 0.85rem; color: var(--muted);
+            border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 0.5rem 0; margin: 1.5rem 0; }
+    nav.toc { font-size: 0.9rem; margin: 1.5rem 0 2rem; }
+    nav.toc ol { padding-left: 1.2rem; margin: 0.4rem 0 0; }
+    .section-time { font-size: 0.8rem; font-weight: 400; color: var(--muted); margin-left: 0.4rem; white-space: nowrap; }
+    .part-label { display: block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+                  color: var(--muted); margin: 1.5rem 0 0.3rem; }
+    .part-label + ul { margin-top: 0.2rem; }
+    dfn { font-style: normal; font-weight: 600; }
+    .box { border-radius: 6px; padding: 1rem 1.25rem; margin: 1.75rem 0; }
+    .box > :first-child { margin-top: 0; }
+    .box > :last-child { margin-bottom: 0; }
+    .label { display: block; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.4rem; }
+    .mission { background: var(--accent-soft); }
+    .mission .label { color: var(--accent); }
+    .mixups { background: var(--warn-soft); border-left: 4px solid var(--warn); }
+    .mixups .label { color: var(--warn); }
+    .mixups h3 { font-size: 1rem; margin: 1rem 0 0.3rem; }
+    .mixups ul { margin: 0.2rem 0 0.5rem; padding-left: 1.2rem; }
+    .worked { border: 1px solid var(--rule); }
+    .worked ol { padding-left: 1.3rem; }
+    .main-points { border: 1px solid var(--rule); }
+    figure { margin: 2rem 0; }
+    figure svg { display: block; width: 100%; height: auto; }
+    figcaption { font-size: 0.85rem; color: var(--muted); margin-top: 0.5rem; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.92rem; margin: 1.5rem 0; }
+    th, td { text-align: left; vertical-align: top; padding: 0.45rem 0.6rem; border-bottom: 1px solid var(--rule); }
+    th { font-size: 0.78rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
+    code, pre { font-family: var(--mono); font-size: 0.85em; background: var(--code-bg); border-radius: 4px; }
+    code { padding: 0.1em 0.3em; }
+    pre { padding: 1rem; overflow-x: auto; line-height: 1.45; }
+    pre code { padding: 0; background: none; font-size: 1em; }
+    .check { border: 1px solid var(--rule); border-radius: 6px; padding: 1rem 1.25rem; margin: 1.75rem 0; }
+    .check .label { color: var(--accent); }
+    .check p { margin: 0.25rem 0; }
+    .check .covers { font-family: var(--sans); font-size: 0.8rem; color: var(--muted); }
+    .choices { list-style: none; padding: 0; margin: 0.75rem 0 0; display: grid; gap: 0.5rem; }
+    .choices button { width: 100%; text-align: left; font: inherit; font-size: 0.95rem; color: inherit; background: transparent;
+                      border: 1px solid var(--rule); border-radius: 6px; padding: 0.55rem 0.8rem; cursor: pointer; }
+    .choices button:hover:not(:disabled) { border-color: var(--accent); }
+    .choices button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .choices button:disabled { cursor: default; }
+    .choices button.right { border-color: var(--ok); background: var(--ok-soft); }
+    .choices button.wrong { border-color: var(--warn); background: var(--warn-soft); }
+    .feedback { font-size: 0.95rem; margin: 0.6rem 0 0; }
+    .feedback:empty { margin: 0; }
+    .why-list { font-size: 0.88rem; margin: 0.5rem 0 0; padding-left: 1.2rem; }
+    .why-list:empty { display: none; }
+    .go-further li { margin-bottom: 0.6rem; }
+    footer.closing { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--rule); font-size: 0.9rem; color: var(--muted); }
+    @media (max-width: 32rem) {
+      html { font-size: 17px; }
+      h1 { font-size: 1.75rem; }
+      main { padding-top: 2rem; }
+    }
+    @media print {
+      :root { --bg: #fff; --text: #000; --muted: #444; --rule: #ccc; --accent: #000; --accent-soft: #f2f2f2;
+              --warn: #000; --warn-soft: #f2f2f2; --ok: #000; --ok-soft: #fff; --code-bg: #f2f2f2; }
+      html { font-size: 11.5pt; }
+      main { max-width: none; padding: 0; }
+      nav.toc { display: none; }
+      a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.8em; word-break: break-all; }
+      .box, .check, figure, table, pre { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+<main>
+
+  <header>
+    <div class="kicker">Lesson 0001 &middot; 10 minutes</div>
+    <h1>Reservoir sampling: a fair sample from a simulation you cannot store</h1>
+    <p class="lead">By the end of this lesson you can keep a fair random sample of k records from a simulation's output, in one pass and fixed memory, without knowing how many records the run will produce.</p>
+    <div class="meta">
+      <span>Objective O1: sample a stream of unknown length with reservoir sampling</span>
+      <span>About 10 minutes</span>
+      <span>First lesson in this workspace</span>
+    </div>
+    <div class="box mission">
+      <span class="label">Why this matters for you</span>
+      <p>Simulations often produce more events than you can store, and you rarely know in advance how many there will be. Reservoir sampling gives you a small sample you can trust, so what you inspect or average represents the whole run.</p>
+    </div>
+  </header>
+
+  <nav class="toc" aria-label="In this lesson">
+    <strong>In this lesson</strong>
+    <ol>
+      <li><a href="#pre-quiz">Pre-quiz: what do you already know?</a></li>
+      <li><a href="#s1">Uniform sampling from a stream (Algorithm R)</a></li>
+      <li><a href="#s2">Weighted sampling: choosing one light in a ray tracer</a></li>
+      <li><a href="#main-points">Main points</a></li>
+      <li><a href="#further">Go further</a></li>
+    </ol>
+  </nav>
+
+  <section id="pre-quiz">
+    <h2>Pre-quiz: what do you already know? <span class="section-time">1 min</span></h2>
+    <p>Answer one question per section. Each answer tells you whether you can skim that section or should read it closely.</p>
+
+    <div class="check" data-check>
+      <span class="label">Pre-quiz 1</span>
+      <p class="covers">Covers <a href="#s1">Section 1: Uniform sampling from a stream</a></p>
+      <p>You keep a reservoir of one record (k = 1) from a stream of unknown length. Record number 4 arrives. With what probability should it replace the stored record?</p>
+      <ul class="choices">
+        <li><button type="button" data-correct="false" data-why="A fixed one-half favors recent records: an early record must survive every coin flip after it, so it almost never ends up in the sample. Read Section 1 closely.">1/2, the same for every record</button></li>
+        <li><button type="button" data-correct="false" data-why="1/3 would be right for record 3, not record 4. The denominator is the index of the record that just arrived. Read Section 1 closely.">1/3, one over the records already seen</button></li>
+        <li><button type="button" data-correct="true" data-why="Record i is kept with probability k/i, here 1/4, and the later replacements make every record end with the same chance. Skim Section 1.">1/4, one over its own index</button></li>
+        <li><button type="button" data-correct="false" data-why="1/n needs the total length n, which you do not know while the stream is running. Read Section 1 closely.">1/n, one over the stream's total length</button></li>
+      </ul>
+      <p class="feedback" aria-live="polite"></p>
+      <ul class="why-list"></ul>
+    </div>
+
+    <div class="check" data-check>
+      <span class="label">Pre-quiz 2</span>
+      <p class="covers">Covers <a href="#s2">Section 2: Weighted sampling</a></p>
+      <p>In weighted reservoir sampling of one item, a new candidate with weight w arrives. What do you compare a uniform random number against?</p>
+      <ul class="choices">
+        <li><button type="button" data-correct="false" data-why="The total of all weights is unknown until the stream ends, so it cannot be used during the pass. Read Section 2 closely.">w divided by the total weight of the whole stream</button></li>
+        <li><button type="button" data-correct="true" data-why="Dividing by the running sum, including the new weight, gives each item a final chance proportional to its weight. Skim Section 2.">w divided by the running sum of weights so far</button></li>
+        <li><button type="button" data-correct="false" data-why="Comparing against the stored weight makes heavy items unbeatable and does not produce probabilities proportional to weight. Read Section 2 closely.">w divided by the weight of the stored item</button></li>
+        <li><button type="button" data-correct="false" data-why="That is the unweighted rule; it ignores w, so a bright light and a dim one would be equally likely. Read Section 2 closely.">one divided by the number of candidates so far</button></li>
+      </ul>
+      <p class="feedback" aria-live="polite"></p>
+      <ul class="why-list"></ul>
+    </div>
+  </section>
+
+  <section id="s1">
+    <h2>Uniform sampling from a stream (Algorithm R) <span class="section-time">5 min</span></h2>
+
+    <span class="part-label">Learning goals</span>
+    <ul>
+      <li>Apply Algorithm R to keep k records from a stream of unknown length.</li>
+      <li>Show why every record ends up in the sample with probability k/n.</li>
+    </ul>
+
+    <span class="part-label">What you need to know first</span>
+    <ul>
+      <li>A uniform random integer from 1 to i: each value equally likely.</li>
+      <li>The chance that several independent events all happen is the product of their chances.</li>
+    </ul>
+
+    <h3>The general idea</h3>
+    <p>A <dfn>stream</dfn> is data you see once, in order, without being able to store it all or know its length in advance. A <dfn>reservoir</dfn> is a fixed array of k slots holding the current sample. <dfn>Reservoir sampling</dfn> keeps that array so that, at every moment, it is a simple random sample of the records seen so far, meaning every set of k records is equally likely (<a href="https://en.wikipedia.org/wiki/Reservoir_sampling">Wikipedia: Reservoir sampling</a>).</p>
+    <p>The basic method, <dfn>Algorithm R</dfn>, is credited by Vitter to Alan Waterman; Vitter's 1985 paper then gave faster variants that skip records (<a href="https://www.bibsonomy.org/bibtex/2f84bfb9fa8054f24e45dc2d4eb06cb70/ytyoun">Vitter, "Random Sampling with a Reservoir", ACM TOMS 1985</a>). Algorithm R draws one random number per record, so it takes time proportional to n and memory proportional to k.</p>
+    <p>Why it is fair: record i enters with probability k/i. A later record m then evicts it only if m is accepted (k/m) and lands on its slot (1/k), so record i survives step m with probability (m &minus; 1)/m. Multiplying over m = i+1 to n, the fractions cancel to i/n, and k/i &times; i/n = k/n for every record (<a href="https://www.cs.princeton.edu/courses/archive/spr02/cs493/lec19.pdf">Princeton COS 493, Lecture 19</a>).</p>
+
+    <h3>Important steps</h3>
+    <ul>
+      <li>Put the first k records straight into the reservoir.</li>
+      <li>For record i &gt; k, draw j uniformly from 1 to i, including both ends.</li>
+      <li>If j &le; k, overwrite slot j with record i; otherwise discard record i.</li>
+      <li>When the stream ends, the reservoir is your sample.</li>
+    </ul>
+<pre><code>import random
+def reservoir(stream, k):
+    R = []
+    for i, x in enumerate(stream, start=1):
+        if i &lt;= k:
+            R.append(x)
+        else:
+            j = random.randint(1, i)   # 1..i inclusive
+            if j &lt;= k:
+                R[j - 1] = x
+    return R</code></pre>
+
+    <h3>Worked example: sampling patients from an emergency-room simulation</h3>
+    <div class="box worked">
+      <span class="label">The case</span>
+      <p>A discrete-event simulation of an emergency room runs until its queue stabilizes, producing one record per patient. A run can produce millions of records, and you do not know how many before it stops. You want k = 2 patient records to inspect by hand; here the run happens to produce 5.</p>
+      <p><strong>Why this idea applies here:</strong> you cannot store every record, and you cannot use a fixed chance like k/n, because n is unknown until the run ends.</p>
+      <ol>
+        <li>P1 and P2 fill the reservoir: [P1, P2].</li>
+        <li>P3 arrives: draw j from 1 to 3 and get 2. Since 2 &le; 2, P3 replaces slot 2: [P1, P3].</li>
+        <li>P4 arrives: draw j from 1 to 4 and get 4. Since 4 &gt; 2, discard P4.</li>
+        <li>P5 arrives: draw j from 1 to 5 and get 1. P5 replaces slot 1: [P5, P3].</li>
+      </ol>
+      <p><strong>The result:</strong> the sample is [P5, P3]. Over many runs, each of the five patients appears with probability 2/5, whether it arrived early or late.</p>
+    </div>
+
+    <figure>
+      <svg viewBox="0 0 640 230" role="img" aria-labelledby="fig1-title">
+        <title id="fig1-title">The two-slot reservoir after each patient arrives</title>
+        <g fill="currentColor" font-family="system-ui, sans-serif" font-size="18">
+          <text x="10" y="40">P1, P2</text><text x="10" y="95">P3, j=2</text><text x="10" y="150">P4, j=4</text><text x="10" y="205">P5, j=1</text>
+        </g>
+        <g fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="170" y="15" width="130" height="38" rx="6"/><rect x="320" y="15" width="130" height="38" rx="6"/>
+          <rect x="170" y="70" width="130" height="38" rx="6"/><rect x="320" y="70" width="130" height="38" rx="6" style="stroke: var(--accent)"/>
+          <rect x="170" y="125" width="130" height="38" rx="6"/><rect x="320" y="125" width="130" height="38" rx="6"/>
+          <rect x="170" y="180" width="130" height="38" rx="6" style="stroke: var(--accent)"/><rect x="320" y="180" width="130" height="38" rx="6"/>
+        </g>
+        <g fill="currentColor" font-family="system-ui, sans-serif" font-size="18" text-anchor="middle">
+          <text x="235" y="40">P1</text><text x="385" y="40">P2</text>
+          <text x="235" y="95">P1</text><text x="385" y="95" style="fill: var(--accent)">P3</text>
+          <text x="235" y="150">P1</text><text x="385" y="150">P3</text>
+          <text x="235" y="205" style="fill: var(--accent)">P5</text><text x="385" y="205">P3</text>
+        </g>
+        <g fill="currentColor" font-family="system-ui, sans-serif" font-size="18">
+          <text x="470" y="40">filled</text><text x="470" y="95">replace slot 2</text><text x="470" y="150">discard</text><text x="470" y="205">replace slot 1</text>
+        </g>
+      </svg>
+      <figcaption>Figure 1. Each row is the reservoir after one patient. Highlighted slots changed; P4 was drawn j = 4 &gt; k and never entered.</figcaption>
+    </figure>
+
+    <div class="box mixups">
+      <span class="label">Common Mix-Ups</span>
+      <h3>Keeping each new record with a fixed chance</h3>
+      <ul>
+        <li><strong>Right:</strong> the chance falls as k/i, so later records are less likely to enter, and earlier ones face fewer evictions in total.</li>
+        <li><strong>Wrong:</strong> "keep each new record with probability 1/2" or "with probability k/n".</li>
+        <li><strong>Why:</strong> a fixed 1/2 makes the sample almost all late records, which biases a simulation toward its end state; k/n needs the total, which you do not have.</li>
+      </ul>
+      <h3>Off by one in the random range</h3>
+      <ul>
+        <li><strong>Right:</strong> j ranges over 1 to i inclusive, with i the index of the record just arrived.</li>
+        <li><strong>Wrong:</strong> drawing from 1 to i &minus; 1, or from 0 to i when the code counts from 0.</li>
+        <li><strong>Why:</strong> either shifts every probability, so the sample is no longer uniform, and no error is ever raised.</li>
+      </ul>
+    </div>
+
+    <div class="check" data-check>
+      <span class="label">Check Yourself</span>
+      <p>A reservoir of k = 10 runs over a stream. Record 50 arrives. What is the chance it enters the reservoir at that moment?</p>
+      <ul class="choices">
+        <li><button type="button" data-correct="false" data-why="1/50 is the chance of drawing one particular j, but any j from 1 to 10 lets the record in.">1/50</button></li>
+        <li><button type="button" data-correct="false" data-why="1/10 is the chance of landing in one particular slot once accepted, not the chance of being accepted.">1/10</button></li>
+        <li><button type="button" data-correct="true" data-why="Record i enters with probability k/i = 10/50 = 1/5.">10/50</button></li>
+        <li><button type="button" data-correct="false" data-why="40/50 is the chance it is discarded, j &gt; 10.">40/50</button></li>
+        <li><button type="button" data-correct="false" data-why="The entry chance depends only on k and i; the final chance k/n depends on the length, but that is a different question.">It depends on the stream's length</button></li>
+      </ul>
+      <p class="feedback" aria-live="polite"></p>
+      <ul class="why-list"></ul>
+    </div>
+  </section>
+
+  <section id="s2">
+    <h2>Weighted sampling: choosing one light in a ray tracer <span class="section-time">3 min</span></h2>
+
+    <span class="part-label">Learning goals</span>
+    <ul>
+      <li>Apply the one-item weighted reservoir update with a running sum of weights.</li>
+      <li>Predict each candidate's final chance from its weight.</li>
+    </ul>
+
+    <span class="part-label">What you need to know first</span>
+    <ul>
+      <li>Algorithm R and why its fractions cancel, from <a href="#s1">Section 1</a>.</li>
+    </ul>
+
+    <h3>The general idea</h3>
+    <p>Sometimes you want a candidate chosen in proportion to a <dfn>weight</dfn>, a non-negative number saying how much it matters. The one-item version keeps a stored sample and a running sum w_sum: when a candidate of weight w arrives, add w to w_sum, then replace the stored sample with probability w / w_sum. The method goes back to Chao (1982) and needs no stream length in advance (<a href="https://arxiv.org/pdf/2403.20256">Weighted Reservoir Sampling With Replacement from Data Streams</a>).</p>
+    <p>The proof is Section 1's with weights: the chance of entering, w_i / S_i, times the chance of surviving each later step, S_(m&minus;1) / S_m, cancels to w_i / S_n, the item's share of the total weight.</p>
+    <p>Real-time ray tracing, a simulation of light, uses this. ReSTIR keeps one small reservoir per pixel to choose which light to sample, rendering scenes with up to 3.4 million emissive triangles in under 50 ms per frame (<a href="https://research.nvidia.com/labs/rtr/publication/bitterli2020spatiotemporal">Bitterli et al., 2020</a>; update rule as in <a href="https://arxiv.org/pdf/2211.00166">Decorrelating ReSTIR Samplers via MCMC Mutations</a>).</p>
+
+    <h3>Important steps</h3>
+    <ul>
+      <li>Start with no sample and w_sum = 0.</li>
+      <li>For each candidate, add its weight w to w_sum.</li>
+      <li>Draw u uniformly in [0, 1); if u &lt; w / w_sum, store this candidate.</li>
+      <li>Keep w_sum with the sample: later steps need it to weight the estimate and to merge reservoirs.</li>
+    </ul>
+
+    <h3>Worked example: one pixel, four candidate lights</h3>
+    <div class="box worked">
+      <span class="label">The case</span>
+      <p>A pixel on a floor is lit by four lamps with estimated contributions 6, 2, 1 and 3. Tracing a shadow ray to every lamp is too expensive, so the renderer traces one, chosen in proportion to its contribution.</p>
+      <p><strong>Why this idea applies here:</strong> candidates are generated one at a time on the GPU, and there is room for one sample and one sum per pixel, not a list.</p>
+      <ol>
+        <li>L1, w = 6: w_sum = 6, chance 6/6 = 1, store L1.</li>
+        <li>L2, w = 2: w_sum = 8, chance 2/8 = 0.25; u = 0.71, keep L1.</li>
+        <li>L3, w = 1: w_sum = 9, chance 1/9 &asymp; 0.11; u = 0.05, store L3.</li>
+        <li>L4, w = 3: w_sum = 12, chance 3/12 = 0.25; u = 0.60, keep L3.</li>
+      </ol>
+      <p><strong>The result:</strong> this time the dim L3 was picked, which is allowed. Across many frames, L1 wins 6/12 = 50% of the time, L2 17%, L3 8% and L4 25%.</p>
+    </div>
+
+    <figure>
+      <svg viewBox="0 0 640 170" role="img" aria-labelledby="fig2-title">
+        <title id="fig2-title">The four lights' weights as shares of the total weight 12</title>
+        <g stroke="currentColor" stroke-width="1.5">
+          <rect x="20" y="40" width="300" height="50" fill="none"/>
+          <rect x="320" y="40" width="100" height="50" fill="none"/>
+          <rect x="420" y="40" width="50" height="50" fill="var(--accent-soft)" style="stroke: var(--accent)"/>
+          <rect x="470" y="40" width="150" height="50" fill="none"/>
+        </g>
+        <g fill="currentColor" font-family="system-ui, sans-serif" font-size="18" text-anchor="middle">
+          <text x="170" y="72">L1: 6 (50%)</text>
+          <text x="370" y="72">L2: 2</text>
+          <text x="445" y="72" style="fill: var(--accent)">L3</text>
+          <text x="545" y="72">L4: 3 (25%)</text>
+          <text x="320" y="130">total weight 12 = w_sum after the last candidate</text>
+        </g>
+      </svg>
+      <figcaption>Figure 2. Each light's final chance is its width on this bar. The update never sees the whole bar at once, yet ends with these shares.</figcaption>
+    </figure>
+
+    <div class="box mixups">
+      <span class="label">Common Mix-Ups</span>
+      <h3>"The heaviest candidate always wins"</h3>
+      <ul>
+        <li><strong>Right:</strong> each candidate wins with probability equal to its share of the total weight.</li>
+        <li><strong>Wrong:</strong> keeping the maximum weight, or replacing only when w beats the stored weight.</li>
+        <li><strong>Why:</strong> always picking L1 would make the renderer ignore L4 entirely, so its light would be missing from the image instead of averaged in.</li>
+      </ul>
+    </div>
+
+    <div class="check" data-check>
+      <span class="label">Check Yourself</span>
+      <p>Three candidates arrive with weights 5, 5 and 10. What is the chance the first one is the final sample?</p>
+      <ul class="choices">
+        <li><button type="button" data-correct="false" data-why="1/3 treats the candidates as equally likely, ignoring the weights.">1/3</button></li>
+        <li><button type="button" data-correct="true" data-why="Its share of the total: 5/20 = 0.25. Check: it survives step 2 with 5/10 and step 3 with 10/20, so 1 &times; 0.5 &times; 0.5 = 0.25.">1/4</button></li>
+        <li><button type="button" data-correct="false" data-why="1/2 is the chance it survives the second candidate only; it must also survive the third.">1/2</button></li>
+        <li><button type="button" data-correct="false" data-why="1/8 multiplies one survival step too many.">1/8</button></li>
+        <li><button type="button" data-correct="false" data-why="1/5 would be right if the total weight were 25; the total here is 5 + 5 + 10 = 20, so the chance is 5/20.">1/5</button></li>
+      </ul>
+      <p class="feedback" aria-live="polite"></p>
+      <ul class="why-list"></ul>
+    </div>
+  </section>
+
+  <section id="main-points">
+    <h2>Main points <span class="section-time">1 min</span></h2>
+    <div class="box main-points">
+      <ul>
+        <li>Reservoir sampling keeps a fair sample of k items from a stream of unknown length, in one pass and k slots of memory.</li>
+        <li>Algorithm R: keep the first k; record i enters with probability k/i and replaces a uniformly random slot.</li>
+        <li>Every record ends in the sample with probability k/n, because the survival fractions cancel.</li>
+        <li>Draw j from 1 to i inclusive; a fixed acceptance chance or an off-by-one range biases the sample silently.</li>
+        <li>Weighted, one item: add w to a running sum, replace with probability w / w_sum; each item wins with its share of the total weight.</li>
+        <li>Ray tracers such as ReSTIR use weighted reservoirs to choose one light per pixel among millions.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="further" class="go-further">
+    <h2>Go further</h2>
+    <p><strong>Read next:</strong> <a href="https://en.wikipedia.org/wiki/Reservoir_sampling">Wikipedia: Reservoir sampling</a>, which states Algorithm R with its proof and covers the faster skipping and weighted variants.</p>
+    <ul>
+      <li><a href="https://www.cs.princeton.edu/courses/archive/spr02/cs493/lec19.pdf">Princeton COS 493, Lecture 19</a>: the k/n proof in lecture-note form.</li>
+      <li><a href="https://www.bibsonomy.org/bibtex/2f84bfb9fa8054f24e45dc2d4eb06cb70/ytyoun">Vitter (1985), "Random Sampling with a Reservoir"</a>: the original paper's record.</li>
+      <li><a href="https://research.nvidia.com/labs/rtr/publication/bitterli2020spatiotemporal">Bitterli et al. (2020), ReSTIR</a>: weighted reservoirs in real-time ray tracing.</li>
+    </ul>
+  </section>
+
+  <footer class="closing">
+    <p>Anything unclear? Ask me in the chat; I can explain any part again, another way, or go deeper.</p>
+    <p>When you want to check what stuck, ask me for a quiz on this lesson with <code>/quiz</code>.</p>
+  </footer>
+
+</main>
+<script>
+  document.querySelectorAll("[data-check]").forEach(function (box) {
+    var buttons = box.querySelectorAll("button[data-correct]");
+    var out = box.querySelector(".feedback");
+    var list = box.querySelector(".why-list");
+    buttons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        var right = button.getAttribute("data-correct") === "true";
+        buttons.forEach(function (b) {
+          b.disabled = true;
+          if (b.getAttribute("data-correct") === "true") { b.classList.add("right"); }
+        });
+        if (!right) { button.classList.add("wrong"); }
+        if (out) { out.textContent = (right ? "Right. " : "Not quite. ") + (button.getAttribute("data-why") || ""); }
+        if (list) {
+          buttons.forEach(function (b) {
+            if (b === button) { return; }
+            var li = document.createElement("li");
+            var tag = b.getAttribute("data-correct") === "true" ? "Right answer: " : "Also wrong: ";
+            li.textContent = tag + b.textContent + " - " + (b.getAttribute("data-why") || "");
+            list.appendChild(li);
+          });
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>

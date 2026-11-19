@@ -1,0 +1,75 @@
+{
+  "id": "0001",
+  "items": [
+    {
+      "id": "q1",
+      "answer": 0.025,
+      "tolerance": 0.0005,
+      "rationale": "Customer 40 is accepted with probability k/i = 5/40, and an accepted record lands on a uniformly random slot, 1/5, so the chance of slot 3 is 5/40 x 1/5 = 1/40 = 0.025. Common wrong answers: 0.125 is the chance of entering at all, forgetting the specific slot; 0.2 is the slot chance alone, forgetting acceptance; 0.005 (1/200) multiplies by 1/k twice. The right method with an arithmetic slip is partial."
+    },
+    {
+      "id": "q2",
+      "answer": "the first record, because randint(1, i) never returns 0, so slot R[0] is never overwritten",
+      "accepted": [
+        "the first record, since j is never 0 so R[0] is never replaced",
+        "record 0 (the first one); randint starts at 1 so slot 0 is never overwritten",
+        "the first record stays forever because the random range 1..i skips index 0",
+        "The first record in the stream: the code draws j from 1 to i instead of 0 to i, so j is never 0 and R[0] keeps the first record on every run.",
+        "first record, off-by-one in randint(1, i)"
+      ],
+      "rationale": "With 0-based i, the range should be randint(0, i) so that record i+1 enters with probability k/(i+1) and every slot can be hit. Drawing from 1..i means j is never 0, so R[0], which holds the first record, is never overwritten (and the acceptance chance is also wrong, (k-1)/i). This is M2, an off-by-one in the random range. Naming the first record without the cause, or naming the cause without the record, is partial. Answering 'the last record' or 'record k' is wrong."
+    },
+    {
+      "id": "q3",
+      "answer": "d",
+      "rationale": "Algorithm R accepts event i with probability k/i and overwrites a uniformly random slot; every event then ends in the sample with probability 100/n. (a) Keeping the first 100 gives later events zero chance, biasing the sample toward the warm-up period. (b) Evicting the oldest instead of a random slot breaks the survival calculation: an early event is evicted after a fixed number of later acceptances, so early events end up less likely than late ones (M6). (c) A fixed 1/2 makes recent events far more likely, because an early event must survive many coin flips (M1). (e) 100/N uses a length known only after the run; if the run is longer or shorter than planned, the sample is the wrong size and not uniform (M1). (f) Every 1000th event with oldest dropped keeps only the latest stored events, a recency bias, and its sample size depends on the run length.",
+      "distractors": {"b": "M6", "c": "M1", "e": "M1"}
+    },
+    {
+      "id": "q4",
+      "answer": 0.333,
+      "tolerance": 0.002,
+      "rationale": "Each later record m evicts record 4 with probability (k/m)(1/k) = 1/m, so record 4 survives step m with probability (m-1)/m. The product over m = 5 to 12 telescopes to 4/12 = 0.333. Common wrong answers: 0.25 is k/n, the unconditional final chance, ignoring that record 4 is already in (M5); 0.917 (11/12) is survival of only the last step; 0.083 (1/12) confuses survival with being the one record chosen."
+    },
+    {
+      "id": "q5",
+      "answer": "Early records face more later records that could evict them, and this exactly balances their higher entry chance: k/i to enter times i/n to survive gives k/n for every record.",
+      "accepted": [
+        "Early records get in more easily but have more chances to be evicted later; entry k/i times survival i/n is k/n for every record.",
+        "the higher entry chance of early records is cancelled by more eviction steps, so each record ends with probability k/n",
+        "k/n, because entering with k/i and surviving with i/n multiply to k/n for every i",
+        "Each record survives each later step m with probability (m-1)/m, which telescopes to i/n, and k/i times i/n is k/n, so early records' advantage at entry is lost to more evictions."
+      ],
+      "rationale": "The full answer needs both the reason (more chances of eviction for early records, or the k/i x i/n calculation) and the probability k/n. The probability alone without a reason, or a correct reason with no probability or the wrong one, is partial. Agreeing that early records are favored is M3. Saying the probability is k/i, or 1/n, is wrong: k/i is only the chance of entering at step i (M5), and 1/n ignores that k records are kept."
+    },
+    {
+      "id": "q6",
+      "answer": "c",
+      "rationale": "Record 7 starts in the reservoir and must survive records 11 to 1000; each step m keeps it with probability (m-1)/m, and the product from m = 11 to 1000 is 10/1000 = 0.01, which is k/n, the same as every other record. (a) 0.007 applies the survival formula i/n with i = 7, but for the first k records survival starts after record k, so the product is k/n. (b) 0.1 is 1/k, the chance of one particular slot, not the chance of being in the sample. (d) 1.0 assumes a record that enters with certainty stays, ignoring later evictions (M3). (e) 0.001 is 1/n, forgetting that the reservoir holds k records.",
+      "distractors": {"d": "M3"}
+    },
+    {
+      "id": "q7",
+      "answer": 0.3,
+      "tolerance": 0.005,
+      "rationale": "In one-item weighted reservoir sampling, each candidate ends as the sample with probability equal to its share of the total weight: 3 / (4 + 1 + 3 + 2) = 3/10 = 0.3. Check: it enters with 3/8 and survives the fourth candidate with 8/10, and 3/8 x 8/10 = 0.3. Common wrong answers: 0.375 (3/8) is the chance of entering at its step, not the final chance (M5); 0.25 treats all lights as equally likely; 0.333 (3/9) adds a weight wrongly."
+    },
+    {
+      "id": "q8",
+      "answer": "only the light with the largest weight is ever chosen, so the other lights are never sampled and their light is missing from the image",
+      "accepted": [
+        "only the brightest (heaviest) light; the dimmer lights never get sampled, so the image is biased and missing their contribution",
+        "the max-weight light every time; the others are ignored so the image is wrong (too dark, missing lights)",
+        "Only the heaviest light wins, deterministically, so dimmer lights contribute nothing and the rendered lighting is biased.",
+        "always the largest-weight light; lights other than it never appear in the image"
+      ],
+      "rationale": "The correct update replaces with probability w / w_sum, so every light with positive weight is chosen in proportion to its share and its light is averaged in over frames. Replacing only on a larger weight makes the choice deterministic: the maximum-weight light wins every time (M4), and the other lights' contribution is never sampled, so the image is biased, missing or underestimating their light. Naming the brightest light without the effect on the image, or the effect without saying only the heaviest light is chosen, is partial. Saying 'the last light' or 'it still works but is noisier' is wrong."
+    },
+    {
+      "id": "q9",
+      "answer": 0.667,
+      "tolerance": 0.002,
+      "rationale": "At the third candidate, w_sum becomes 2 + 6 + 4 = 12, and the third light replaces the stored one with probability 4/12; the stored light survives with 1 - 4/12 = 8/12 = 0.667. Common wrong answers: 0.5 (6/12) is the second light's unconditional final chance, ignoring that it is already stored (M5); 0.333 (4/12) is the replacement chance, not the survival chance; 0.6 (6/10) divides by the wrong sum."
+    }
+  ]
+}

@@ -22,34 +22,34 @@ An example of a finished entry:
 
 - Kind: skill
 - Step added: c1-skills
-- Purpose: TODO
+- Purpose: To make sure the quizzes challenge the student and ensure that they actually understand everything.
 - With and without: reviews/c1-skills.md, Round 1 (without) and Round 2 (with)
-- Review: TODO
+- Review: The quizzes now encourage critical thinking and actually test understanding with more free response questions or mcq with more options. 
 - Kept in final: TODO
 
 ### grade
 
 - Kind: skill
 - Step added: c1-skills
-- Purpose: TODO
+- Purpose: To ensure that each multiple choice option is explained fully and clearly.
 - With and without: reviews/c1-skills.md, Round 2 (without) and Round 3 (with)
-- Review: TODO
+- Review: The multiple choice options are now all explained thouroughly. 
 - Kept in final: TODO
 
 ### tutor
 
 - Kind: skill
 - Step added: c1-skills
-- Purpose: TODO
+- Purpose: Attempt to help give the tutor more guidance on how to respond without giving away the answer.
 - With and without: reviews/c1-skills.md, Round 3 (without) and Round 4 (with)
-- Review: TODO
+- Review: I feel like it did better not hinting at the correct answer with its questions.
 - Kept in final: TODO
 
 ### teach
 
 - Kind: skill
 - Step added: c1-skills
-- Purpose: TODO
+- Purpose: To add more structure to the lessons and help me actually learn the content.
 - With and without: reviews/c1-skills.md, Round 4 (without) and the c1-skills full run (with)
-- Review: TODO
+- Review: The structure is great now and it is much more condusive to my learning style.
 - Kept in final: TODO
