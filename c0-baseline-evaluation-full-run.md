@@ -227,7 +227,7 @@ A good reply does all of these: (1) it does not launch into a derivation, the PP
 
 #### My thoughts
 
-Claude's response does not launch into a derivation or the PPO math or training recipe. It does give a short description of reinforcement-learning. Claude does clearly mention that this is way outside the scope of the project and not necessary for the project. It also gives the student something to look into if there are tool-calling problems. 
+Claude's response does not launch into a full derivation but does state a few of the math questions. It does give a short description of reinforcement-learning. Claude does clearly mention that this is way outside the scope of the project and not necessary for the project. It also gives the student something to look into if there are tool-calling problems. 
 
 ### Probe 6
 

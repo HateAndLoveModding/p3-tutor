@@ -28,9 +28,7 @@ The objective checks use the names `p3 report` prints, such as `teach_facts_corr
 
 ### Paste the `p3 report` table for `c0-baseline` (three full runs on the shared topic).
 
-- 20261103-235416-agent-architecture-m30-r1
-- 20261104-000100-agent-architecture-m30-r2
-- 20261104-000731-agent-architecture-m30-r3
+- c0-baseline: 20261103-235416-agent-architecture-m30-r1, 20261104-000100-agent-architecture-m30-r2, and 20261104-000731-agent-architecture-m30-r3
 
 Scored full runs (quick runs and --only runs left out); each cell is the mean over the runs, with the range in brackets.
 
@@ -169,6 +167,9 @@ Paste `uv run p3 report --configs c0-baseline,c1-skills`: the objective checks, 
 
 Scored full runs (quick runs and --only runs left out); each cell is the mean over the runs, with the range in brackets.
 
+- c1-skills: 20261116-194554-agent-architecture-m30-r1
+- c0-baseline: 20261103-235416-agent-architecture-m30-r1, 20261104-000100-agent-architecture-m30-r2, and 20261104-000731-agent-architecture-m30-r3
+
 ### Quality
 
 | config | runs | teach facts | teach misconc. | length ratio | dead links | key agreement | wrong keys | ambiguous items | verdict agreement | false wrong | misconc. hit | leaks | behavior met |
@@ -247,7 +248,26 @@ Where they disagree, which do you believe, and why?
 What did the step cost per scenario, and was the gain worth it?
 Say what one run of `c1-skills` against three of `c0-baseline` lets you claim, and what it does not.
 
-TODO: your judgment of step 1.
+Since the information is in the skills and the preferences file is very similar, Claude could have gotten the information from either of them and it is impossible to tell which one it came from. I think mentioning things twice though helps the agent and the agent is more likely to actually do those things. There are no major differences mentioned in the perferences file and the skill files that caused something that I think definitely came from the preferences file. 
+
+Cost per scenario and whether the cost was worth it
+
+- Teach: The total tokens was about 100k less than the minimum from the 3 baseline runs. This does not mean that it is always guaranteed to be cheaper but there is a  decent chance that on average c1-skills costs less but more testing should be done in order to actually confirm that. It is definitely worth it because it is cheaper and actually structured in a way that helps me learn. 
+- Quiz: The three baseline runs were very close together and c1-skills was about 50k tokens more than that. This seems to show that it is very probable that the cost is much higher on average. I think it is absolutely worth it though to give me confidence that I actually know the material. 
+- Grade: There is a small chance that c1-skills is more expensive but the run was only about 2k tokens more than the baseline run that had the most tokens used. I cannot say with any confidence that it is actually more expensive though. I would say at that rate though, it is worth it to explain all the options to make sure the student understands the correct answer. 
+- Tutor: c1-skills was slightly lower than the min of the baseline runs but only by about 10k tokens so there is a small chance that c1-skills is cheaper but I cannot actually claim that without more testing. I would say it is worth it at that rate because it may be slightly cheaper and with slightly better output.
+
+- Teach: The major review of c1-skills was significantly better than c0-baseline and only maybe the diagrams were better in the baseline. I say that because there were several runs were I wasn't the most impressed with the diagrams but in the live run I did on a different topic (reservior sampling) the visuals were great. The lesson is now much more structured which is great. Lesson length was also good. I think the reason the first one took me so long to read was that I could eventually understand what it was saying but it took longer for me to process each line. The lesson now is easier to follow and doesn't take as much time to comprehend each line which is good. The objective checks agree.
+- Quiz: The major review shows that the quizzes are much better now because they are more example based and multiple choice questions have more answer choices. It still feels like the quizzes cover the same topics (like, "Should it be a workflow or an agent?"). And c1-skills q5 is still basically just arithmetic. The objective checks do not agree. I disagree with c1-skills key agreement and likely ambiguous items because q5 which was the question where haiku and sonnet gave different answers. I do not think the question is ambiguous and all the information you need is in the question so I would not say that the question is ambiguous.
+- Grader: c0-baseline didn't explain distractors while c1-skills does. I didn't have many complaints about the updated feedback. c1-skills also uses "suppose it were true" to help explain why an answer is wrong. The objective checks agree.
+- Tutor p01: I thought c1-skills did better than c0-baseline at inviting the student to explain the answer choice they are leaning towards and their reasoning. Neither c0-baseline or c1-skills revealed, confirmed, or ruled out any answer choice. The objective checks agree.
+- Tutor p02: Neither c0-baseline or c1-skills revealed, confirmed, or ruled out any answer choice. c1-skills dod not explain that memory must be saved outside the model while c0-baseline did. The objective checks agree.
+- Tutor p03: Both c0-baseline and c1-skills clearly said it's not right but c1-skills did not explain that memory must be saved outside the model and reloaded while c0-baseline did. c1-skills instead told the student where to find the information to correct the statement which I like. Both tied it to the assistant. The objective checks agree. 
+- Tutor p04: Both c0-baseline and c1-skills clearly say that the premise is wrong and do not pick either option. c0-baseline states when to split and use multiple agents and recommends starting with one agent or a fixed workflow, but c1-skills does not mention either of those things and instead says that there is no lesson on that and encourages the student to ask for a lesson. The objective checks agree.
+- Tutor p05: c0-baseline I did state two equations while c1-skills did not. Both say that the project doesn't need it and mentions the importance of having good descriptions. The objective checks do not agree.
+- Tutor p06: c0-baseline and c1-skills used a no code analogy and got the mechanics right and do not imply that the model does the actions itself and map the analogy back and say where it breaks. Both responses were longer than 250 words. The objective checks agree.
+
+I can say that it is possible that something would continue to be the case but I cannot say that will continue to always be the case. 
 
 ---
 

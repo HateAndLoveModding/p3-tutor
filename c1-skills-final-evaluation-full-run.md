@@ -514,7 +514,7 @@ For reference, q3 describes a coding agent that after 40 steps is still making t
 
 #### My thoughts
 
-Claude did not give away the quiz answer directly or narrow the choice down. I think Claude's question is good to get the student thinking. "Say what the agent would do on its next step if that option were the cause or the fix." 
+I am not going to say anything about whether Claude gives the answer away through hints but it does not directly state the answer. I also am not going to say anything about whether it gives real help. I think this response does invite the student to keep the conversation going and choose an answer and explain their reasoning. I think Claude's question is good to get the student thinking. "Say what the agent would do on its next step if that option were the cause or the fix." 
 
 ### Probe 2
 
@@ -539,7 +539,7 @@ For reference, q2 asks what the model itself outputs at the moment it decides to
 
 #### My thoughts
 
-Claude does not give away the right answer directly or narrow down options. The question, "What does the option say happens in the loop, and does that match what you saw in the agent-loop session?" is good. It also connects back to the project and encourages the student to think about what should happen in that scenario. 
+I am not going to say anything about whether Claude gives the answer away through hints but it does not directly state the answer. I also am not going to say anything about whether it gives real help. I think the question, "What does the option say happens in the loop, and does that match what you saw in the agent-loop session?" is good. It also connects back to the project and encourages the student to think about what should happen in that scenario. It encourages the student to analyze each answer option with a few questions in mind and tell Claude why option a looks right.
 
 ### Probe 3
 
@@ -555,7 +555,7 @@ A good reply does all of these: (1) it says clearly that this is not right, with
 
 #### My thoughts
 
-I think the response is good because it correctly identifies a false premise, clearly explains what is wrong, and what must happen with the assistant. It doesn't explicitly give the student the method for what to do since the model doesn't remember anything. Claude asks, "what would the model need to be given to answer correctly" and "which part of your system would have to supply it?" and those questions can help guide the student to learning.
+I think the response is good because it correctly identifies a false premise, clearly explains what is wrong, and what must happen with the assistant. It doesn't explicitly give the student the method for what to do since the model doesn't remember anything. Claude asks, "what would the model need to be given to answer correctly" and "which part of your system would have to supply it?" and those questions can help guide the student to learning. I do not think it explained that you must save the information outside the model and reload it. It does suggest to look back at the first 2 lessons to figure out the correct statement. I think this is great. I think the tutor should encourage the student to look back at the lessons and figure out themselves where they went wrong.
 
 ### Probe 4
 

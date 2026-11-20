@@ -14,3 +14,8 @@ Each line: the date, the fact in my words, and the guide page that asks for it.
 
 - 2026-11-09: I have read KNOWN-GAPS.md. (guide/03-baseline.html, "KNOWN-GAPS.md: what I saw")
 - 2026-11-09: I have read reviews/README.md. (guide/03-baseline.html, "Then read reviews/README.md")
+
+## 4 Step 1, c1-skills
+
+- 2026-11-20: I read every output of the c1-skills full run, with the lesson opened in my browser. (guide/08-step1-skills.html, "The Run line and the outputs")
+- 2026-11-20: In my c1-skills live tries I started with a lesson request and saw Skill(teach), Skill(quiz), Skill(grade) and Skill(tutor) each load. (guide/08-step1-skills.html, "Your own sessions route requests through tutor/CLAUDE.md")
