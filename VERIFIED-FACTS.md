@@ -19,3 +19,4 @@ Each line: the date, the fact in my words, and the guide page that asks for it.
 
 - 2026-11-20: I read every output of the c1-skills full run, with the lesson opened in my browser. (guide/08-step1-skills.html, "The Run line and the outputs")
 - 2026-11-20: In my c1-skills live tries I started with a lesson request and saw Skill(teach), Skill(quiz), Skill(grade) and Skill(tutor) each load. (guide/08-step1-skills.html, "Your own sessions route requests through tutor/CLAUDE.md")
+- 2026-11-20: I took the c1-skills full run's quiz before I opened its key; I lost the answers I wrote then and rewrote them from memory in c1-skills-final-evaluation-full-run.md. (guide/08-step1-skills.html, "The Run line and the outputs")
