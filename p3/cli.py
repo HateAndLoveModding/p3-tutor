@@ -4,7 +4,7 @@
     p3 snapshot   copy the tutor's config (tutor/) into configs/<name>/
     p3 bench      run a config on a topic's scenarios with claude -p, and score the run
     p3 score      score a run again (the objective checks and the model-scored ones)
-    p3 report     Markdown tables of the scored runs, for EVAL.md
+    p3 report     Markdown tables of the scored runs; --write saves them as REPORT.md
     p3 compare    blind side-by-side comparison of two configs' outputs, then the reveal
     p3 check      is everything in place and unchanged (CI runs this)
     p3 next       where you are on the project's map, and the one next thing to do
@@ -39,9 +39,10 @@ def parser() -> argparse.ArgumentParser:
     sn.add_argument("--force", action="store_true", help="replace an existing snapshot of that name")
 
     be = sub.add_parser("bench", help="run a config on a topic's scenarios with claude -p, then score the run")
-    be.add_argument("--config", required=True, help="a snapshot under configs/, or live for tutor/ as it is now (not committed)")
-    be.add_argument("--topic", default=util.SHARED_TOPIC, help=f"a topic in bench/topics/ or bench/own/ (default {util.SHARED_TOPIC})")
-    be.add_argument("--repeats", type=int, default=1, metavar="N", help="run the whole bench N times, one after another (default 1)")
+    be.add_argument("--config", help="a snapshot under configs/, or live for tutor/ as it is now (not committed); required unless --resume")
+    be.add_argument("--resume", nargs="?", const="", default=None, metavar="RUN_ID", help="finish a repeat that a usage limit or sign-in problem stopped, running only its missing scenarios (no value: the newest; with several, give a run id); --quick, --only, --minutes, --topic and --repeats come from the stopped repeat")
+    be.add_argument("--topic", help=f"a topic in bench/topics/ or bench/own/ (default {util.SHARED_TOPIC})")
+    be.add_argument("--repeats", type=int, default=None, metavar="N", help="run the whole bench N times, one after another (default 1)")
     be.add_argument("--quick", action="store_true", help="teach, quiz, the first grade scenario and the first two tutor probes, once")
     be.add_argument("--minutes", type=int, metavar="M", help="the lesson length to ask for (default: the topic's, 30 on the shared topic)")
     be.add_argument("--jobs", type=int, default=1, metavar="N", help="run up to N scenarios of a repeat at the same time (default 1)")
@@ -55,13 +56,14 @@ def parser() -> argparse.ArgumentParser:
     sc.add_argument("--offline", action="store_true", help="skip the link checks")
     sc.add_argument("--no-model", action="store_true", help="skip the model-scored checks (the judge and the solvers); the deterministic checks still run")
 
-    re_ = sub.add_parser("report", help="Markdown tables of the scored runs, for EVAL.md")
-    re_.add_argument("--topic", default=util.SHARED_TOPIC, help=f"the topic (default {util.SHARED_TOPIC})")
+    re_ = sub.add_parser("report", help="Markdown tables of the scored runs; --write saves them all as REPORT.md")
+    re_.add_argument("--topic", help=f"the topic (default {util.SHARED_TOPIC})")
     re_.add_argument("--configs", metavar="A,B,...", help="only these configs, in this order (default: every config with a scored run)")
     re_.add_argument("--minutes", type=int, metavar="M", help="only runs at this lesson length (default: every length, one row each)")
     re_.add_argument("--quick", action="store_true", help="report the quick runs instead of the full ones")
     re_.add_argument("--teach-only", action="store_true", help="report the runs of the teach scenario alone (p3 bench --only teach, the length study) instead of the full runs")
     re_.add_argument("--reviews", action="store_true", help="print only the table of your 1 to 5 ratings from the major reviews in reviews/ (the other options do not apply)")
+    re_.add_argument("--write", action="store_true", help="write REPORT.md at the repo root: the shared topic's tables, the ablation, each test topic's tables and the lesson-length study, for your write-up (takes no other option)")
 
     co = sub.add_parser("compare", help="blind side-by-side comparison of two configs' outputs on one job")
     co.add_argument("configs", nargs="*", metavar="CONFIG", help="the two configs to compare, such as c0-baseline final")
