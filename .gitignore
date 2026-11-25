@@ -5,6 +5,7 @@ __pycache__/
 *.egg-info/
 # uv run writes a lock file the first time; p3 has no dependencies, so there is nothing to lock
 uv.lock
+shell.nix
 
 # Operating systems
 .DS_Store
