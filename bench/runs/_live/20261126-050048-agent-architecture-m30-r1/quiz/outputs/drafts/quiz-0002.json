@@ -1,0 +1,50 @@
+{
+  "id": "0002",
+  "objective": "O4",
+  "title": "Workflows vs. agents: who owns the control flow",
+  "items": [
+    {
+      "id": "q1",
+      "type": "short",
+      "objective": "O4",
+      "stem": "Your teammate shows you two designs for the manual-lookup part of the assistant. Design A: the code always calls search_manuals first, then always calls check_training_record second, then writes the answer, in that exact order for every question. Design B: after the student's question, the model is called, and whichever action it requests (search_manuals, check_training_record, or a final answer) is carried out and fed back to the model, which then decides the next action itself, repeating until it gives a final answer. Which design is the workflow and which is the agent, and what one feature of each design is it that tells you so?"
+    },
+    {
+      "id": "q2",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "In one design for the assistant, each time a tool's result comes back, that result is added to what the model has seen so far, the model is called again, and whatever it outputs next, another tool request or a final answer, is what runs next; this repeats until the model's own output is a final answer instead of a tool request. In this design, what decides which tool runs next, and when the loop stops?",
+      "options": [
+        {"id": "a", "text": "The program's code, following a sequence the developer wrote in advance"},
+        {"id": "b", "text": "The user, approving or picking the next action from a menu each time"},
+        {"id": "c", "text": "The model, deciding from the current state and the results that have come back so far"},
+        {"id": "d", "text": "A classifier that reads the question once at the start and fixes the whole path before any tool runs"},
+        {"id": "e", "text": "Whichever tool was called last time for a similar-looking question, by lookup"}
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "short",
+      "objective": "O4",
+      "stem": "A student scans their ID at check-in. Every single time, the assistant must: look up the student's name, check whether their waiver is signed, and if it is not, print a blank waiver form, always in that order, for every student, with no case where the order changes or a step is skipped for a different reason. Would you build this part of the assistant as a fixed workflow or as an agent? Give the one reason, about this task, that makes it so."
+    },
+    {
+      "id": "q4",
+      "type": "short",
+      "objective": "O4",
+      "stem": "At the laser-cutter check-out desk, closing a reservation always takes the same three steps in the same order, for every single close-out with no exceptions: mark the reservation complete, log the two material-use fields the staff member typed in, and email the sponsor's monthly-usage tracker. Your teammate argues the team should still build this part as an agent: \"If the model is making the decisions, we're ready in case we add more steps later, and the agent design already worked well for the manual lookups.\" Should you agree? Give the one reason, about this task as it stands today, that settles it."
+    },
+    {
+      "id": "q5",
+      "type": "short",
+      "objective": "O4",
+      "stem": "A student can ask the assistant almost anything: whether a machine is free, what training it needs, how to fix a jam, or some mix of these in one message, and which facts are needed, and in what order, depends on the specific question and on what the earlier steps turn up. Your teammate builds this part as an agent: the model is given the three tools (check_calendar, search_manuals, check_training_record) and, after each result comes back, decides the next action itself, stopping once it has enough to answer. A design reviewer asks you to judge the design before it ships. Is it sound for this task? Give the one reason, about the task, that settles it."
+    },
+    {
+      "id": "q6",
+      "type": "short",
+      "objective": "O4",
+      "stem": "After a booking is approved, the assistant always does the same three things in the same order, for every booking, with no exceptions: re-check that the slot is still free, write the confirmed booking to the calendar, then send the student a confirmation text. Your teammate builds this part by calling the model repeatedly in a loop and letting it decide, at each step, whether to check the calendar, write the booking, or send the text, and when to stop. A design reviewer flags this. What is wrong with this design, and what should replace it?"
+    }
+  ]
+}

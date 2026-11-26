@@ -1,0 +1,242 @@
+{
+  "run_id": "20261126-131617-agent-architecture-m30-r1",
+  "config": "live",
+  "config_hash": "sha256:9cefa9483a4dd407c1ff04aa18c2ecf73287aa83364f3df79ae113bfeee39f40",
+  "topic": "agent-architecture",
+  "topic_hash": "sha256:15e7410b31c44309b8c89066f95db4318ca9706ed790aeeb431d4f1a89552410",
+  "topic_commit": "d78c19ff41e06bb095324fe1d5db55bbf74aed09",
+  "repeat": 1,
+  "minutes": 30,
+  "quick": true,
+  "started_at": "2026-11-26T13:16:17Z",
+  "finished_at": "2026-11-26T13:41:12Z",
+  "claude_version": "2.1.223 (Claude Code)",
+  "p3_version": "0.2.0",
+  "platform": "Linux-6.18.64-x86_64-with-glibc2.42",
+  "model": "sonnet",
+  "allowed_tools": [
+    "Glob",
+    "Grep",
+    "WebSearch",
+    "WebFetch"
+  ],
+  "entries": {
+    "teach": "/teach",
+    "tutor": "/tutor",
+    "quiz": "/quiz",
+    "grade": "/grade"
+  },
+  "only": null,
+  "ancestor_memory": [],
+  "scenarios": [
+    {
+      "id": "teach",
+      "job": "teach",
+      "entry": "/teach",
+      "status": "ok",
+      "duration_ms": 551324,
+      "num_turns": 43,
+      "tokens": {
+        "input": 56188,
+        "output": 51208,
+        "cache_read": 1761023,
+        "cache_write": 131476
+      },
+      "cost_usd_list": 2.156439,
+      "web_searches": 4,
+      "web_fetches": 2,
+      "subagents": {
+        "spawned": 0,
+        "max_depth": 0,
+        "by_type": {}
+      },
+      "permission_denials": [],
+      "outputs": [
+        "NOTES.md",
+        "RESOURCES.md",
+        "cheatsheets/context-and-memory.html",
+        "lessons/0001-context-and-memory.html"
+      ],
+      "changed": [
+        "NOTES.md"
+      ],
+      "deleted": [],
+      "models": [
+        "claude-haiku-4-5-20251001",
+        "claude-sonnet-5"
+      ],
+      "search_queries": [
+        "context window definition tokens LLM agent official documentation",
+        "Anthropic \"effective context engineering for AI agents\"",
+        "retrieval augmented generation explainer what is RAG official",
+        "Anthropic documentation \"token\" definition count tokens"
+      ],
+      "fetch_urls": [
+        "https://www.anthropic.com/research/effective-context-engineering-for-ai-agents",
+        "https://aws.amazon.com/what-is/retrieval-augmented-generation/"
+      ],
+      "exit_code": 0,
+      "claude_version": "2.1.223"
+    },
+    {
+      "id": "quiz",
+      "job": "quiz",
+      "entry": "/quiz",
+      "status": "ok",
+      "duration_ms": 731978,
+      "num_turns": 22,
+      "tokens": {
+        "input": 5511,
+        "output": 63811,
+        "cache_read": 877014,
+        "cache_write": 119004
+      },
+      "cost_usd_list": 1.850193,
+      "web_searches": 0,
+      "web_fetches": 1,
+      "subagents": {
+        "spawned": 1,
+        "max_depth": 1,
+        "by_type": {
+          "quiz-reviewer": 1
+        }
+      },
+      "permission_denials": [],
+      "outputs": [
+        "drafts/key-0002.json",
+        "drafts/quiz-0002.json",
+        "keys/0002.json",
+        "quizzes/0002.json",
+        "review-records/0002-quiz.md"
+      ],
+      "changed": [],
+      "deleted": [],
+      "models": [
+        "claude-haiku-4-5-20251001",
+        "claude-sonnet-5"
+      ],
+      "search_queries": [],
+      "fetch_urls": [
+        "https://www.anthropic.com/engineering/building-effective-agents"
+      ],
+      "exit_code": 0,
+      "claude_version": "2.1.223"
+    },
+    {
+      "id": "grade-s1",
+      "job": "grade",
+      "entry": "/grade",
+      "status": "ok",
+      "duration_ms": 152696,
+      "num_turns": 20,
+      "tokens": {
+        "input": 20,
+        "output": 13345,
+        "cache_read": 448520,
+        "cache_write": 52756
+      },
+      "cost_usd_list": 0.651327,
+      "web_searches": 0,
+      "web_fetches": 0,
+      "subagents": {
+        "spawned": 0,
+        "max_depth": 0,
+        "by_type": {}
+      },
+      "permission_denials": [
+        "Bash",
+        "Bash",
+        "Bash"
+      ],
+      "outputs": [
+        "NOTES.md",
+        "grades/0001-s1.json",
+        "learning-records/0003-tool-calls-are-requests-not-actions.md",
+        "learning-records/0004-automatic-cross-session-memory.md"
+      ],
+      "changed": [
+        "NOTES.md"
+      ],
+      "deleted": [],
+      "models": [
+        "claude-sonnet-5"
+      ],
+      "search_queries": [],
+      "fetch_urls": [],
+      "exit_code": 0,
+      "submission": "s1",
+      "claude_version": "2.1.223"
+    },
+    {
+      "id": "tutor-p01",
+      "job": "tutor",
+      "entry": "/tutor",
+      "status": "ok",
+      "duration_ms": 31910,
+      "num_turns": 8,
+      "tokens": {
+        "input": 8,
+        "output": 2246,
+        "cache_read": 107827,
+        "cache_write": 31894
+      },
+      "cost_usd_list": 0.257426,
+      "web_searches": 0,
+      "web_fetches": 0,
+      "subagents": {
+        "spawned": 0,
+        "max_depth": 0,
+        "by_type": {}
+      },
+      "permission_denials": [],
+      "outputs": [],
+      "changed": [],
+      "deleted": [],
+      "models": [
+        "claude-sonnet-5"
+      ],
+      "search_queries": [],
+      "fetch_urls": [],
+      "exit_code": 0,
+      "probe": "p01",
+      "claude_version": "2.1.223"
+    },
+    {
+      "id": "tutor-p02",
+      "job": "tutor",
+      "entry": "/tutor",
+      "status": "ok",
+      "duration_ms": 27242,
+      "num_turns": 8,
+      "tokens": {
+        "input": 8,
+        "output": 1722,
+        "cache_read": 104459,
+        "cache_write": 32122
+      },
+      "cost_usd_list": 0.249924,
+      "web_searches": 0,
+      "web_fetches": 0,
+      "subagents": {
+        "spawned": 0,
+        "max_depth": 0,
+        "by_type": {}
+      },
+      "permission_denials": [],
+      "outputs": [],
+      "changed": [],
+      "deleted": [],
+      "models": [
+        "claude-sonnet-5"
+      ],
+      "search_queries": [],
+      "fetch_urls": [],
+      "exit_code": 0,
+      "probe": "p02",
+      "claude_version": "2.1.223"
+    }
+  ],
+  "claude_versions": [
+    "2.1.223"
+  ]
+}

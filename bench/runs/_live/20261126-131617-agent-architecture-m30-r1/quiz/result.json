@@ -1,0 +1,77 @@
+{
+  "is_error": false,
+  "duration_api_ms": 730108,
+  "num_turns": 22,
+  "stop_reason": "end_turn",
+  "session_id": "bf5d5ae3-fb0e-4429-9580-83065d23a292",
+  "total_cost_usd": 1.85019295,
+  "usage": {
+    "input_tokens": 30,
+    "cache_creation_input_tokens": 80599,
+    "cache_read_input_tokens": 804137,
+    "output_tokens": 33774,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 80599,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 271,
+        "cache_read_input_tokens": 85548,
+        "cache_creation_input_tokens": 366,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 366
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard"
+  },
+  "modelUsage": {
+    "claude-sonnet-5": {
+      "inputTokens": 40,
+      "outputTokens": 63483,
+      "cacheReadInputTokens": 877014,
+      "cacheCreationInputTokens": 119004,
+      "webSearchRequests": 0,
+      "costUSD": 1.84308195,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 64000,
+      "canonicalModel": "claude-sonnet-5",
+      "provider": "firstParty"
+    },
+    "claude-haiku-4-5-20251001": {
+      "inputTokens": 5471,
+      "outputTokens": 328,
+      "cacheReadInputTokens": 0,
+      "cacheCreationInputTokens": 0,
+      "webSearchRequests": 0,
+      "costUSD": 0.007111,
+      "contextWindow": 200000,
+      "maxOutputTokens": 32000,
+      "canonicalModel": "claude-haiku-4-5",
+      "provider": "firstParty"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "Quiz 0002 is written: `quizzes/0002.json` and its key `keys/0002.json`, 6 items on objective O4. O4 hasn't been taught yet (no lesson exists), so this quiz checks the objective itself at the level its wording states — flag that if Riley wants the lesson first.\n\nLearning goals covered, two items each:\n- Telling a workflow from an agent by who decides the next step and when to stop (q1, q2)\n- Deciding whether a fixed workflow or an agent is the better fit for a given task, tied to a reason (q3, q4)\n- Recognizing when a design mismatches the task — misusing an agent on a fully fixed task, or correctly using an agent on an unpredictable one (q5, q6)\n\nWant to take it in the chat now, or hold off until there's a lesson on O4?",
+  "ttft_ms": 3348,
+  "ttft_stream_ms": 1467,
+  "time_to_request_ms": 84,
+  "type": "result",
+  "duration_ms": 731075,
+  "uuid": "4a239fe3-87ba-469d-920c-4fd28f65f114"
+}

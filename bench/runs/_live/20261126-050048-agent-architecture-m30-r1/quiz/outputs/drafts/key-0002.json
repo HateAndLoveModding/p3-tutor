@@ -1,0 +1,56 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "Design A is the workflow, because its order of calls (search_manuals, then check_training_record) is fixed in the code no matter what the question is. Design B is the agent, because the model itself decides, after each result comes back, which action to take next and when to stop.",
+      "accepted": [
+        "A is the workflow since the code always runs the same two calls in the same order; B is the agent since the model picks the next action and the stopping point itself, call by call.",
+        "Workflow: A, its sequence never changes. Agent: B, the model chooses the next step from the results so far."
+      ],
+      "rationale": "The tell is who decides the next step: in A, the sequence (search_manuals then check_training_record) is written into the code ahead of time and never varies, so the code owns the control flow, that is a workflow. In B, the model is handed each result and chooses the next action itself, including when to stop, that is an agent, because the model owns the control flow. A common partial answer names only one design correctly, or says 'B is the agent because it calls more tools,' which gets the label right but the reason wrong: the number of tools called is not what makes it an agent, the model's own choice of what to do next is."
+    },
+    {
+      "id": "q2",
+      "answer": "c",
+      "rationale": "By definition this is an agent's loop: the model itself is handed the current state and every result so far, and its own output is what determines the next tool call and, eventually, the stop. Option a assigns this to the program's code instead; it is tempting because the code does literally carry out every call in both a workflow and this design, so it is easy to mistake 'the code executes it' for 'the code decided it,' when here the code is only carrying out whatever the model already chose (M2). Option b puts a human in the loop approving each step; it is tempting because many real systems do ask a person to approve a risky action like actually booking a machine, but nothing in this description has a person approving anything between steps, it is the model choosing (M5). Option d describes a one-time routing choice made before any tool runs; it is tempting because some real systems do classify a question once and send it down a fixed path, which can look similar to 'deciding what happens,' but that is a single upfront choice, not the repeated, result-informed choosing this design does at every step (M7). Option e treats the choice as a lookup of what worked before; it is tempting because reusing 'what worked last time' sounds efficient and some real systems do cache answers, but this design is described as using the current result each time, not a table of past questions (M8).",
+      "distractors": {"a": "M2", "b": "M5", "d": "M7", "e": "M8"}
+    },
+    {
+      "id": "q3",
+      "answer": "Fixed workflow, because every step and their order are already known in advance and never change between students, so there is nothing for the model to decide.",
+      "accepted": [
+        "A workflow: the three steps always happen in the same order for everyone, so a predefined code path is enough.",
+        "Fixed workflow, since the task is fully predictable and decomposes into the same fixed steps every time, with no case-by-case decision to make."
+      ],
+      "rationale": "When a task's steps and their order are fully known ahead of time and do not depend on anything found out along the way, there is no decision left for a model to make, so a predefined code path is cheaper and more reliable than letting a model re-decide the same fixed steps every time. A partial answer says 'workflow' without this reason, or gives a reason about cost alone without naming that the steps and order are already fixed; an answer of 'agent' misses that nothing here varies by case, which is the condition that makes a fixed workflow fit."
+    },
+    {
+      "id": "q4",
+      "answer": "No, it should still be a fixed workflow: the three steps and their order are already fixed and known today, so there is no decision for a model to make right now, and paying for that extra decision-making in cost and in the chance of an unwanted choice buys no benefit yet; if the steps change later, the fixed code can simply be edited then.",
+      "accepted": [
+        "Disagree. The task has not changed: it is still three fixed steps in a fixed order, so a workflow still fits; building in decision-making the task does not need yet only adds cost and risk for a 'maybe later' that can be handled by editing the code when and if it happens.",
+        "No. 'It might change later' and 'it worked elsewhere' are not reasons about this task as it is now; today the steps are fixed, so a workflow is still the better fit, and the design can be revisited if the task itself changes."
+      ],
+      "rationale": "The reason that settles a workflow-versus-agent choice is the shape of the task itself, not how the team feels about an agent design or what might happen in the future. Here the three steps and their order are fixed today, so there is nothing for a model to decide, and giving it that decision anyway adds model calls, and so cost and latency, along with a chance it picks a different order, for no benefit the task currently needs. A common wrong answer agrees with the teammate because 'it's good to be ready for change' or because 'it already worked for the manual lookups,' which shows the misconception that a design should be built for anticipated future needs or copied from an unrelated part of the system, rather than matched to this task's own, currently fixed shape (M14); if the close-out task does grow new, variable steps later, the fixed workflow can be edited or replaced then. A partial answer says 'workflow' without naming that the teammate's reasons (future-proofing, reuse) are not reasons about the task as it stands."
+    },
+    {
+      "id": "q5",
+      "answer": "Yes, it is sound: the facts needed and their order depend on the specific question and on what earlier steps turn up, so no single fixed sequence could be hardcoded in advance to fit every question, which is exactly the kind of task an agent, deciding its next step from the current state, is suited to.",
+      "accepted": [
+        "Sound. Since the right facts and their order vary by question and by what comes back along the way, the path cannot be fixed in advance, so letting the model decide step by step is the right fit, not a problem to fix.",
+        "Yes, this is the right call: the task is open-ended in what it needs and in what order, which is exactly when a fixed sequence would fail and an agent's own step-by-step deciding is appropriate."
+      ],
+      "rationale": "A model directing its own next step, based on the question and on what has come back so far, is exactly suited to a task where the needed facts and their order cannot be predicted in advance. Here, different questions need different combinations of check_calendar, search_manuals and check_training_record in different orders, so no single hardcoded sequence would fit every question, which is the condition that favors an agent. A common wrong answer calls this design flawed on the grounds that an agent design is inherently less reliable or more wasteful than a workflow, without checking whether this task's steps are actually predictable in advance, here they are not, so the extra flexibility is earning its cost (M15). A partial answer says 'sound' without naming that it is the unpredictability of which steps are needed, and in what order, that makes it so."
+    },
+    {
+      "id": "q6",
+      "answer": "Nothing here actually depends on a decision: the three steps and their order never vary, so there is nothing for the model to decide, and letting the model control the loop just adds extra model calls, cost and latency for no benefit, with a chance it skips a step or does them out of order; it should be rebuilt as a fixed workflow, with the three steps hardcoded in that order, calling the model only where text actually needs to be generated, such as wording the confirmation message, if at all.",
+      "accepted": [
+        "The task never varies, so giving the model control over the order just costs more calls and risks it getting the order wrong; it should be a fixed workflow with the three steps hardcoded.",
+        "There is no decision for the model to make since the steps and order are always the same, so this should be a workflow, not an agent; the model is only needed, if at all, to write the confirmation text."
+      ],
+      "rationale": "The three steps and their order are fixed for every booking with no exceptions, so there is no real choice for a model to make at run time; letting the model decide the next step anyway adds model calls (and so cost and latency) that a fixed sequence would not need, and introduces a chance the model skips a step or runs them out of order, which the task never required. The fix is a fixed workflow: hardcode the three steps in that order, and reserve any model call for a part that genuinely needs generated text, such as the wording of the confirmation message. A common wrong answer says the agent design is fine because 'more checking is safer,' which misses that the extra model calls buy no extra reliability here since the order was never in question. A partial answer says 'use a workflow' without naming why (nothing to decide) or without noting that a model call can still be kept for the parts that do need generated text."
+    }
+  ]
+}

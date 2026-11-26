@@ -1,0 +1,77 @@
+{
+  "is_error": false,
+  "duration_api_ms": 565226,
+  "num_turns": 43,
+  "stop_reason": "end_turn",
+  "session_id": "9eb71d17-0288-4158-b64c-871e030e0b31",
+  "total_cost_usd": 2.156438900000001,
+  "usage": {
+    "input_tokens": 44,
+    "cache_creation_input_tokens": 131476,
+    "cache_read_input_tokens": 1761023,
+    "output_tokens": 48696,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 131476,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 615,
+        "cache_read_input_tokens": 136726,
+        "cache_creation_input_tokens": 1018,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 1018
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard"
+  },
+  "modelUsage": {
+    "claude-sonnet-5": {
+      "inputTokens": 44,
+      "outputTokens": 48696,
+      "cacheReadInputTokens": 1761023,
+      "cacheCreationInputTokens": 131476,
+      "webSearchRequests": 0,
+      "costUSD": 2.0477349,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 64000,
+      "canonicalModel": "claude-sonnet-5",
+      "provider": "firstParty"
+    },
+    "claude-haiku-4-5-20251001": {
+      "inputTokens": 56144,
+      "outputTokens": 2512,
+      "cacheReadInputTokens": 0,
+      "cacheCreationInputTokens": 0,
+      "webSearchRequests": 4,
+      "costUSD": 0.108704,
+      "contextWindow": 200000,
+      "maxOutputTokens": 32000,
+      "canonicalModel": "claude-haiku-4-5",
+      "provider": "firstParty"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "The lesson is written and checked against the format rules. Here's what's ready:\n\n**`lessons/0001-context-and-memory.html`** — Objective O3, 30 minutes, three sections:\n\n1. **The context window** — what a token is, why the system prompt, full history, and every tool result get resent (and billed) on *every* call, traced through a 4-call token count for a calendar+training lookup.\n2. **What survives: within a run, and between sessions** — why \"memory\" within an open session is really just the whole transcript being resent, and why nothing crosses to the next session unless a program explicitly writes it out and reads it back in (worked through Jordan's laser-cutter certification, Monday to Tuesday — ties directly to M3 from quiz 0001, the \"automatic memory\" misconception).\n3. **Retrieval and notes** — indexing a long manual so only the relevant chunk gets pulled into context, versus writing short facts (like certification status) that aren't documents at all; worked through one question that needs both at once.\n\nEach section has its full eight-part structure (goals, prior knowledge, idea, steps, worked example with diagram, two Common Mix-Ups, Check Yourself), no analogies, and ties back to your makerspace assistant and its small budget throughout.\n\nAlso written:\n- `RESOURCES.md` — the Anthropic and AWS sources used, plus a noted gap (nothing yet on workflow-vs-agent or multi-agent, for O4/O5).\n- `cheatsheets/context-and-memory.html` — a one-page lookup table for deciding between context, between-session memory, retrieval, and notes.\n- Updated `NOTES.md` with the new misconception IDs (M7–M10) this lesson introduces, so a future `/quiz` on O3 doesn't collide with them.\n\nYou can ask me anything about it, or say `/quiz` for a quiz on O3.",
+  "ttft_ms": 2254,
+  "ttft_stream_ms": 1609,
+  "time_to_request_ms": 92,
+  "type": "result",
+  "duration_ms": 550459,
+  "uuid": "389e93fa-8d07-4e36-a08f-423b66b093b9"
+}

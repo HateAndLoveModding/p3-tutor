@@ -1,0 +1,43 @@
+{
+  "quiz": "0001",
+  "submission": "s1",
+  "items": [
+    {
+      "id": "q1",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "- Right: (d) is correct. What makes something an agent is the loop itself: the model picks an action, the program runs it, the result comes back as input, and this repeats until a stopping condition is hit. A single model call has none of that structure.\n- (a) is wrong because a longer, more detailed prompt only changes what one call can do (how carefully it reasons); it adds no loop, no action and no feedback, so the system still doesn't act over multiple steps.\n- (b) is wrong because automatic memory of every earlier conversation is not what defines an agent, and it isn't automatic either — memory across sessions has to be deliberately built and fed back into context. You correctly ruled this out here, but watch q6 below: the same idea resurfaces there.\n- (c) is wrong because a bigger context window lets one call hold more text, but holding more text in a single call still isn't a loop of actions and results coming back."
+    },
+    {
+      "id": "q2",
+      "verdict": "wrong",
+      "misconception": "M4",
+      "feedback": "- Wrong: you chose (a), where the model itself opens the booking system and reads the calendar entries. That's the belief that the model carries out the action directly rather than just requesting it — the same misconception behind your q4 answer. Walk it through: if the model could open the booking system itself, there'd be nothing for the program to intercept, run, and return a result for; the whole point of check_calendar(machine, date) is that the program, not the model, holds the code that actually touches the calendar.\n- Right: (c) is what actually happens. The model's output is a structured request naming check_calendar with the laser cutter and tomorrow's date as arguments — text, not an action. The program parses that request, runs the real check_calendar function, and sends the result back as the model's next input.\n- (b) is wrong because it's the model, not the program, that decides a tool is needed; the program doesn't 'notice' anything about bookings on its own, it only carries out whatever the model requests.\n- (d) is wrong for the same reason as (a): the model never receives or runs check_calendar's Python code, it only knows the tool's name, description and parameters. It's like a customer ordering 'the laser cutter calendar for tomorrow' at a counter — they never step into the kitchen to cook it themselves."
+    },
+    {
+      "id": "q3",
+      "verdict": "correct",
+      "misconception": null,
+      "feedback": "- Right: (b) is correct. A step limit stops the loop and hands back what happened so far once the agent is clearly stuck, which is exactly the situation here: 40 identical, failing steps.\n- (a) is wrong because the problem isn't size — all 40 steps already fit in the window. A bigger window would just let the same failing edit repeat even longer before running out of room.\n- (c) is wrong because nothing about repeating a failing edit tends to fix it: the model sees the same failing test each time and produces the same output, so more steps just burn more calls on the same mistake. Believing it will 'get there eventually' is the misconception that an agent doesn't need a stopping condition at all.\n- (d) is wrong because telling the model to 'try harder' doesn't change what's being fed back to it; without new information or a different approach, the loop has no reason to behave differently."
+    },
+    {
+      "id": "q4",
+      "verdict": "wrong",
+      "misconception": "M4",
+      "feedback": "- Wrong: you answered 1 ('the model runs the 3 tools itself and answers'). The correct count is 4.\n- Why: each model call ends with either one tool request or the final answer, and running the tool is not something the model does — the program does it, in between calls. Trace it: call 1, the model sees the question and requests check_calendar; the program runs it and sends the result back. Call 2, the model sees that result and requests search_manuals; the program runs it and sends the result back. Call 3, the model requests check_training_record; the program runs it and sends the result back. Call 4, the model now has everything and writes the final answer. That's 3 tool requests + 1 final answer = 4 model calls; the three tool runs themselves cost no extra model call because the program does them.\n- This is the same belief as in q2: that the model carries out the tool's action itself, inside one call, instead of only asking for it. Suppose that belief were true — then the model would need the calendar system, the manual index and the training database all wired directly into the single call that produces its answer, with no step in between to feed results back. But the model can't reach those systems on its own; it can only emit a text request and wait for the program to act and report back, which is exactly why each tool use takes its own round trip."
+    },
+    {
+      "id": "q5",
+      "verdict": "partial",
+      "misconception": null,
+      "feedback": "- Right: 'it sends it back to the model' is correct as far as it goes — the result does go back to the model.\n- Missing: the mechanism and the why. The program puts the tool's result into the model's next input and calls the model again; the model doesn't see the result until that new call happens.\n- Why: the point of sending it back is so the model can use it to decide what to do next — ask for another tool, or write the final answer. Without stating that purpose, the answer describes the hand-off but not what it's for, which is why this is partial rather than full credit."
+    },
+    {
+      "id": "q6",
+      "verdict": "partial",
+      "misconception": "M3",
+      "feedback": "- Right: the first part is correct and complete — the model is given a list of tools, each with a name and a description of what it does, and it picks the one whose description fits the request. That's exactly how tool selection works.\n- Wrong: the added claim that it 'remembers on its own which tool it picked for questions like that in earlier sessions.' Models don't carry memory between sessions automatically; that has to be deliberately built — saved somewhere and fed back into the context — it isn't something the model does by itself.\n- Why: suppose that belief were true, that the model automatically remembers past tool choices across sessions. Then a brand-new conversation, with no history given to it, should still somehow 'know' it chose check_calendar for a booking question last week. But a fresh model call starts from nothing except its training and whatever text is actually placed in its input this time; if nothing in this session's input mentions last week's choice, there's nothing for the model to recall. This is the same misconception as option (b) in q1 — you correctly rejected it there as not what makes something an agent, but it resurfaces here as a belief about how tool-picking itself works. It's like assuming a new cashier at a shop remembers your usual order from a visit last month just because you'd been there before: they only 'know' it if someone wrote it down and handed them the note, not because the knowledge is automatically in their head."
+    }
+  ],
+  "summary": "You have the agent loop and the idea of a stopping condition down solidly: q1 and q3 are both correct, including rejecting the ideas that a longer prompt, a bigger context window, or automatic cross-session memory are what make something an agent. Two things to fix, and they're worth separating. First, M4 — the belief that the model runs a tool's action itself inside one call — shows up in q2 (picking the option where the model opens the calendar itself) and in q4 (counting 1 model call instead of 4, folding the three tool runs into it); the model only ever asks for a tool by name and arguments, and the program is what runs it, each time as a separate round trip. Second, M3 — belief in automatic memory across sessions — shows up in q6's extra claim, even though you correctly ruled it out in q1; nothing persists between sessions unless it's explicitly saved and re-fed into the model's input. q5 was partial only because it named the hand-off but not its purpose — add the 'so that the model can decide its next step' and it's complete. Next step: redo q4 by literally listing out call 1, 2, 3, 4 and what the model receives and outputs at each one — that will make the tool-run-vs-model-call boundary concrete and should also clear up q2."
+}

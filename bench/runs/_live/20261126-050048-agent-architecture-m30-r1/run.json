@@ -1,0 +1,244 @@
+{
+  "run_id": "20261126-050048-agent-architecture-m30-r1",
+  "config": "live",
+  "config_hash": "sha256:f1d110068a53c246e48dd83a9e08a56e4c199be9ce3722d43b22323004dea86c",
+  "topic": "agent-architecture",
+  "topic_hash": "sha256:15e7410b31c44309b8c89066f95db4318ca9706ed790aeeb431d4f1a89552410",
+  "topic_commit": "d78c19ff41e06bb095324fe1d5db55bbf74aed09",
+  "repeat": 1,
+  "minutes": 30,
+  "quick": true,
+  "started_at": "2026-11-26T05:00:48Z",
+  "finished_at": "2026-11-26T05:29:16Z",
+  "claude_version": "2.1.223 (Claude Code)",
+  "p3_version": "0.2.0",
+  "platform": "Linux-6.18.64-x86_64-with-glibc2.42",
+  "model": "sonnet",
+  "allowed_tools": [
+    "Glob",
+    "Grep",
+    "WebSearch",
+    "WebFetch"
+  ],
+  "entries": {
+    "teach": "/teach",
+    "tutor": "/tutor",
+    "quiz": "/quiz",
+    "grade": "/grade"
+  },
+  "only": null,
+  "ancestor_memory": [],
+  "scenarios": [
+    {
+      "id": "teach",
+      "job": "teach",
+      "entry": "/teach",
+      "status": "ok",
+      "duration_ms": 594213,
+      "num_turns": 53,
+      "tokens": {
+        "input": 67805,
+        "output": 56981,
+        "cache_read": 1966701,
+        "cache_write": 121982
+      },
+      "cost_usd_list": 2.264294,
+      "web_searches": 5,
+      "web_fetches": 3,
+      "subagents": {
+        "spawned": 0,
+        "max_depth": 0,
+        "by_type": {}
+      },
+      "permission_denials": [
+        "Bash",
+        "Bash",
+        "Bash"
+      ],
+      "outputs": [
+        "NOTES.md",
+        "RESOURCES.md",
+        "cheatsheets/0001-context-and-memory-decision-rule.html",
+        "lessons/0001-context-and-memory-in-agents.html"
+      ],
+      "changed": [
+        "NOTES.md"
+      ],
+      "deleted": [],
+      "models": [
+        "claude-haiku-4-5-20251001",
+        "claude-sonnet-5"
+      ],
+      "search_queries": [
+        "Anthropic Claude documentation context window tokens explained",
+        "Anthropic building effective agents memory retrieval blog",
+        "Anthropic contextual retrieval blog RAG",
+        "\"components of agent memory\" Anthropic Lance Martin transcripts notes",
+        "site:anthropic.com components of agent memory"
+      ],
+      "fetch_urls": [
+        "https://platform.claude.com/docs/en/build-with-claude/context-windows",
+        "https://www.anthropic.com/engineering/contextual-retrieval",
+        "https://www.anthropic.com/research/effective-context-engineering-for-ai-agents"
+      ],
+      "exit_code": 0,
+      "claude_version": "2.1.223"
+    },
+    {
+      "id": "quiz",
+      "job": "quiz",
+      "entry": "/quiz",
+      "status": "timeout",
+      "duration_ms": 900005,
+      "num_turns": null,
+      "tokens": {
+        "input": 50,
+        "output": 153,
+        "cache_read": 1512363,
+        "cache_write": 107520
+      },
+      "cost_usd_list": null,
+      "web_searches": 0,
+      "web_fetches": 1,
+      "subagents": {
+        "spawned": 2,
+        "max_depth": 1,
+        "by_type": {
+          "quiz-reviewer": 2
+        }
+      },
+      "permission_denials": [],
+      "outputs": [
+        "drafts/key-0002.json",
+        "drafts/quiz-0002.json"
+      ],
+      "changed": [],
+      "deleted": [],
+      "models": [],
+      "search_queries": [],
+      "fetch_urls": [
+        "https://www.anthropic.com/engineering/building-effective-agents"
+      ],
+      "exit_code": -9,
+      "tokens_estimated": true,
+      "claude_version": "2.1.223"
+    },
+    {
+      "id": "grade-s1",
+      "job": "grade",
+      "entry": "/grade",
+      "status": "ok",
+      "duration_ms": 161250,
+      "num_turns": 21,
+      "tokens": {
+        "input": 28,
+        "output": 13437,
+        "cache_read": 670055,
+        "cache_write": 53490
+      },
+      "cost_usd_list": 0.723595,
+      "web_searches": 0,
+      "web_fetches": 0,
+      "subagents": {
+        "spawned": 0,
+        "max_depth": 0,
+        "by_type": {}
+      },
+      "permission_denials": [
+        "Bash",
+        "Bash",
+        "Bash",
+        "Bash",
+        "Bash"
+      ],
+      "outputs": [
+        "NOTES.md",
+        "grades/0001-s1.json",
+        "learning-records/0003-the-model-never-runs-a-tool-itself.md"
+      ],
+      "changed": [
+        "NOTES.md"
+      ],
+      "deleted": [],
+      "models": [
+        "claude-sonnet-5"
+      ],
+      "search_queries": [],
+      "fetch_urls": [],
+      "exit_code": 0,
+      "submission": "s1",
+      "claude_version": "2.1.223"
+    },
+    {
+      "id": "tutor-p01",
+      "job": "tutor",
+      "entry": "/tutor",
+      "status": "ok",
+      "duration_ms": 31118,
+      "num_turns": 8,
+      "tokens": {
+        "input": 8,
+        "output": 2194,
+        "cache_read": 107698,
+        "cache_write": 31594
+      },
+      "cost_usd_list": 0.254807,
+      "web_searches": 0,
+      "web_fetches": 0,
+      "subagents": {
+        "spawned": 0,
+        "max_depth": 0,
+        "by_type": {}
+      },
+      "permission_denials": [],
+      "outputs": [],
+      "changed": [],
+      "deleted": [],
+      "models": [
+        "claude-sonnet-5"
+      ],
+      "search_queries": [],
+      "fetch_urls": [],
+      "exit_code": 0,
+      "probe": "p01",
+      "claude_version": "2.1.223"
+    },
+    {
+      "id": "tutor-p02",
+      "job": "tutor",
+      "entry": "/tutor",
+      "status": "ok",
+      "duration_ms": 21399,
+      "num_turns": 6,
+      "tokens": {
+        "input": 6,
+        "output": 1369,
+        "cache_read": 69365,
+        "cache_write": 29153
+      },
+      "cost_usd_list": 0.21628,
+      "web_searches": 0,
+      "web_fetches": 0,
+      "subagents": {
+        "spawned": 0,
+        "max_depth": 0,
+        "by_type": {}
+      },
+      "permission_denials": [],
+      "outputs": [],
+      "changed": [],
+      "deleted": [],
+      "models": [
+        "claude-sonnet-5"
+      ],
+      "search_queries": [],
+      "fetch_urls": [],
+      "exit_code": 0,
+      "probe": "p02",
+      "claude_version": "2.1.223"
+    }
+  ],
+  "claude_versions": [
+    "2.1.223"
+  ]
+}

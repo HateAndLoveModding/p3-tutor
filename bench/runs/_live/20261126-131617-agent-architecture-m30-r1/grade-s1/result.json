@@ -1,0 +1,89 @@
+{
+  "is_error": false,
+  "duration_api_ms": 151531,
+  "num_turns": 20,
+  "stop_reason": "end_turn",
+  "session_id": "a3946124-fe5c-4735-a3d8-15dafcd99996",
+  "total_cost_usd": 0.6513269999999999,
+  "usage": {
+    "input_tokens": 20,
+    "cache_creation_input_tokens": 52756,
+    "cache_read_input_tokens": 448520,
+    "output_tokens": 13345,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 52756,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 510,
+        "cache_read_input_tokens": 56997,
+        "cache_creation_input_tokens": 1559,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 1559
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard"
+  },
+  "modelUsage": {
+    "claude-sonnet-5": {
+      "inputTokens": 20,
+      "outputTokens": 13345,
+      "cacheReadInputTokens": 448520,
+      "cacheCreationInputTokens": 52756,
+      "webSearchRequests": 0,
+      "costUSD": 0.6513269999999999,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 64000,
+      "canonicalModel": "claude-sonnet-5",
+      "provider": "firstParty"
+    }
+  },
+  "permission_denials": [
+    {
+      "tool_name": "Bash",
+      "tool_use_id": "toolu_017ucJTntH5rPQfCA1MFZPEm",
+      "tool_input": {
+        "command": "python3 -c \"import json; json.load(open('grades/0001-s1.json'))\" && echo OK"
+      }
+    },
+    {
+      "tool_name": "Bash",
+      "tool_use_id": "toolu_01YQZQVJE8R5LND5cvm7KPzB",
+      "tool_input": {
+        "command": "python3 -c \"import json; json.load(open('grades/0001-s1.json'))\"",
+        "description": "Validate grades JSON file parses correctly"
+      }
+    },
+    {
+      "tool_name": "Bash",
+      "tool_use_id": "toolu_011RevpGdUqasAwasSFJmJMw",
+      "tool_input": {
+        "command": "python3 -c \"import json; json.load(open('grades/0001-s1.json'))\"",
+        "description": "Validate grades JSON file parses correctly"
+      }
+    }
+  ],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "Grading is written to `grades/0001-s1.json`.\n\n**Score: 2 correct (q1, q3), 2 partial (q5, q6), 2 wrong (q2, q4)**\n\n- **q1, q3 — correct.** You've got the agent loop and why it needs a stopping condition.\n- **q2, q4 — wrong, same misconception (M4):** you picked the option where the model reads the calendar itself (q2), and counted 1 model call instead of 4 by folding the three tool runs into it (q4). The model only ever *requests* a tool (name + arguments as text); the program is what actually runs it, each time as a separate round trip.\n- **q5 — partial:** you named the hand-off (\"sends it back to the model\") but not the why — that it's so the model can decide its next step or final answer.\n- **q6 — partial (M3):** your mechanism for tool-picking was right, but you added that the model \"remembers on its own ... from earlier sessions.\" You correctly ruled this exact idea out as an answer choice in q1, but it resurfaced here — nothing persists across sessions unless it's explicitly saved and fed back in.\n\n**Next step:** redo q4 by literally listing call 1, 2, 3, 4 and what the model receives/outputs at each — that should pin down the model-vs-program boundary and should also clear up q2.\n\nI also added two learning records (`0003`, `0004`) and updated `NOTES.md` with the open M3/M4 misconceptions — M3 in particular is a good lead-in for the upcoming context-and-memory lesson.",
+  "ttft_ms": 3061,
+  "ttft_stream_ms": 1504,
+  "time_to_request_ms": 89,
+  "type": "result",
+  "duration_ms": 151789,
+  "uuid": "0e74fee0-b605-4334-bc3b-bc941b415049"
+}

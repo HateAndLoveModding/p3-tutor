@@ -1,0 +1,59 @@
+{
+  "id": "0002",
+  "objective": "O4",
+  "title": "Choosing workflows and agents for the makerspace assistant",
+  "items": [
+    {
+      "id": "q1",
+      "type": "short",
+      "objective": "O4",
+      "stem": "Your makerspace assistant's booking feature is built as a short script: every request calls check_training_record, then check_calendar, then book_slot, always in that exact order, regardless of what the student typed. Is this piece a workflow or an agent? In one or two sentences, say which it is and name who decides what step runs next."
+    },
+    {
+      "id": "q2",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "A different part of the assistant answers free-form student questions. Each time it runs, it reads the student's question and chooses one of three tools - search_manuals, check_calendar, or check_training_record - then looks at what came back and chooses again, stopping on its own once it has enough to answer. Which statement best explains whether this is a workflow or an agent, and why?",
+      "options": [
+        {"id": "a", "text": "It's an agent, because it calls more than one tool during a single request."},
+        {"id": "b", "text": "It's an agent, because at each step the model, not a hardcoded order, decides the next tool and when to stop."},
+        {"id": "c", "text": "It's a workflow, because the three tools it can choose from were fixed by the developer in advance."},
+        {"id": "d", "text": "It's an agent, because running it costs more per request than a single model call would."},
+        {"id": "e", "text": "It's a workflow, because the loop always ends after a bounded number of tool calls."},
+        {"id": "f", "text": "It's a workflow, because each tool's result is handed back to the program before the next step happens."}
+      ]
+    },
+    {
+      "id": "q3",
+      "type": "short",
+      "objective": "O4",
+      "stem": "The booking feature always needs exactly the same three steps, in the same order, for every student: verify training, check the calendar, then write the booking. Your sponsor also wants each booking request to use as few model calls as possible, to stay inside the model budget. For this part of the assistant, is a fixed workflow or an agent calling those three tools the better choice? Name your choice and give one reason tied to the budget and to the task's structure."
+    },
+    {
+      "id": "q4",
+      "type": "short",
+      "objective": "O4",
+      "stem": "Sometimes a student's question is clear enough for the assistant to search the manuals right away. Other times the assistant first needs to ask a clarifying question, such as which machine the student means, and it cannot know in advance whether a given question will need zero, one, or more clarifying rounds before it can search. For this part of the assistant, would a fixed workflow or an agent fit better? Name your choice and give one reason tied to the task's structure."
+    },
+    {
+      "id": "q5",
+      "type": "short",
+      "objective": "O4",
+      "stem": "A teammate builds the booking feature (verify training, check the calendar, write the booking - always these three steps, always in this order, for every student) by giving the model all three tools and a system prompt telling it to use them as it sees fit, letting the model decide the order and when it is done. What is the problem with this design choice for this particular task, and what should the teammate do instead? Answer in one or two sentences."
+    },
+    {
+      "id": "q6",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "A different teammate builds the question-answering feature as an agent: for each student question, the model itself decides at run time which of the machine manuals to search, how many of them to check, and whether to ask a clarifying question first, stopping once it has enough to answer. A reviewer worries this is more complicated than it needs to be. Is the agent design appropriate here? Which statement best answers that, for the goal of matching the assistant's steps to what each question actually needs?",
+      "options": [
+        {"id": "a", "text": "No: inappropriate, because an agent can never be trusted to stop on its own, so only a hardcoded script has a defined end point."},
+        {"id": "b", "text": "No: inappropriate, because the three tools available to it were fixed in advance, so nothing about this feature is actually unpredictable."},
+        {"id": "c", "text": "Yes: appropriate, because the number of lookups and whether clarification is needed varies by question, so the model must decide at run time."},
+        {"id": "d", "text": "No: inappropriate, because agents always cost more per request than workflows do, regardless of what the task actually requires."},
+        {"id": "e", "text": "Yes: appropriate, but only because the feature happens to call three different tools instead of just one."},
+        {"id": "f", "text": "Yes: appropriate, but only because the student can't see how the answer was produced either way."}
+      ]
+    }
+  ]
+}

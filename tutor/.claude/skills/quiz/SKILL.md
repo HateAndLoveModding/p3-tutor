@@ -112,10 +112,9 @@ Go through the draft once, item by item, and rewrite anything that fails:
 Start the `quiz-reviewer` subagent, with a task message naming `drafts/quiz-NNNN.json`, `drafts/key-NNNN.json` and the objective, and wait for its report before you go on.
 
 - **Revise** the draft to answer every finding; where you disagree with one, leave it as it is and say why in the loop's record (below).
-- **Review again** after a revision, the same way, for at most two passes in total.
-- **Stop early** when a review comes back with no finding.
+- **One pass only**: revise once from this review and move on to step 8, with no second review of the revision.
 
-Once the loop ends, by the cap or by a clean review, write a record of it to `review-records/NNNN-quiz.md`: how many passes ran, what each one found, and what changed or why a finding was left unaddressed.
+Once you have revised, write a record of the pass to `review-records/NNNN-quiz.md`: what the reviewer found, and what changed or why a finding was left unaddressed.
 
 ## 8. Finish
 

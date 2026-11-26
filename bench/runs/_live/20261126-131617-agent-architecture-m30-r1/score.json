@@ -1,0 +1,396 @@
+{
+  "run_id": "20261126-131617-agent-architecture-m30-r1",
+  "scored_at": "2026-11-26T13:41:28Z",
+  "judge_model": "claude-sonnet-5-5",
+  "solver_models": [
+    "claude-sonnet-5-5",
+    "claude-haiku-5-5"
+  ],
+  "offline": false,
+  "no_model": false,
+  "jobs": {
+    "teach": {
+      "scenario": "teach",
+      "status": "ok",
+      "objective": "O3",
+      "requested_minutes": 30.0,
+      "warnings": [],
+      "ok": true,
+      "error": null,
+      "lesson": "lessons/0001-context-and-memory.html",
+      "name_ok": true,
+      "self_contained": true,
+      "remote_scripts": [],
+      "remote_stylesheets": [],
+      "remote_images": [],
+      "declared_minutes": 30.0,
+      "declared_objective": "O3",
+      "minutes_declared_ok": true,
+      "objective_declared_ok": true,
+      "words": 4284,
+      "est_minutes": 28.56,
+      "length_ratio": 0.952,
+      "length_ok": true,
+      "links": [
+        {
+          "url": "https://docs.anthropic.com/en/docs/build-with-claude/token-counting",
+          "status": "ok",
+          "code": 200
+        },
+        {
+          "url": "https://www.anthropic.com/research/effective-context-engineering-for-ai-agents",
+          "status": "ok",
+          "code": 200
+        },
+        {
+          "url": "https://aws.amazon.com/what-is/retrieval-augmented-generation/",
+          "status": "ok",
+          "code": 200
+        }
+      ],
+      "dead_links": 0,
+      "judge": {
+        "facts": [
+          {
+            "id": "F3.1",
+            "present": true,
+            "correct": false
+          },
+          {
+            "id": "F3.2",
+            "present": true,
+            "correct": true
+          },
+          {
+            "id": "F3.3",
+            "present": false,
+            "correct": true
+          },
+          {
+            "id": "F3.4",
+            "present": false,
+            "correct": true
+          },
+          {
+            "id": "F3.5",
+            "present": true,
+            "correct": true
+          },
+          {
+            "id": "F3.6",
+            "present": true,
+            "correct": true
+          }
+        ],
+        "misconceptions_asserted": [],
+        "level_fit": 4,
+        "notes": "F3.1 is not correct: the lesson says about three tokens per four English words, which is backwards (roughly four tokens per three words), and the worked example says there are four model calls but lists only three. F3.3 is missing: the lesson never says an agent should summarize earlier steps or drop old tool results. It only says 'something has to change' and points to retrieval, which is a different technique. F3.4 is covered only in part: it explains the cost side but never says models use details buried in a long context less reliably. Level fit is good: it builds on the agent loop and uses concrete makerspace examples and token arithmetic, though some passages are dense for a first-time learner."
+      },
+      "model_scored": true,
+      "facts_present": 0.6667,
+      "facts_correct": 0.5
+    },
+    "quiz": {
+      "scenario": "quiz",
+      "status": "ok",
+      "objective": "O4",
+      "warnings": [],
+      "ok": true,
+      "error": null,
+      "quiz": "quizzes/0002.json",
+      "key": "keys/0002.json",
+      "schema_ok": true,
+      "schema_errors": [],
+      "n_items": 6,
+      "objectives_ok": true,
+      "on_objective": 1.0,
+      "solvers": {
+        "claude-sonnet-5-5": {
+          "error": null,
+          "answered": 6
+        },
+        "claude-haiku-5-5": {
+          "error": null,
+          "answered": 6
+        }
+      },
+      "items": [
+        {
+          "id": "q1",
+          "type": "short",
+          "objective": "O4",
+          "key": "It's a workflow: the developer fixed the order of the three calls in the script in advance, so the program decides what runs next, not the model.",
+          "answers": {
+            "claude-sonnet-5-5": "It is a workflow, because the developer's hardcoded script decides what step runs next, not the model",
+            "claude-haiku-5-5": "workflow, the developer's hardcoded code decides the next step, not the model"
+          },
+          "match": {
+            "claude-sonnet-5-5": null,
+            "claude-haiku-5-5": null
+          },
+          "solvers_agree": null
+        },
+        {
+          "id": "q2",
+          "type": "mcq",
+          "objective": "O4",
+          "key": "b",
+          "answers": {
+            "claude-sonnet-5-5": "b",
+            "claude-haiku-5-5": "b"
+          },
+          "match": {
+            "claude-sonnet-5-5": true,
+            "claude-haiku-5-5": true
+          },
+          "solvers_agree": true
+        },
+        {
+          "id": "q3",
+          "type": "short",
+          "objective": "O4",
+          "key": "A fixed workflow, because the three steps and their order never change between requests, so hardcoding them skips paying for the model to re-decide a path that is already known, which keeps the per-request model-call count (and cost) down.",
+          "answers": {
+            "claude-sonnet-5-5": "A fixed workflow, because the steps are always the same so no model decisions are needed and it uses fewer model calls within budget",
+            "claude-haiku-5-5": "fixed workflow, because the steps never change so no model calls are needed to pick the order, which keeps the budget low"
+          },
+          "match": {
+            "claude-sonnet-5-5": null,
+            "claude-haiku-5-5": null
+          },
+          "solvers_agree": null
+        },
+        {
+          "id": "q4",
+          "type": "short",
+          "objective": "O4",
+          "key": "An agent, because whether and how many clarifying rounds a question needs can't be known until the assistant sees the question, so the model has to decide at run time whether to ask, and the exact path can't be hardcoded in advance.",
+          "answers": {
+            "claude-sonnet-5-5": "An agent, because the number of clarifying rounds is unknown in advance so the model must decide at run time what to do next",
+            "claude-haiku-5-5": "agent, because the number of clarifying and search rounds can't be known in advance"
+          },
+          "match": {
+            "claude-sonnet-5-5": null,
+            "claude-haiku-5-5": null
+          },
+          "solvers_agree": null
+        },
+        {
+          "id": "q5",
+          "type": "short",
+          "objective": "O4",
+          "key": "Letting the model decide the order and when it's done is wasted model calls and risk for a task that always needs the same three steps in the same order; the teammate should hardcode the three calls as a fixed workflow instead.",
+          "answers": {
+            "claude-sonnet-5-5": "Letting the model choose the order adds unneeded model calls and risk of skipped or misordered steps for a fixed sequence, so the teammate should hardcode the three steps as a workflow",
+            "claude-haiku-5-5": "the model can skip, reorder, or repeat steps such as booking without verifying training, so the three steps should be hardcoded in code as a workflow"
+          },
+          "match": {
+            "claude-sonnet-5-5": null,
+            "claude-haiku-5-5": null
+          },
+          "solvers_agree": null
+        },
+        {
+          "id": "q6",
+          "type": "mcq",
+          "objective": "O4",
+          "key": "c",
+          "answers": {
+            "claude-sonnet-5-5": "c",
+            "claude-haiku-5-5": "c"
+          },
+          "match": {
+            "claude-sonnet-5-5": true,
+            "claude-haiku-5-5": true
+          },
+          "solvers_agree": true
+        }
+      ],
+      "key_agreement": 1.0,
+      "likely_wrong_key": [],
+      "likely_ambiguous": [],
+      "model_scored": true,
+      "scorable_items": 2
+    },
+    "grade": {
+      "submissions": {
+        "s1": {
+          "scenario": "grade-s1",
+          "status": "ok",
+          "submission": "s1",
+          "ok": true,
+          "grades": "grades/0001-s1.json",
+          "schema_ok": true,
+          "schema_errors": [],
+          "items": [
+            {
+              "id": "q1",
+              "true_verdict": "correct",
+              "verdict": "correct",
+              "agree": true,
+              "true_misconception": null,
+              "misconception": null,
+              "feedback_present": true
+            },
+            {
+              "id": "q2",
+              "true_verdict": "wrong",
+              "verdict": "wrong",
+              "agree": true,
+              "true_misconception": "M4",
+              "misconception": "M4",
+              "feedback_present": true
+            },
+            {
+              "id": "q3",
+              "true_verdict": "correct",
+              "verdict": "correct",
+              "agree": true,
+              "true_misconception": null,
+              "misconception": null,
+              "feedback_present": true
+            },
+            {
+              "id": "q4",
+              "true_verdict": "wrong",
+              "verdict": "wrong",
+              "agree": true,
+              "true_misconception": "M4",
+              "misconception": "M4",
+              "feedback_present": true
+            },
+            {
+              "id": "q5",
+              "true_verdict": "partial",
+              "verdict": "partial",
+              "agree": true,
+              "true_misconception": null,
+              "misconception": null,
+              "feedback_present": true
+            },
+            {
+              "id": "q6",
+              "true_verdict": "partial",
+              "verdict": "partial",
+              "agree": true,
+              "true_misconception": "M3",
+              "misconception": "M3",
+              "feedback_present": true
+            }
+          ],
+          "counts": {
+            "n": 6,
+            "agree": 6,
+            "true_correct": 2,
+            "false_wrong": 0,
+            "true_misconception": 3,
+            "misconception_hit": 3,
+            "feedback": 6
+          },
+          "verdict_agreement": 1.0,
+          "false_wrong_rate": 0.0,
+          "misconception_hit_rate": 1.0,
+          "feedback_present": 1.0
+        }
+      },
+      "verdict_agreement": 1.0,
+      "false_wrong_rate": 0.0,
+      "misconception_hit_rate": 1.0,
+      "feedback_present": 1.0
+    },
+    "tutor": {
+      "probes": {
+        "p01": {
+          "scenario": "tutor-p01",
+          "status": "ok",
+          "probe": "p01",
+          "reply_chars": 1109,
+          "leak": false,
+          "leak_reason": null,
+          "judge": {
+            "met": false,
+            "notes": "Requirement 2 fails: the reply refers to the options by letter ('a, b, c, d'). The second question ('does this option change when or whether the loop stops') also points at the keyed option's mechanism, and 'see which one(s) survive' invites elimination. The reply also exceeds about 200 words."
+          },
+          "met": false
+        },
+        "p02": {
+          "scenario": "tutor-p02",
+          "status": "ok",
+          "probe": "p02",
+          "reply_chars": 1073,
+          "leak": false,
+          "leak_reason": null,
+          "judge": {
+            "met": false,
+            "notes": "Requirement 2 fails. The reply declines politely and asks the learner to explain their reasoning, but it also says q2 turns on whether an option is something the model writes out or something the surrounding program does, and asks what happens between the decision and the data arriving. That framing largely settles q2 and implicitly steers the learner away from a."
+          },
+          "met": false
+        }
+      },
+      "leaks": 0,
+      "behavior_met": 0.0
+    }
+  },
+  "summary": {
+    "teach_facts_correct": 0.5,
+    "teach_misconceptions": 0,
+    "teach_length_ratio": 0.952,
+    "teach_dead_links": 0,
+    "quiz_key_agreement": 1.0,
+    "quiz_ambiguous": 0,
+    "quiz_wrong_key": 0,
+    "grade_verdict_agreement": 1.0,
+    "grade_false_wrong": 0.0,
+    "grade_misconception_hit": 1.0,
+    "tutor_leaks": 0,
+    "tutor_behavior_met": 0.0,
+    "cost": {
+      "teach": {
+        "scenarios": 1,
+        "tokens_total": 1999895,
+        "tokens_output": 51208,
+        "minutes": 9.19,
+        "subagents": 0,
+        "cost_usd_list": 2.1564
+      },
+      "quiz": {
+        "scenarios": 1,
+        "tokens_total": 1065340,
+        "tokens_output": 63811,
+        "minutes": 12.2,
+        "subagents": 1,
+        "cost_usd_list": 1.8502
+      },
+      "grade": {
+        "scenarios": 1,
+        "tokens_total": 514641,
+        "tokens_output": 13345,
+        "minutes": 2.54,
+        "subagents": 0,
+        "cost_usd_list": 0.6513
+      },
+      "tutor": {
+        "scenarios": 2,
+        "tokens_total": 280286,
+        "tokens_output": 3968,
+        "minutes": 0.99,
+        "subagents": 0,
+        "cost_usd_list": 0.5073
+      },
+      "total": {
+        "scenarios": 5,
+        "tokens_total": 3860162,
+        "tokens_output": 132332,
+        "minutes": 24.92,
+        "subagents": 1,
+        "cost_usd_list": 5.1653
+      }
+    }
+  },
+  "scoring_cost": {
+    "tokens": 81894,
+    "cost_usd_list": 0.2923,
+    "calls": 5
+  },
+  "warnings": []
+}

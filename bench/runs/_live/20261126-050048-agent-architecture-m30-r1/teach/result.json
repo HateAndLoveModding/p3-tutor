@@ -1,0 +1,101 @@
+{
+  "is_error": false,
+  "duration_api_ms": 598659,
+  "num_turns": 53,
+  "stop_reason": "end_turn",
+  "session_id": "43b2c41c-a8fc-44a6-b7c1-d2c7dc113820",
+  "total_cost_usd": 2.2642942999999995,
+  "usage": {
+    "input_tokens": 46,
+    "cache_creation_input_tokens": 121982,
+    "cache_read_input_tokens": 1966701,
+    "output_tokens": 53959,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 121982,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 615,
+        "cache_read_input_tokens": 125859,
+        "cache_creation_input_tokens": 2386,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 2386
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard"
+  },
+  "modelUsage": {
+    "claude-sonnet-5": {
+      "inputTokens": 46,
+      "outputTokens": 53959,
+      "cacheReadInputTokens": 1966701,
+      "cacheCreationInputTokens": 121982,
+      "webSearchRequests": 0,
+      "costUSD": 2.1314253,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 64000,
+      "canonicalModel": "claude-sonnet-5",
+      "provider": "firstParty"
+    },
+    "claude-haiku-4-5-20251001": {
+      "inputTokens": 67759,
+      "outputTokens": 3022,
+      "cacheReadInputTokens": 0,
+      "cacheCreationInputTokens": 0,
+      "webSearchRequests": 5,
+      "costUSD": 0.132869,
+      "contextWindow": 200000,
+      "maxOutputTokens": 32000,
+      "canonicalModel": "claude-haiku-4-5",
+      "provider": "firstParty"
+    }
+  },
+  "permission_denials": [
+    {
+      "tool_name": "Bash",
+      "tool_use_id": "toolu_01YDSXBvjKqivRB4KR8ZHKps",
+      "tool_input": {
+        "command": "python3 -c \"\nimport xml.etree.ElementTree as ET\nimport re\nwith open('lessons/0001-context-and-memory-in-agents.html') as f:\n    html = f.read()\n# strip doctype and script content for a rough well-formedness check of structure tags\nbody = re.sub(r'<!doctype[^>]*>', '', html, flags=re.I)\nfor tag in ['svg','g','rect','line','text','title','ellipse','path','marker','defs']:\n    opens = len(re.findall(r'<'+tag+r'(\\s|>)', body))\n    closes = len(re.findall(r'</'+tag+r'>', body))\n    selfclosing = len(re.findall(r'<'+tag+r'[^>]*/>', body))\n    print(tag, 'opens(incl self-closing count counted in opens)=', opens, 'closes=', closes, 'self-closing=', selfclosing)\n\"\n"
+      }
+    },
+    {
+      "tool_name": "Bash",
+      "tool_use_id": "toolu_01DzsMLgp9mTFwTSp1fQBazw",
+      "tool_input": {
+        "command": "python3 .check_tags.py && rm .check_tags.py",
+        "description": "Check SVG/HTML tag balance in the lesson file, then remove scratch script"
+      }
+    },
+    {
+      "tool_name": "Bash",
+      "tool_use_id": "toolu_01PWbW997PhdzTixHYXku3QD",
+      "tool_input": {
+        "command": "python3 .check_tags.py",
+        "description": "Check SVG/HTML tag balance in the lesson file"
+      }
+    }
+  ],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "Lesson 1 is written and checks out structurally (7 sections, 4 figures, 8 check boxes, balanced SVG groups). Here's the summary:\n\n**`lessons/0001-context-and-memory-in-agents.html`** — Objective O3, 30 minutes:\n\n1. **The context window** — what counts toward it (system prompt, full history, tool defs, tool results), token cost, and context rot (bigger ≠ better).\n2. **What's kept between steps** — why the agent loop *looks* like it remembers: the program resends the whole growing transcript every call, not the model holding state.\n3. **What's kept between sessions** — nothing, by default; persistence means writing a fact outside the conversation and deliberately reloading it next time.\n4. **Retrieval and notes as memory** — retrieval (search a big, fixed source, pull in only the matching chunk) vs. notes (a small, saved fact reloaded by key), and how to decide between them.\n\nEach section has learning goals, prior knowledge, a worked example from the makerspace assistant (laser cutter booking, student training records), a diagram, two Common Mix-Ups, and a Check Yourself question.\n\nAlso added: `cheatsheets/0001-context-and-memory-decision-rule.html` (the \"where does this information belong?\" decision rule), `RESOURCES.md` with the four sources used, and updated `NOTES.md`.\n\nAsk me anything about it, or say `/quiz` to test what stuck.",
+  "ttft_ms": 2914,
+  "ttft_stream_ms": 1703,
+  "time_to_request_ms": 116,
+  "type": "result",
+  "duration_ms": 593290,
+  "uuid": "78bae888-d9bb-4904-80de-eaf20b66d573"
+}

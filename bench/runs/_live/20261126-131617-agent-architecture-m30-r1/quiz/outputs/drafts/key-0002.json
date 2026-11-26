@@ -1,0 +1,53 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "It's a workflow: the developer fixed the order of the three calls in the script in advance, so the program decides what runs next, not the model.",
+      "accepted": [
+        "A workflow, because the sequence (check_training_record, then check_calendar, then book_slot) is hardcoded by the program, not chosen by the model at run time.",
+        "Workflow - the code decides the next step, since the order never changes no matter what the student asked."
+      ],
+      "rationale": "A workflow is orchestrated through a predefined code path: the developer wrote the order down once, and the program simply follows it every time, so the program (not the model) owns the control flow. Calling it an agent because it calls three tools shows M7, the common error of judging by how many tools run rather than by who picked the order. Saying 'workflow' with no reason, or naming the model as the decider, is only partial credit."
+    },
+    {
+      "id": "q2",
+      "answer": "b",
+      "rationale": "What makes a system an agent is that the model itself chooses the next action and when to stop, based on what came back from the previous step, rather than following a path a developer wrote in advance. Here the model picks among three tools and decides when it has enough, so it owns the control flow. Option a shows M7: it counts the number of tool calls instead of asking who chose them - a fixed workflow can call several tools too. Option c shows M9: it mistakes a fixed, known-in-advance set of available tools for a fixed, known-in-advance order of calling them; the model can still choose which of those three tools to call and when. Option d shows M8: it treats cost as the test itself, when cost is a consequence of letting the model decide, not the definition of an agent. Option e shows M10: an agent's loop can also end after a small, bounded number of steps, so boundedness does not mark a workflow. Option f shows M11: returning a tool's result to the program before the next step happens is true of both workflows and agents, so it cannot be what tells them apart.",
+      "distractors": {"a": "M7", "c": "M9", "d": "M8", "e": "M10", "f": "M11"}
+    },
+    {
+      "id": "q3",
+      "answer": "A fixed workflow, because the three steps and their order never change between requests, so hardcoding them skips paying for the model to re-decide a path that is already known, which keeps the per-request model-call count (and cost) down.",
+      "accepted": [
+        "Workflow - the task is fully decomposable into the same fixed steps every time, so there's nothing for a model to decide, and a hardcoded script does it without spending any model calls on deciding the order.",
+        "Fixed workflow, since the steps are always the same and in the same order, letting an agent choose that order each time would only add model calls without changing the outcome."
+      ],
+      "rationale": "When a task's steps and their order are already known and never vary, a workflow gets the same result as an agent for a fraction of the model calls, because there is no real decision left for the model to make. A common wrong answer is 'agent, because it calls multiple tools' (M7), which mistakes tool count for the reason a workflow or an agent is chosen; the right criterion is whether the path is already known, not how many tools are involved. An answer of 'workflow' with no reason tied to cost or to the fixed structure is partial."
+    },
+    {
+      "id": "q4",
+      "answer": "An agent, because whether and how many clarifying rounds a question needs can't be known until the assistant sees the question, so the model has to decide at run time whether to ask, and the exact path can't be hardcoded in advance.",
+      "accepted": [
+        "Agent - the number of clarifying rounds varies per question and isn't known ahead of time, so the model needs to decide, question by question, whether one is needed before it can search.",
+        "This fits an agent better, since a fixed script would have to guess a fixed number of clarifying steps for every question, which doesn't match questions that need zero rounds or more than one."
+      ],
+      "rationale": "A workflow only pays off when the steps and their order are known in advance; here the number of clarifying rounds a question needs varies and cannot be predicted before the question arrives, so the model must be the one deciding, each time, whether to ask. A common partial answer names 'agent' without saying why (the varying, unpredictable number of rounds); naming only speed or simplicity, without the structural reason, is also partial. Answering 'workflow, because clarifying questions can just be hardcoded as a fixed first step' shows M14, confusing the ability to write a fixed clarifying step in the code with being able to predict whether that step is actually needed for a given question."
+    },
+    {
+      "id": "q5",
+      "answer": "Letting the model decide the order and when it's done is wasted model calls and risk for a task that always needs the same three steps in the same order; the teammate should hardcode the three calls as a fixed workflow instead.",
+      "accepted": [
+        "The problem is using an agent for a task with no real decision to make - the three steps never vary, so the model is spending calls choosing an order that is already known. It should be a fixed workflow.",
+        "This task doesn't need a model deciding anything, since the order never changes; building it as an agent adds cost and a chance the model picks a different, wrong order. Build it as a workflow instead."
+      ],
+      "rationale": "Giving an agent a task whose steps and order never vary adds model calls (and the chance of an inconsistent or wrong order) for no benefit, because there is nothing left for the model to decide. The fix is to hardcode the three calls as a workflow. A common wrong answer defends the agent design (e.g., 'it's fine, more flexible is always better,' which overlooks that flexibility is only useful where the path can actually vary) or names a problem unrelated to control flow, such as data privacy; these miss that the task's structure makes the model's freedom to choose pure overhead here. Naming the mismatch without naming the fix, or vice versa, is partial."
+    },
+    {
+      "id": "q6",
+      "answer": "c",
+      "rationale": "A fixed workflow only pays off when the steps and their order are known in advance; here the number of manuals to check and whether to ask a clarifying question both depend on the specific question, so letting the model decide at run time is the appropriate choice, not unnecessary complexity. Option a shows M15: an agent's loop ends on a stopping condition (here, 'once it has enough to answer') just as reliably as a script ends after its last line; agents are not inherently unable to stop. Option b shows M9: a fixed, known set of three available tools is not the same as a fixed, known order of calling them - the model can still choose which of the three to call, how many times, and in what order. Option d shows M8: it treats 'agents cost more' as a universal rule rather than a tradeoff that depends on whether the task's path can actually be fixed in advance; here the task's unpredictability is what justifies the extra cost. Option e shows M7: it credits the design for using three tools rather than for the model's run-time choice among them, which is what actually matters. Option f raises a true but unrelated point - how visible the reasoning is to the student doesn't bear on whether a workflow or an agent fits this task's structure.",
+      "distractors": {"a": "M15", "b": "M9", "d": "M8", "e": "M7"}
+    }
+  ]
+}

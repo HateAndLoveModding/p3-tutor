@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cheat sheet: where does this information belong?</title>
+  <style>
+    :root {
+      --bg: #fffdf8; --text: #1f1d1a; --muted: #6b665e; --rule: #e4dfd4;
+      --accent: #9a4517; --accent-soft: #f7ede4; --ok: #2f6b3a; --ok-soft: #e7f2e9;
+      --serif: Charter, "Bitstream Charter", "Iowan Old Style", "Sitka Text", Cambria, Georgia, serif;
+      --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg: #171614; --text: #e9e5dc; --muted: #a49e93; --rule: #36332e; --accent: #eaa77a; --accent-soft: #2c231d; --ok: #9fd3a8; --ok-soft: #1c2a1f; }
+    }
+    * { box-sizing: border-box; }
+    html { font-size: 19px; }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--serif); line-height: 1.6; }
+    main { max-width: 40rem; margin: 0 auto; padding: 2.5rem 1.25rem 3rem; }
+    h1 { font-size: 1.6rem; margin: 0 0 0.3rem; }
+    h2 { font-size: 1.1rem; margin: 2rem 0 0.6rem; font-family: var(--sans); }
+    p.sub { color: var(--muted); font-family: var(--sans); font-size: 0.9rem; margin: 0 0 1.5rem; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.92rem; margin: 1rem 0 1.5rem; }
+    th, td { text-align: left; vertical-align: top; padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--rule); }
+    th { font-family: var(--sans); font-size: 0.78rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
+    .rule { border: 1px solid var(--rule); border-radius: 6px; padding: 1rem 1.25rem; margin: 1rem 0; background: var(--accent-soft); }
+    .rule ol { margin: 0.3rem 0 0; padding-left: 1.3rem; }
+    .rule li { margin-bottom: 0.5rem; }
+    code { font-family: ui-monospace, monospace; background: var(--ok-soft); padding: 0.1em 0.3em; border-radius: 4px; }
+    footer { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--rule); font-size: 0.85rem; color: var(--muted); font-family: var(--sans); }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Where does this information belong?</h1>
+  <p class="sub">From Lesson 1, <a href="../lessons/0001-context-and-memory-in-agents.html">Context and memory in an agent</a> (Objective O3).</p>
+
+  <div class="rule">
+    <strong>Ask these in order:</strong>
+    <ol>
+      <li>Does the model need it to answer <em>this</em> call? If no, keep it out of context entirely.</li>
+      <li>Will it still be needed a few steps later in the <em>same</em> task? If yes, it stays in the transcript automatically &mdash; the program resends it on every call until the task ends.</li>
+      <li>Does it need to be true again in a <em>later, separate</em> session? If yes, it must be written outside the conversation and reloaded &mdash; nothing crosses sessions on its own.</li>
+      <li>Is the source large and mostly fixed (a manual)? Use <strong>retrieval</strong>: search it, pull in only the matching chunk.</li>
+      <li>Is it one small fact about one person or thing, set once and carried forward (training status, a preference)? Use a <strong>note</strong>: write it, store it outside context, load it back by key.</li>
+    </ol>
+  </div>
+
+  <h2>Four things, told apart</h2>
+  <table>
+    <tr><th>Thing</th><th>Lives where</th><th>Carries forward how</th></tr>
+    <tr><td>Context window</td><td>One model call</td><td>Does not carry forward on its own; it is rebuilt by the program every call.</td></tr>
+    <tr><td>Within one task</td><td>The growing transcript</td><td>Automatic: the program resends the full history every call, until the task ends.</td></tr>
+    <tr><td>Retrieval</td><td>Outside context, in chunks</td><td>Searched on demand; only the matching chunk(s) enter context.</td></tr>
+    <tr><td>Notes</td><td>Outside context, as a saved fact</td><td>Written once when established; reloaded by key at the start of a later session.</td></tr>
+  </table>
+
+  <h2>Two mix-ups to catch yourself on</h2>
+  <table>
+    <tr><th>Tempting thought</th><th>What's actually true</th></tr>
+    <tr><td>"A bigger context window means better or more remembered answers."</td><td>Bigger only means more room. Recall can still degrade as tokens grow (context rot), and a new session starts empty regardless of window size.</td></tr>
+    <tr><td>"Retrieval and notes are just ways to store the whole thing somewhere."</td><td>Both exist to keep what lands in context <em>small</em>: retrieval sends one matching chunk, not the whole document; a note is one compact fact, not a saved transcript.</td></tr>
+  </table>
+
+  <footer>From the makerspace assistant mission: use this when deciding what <code>search_manuals</code> should return, and what the training-record tool should save and load.</footer>
+</main>
+</body>
+</html>

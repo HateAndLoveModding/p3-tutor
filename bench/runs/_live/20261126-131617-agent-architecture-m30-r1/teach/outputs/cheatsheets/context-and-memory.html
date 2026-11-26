@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cheat sheet: context and memory</title>
+  <style>
+    :root {
+      --bg: #fffdf8; --text: #1f1d1a; --muted: #6b665e; --rule: #e4dfd4;
+      --accent: #9a4517; --accent-soft: #f7ede4;
+      --serif: Charter, "Bitstream Charter", "Iowan Old Style", Cambria, Georgia, serif;
+      --sans: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg: #171614; --text: #e9e5dc; --muted: #a49e93; --rule: #36332e; --accent: #eaa77a; --accent-soft: #2c231d; }
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--serif); line-height: 1.55; }
+    main { max-width: 42rem; margin: 0 auto; padding: 2rem 1.25rem 3rem; }
+    h1 { font-size: 1.5rem; margin-bottom: 0.25rem; }
+    p.sub { font-family: var(--sans); color: var(--muted); font-size: 0.9rem; margin-top: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.92rem; margin: 1.25rem 0; }
+    th, td { text-align: left; vertical-align: top; padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--rule); }
+    th { font-family: var(--sans); font-size: 0.75rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+    .rule { border: 1px solid var(--rule); border-radius: 6px; padding: 0.9rem 1.1rem; margin: 1.25rem 0; background: var(--accent-soft); }
+    .rule strong { color: var(--accent); }
+    code { font-family: ui-monospace, monospace; font-size: 0.85em; background: rgba(154,69,23,0.08); padding: 0.1em 0.3em; border-radius: 3px; }
+    footer { font-family: var(--sans); font-size: 0.8rem; color: var(--muted); margin-top: 2rem; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Context and memory: which one do I need?</h1>
+  <p class="sub">From <a href="../lessons/0001-context-and-memory.html">Lesson 1, Objective O3</a>. Use this when designing what the makerspace assistant keeps, saves, or looks up.</p>
+
+  <div class="rule">
+    <strong>The one rule:</strong> nothing survives a call, a session, or a document's length unless something explicitly resends it, writes it, or searches for it. There is no automatic memory.
+  </div>
+
+  <table>
+    <tr><th>Mechanism</th><th>What it holds</th><th>How it persists</th><th>When to use it</th></tr>
+    <tr>
+      <td>Context window</td>
+      <td>System prompt, conversation so far, all tool results in this run</td>
+      <td>Resent in full on every model call, within one run; never trimmed automatically</td>
+      <td>It's always present; the design question is what to <em>keep out</em> of it</td>
+    </tr>
+    <tr>
+      <td>Within-session "memory"</td>
+      <td>Earlier turns in the same open chat</td>
+      <td>Same as context window: the whole transcript is resent each turn</td>
+      <td>No action needed; this is automatic within one open session</td>
+    </tr>
+    <tr>
+      <td>Between-session memory</td>
+      <td>A fact that must be true in a future session (e.g. a certification)</td>
+      <td>Explicit write to storage at session end, explicit read at next session's start</td>
+      <td>Any fact about ongoing state that outlives one visit: training, bookings, preferences</td>
+    </tr>
+    <tr>
+      <td>Retrieval</td>
+      <td>Chunks of a large, mostly fixed document set (manuals, procedures)</td>
+      <td>Documents are indexed once; a search at question time injects only the matching chunk</td>
+      <td>The source is a document that already exists in full and is too big to paste in whole</td>
+    </tr>
+    <tr>
+      <td>Notes</td>
+      <td>Short, specific facts produced by the system itself as things happen</td>
+      <td>Written when learned, reloaded only when relevant, kept small and curated</td>
+      <td>The information is not a pre-existing document, it's a fact about an event or state</td>
+    </tr>
+  </table>
+
+  <div class="rule">
+    <strong>Quick test:</strong> "Does this already exist as text somewhere long?" &rarr; retrieval. "Did this just happen and must be true later?" &rarr; a note. "Is it already in this run's history?" &rarr; it's already in context, no action needed. "Did the session just end?" &rarr; it's gone unless you wrote it down.
+  </div>
+
+  <footer>From the agent architecture mission workspace.</footer>
+</main>
+</body>
+</html>
