@@ -1,0 +1,51 @@
+{
+  "id": "0002",
+  "objective": "O4",
+  "title": "Workflows vs. agents, and when to pick a fixed workflow",
+  "items": [
+    {
+      "id": "q1",
+      "type": "short",
+      "objective": "O4",
+      "stem": "Your team is designing two versions of a check that decides whether a student can book the laser cutter.\nVersion A: the code always runs, in this fixed order, for every request: first look up the student's training record, then check the calendar for the requested time, then book the slot if both checks pass. The same three steps run in the same order every time, and nothing in the code changes that order.\nVersion B: the model is given three tools (check_training, check_calendar, book_slot) and, after each tool's result comes back, it decides for itself which tool to call next, whether to call the same one again, or to stop and answer the student. Nothing in the code fixes this order in advance.\nSay which version is the workflow and which is the agent, and name the one fact about each version that makes it so."
+    },
+    {
+      "id": "q2",
+      "type": "short",
+      "objective": "O4",
+      "stem": "A teammate says: \"Our check-in script must be an agent — it calls three different tools, and students can phrase their question about the laser cutter in all sorts of different ways.\" Is the teammate's reasoning correct? In one or two sentences, say why or why not, using what actually separates a workflow from an agent."
+    },
+    {
+      "id": "q3",
+      "type": "mcq",
+      "objective": "O4",
+      "stem": "What is the one fact that makes a system an agent rather than a workflow?",
+      "options": [
+        {"id": "a", "text": "The system keeps memory of what students said earlier, so it can act on that later in the conversation"},
+        {"id": "b", "text": "The system can be given a step limit so that it does not run forever"},
+        {"id": "c", "text": "The model itself decides, at each step, which tool to call next and when to stop, instead of following an order fixed in the code"},
+        {"id": "d", "text": "The system always follows the same sequence of steps for every request, so the result is easy to predict"},
+        {"id": "e", "text": "The system calls more tools and has more code behind it than a simple one-shot chatbot"},
+        {"id": "f", "text": "The system uses a larger or more expensive model to produce its answers"}
+      ]
+    },
+    {
+      "id": "q4",
+      "type": "short",
+      "objective": "O4",
+      "stem": "Your assistant for booking the 3D printer works like this. Step 1 always runs first: the code calls check_training(student_id) no matter what the request is. Step 2: if training is confirmed, the model is given check_calendar() and book_slot(), and based on what check_calendar() returns, it decides for itself whether to book the first open slot, suggest a different time to the student, or ask the student a clarifying question first — continuing until it has an answer for the student.\nIn one or two sentences, say which step is the workflow part of this design and which step is the agent part, and why."
+    },
+    {
+      "id": "q5",
+      "type": "short",
+      "objective": "O4",
+      "stem": "Every time a student finishes using the laser cutter, your assistant must do these three things, in this exact order, with nothing to decide along the way: mark the slot \"used\" in the calendar, log the material type the student typed into a tracking sheet, and send the student a cleanup reminder email. This is the same for every single booking. A teammate wants to build this as an agent with three tools, so that \"it can reason about what to do.\" Using one reason about cost, reliability, or predictability, say whether you would build this as a workflow or an agent, and why."
+    },
+    {
+      "id": "q6",
+      "type": "short",
+      "objective": "O4",
+      "stem": "A student messages your assistant: \"The laser cutter jammed halfway through my job, I'm not sure if I need to rebook, and I don't know if I had the right material loaded — can you help me sort this out?\" Depending on what the student says next, the assistant might need to search the manual, check the calendar, check the training record, or just explain something, and you cannot know in advance which of these it will need, or in what order. A teammate wants to hard-code one fixed sequence of steps to handle every version of this request. Using one reason about predictability of the steps needed, say whether you would build this as a workflow or an agent, and why."
+    }
+  ]
+}

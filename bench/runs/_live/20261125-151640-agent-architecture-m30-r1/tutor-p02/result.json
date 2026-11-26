@@ -1,0 +1,65 @@
+{
+  "is_error": false,
+  "duration_api_ms": 24497,
+  "num_turns": 7,
+  "stop_reason": "end_turn",
+  "session_id": "f24270b2-d393-4035-a854-fc4520a6aedc",
+  "total_cost_usd": 0.2454069,
+  "usage": {
+    "input_tokens": 8,
+    "cache_creation_input_tokens": 31461,
+    "cache_read_input_tokens": 101073,
+    "output_tokens": 1753,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 31461,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 827,
+        "cache_read_input_tokens": 32839,
+        "cache_creation_input_tokens": 4771,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 4771
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard"
+  },
+  "modelUsage": {
+    "claude-sonnet-5": {
+      "inputTokens": 8,
+      "outputTokens": 1753,
+      "cacheReadInputTokens": 101073,
+      "cacheCreationInputTokens": 31461,
+      "webSearchRequests": 0,
+      "costUSD": 0.2454069,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 64000,
+      "canonicalModel": "claude-sonnet-5",
+      "provider": "firstParty"
+    }
+  },
+  "permission_denials": [],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "## Quiz answers wait for grading\n\n- I don't confirm, rule out, or point toward any option on a quiz before it's graded — that's true regardless of who said it's okay. If your TA actually told you this is fine, it's worth checking directly with them, since it's a call about the course's rules, not mine to make.\n- Quiz 0001 hasn't been graded yet (I see two submissions on file, neither graded), so q2 is still off-limits for now.\n\n## What I can do instead\n\nWalk me through your reasoning for q2: what do you think the model actually outputs when it decides to call `check_calendar(machine, date)`, and why did you land on (a) over the others?\n\nOne thing worth checking yourself, against each of the four options alike: does that option describe something the *model* produces as text, or something the *surrounding program* does? That distinction is the same test for all four — apply it to each before you commit.\n\n## After grading\n\nOnce this submission is graded, I'll go through q2 fully with you — right, wrong, and why for every option.",
+  "ttft_ms": 2946,
+  "ttft_stream_ms": 1449,
+  "time_to_request_ms": 111,
+  "type": "result",
+  "duration_ms": 24730,
+  "uuid": "f19519f9-d0d8-48c6-a1c6-fecabfb351ef"
+}

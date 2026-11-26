@@ -1,0 +1,55 @@
+{
+  "id": "0002",
+  "items": [
+    {
+      "id": "q1",
+      "answer": "Version A is the workflow, because its code fixes the order of the three steps in advance and nothing is left for the model to decide; Version B is the agent, because the model itself decides, at each step, which action to take next.",
+      "accepted": [
+        "A = workflow, B = agent. In A the sequence is written into the code ahead of time; in B the model chooses the next action itself based on what came back from the last tool.",
+        "A is the workflow since the path through the steps is fixed by the programmer; B is the agent since the model controls the path at run time."
+      ],
+      "rationale": "The defining fact is who owns the control flow: in A, a human wrote the order of steps into the code before any request arrives, so the path never changes; in B, the model decides the next step itself, in response to what just happened, so the path can differ from one request to the next. Calling both versions 'agents' because both use three tools shows M7, mistaking tool use for agent-ness — what matters is who chooses the order the tools are called in, not how many there are. Calling A 'the agent' because it 'makes a decision' (pass the checks or don't) shows M8: that branch was written into the code in advance by a programmer, so it is not a decision the model makes at run time."
+    },
+    {
+      "id": "q2",
+      "answer": "No. Calling several tools and handling varied wording don't make something an agent; what matters is whether the model itself decides, at run time, which tool to call and in what order, or whether that order is fixed in the code.",
+      "accepted": [
+        "The teammate is wrong — tool count and variety of input phrasing aren't the criterion. A system is an agent only if the model, not the code, is choosing the next step.",
+        "No, that reasoning is off. Even a script with three tools and flexible input parsing is still a workflow if its code decides the order the tools run in."
+      ],
+      "rationale": "Agreeing with the teammate because of the tool count or the variety of phrasing shows M7: using several tools, or handling many ways of phrasing a question, is a feature of the system's inputs or its toolset, not of who controls the sequence of steps. A script can call three tools in a fixed order and still parse flexible wording with ordinary code; that alone does not hand control of the next step to the model. An answer that says 'no' but gives the reason 'because agents need memory and this doesn't have any' is partial and shows M3: memory across turns is not the criterion either, and its absence doesn't settle whether something is an agent."
+    },
+    {
+      "id": "q3",
+      "answer": "c",
+      "rationale": "An agent is a system where the model itself decides, step by step, what to do next, rather than following a sequence a human wrote into the code in advance; a workflow is the opposite case, where the code fixes that path. Option a (M3) mistakes memory across a conversation for the defining trait; a system can remember earlier turns and still run a fixed script, or forget everything and still be model-directed. Option b describes a real safety feature of agents (a stopping condition) but is not what separates an agent from a workflow — a workflow can also have a step limit. Option d (M9) has the definitions backwards: always following the same sequence, with a predictable result, is the hallmark of a workflow, not an agent. Option e (M7) mistakes the number of tools or the amount of code for the defining trait, when a workflow can call many tools too. Option f mistakes which model is used for who controls the steps; a workflow built with an expensive model is still a workflow."
+    },
+    {
+      "id": "q4",
+      "answer": "Step 1 is the workflow part, because the code always calls check_training the same way no matter what the request is; step 2 is the agent part, because the model decides what to do next itself, based on what check_calendar returns.",
+      "accepted": [
+        "Step 1 = workflow: it's a fixed call the code always makes. Step 2 = agent: the model chooses between booking, suggesting another time, or asking a question, based on the calendar result.",
+        "The training check is the workflow piece since it never varies; the booking decision is the agent piece since the model picks the next action from what it sees."
+      ],
+      "rationale": "A single design can mix both: step 1 has no branch point for the model at all, so it is a workflow step, while step 2 hands the next move to the model, which chooses among several actions based on the tool's result, making it an agent step. Calling the whole design an agent because it uses multiple tools overall shows M7. Calling the whole design a workflow because step 1 is fixed shows M10: assuming a system must be entirely one type because one part of it is, instead of checking who controls each part separately."
+    },
+    {
+      "id": "q5",
+      "answer": "Workflow — the three steps are fixed and never change, so there is nothing for a model to decide, and coding them directly is cheaper and more reliable than paying a model to 'decide' something that always comes out the same way.",
+      "accepted": [
+        "Workflow, because the sequence is always the same with no decision point; a fixed script is cheaper and more predictable than calling a model for a task that has only one right order of steps.",
+        "Build it as a workflow. Since the steps never vary, a hardcoded sequence is more reliable and far cheaper per run than an agent that has to reason about an outcome that's already fixed."
+      ],
+      "rationale": "Choosing a workflow is right whenever the steps are well-defined and don't change from request to request: there is no decision for a model to add value on, so a fixed script is cheaper, faster, and more reliable than a model call that could still occasionally choose the wrong order. An answer that picks 'agent' because 'it calls three tools' shows M7. An answer that picks 'agent' in case something unexpected happens is partial: it is reasonable caution, but it misses that the task as described has no branching at all, so there is nothing an agent's flexibility would buy here."
+    },
+    {
+      "id": "q6",
+      "answer": "Agent — the steps needed depend on what the student says next and can't be listed or ordered in advance, so the model has to decide, case by case, what to do rather than follow one fixed script.",
+      "accepted": [
+        "Agent, because you can't predict ahead of time which tools this will need or in what order; an open-ended problem like this needs the model to choose its own path.",
+        "Build it as an agent. The set and order of steps isn't knowable in advance, so a fixed sequence can't cover every version of this request."
+      ],
+      "rationale": "A workflow needs its steps decomposed and fixed in advance; here the steps depend on details only the student's reply will reveal, and the combinations can't all be enumerated, so a model that decides its own next step is needed. An answer that says 'workflow, because we can just add a branch for every case' shows M11: it underestimates how many branches an open-ended conversation can take and assumes enough if/else logic can substitute for a model deciding at run time, when the actual set of cases can't be listed up front."
+    }
+  ]
+}

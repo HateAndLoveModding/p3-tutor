@@ -1,0 +1,92 @@
+{
+  "is_error": false,
+  "duration_api_ms": 265956,
+  "num_turns": 17,
+  "stop_reason": "end_turn",
+  "session_id": "6873a076-8de8-47de-b691-36a15768490b",
+  "total_cost_usd": 0.9136710000000001,
+  "usage": {
+    "input_tokens": 24,
+    "cache_creation_input_tokens": 66956,
+    "cache_read_input_tokens": 585250,
+    "output_tokens": 21953,
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 66956,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 413,
+        "cache_read_input_tokens": 68485,
+        "cache_creation_input_tokens": 4323,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 4323
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard"
+  },
+  "modelUsage": {
+    "claude-sonnet-5": {
+      "inputTokens": 24,
+      "outputTokens": 21953,
+      "cacheReadInputTokens": 585250,
+      "cacheCreationInputTokens": 66956,
+      "webSearchRequests": 0,
+      "costUSD": 0.9066780000000001,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 64000,
+      "canonicalModel": "claude-sonnet-5",
+      "provider": "firstParty"
+    },
+    "claude-haiku-4-5-20251001": {
+      "inputTokens": 5483,
+      "outputTokens": 302,
+      "cacheReadInputTokens": 0,
+      "cacheCreationInputTokens": 0,
+      "webSearchRequests": 0,
+      "costUSD": 0.006993,
+      "contextWindow": 200000,
+      "maxOutputTokens": 32000,
+      "canonicalModel": "claude-haiku-4-5",
+      "provider": "firstParty"
+    }
+  },
+  "permission_denials": [
+    {
+      "tool_name": "Bash",
+      "tool_use_id": "toolu_01RCsKrrH8Xd2AmwPiC4GxyV",
+      "tool_input": {
+        "command": "python3 -c \"import json; json.load(open('quizzes/0002.json')); json.load(open('keys/0002.json')); print('OK')\""
+      }
+    },
+    {
+      "tool_name": "Bash",
+      "tool_use_id": "toolu_01Wsjj46fEdivKnuP5pqt9ZS",
+      "tool_input": {
+        "command": "python3 -c \"import json; json.load(open('quizzes/0002.json')); json.load(open('keys/0002.json')); print('OK')\""
+      }
+    }
+  ],
+  "terminal_reason": "completed",
+  "fast_mode_state": "off",
+  "fast_mode_disabled_reason": "sdk_opt_in_required",
+  "subtype": "success",
+  "api_error_status": null,
+  "result": "Both files are valid JSON and match `FORMATS.md`'s shape.\n\nQuiz 0002 is ready: `quizzes/0002.json` and `keys/0002.json`, 6 items on objective O4.\n\nSince O4 has no lesson yet in this workspace, this quiz checks the objective itself, at the level its wording states, using Anthropic's \"Building Effective Agents\" framing (workflows = predefined code paths; agents = the model directs its own steps) as the source.\n\nLearning goals covered, two items each:\n- **Tell workflows and agents apart** by who owns the control flow (q1 applies it to a fresh two-version design; q2 catches a teammate's false signal — tool count and phrasing variety don't decide it).\n- **State the defining criterion itself**, distinguishing it from lookalikes like memory, model size, or step limits (q3, multiple-choice with common lookalike traits as distractors; q4 applies it inside one hybrid design that mixes a fixed step and a model-directed step).\n- **Decide when a fixed workflow is the better choice** (q5, a well-defined task where a workflow wins on cost/reliability; q6, an open-ended task where an agent is actually the right call, so the decision isn't just \"always pick workflow\").",
+  "ttft_ms": 2347,
+  "ttft_stream_ms": 1503,
+  "time_to_request_ms": 85,
+  "type": "result",
+  "duration_ms": 266751,
+  "uuid": "4ec3fc91-602a-4467-a0f3-f2fdb24c475d"
+}
