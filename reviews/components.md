@@ -18,6 +18,15 @@ An example of a finished entry:
 - Kept in final: yes
 -->
 
+### quiz-reviewer
+
+- Kind: subagent
+- Step added: c2-review
+- Purpose: TODO
+- With and without: reviews/c2-review.md, Round 1 (without) and Round 2 (with)
+- Review: TODO
+- Kept in final: TODO
+
 ### quiz
 
 - Kind: skill

@@ -12,6 +12,22 @@ Keep every heading as it is, because `p3 check` reads them, and add a round by c
 
 ### Round 1
 
+**Run:** work/p3-tutor/bench/runs/_live/20261125-151640-agent-architecture-m30-r1
+
+**My thoughts:**
+
+I want to add a quiz reviewer subagent. 
+
+I want the subagent to check and make sure the skill criteria was followed and ensure that whether the question is correct and the student has to identify that, or the question is wrong and the student has to correct it, is random.
+
+**What changed:**
+
+- Kind: new subagent
+- Files: tutor/.claude/agents/quiz-reviewer.md, tutor/.claude/skills/quiz/SKILL.md
+- Why: These thoughts ask for a reviewer that checks the quiz skill's own criteria and, specifically, that scenario items asking the learner to judge or fix something do not all land on the same side (always flawed, or always sound) in a guessable pattern; quiz-reviewer's checklist covers the skill's stem, goal-coverage, mcq and key-rationale rules and adds a check that lists each such item's side so a one-sided or ordered pattern shows up, and the quiz skill now drafts into drafts/, sends the draft to quiz-reviewer, revises for up to two passes, and writes the final quiz and key once the loop ends.
+
+### Round 2
+
 **Run:** TODO
 
 **My thoughts:**
@@ -24,7 +40,7 @@ TODO
 - Files: TODO
 - Why: TODO
 
-### Round 2
+### Round 3
 
 **Run:** TODO
 

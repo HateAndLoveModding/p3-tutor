@@ -78,9 +78,12 @@ Never write anything under `.claude/`, and never change an existing quiz or key.
 - Vary which position holds the correct option across the quiz.
 - Exactly one option is correct; check that no wrong option is also defensible.
 
-## 5. Write the key
+## 5. Write the draft and its key
 
-For every item, in `keys/NNNN.json` as `FORMATS.md` shows:
+Pick `NNNN` now, the next free number in `quizzes/`, and use it for both files below and for the final files in step 8.
+Write the quiz's items into `drafts/quiz-NNNN.json`, in the exact shape `FORMATS.md` gives for `quizzes/NNNN.json`.
+
+For every item, write its key entry into `drafts/key-NNNN.json`, in the exact shape `FORMATS.md` gives for `keys/NNNN.json`:
 
 - `answer`: the correct option's id, the number in the item's unit, or for `short` the shortest complete reference answer.
 - `accepted` (`short`): several other wordings that are just as correct, including a terse one and a fuller one, since a correct answer can be phrased many ways.
@@ -94,7 +97,7 @@ For every item, in `keys/NNNN.json` as `FORMATS.md` shows:
 
 ## 6. Check before you finish
 
-Go through the quiz once, item by item, and rewrite anything that fails:
+Go through the draft once, item by item, and rewrite anything that fails:
 
 1. Answer each item yourself from its stem alone, without your key, and compare. Rewrite any item where you hesitate or where an expert could defend a second answer.
 2. Could someone who never studied the topic answer it, or does the stem hold its answer? Rewrite.
@@ -104,7 +107,19 @@ Go through the quiz once, item by item, and rewrite anything that fails:
 6. Does every key rationale explain every distractor or the common wrong answers?
 7. Does the quiz file hold no answers, and does no item repeat a practice question from a lesson or an item from an earlier quiz?
 
-## 7. Finish
+## 7. Review with a fresh reader
+
+Start the `quiz-reviewer` subagent, with a task message naming `drafts/quiz-NNNN.json`, `drafts/key-NNNN.json` and the objective, and wait for its report before you go on.
+
+- **Revise** the draft to answer every finding; where you disagree with one, leave it as it is and say why in the loop's record (below).
+- **Review again** after a revision, the same way, for at most two passes in total.
+- **Stop early** when a review comes back with no finding.
+
+Once the loop ends, by the cap or by a clean review, write a record of it to `review-records/NNNN-quiz.md`: how many passes ran, what each one found, and what changed or why a finding was left unaddressed.
+
+## 8. Finish
+
+Write the final `quizzes/NNNN.json` and `keys/NNNN.json` once, from the latest draft, exactly as `FORMATS.md` shows; never write a draft into `quizzes/` or `keys/`, and never leave the quiz unfinished because a reviewer pass is still outstanding at the cap.
 
 End with a short message to the learner: the quiz's path, how many items it has, and the learning goals it covers, one line each.
 Never put an answer, a hint toward one, or anything from the key in the message.
